@@ -1,13 +1,20 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-4">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, non libero blanditiis voluptates dignissimos ipsum minus sequi mollitia ullam sunt qui sit neque eum nostrum voluptatem a, modi nulla aspernatur?
-    </div>
-    <div class="col-sm-4">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, non libero blanditiis voluptates dignissimos ipsum minus sequi mollitia ullam sunt qui sit neque eum nostrum voluptatem a, modi nulla aspernatur?
-    </div>
-    <div class="col-sm-4">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, non libero blanditiis voluptates dignissimos ipsum minus sequi mollitia ullam sunt qui sit neque eum nostrum voluptatem a, modi nulla aspernatur?
+    <div class="col s6">
+      <table>
+        <thead>
+          <th>Id</th>
+          <th>Nombre</th>
+          <th>Url</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cat of cats">
+            <td>{{cat.id}}</td>
+            <td>{{cat.nombre}}</td>
+            <td>{{cat.url}}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

@@ -10,6 +10,7 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
   imports: [
     CommonModule,
     WelcomeRoutingModule
-  ]
+  ],
+  exports: [WelcomeComponent]
 })
 export class WelcomeModule { }

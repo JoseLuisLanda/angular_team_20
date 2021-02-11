@@ -4,7 +4,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 
 @Injectable({providedIn: 'root'})
 export class CatCollection {
-  private static COLLECTION_KEY: 'cats';
+  private static COLLECTION_KEY = 'cats';
   constructor(private firestore: AngularFirestore) {
 
   }

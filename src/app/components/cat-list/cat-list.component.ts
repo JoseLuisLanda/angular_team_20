@@ -8,10 +8,17 @@ import { CatCollection } from 'src/app/firebase/collections/cat.collection';
 })
 export class CatListComponent implements OnInit {
 
+  public cats: any;
+
   constructor(private catCollection: CatCollection) { }
 
   ngOnInit(): void {
+    this.setCats([]);
     this.catListAction();
+  }
+
+  protected setCats(cats: any) {
+    this.cats = cats;
   }
 
   protected catListAction() {
@@ -22,11 +29,17 @@ export class CatListComponent implements OnInit {
   }
 
   protected catListActionOk(response: any) {
-
+    let data = response.map((catData:any) => {
+      return {
+        id: catData.payload.doc.id,
+        ...catData.payload.doc.data()
+      }
+    });
+   this.setCats(data);
   }
 
   protected catListActionErr(error: any) {
-    
+    console.log('error',error);
   }
 
 }
