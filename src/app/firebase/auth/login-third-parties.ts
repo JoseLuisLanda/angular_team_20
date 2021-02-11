@@ -6,15 +6,17 @@ import { SetUserData } from "./set-user-data";
 
 import firebase from 'firebase/app';
 import 'firebase/auth'; 
+import { EmailVerification } from "./email-verification";
 
 
 @Injectable({ providedIn: 'root' })
 export class LoginThirdParties {
   constructor(
-    public ngZone: NgZone,
-    public router: Router,
-    public afs: AngularFirestore, 
+    protected ngZone: NgZone,
+    protected router: Router,
+    protected afs: AngularFirestore, 
     protected afAuth: AngularFireAuth,
+    protected _emailVerification: EmailVerification,
     protected _setUserData: SetUserData) {}
 
   facebook() {
@@ -24,7 +26,7 @@ export class LoginThirdParties {
   protected handle(provider: any) {
     return this.afAuth.signInWithPopup(provider)
       .then(this.setUserData.bind(this))
-      .then(this.successHandler.bind(this))
+      .then(this.emailVerification.bind(this))
       .catch(this.errorHandler.bind(this));
   }
 
@@ -32,8 +34,32 @@ export class LoginThirdParties {
     return this._setUserData.handle(result.user);
   }
 
-  protected successHandler(result: any) {
-    console.log("LoginThirdParties successHandler", result);
+  protected emailVerification(user: any) {
+    
+    let emailVerificationHandlers = {
+      success(resolve: any, reject: any) {
+        return (response: any) => {
+
+        };
+      },
+      error(resolve: any, reject: any) {
+        return (response: any) => {
+
+        };
+      }
+    }
+    
+    return new Promise((resolve, reject)=>{
+      if(false) {
+        this._emailVerification.handle(user)
+          .then(emailVerificationHandlers.success(resolve, reject).bind(this))
+          .catch(emailVerificationHandlers.error(resolve, reject).bind(this));
+      }
+
+      else {
+        resolve(user);
+      }
+    });
   }
 
   protected errorHandler(error: any) {

@@ -12,8 +12,7 @@ export class EmailVerification {
     protected afAuth: AngularFireAuth) {}
 
   handle(user: any) {
-    console.log('EmailVerification', user);
-    this.afAuth.currentUser
+    return this.afAuth.currentUser
     .then(this.sendEmailVerification)
     .catch(this.error.bind(this));
   }

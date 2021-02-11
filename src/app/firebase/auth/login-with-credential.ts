@@ -11,16 +11,16 @@ export class LoginWithCredentials {
     protected router: Router,
     protected afs: AngularFirestore, 
     protected afAuth: AngularFireAuth,
-    protected setUserData: SetUserData) {}
+    protected _setUserData: SetUserData) {}
 
   handle(email: string, password: string) {
     return this.afAuth.signInWithEmailAndPassword(email, password)
-      .then(this.success.bind(this))
+      .then(this.setUserData.bind(this))
       .catch(this.error.bind(this));
   }
 
-  protected success(result: any) {
-    this.setUserData.handle(result.user);
+  protected setUserData(result: any) {
+    return this._setUserData.handle(result.user);
   }
 
   protected error(error: any) {
