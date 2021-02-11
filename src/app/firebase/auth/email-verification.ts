@@ -1,10 +1,10 @@
 import { Injectable, NgZone } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
-import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firestore";
+import { AngularFirestore } from "@angular/fire/firestore";
 import { Router } from "@angular/router";
 
 @Injectable({providedIn: 'root'})
-export class SendVerification {
+export class EmailVerification {
   constructor(
     protected ngZone: NgZone,
     protected router: Router,

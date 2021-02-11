@@ -2,21 +2,21 @@ import { Injectable, NgZone } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { Router } from "@angular/router";
-import { SendVerification } from "./send-verification";
+import { EmailVerification } from "./email-verification";
 
 @Injectable({providedIn: 'root'})
 export class RegisterUser {
   constructor(
     protected ngZone: NgZone,
     protected router: Router,
-    protected sendVerification: SendVerification,
+    protected emailVerification: EmailVerification,
     protected afs: AngularFirestore, 
     protected afAuth: AngularFireAuth) {}
 
   handle(email: string, password: string) {
     return this.afAuth.createUserWithEmailAndPassword(email, password)
       .then(
-        this.sendVerification.handle.bind(this.sendVerification),
+        this.emailVerification.handle.bind(this.emailVerification),
         this.success.bind(this),
       )
       .catch(this.error.bind(this));
