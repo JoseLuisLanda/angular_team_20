@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginFacebook } from 'src/app/firebase/auth/login-facebook';
+import { LoginThirdParties } from 'src/app/firebase/auth/login-third-parties';
 import { LoginWithCredentials } from 'src/app/firebase/auth/login-with-credential';
 import { Logout } from 'src/app/firebase/auth/logout';
 import { RegisterUser } from 'src/app/firebase/auth/register-user';
@@ -15,10 +15,10 @@ export class LoginComponent implements OnInit {
     private registerUser: RegisterUser,
     private loginWithCredentials: LoginWithCredentials,
     private _logout: Logout,
-    private loginFacebook: LoginFacebook) { }
+    private loginThirdParties: LoginThirdParties) { }
 
   ngOnInit(): void {
-    //this.loginFacebook.handle();
+    this.loginThirdParties.facebook();
   }
 
   registrarUsuario() {
