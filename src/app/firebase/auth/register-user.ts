@@ -9,26 +9,26 @@ export class RegisterUser {
   constructor(
     protected ngZone: NgZone,
     protected router: Router,
-    protected emailVerification: EmailVerification,
+    protected _emailVerification: EmailVerification,
     protected afs: AngularFirestore, 
     protected afAuth: AngularFireAuth) {}
 
   handle(email: string, password: string) {
     return this.afAuth.createUserWithEmailAndPassword(email, password)
-      .then(
-        this.emailVerification.handle.bind(this.emailVerification),
-        this.success.bind(this),
-      )
-      .catch(this.error.bind(this));
+      .then(this.emailVerification.bind(this))
+      .then(this.successHandler.bind(this))
+      .catch(this.errorHandler.bind(this));
   }
 
-  protected success(result: any) {
-    this.ngZone.run(() => {
-      console.log('result', result);
-    })
+  protected emailVerification(user: any) {
+    return this._emailVerification.handle(user);
   }
 
-  protected error(error: any) {
-    window.alert(error)
+  protected successHandler(result: any) {
+    console.log('RegisterUserOk', result);
+  }
+
+  protected errorHandler(error: any) {
+    console.log('RegisterUserError', error);
   }
 }

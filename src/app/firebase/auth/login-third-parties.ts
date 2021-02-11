@@ -15,7 +15,7 @@ export class LoginThirdParties {
     public router: Router,
     public afs: AngularFirestore, 
     protected afAuth: AngularFireAuth,
-    protected setUserData: SetUserData) {}
+    protected _setUserData: SetUserData) {}
 
   facebook() {
     return this.handle(new firebase.auth.FacebookAuthProvider());
@@ -23,15 +23,20 @@ export class LoginThirdParties {
 
   protected handle(provider: any) {
     return this.afAuth.signInWithPopup(provider)
-      .then(this.success.bind(this))
-      .catch(this.error.bind(this));
+      .then(this.setUserData.bind(this))
+      .then(this.successHandler.bind(this))
+      .catch(this.errorHandler.bind(this));
   }
 
-  protected success(result: any) {
-    this.setUserData.handle(result.user);
+  protected setUserData(result: any) {
+    return this._setUserData.handle(result.user);
   }
 
-  protected error(error: any) {
-    window.alert(error)
+  protected successHandler(result: any) {
+    console.log("LoginThirdParties successHandler", result);
+  }
+
+  protected errorHandler(error: any) {
+    console.log("LoginThirdParties errorHandler", error);
   }
 }

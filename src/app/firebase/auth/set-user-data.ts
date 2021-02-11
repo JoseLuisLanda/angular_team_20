@@ -20,8 +20,6 @@ export class SetUserData {
       photoURL: user.photoURL,
       emailVerified: user.emailVerified
     }
-    return userRef.set(userData, {
-      merge: true
-    })
+    return userRef.set(userData, {merge: true});
   }
 }

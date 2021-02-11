@@ -11,7 +11,8 @@ export class EmailVerification {
     protected afs: AngularFirestore, 
     protected afAuth: AngularFireAuth) {}
 
-  handle() {
+  handle(user: any) {
+    console.log('EmailVerification', user);
     this.afAuth.currentUser
     .then(this.sendEmailVerification)
     .catch(this.error.bind(this));
