@@ -18,7 +18,6 @@ import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-l
   imports: [
     BrowserModule,
     CommonModule,
-    
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase)
   ],

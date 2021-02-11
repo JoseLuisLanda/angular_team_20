@@ -2,21 +2,23 @@ import { Injectable, NgZone } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { Router } from "@angular/router";
-import firebase from 'firebase/app';
-import 'firebase/auth'; 
+import { SendVerification } from "./send-verification";
 
-
-@Injectable({ providedIn: 'root' })
-export class LoginFacebook {
+@Injectable({providedIn: 'root'})
+export class RegisterUser {
   constructor(
-    public ngZone: NgZone,
-    public router: Router,
+    protected ngZone: NgZone,
+    protected router: Router,
+    protected sendVerification: SendVerification,
     public afs: AngularFirestore, 
     protected afAuth: AngularFireAuth) {}
 
-  handle() {
-    return this.afAuth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
-      .then(this.success.bind(this))
+  handle(email: string, password: string) {
+    return this.afAuth.createUserWithEmailAndPassword(email, password)
+      .then(
+        this.sendVerification.handle.bind(this.sendVerification),
+        this.success.bind(this),
+      )
       .catch(this.error.bind(this));
   }
 
