@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
     private loginThirdParties: LoginThirdParties) { }
 
   ngOnInit(): void {
-    this.loginThirdParties.facebook();
+    
   }
 
   registrarUsuario() {
@@ -31,6 +31,10 @@ export class LoginComponent implements OnInit {
 
   logout() {
     this._logout.handle();
+  }
+
+  loginFacebook() {
+    this.loginThirdParties.facebook();
   }
 
 
