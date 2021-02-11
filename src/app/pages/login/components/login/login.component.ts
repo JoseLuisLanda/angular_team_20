@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginFacebook } from 'src/app/firebase/auth/login-facebook';
 import { LoginWithCredentials } from 'src/app/firebase/auth/login-with-credential';
+import { Logout } from 'src/app/firebase/auth/logout';
 import { RegisterUser } from 'src/app/firebase/auth/register-user';
 
 @Component({
@@ -13,6 +14,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private registerUser: RegisterUser,
     private loginWithCredentials: LoginWithCredentials,
+    private _logout: Logout,
     private loginFacebook: LoginFacebook) { }
 
   ngOnInit(): void {
@@ -25,6 +27,10 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.loginWithCredentials.handle('naiger67@gmail.com', '1234567');
+  }
+
+  logout() {
+    this._logout.handle();
   }
 
 

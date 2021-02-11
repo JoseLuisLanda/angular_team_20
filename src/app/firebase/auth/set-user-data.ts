@@ -4,18 +4,24 @@ import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firest
 import { Router } from "@angular/router";
 
 @Injectable({providedIn: 'root'})
-export class Logout {
+export class SetUserData {
   constructor(
     protected ngZone: NgZone,
     protected router: Router,
     protected afs: AngularFirestore, 
     protected afAuth: AngularFireAuth) {}
 
-  handle() {
-    return this.afAuth.signOut().then(() => {
-      /*localStorage.removeItem('user');
-      this.router.navigate(['sign-in']);*/
-      console.log('logout');
-    });
+  handle(user: any) {
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+    const userData: any = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      emailVerified: user.emailVerified
+    }
+    return userRef.set(userData, {
+      merge: true
+    })
   }
 }

@@ -1,7 +1,8 @@
 import { Injectable, NgZone } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
-import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firestore";
+import { AngularFirestore } from "@angular/fire/firestore";
 import { Router } from "@angular/router";
+import { SetUserData } from "./set-user-data";
 
 @Injectable({providedIn: 'root'})
 export class LoginWithCredentials {
@@ -9,7 +10,8 @@ export class LoginWithCredentials {
     protected ngZone: NgZone,
     protected router: Router,
     protected afs: AngularFirestore, 
-    protected afAuth: AngularFireAuth) {}
+    protected afAuth: AngularFireAuth,
+    protected setUserData: SetUserData) {}
 
   handle(email: string, password: string) {
     return this.afAuth.signInWithEmailAndPassword(email, password)
@@ -18,9 +20,7 @@ export class LoginWithCredentials {
   }
 
   protected success(result: any) {
-    this.ngZone.run(() => {
-      console.log('result', result);
-    })
+    this.setUserData.handle(result.user);
   }
 
   protected error(error: any) {
