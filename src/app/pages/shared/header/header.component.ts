@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NavbarService } from '../../../services/navbar.service';
+import { AuthService } from '../../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -7,11 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  recoverPassword: boolean = false;
+  logged = false;
+  constructor(public nav: NavbarService,
+              private authService: AuthService,
+              private router: Router) {
+              }
 
-  constructor() { }
+  ngOnInit() {
 
-  ngOnInit(): void {
+    this.isLogged();
+    console.log('isLogged', this.isLogged());
   }
 
+  isLogged(): boolean {
+    return this.logged = this.authService.isAuthenticated();
+  }
+  logOut() {
+    this.authService.logOut();
+    this.logged = false;
+    this.ngOnInit();
+    this.router.navigateByUrl('/home');
+  }
 }

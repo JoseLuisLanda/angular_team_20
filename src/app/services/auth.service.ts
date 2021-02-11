@@ -7,8 +7,10 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  private url: string = 'urlApi';
-  private apiKey: string = 'apiKey';
+  //private url: string = 'urlApi';
+  //private apiKey: string = 'apiKey';
+  private url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty';
+  private apiKey = 'AIzaSyDHxlKfchpJrycT_fAOX3JjBCWp_uFlcjI';
 
   public userToken: string = '';
 
@@ -38,38 +40,41 @@ export class AuthService {
       name: user.name,
       returnSecureToken: true
     };
-
-    return this.http.post(`${this.url}signUp?key=${this.apiKey}`,
+    return this.http.post(
+      `${ this.url }/signupNewUser?key=${ this.apiKey }`,
       authData
     ).pipe(
-      map( (response: any)  =>{
+      map( (response: any)  => {
+        console.log('entro en el mep()');
         this.saveToken( response['idToken']);
         return response;
       })
     );
+    
   }
-
-
-   login(user: UserModel){
+  login(user: UserModel) {
     const authData = {
-      email: user.email,
-      password: user.password,
+      email : user.email,
+      password : user.password,
       name: user.name,
-      returnSecureToken: true
+      returnSecureToken : true
     };
-    return this.http.post(`${this.url}signInWithPassword?key=${this.apiKey}`,
+    return this.http.post(
+      `${ this.url }/verifyPassword?key=${ this.apiKey }`,
       authData
     ).pipe(
-      map( (response: any) =>{
-        this.saveToken( response['idToken']);
-        return response;
+      map( (resp: any)  => {
+        console.log('entro en el map()');
+        this.saveToken( resp['idToken']);
+        return resp;
       })
     );
-
   }
+
 
   logOut(): void{
     localStorage.removeItem('token');
+    this.userToken = '';
   }
 
   isAuthenticated() : boolean{

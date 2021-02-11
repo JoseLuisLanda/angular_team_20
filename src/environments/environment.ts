@@ -5,13 +5,22 @@
 export const environment = {
   production: false,
   firebaseConfig : {
-    apiKey: "AIzaSyB3NbGTBq52ef7UaoppgjefM2055EwhBNg",
-    authDomain: "teamangular20.firebaseapp.com",
-    projectId: "teamangular20",
-    storageBucket: "teamangular20.appspot.com",
-    messagingSenderId: "672380893900",
-    appId: "1:672380893900:web:6781e47b3c935783f6a069",
-    measurementId: "G-1Z8NRQPJB4"
+    apiKey: "AIzaSyDHxlKfchpJrycT_fAOX3JjBCWp_uFlcjI",
+    authDomain: "comfecoapp.firebaseapp.com",
+    projectId: "comfecoapp",
+    storageBucket: "comfecoapp.appspot.com",
+    messagingSenderId: "402972450487",
+    appId: "1:402972450487:web:9e95a13733763164be7732",
+    measurementId: "G-N8CCCR0BKC"
+  },
+  firebase: {
+    apiKey: "AIzaSyDHxlKfchpJrycT_fAOX3JjBCWp_uFlcjI",
+    authDomain: "comfecoapp.firebaseapp.com",
+    projectId: "comfecoapp",
+    storageBucket: "comfecoapp.appspot.com",
+    messagingSenderId: "402972450487",
+    appId: "1:402972450487:web:9e95a13733763164be7732",
+    measurementId: "G-N8CCCR0BKC"
   }
 };
 
