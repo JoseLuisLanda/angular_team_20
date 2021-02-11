@@ -10,7 +10,7 @@ export class RegisterUser {
     protected ngZone: NgZone,
     protected router: Router,
     protected sendVerification: SendVerification,
-    public afs: AngularFirestore, 
+    protected afs: AngularFirestore, 
     protected afAuth: AngularFireAuth) {}
 
   handle(email: string, password: string) {
