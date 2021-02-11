@@ -6,9 +6,9 @@ import { Router } from "@angular/router";
 @Injectable({providedIn: 'root'})
 export class LoginWithCredentials {
   constructor(
-    public ngZone: NgZone,
-    public router: Router,
-    public afs: AngularFirestore, 
+    protected ngZone: NgZone,
+    protected router: Router,
+    protected afs: AngularFirestore, 
     protected afAuth: AngularFireAuth) {}
 
   handle(email: string, password: string) {
