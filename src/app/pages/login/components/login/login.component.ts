@@ -4,7 +4,9 @@ import { LoginThirdParties } from 'src/app/firebase/auth/login-third-parties';
 import { LoginWithCredentials } from 'src/app/firebase/auth/login-with-credential';
 import { Logout } from 'src/app/firebase/auth/logout';
 import { RegisterUser } from 'src/app/firebase/auth/register-user';
-
+import firebase from 'firebase/app';
+import 'firebase/auth'; 
+import { CurrentUserReload } from 'src/app/firebase/auth/current-user-reload';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -19,6 +21,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private registerUser: RegisterUser,
     private loginWithCredentials: LoginWithCredentials,
+    private currentUserReload: CurrentUserReload,
     private _logout: Logout,
     protected router: Router,
     private loginThirdParties: LoginThirdParties) { }
@@ -47,6 +50,12 @@ export class LoginComponent implements OnInit {
     let mode = this.verification.mode;
     let code = this.getCode();
     this.router.navigate(['auth/email-validation-callback', mode, code]);
+  }
+
+  verifyUser() {
+    this.currentUserReload.handle()?.then((currentUser)=>{
+      console.log("currentUser", currentUser);
+    });
   }
 
   protected getCode() {

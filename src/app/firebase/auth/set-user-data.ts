@@ -24,12 +24,7 @@ export class SetUserData {
       emailVerified: user.emailVerified
     }
     userRef.set(userData, {merge: true});
-
-    /*firebase.auth().currentUser?.reload().then(() => {
-      console.log(firebase.auth().currentUser);
-      console.log(firebase.auth().currentUser?.emailVerified) // should now be 'true'
-   })*/
-
+    
     return new Promise((resolve, reject)=>{
       resolve(userData);
     });

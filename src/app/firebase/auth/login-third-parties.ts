@@ -51,7 +51,7 @@ export class LoginThirdParties {
     }
     
     return new Promise((resolve, reject)=>{
-      if(false) {
+      if(user.emailVerified) {
         resolve(user);
         return;
       }
