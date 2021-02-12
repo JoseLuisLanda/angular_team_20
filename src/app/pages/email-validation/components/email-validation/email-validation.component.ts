@@ -10,15 +10,14 @@ export class EmailValidationComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private emailVerificationCallback: EmailVerificationCallback) { }
+    private _emailVerificationCallback: EmailVerificationCallback) { }
 
   ngOnInit(): void {
-    console.log(42342);
-    this.validateEmailHandler(this.activatedRoute.snapshot.params);
+    this.emailVerificationCallback(this.activatedRoute.snapshot.params);
   }
 
-  protected validateEmailHandler(params: any) {
-    console.log("params", 32423);
+  protected emailVerificationCallback(params: any) {
+    
   }
 
 }
