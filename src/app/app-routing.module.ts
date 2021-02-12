@@ -23,6 +23,11 @@ const routes: Routes = [
         module => module.LoginModule
       )
     }, {
+      path: 'register',
+      loadChildren: () => import('./pages/register-page/register-page.module').then(
+        module => module.RegisterPageModule
+      )
+    }, {
       path: 'email-validation-callback/:mode/:code',
       loadChildren: () => import('./pages/email-validation/email-validation.module').then(
         module => module.EmailValidationModule
