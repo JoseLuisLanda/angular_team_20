@@ -5,6 +5,9 @@
         <label for="">Email</label>
         <input type="text" formControlName="email">
       </div>
+      <div [hidden]="form.controls['email'].pristine">
+        <div [hidden]="form.controls['email'].valid">Error</div>
+      </div>
     </div>
     <div class="row">
       <div class="col s6">
@@ -15,7 +18,7 @@
     <div class="row">
       <div class="col s6">
         <div class="col s6">
-          <button type="button" (click)="submit()">Enviar</button>
+          <button type="button" (click)="submit()">Ingresar</button>
         </div>
         <div class="col s6">
           <button type="button" (click)="restablecerPassword()">Restablecer contrasena</button>

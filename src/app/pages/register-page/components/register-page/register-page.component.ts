@@ -21,7 +21,8 @@ export class RegisterPageComponent implements OnInit {
   }
 
   register(form: any) {
-    this.registerUser.handle(form.email, form.password);
+    console.log('form', form);
+    //this.registerUser.handle(form.email, form.password);
   }
 
 }
