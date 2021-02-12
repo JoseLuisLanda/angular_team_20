@@ -1,0 +1,24 @@
+<div>
+  <form [formGroup]="form">
+    <div class="row">
+      <div class="col s6">
+        <label for="">Email</label>
+        <input type="text" formControlName="email">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s6">
+        <label for="">Password</label>
+        <input type="password" formControlName="password">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s6">
+        <div class="col s6">
+          <button type="button" (click)="submit()">Registrar</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+

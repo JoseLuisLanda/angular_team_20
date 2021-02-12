@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthButtonActionEvent } from './auth-button-action.event';
 
 @Component({
@@ -10,7 +11,9 @@ export class AuthButtonActionComponent implements OnInit {
 
   public shows: any;
 
-  constructor(private authButtonActionEvent: AuthButtonActionEvent) { 
+  constructor(
+    private router: Router,
+    private authButtonActionEvent: AuthButtonActionEvent) { 
     this.shows = this._shows();
   }
 
@@ -28,6 +31,14 @@ export class AuthButtonActionComponent implements OnInit {
       login: false,
       register: true,
     };
+  }
+
+  login() {
+    this.router.navigate(['auth/login']);
+  }
+
+  register() {
+    this.router.navigate(['auth/register']);
   }
 
 }
