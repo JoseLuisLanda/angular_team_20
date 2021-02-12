@@ -1,4 +1,4 @@
 <div>
-  <button >Login</button>
-  <button>Registro</button>
+  <button [hidden]="!shows['login']">Login</button>
+  <button [hidden]="!shows['register']">Registro</button>
 </div>

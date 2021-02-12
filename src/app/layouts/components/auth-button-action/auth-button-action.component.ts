@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthButtonActionEvent } from './auth-button-action.event';
 
 @Component({
   selector: 'app-auth-button-action',
@@ -7,18 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthButtonActionComponent implements OnInit {
 
-  public hiddens: any;
+  public shows: any;
 
-  constructor() { 
-    this.hiddens = this._hiddens();
+  constructor(private authButtonActionEvent: AuthButtonActionEvent) { 
+    this.shows = this._shows();
   }
 
   ngOnInit(): void {
+    this.authButtonActionEvent.event$.subscribe(this.updateHiddens.bind(this));
   }
 
-  protected _hiddens() {
+  protected updateHiddens(shows: any) {
+    this.shows['login'] = shows['login']; 
+    this.shows['register'] = shows['register']; 
+  }
+
+  protected _shows() {
     return {
-      login: true,
+      login: false,
       register: true,
     };
   }
