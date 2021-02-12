@@ -8,12 +8,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
+import { AuthNavbarComponent } from './layouts/components/auth-navbar/auth-navbar.component';
+import { AuthButtonActionComponent } from './layouts/components/auth-button-action/auth-button-action.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthLayoutComponent,
-    DashboardLayoutComponent
+    DashboardLayoutComponent,
+    AuthNavbarComponent,
+    AuthButtonActionComponent
   ],
   imports: [
     BrowserModule,

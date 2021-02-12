@@ -1,30 +1,14 @@
-<button (click)="registrarUsuario()">Registrar usuario</button>
-
-<button (click)="login()">Login</button>
-
-<button (click)="loginFacebook()">Login facebook</button>
-
-<button (click)="logout()">Logout</button>
-
 <div>
-  <input type="text" [(ngModel)]="verification.mode">
-  <input type="text" [(ngModel)]="verification.code">
-  <button (click)="emailValidationCallback()">Verificar email</button>
-</div>
-
-<div>
-  <input type="text" [(ngModel)]="confirmarPass.code">
-  <input type="password" [(ngModel)]="confirmarPass.password">
-  <button (click)="confirmPasswordReset()">confirmPasswordReset</button>
-</div>
-
-<button (click)="verifyUser()">Verify User</button>
-
-<button (click)="cambiarContrasenia()">Enviar correo de cambio de contrasenia</button>
-
-<div>
-  <app-login-form 
-    (onLogin)="login($event)" 
-    (onPasswordRecovery)="cambiarContrasenia($event)">
-  </app-login-form>
+  <h1>Login</h1>
+  <div>
+    <app-login-form 
+      (onLogin)="login($event)" 
+      (onPasswordRecovery)="cambiarContrasenia($event)">
+    </app-login-form>
+    <div>
+  </div>
+    <app-login-terceras-partes 
+      (onLoginFacebook)="loginFacebook($event)">
+    </app-login-terceras-partes>
+  </div>
 </div>

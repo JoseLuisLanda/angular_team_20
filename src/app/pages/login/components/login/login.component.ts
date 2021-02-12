@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
     this._logout.handle();
   }
 
-  loginFacebook() {
+  loginFacebook(event: any) {
     this.loginThirdParties.facebook();
   }
 
