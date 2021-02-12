@@ -7,6 +7,7 @@ import { RegisterUser } from 'src/app/firebase/auth/register-user';
 import firebase from 'firebase/app';
 import 'firebase/auth'; 
 import { CurrentUserReload } from 'src/app/firebase/auth/current-user-reload';
+import { SendPasswordResetEmail } from 'src/app/firebase/auth/send-password-reset-email';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
     private registerUser: RegisterUser,
     private loginWithCredentials: LoginWithCredentials,
     private currentUserReload: CurrentUserReload,
+    private sendPasswordResetEmail: SendPasswordResetEmail,
     private _logout: Logout,
     protected router: Router,
     private loginThirdParties: LoginThirdParties) { }
@@ -56,6 +58,10 @@ export class LoginComponent implements OnInit {
     this.currentUserReload.handle()?.then((currentUser)=>{
       console.log("currentUser", currentUser);
     });
+  }
+
+  cambiarContrasenia() {
+    this.sendPasswordResetEmail.handle('naiger67@gmail.com');
   }
 
   protected getCode() {

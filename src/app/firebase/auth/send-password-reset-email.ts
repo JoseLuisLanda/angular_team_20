@@ -4,18 +4,16 @@ import { AngularFirestore } from "@angular/fire/firestore";
 import { Router } from "@angular/router";
 
 @Injectable({providedIn: 'root'})
-export class Logout {
+export class SendPasswordResetEmail {
   constructor(
     protected ngZone: NgZone,
     protected router: Router,
     protected afs: AngularFirestore, 
     protected afAuth: AngularFireAuth) {}
 
-  handle() {
-    return this.afAuth.signOut().then(() => {
-      /*localStorage.removeItem('user');
-      this.router.navigate(['sign-in']);*/
-      console.log('logout');
-    });
+  handle(email: any) {
+    return this.afAuth.sendPasswordResetEmail(email)
+      .then(() => console.log('sent Password Reset Email!'))
+      .catch((error) => console.log(error));
   }
 }
