@@ -7,6 +7,7 @@ import { RegisterUser } from 'src/app/firebase/auth/register-user';
 import { CurrentUserReload } from 'src/app/firebase/auth/current-user-reload';
 import { SendPasswordResetEmail } from 'src/app/firebase/auth/send-password-reset-email';
 import { ConfirmPasswordReset } from 'src/app/firebase/auth/confirm-password-reset';
+import { AuthButtonActionEvent } from 'src/app/layouts/components/auth-button-action/auth-button-action.event';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -24,6 +25,7 @@ export class LoginComponent implements OnInit {
     code: ''
   };
   constructor(
+    private authButtonActionEvent: AuthButtonActionEvent,
     private _confirmPasswordReset: ConfirmPasswordReset,
     private registerUser: RegisterUser,
     private loginWithCredentials: LoginWithCredentials,
@@ -34,7 +36,10 @@ export class LoginComponent implements OnInit {
     private loginThirdParties: LoginThirdParties) { }
 
   ngOnInit(): void {
-    
+    this.authButtonActionEvent.event$.next({
+      login: false,
+      register: true
+    });
   }
 
   registrarUsuario() {
