@@ -41,9 +41,6 @@ export class LoginComponent implements OnInit {
   }
 
   emailValidationCallback() {
-    this.router.navigate(['auth/email-validation-callback'], { queryParams: {
-      mode: this.verification.mode, 
-      code: this.verification.code
-    }});
+    this.router.navigate(['auth/email-validation-callback', 1, 1]);
   }
 }

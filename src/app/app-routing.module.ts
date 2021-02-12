@@ -23,7 +23,7 @@ const routes: Routes = [
         module => module.LoginModule
       )
     }, {
-      path: 'email-validation-callback',
+      path: 'email-validation-callback/:mode/:code',
       loadChildren: () => import('./pages/email-validation/email-validation.module').then(
         module => module.EmailValidationModule
       )
