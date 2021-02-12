@@ -12,7 +12,10 @@ import { RegisterUser } from 'src/app/firebase/auth/register-user';
 })
 export class LoginComponent implements OnInit {
 
-  public verification:any = {};
+  public verification:any = {
+    mode: 'verifyEmail',
+    code: ''
+  };
   constructor(
     private registerUser: RegisterUser,
     private loginWithCredentials: LoginWithCredentials,
@@ -41,6 +44,13 @@ export class LoginComponent implements OnInit {
   }
 
   emailValidationCallback() {
-    this.router.navigate(['auth/email-validation-callback', this.verification.mode, this.verification.code]);
+    let mode = this.verification.mode;
+    let code = this.getCode();
+    this.router.navigate(['auth/email-validation-callback', mode, code]);
+  }
+
+  protected getCode() {
+    let code = this.verification.code.split('&')[1].substring("oobCode=".length);
+    return code;
   }
 }

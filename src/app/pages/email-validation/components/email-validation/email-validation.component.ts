@@ -16,8 +16,9 @@ export class EmailValidationComponent implements OnInit {
     this.emailVerificationCallback(this.activatedRoute.snapshot.params);
   }
 
-  protected emailVerificationCallback(params: any) {    
-    return this._emailVerificationCallback.handle(params['code'].toString())
+  protected emailVerificationCallback(params: any) {
+    let code = params['code'];
+    return this._emailVerificationCallback.handle(code)
       .then(this.emailVerificationCallbackOk.bind(this))
       .catch(this.emailVerificationCallbackErr.bind(this));
   }
@@ -29,5 +30,4 @@ export class EmailValidationComponent implements OnInit {
   protected emailVerificationCallbackErr(erro: any) {
     console.log("emailVerificationCallbackErr", erro);
   }
-
 }

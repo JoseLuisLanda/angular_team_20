@@ -51,11 +51,8 @@ export class LoginThirdParties {
     }
     
     return new Promise((resolve, reject)=>{
-      if(true) {
+      if(false) {
         resolve(user);
-        let code = ("5PWglaouGEQdQyRRAoOWrw5K_0BGXKs9i1D6YUz-uxoAAAF3lAj-AA&apiKey=AIzaSyAluvjqdC9Kzmq6zTTS5t-iLY0-8bFGYFE&lang=en")
-        console.log("user", decodeURIComponent(code));
-        console.log("user2", code);
         return;
       }
       this._emailVerification.handle(user)
