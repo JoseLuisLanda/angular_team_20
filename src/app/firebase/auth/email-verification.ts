@@ -18,7 +18,10 @@ export class EmailVerification {
   }
 
   protected sendEmailVerification(currentUser: any) {
-    return currentUser.sendEmailVerification();
+    return currentUser.sendEmailVerification().then((response: any)=>{
+      console.log("serrrr", response);
+      return response;
+    });
   }
 
   protected error(error: any) {

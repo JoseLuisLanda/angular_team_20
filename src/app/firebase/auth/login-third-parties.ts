@@ -27,6 +27,7 @@ export class LoginThirdParties {
     return this.afAuth.signInWithPopup(provider)
       .then(this.setUserData.bind(this))
       .then(this.emailVerification.bind(this))
+      .then(this.tap.bind(this))
       .catch(this.errorHandler.bind(this));
   }
 
@@ -39,27 +40,30 @@ export class LoginThirdParties {
     let emailVerificationHandlers = {
       success(resolve: any, reject: any) {
         return (response: any) => {
-
+          resolve({response, name: 'emailVerificationHandlers ok'});
         };
       },
       error(resolve: any, reject: any) {
         return (response: any) => {
-
+          reject({response, name: 'emailVerificationHandlers error'});
         };
       }
     }
     
     return new Promise((resolve, reject)=>{
       if(false) {
-        this._emailVerification.handle(user)
-          .then(emailVerificationHandlers.success(resolve, reject).bind(this))
-          .catch(emailVerificationHandlers.error(resolve, reject).bind(this));
-      }
-
-      else {
         resolve(user);
+        console.log("user", user);
+        return;
       }
+      this._emailVerification.handle(user)
+        .then(emailVerificationHandlers.success(resolve, reject).bind(this))
+        .catch(emailVerificationHandlers.error(resolve, reject).bind(this));
     });
+  }
+
+  protected tap(user: any) {
+    console.log("******datos del usuario para determinar si valido o no el correo:", user);
   }
 
   protected errorHandler(error: any) {

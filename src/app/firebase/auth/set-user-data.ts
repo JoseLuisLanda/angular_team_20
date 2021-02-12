@@ -3,6 +3,9 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firestore";
 import { Router } from "@angular/router";
 
+import firebase from 'firebase/app';
+import 'firebase/auth';
+
 @Injectable({providedIn: 'root'})
 export class SetUserData {
   constructor(
@@ -20,6 +23,15 @@ export class SetUserData {
       photoURL: user.photoURL,
       emailVerified: user.emailVerified
     }
-    return userRef.set(userData, {merge: true});
+    userRef.set(userData, {merge: true});
+
+    /*firebase.auth().currentUser?.reload().then(() => {
+      console.log(firebase.auth().currentUser);
+      console.log(firebase.auth().currentUser?.emailVerified) // should now be 'true'
+   })*/
+
+    return new Promise((resolve, reject)=>{
+      resolve(userData);
+    });
   }
 }
