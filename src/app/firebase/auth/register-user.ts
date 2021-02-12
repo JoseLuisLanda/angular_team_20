@@ -16,7 +16,7 @@ export class RegisterUser {
   handle(email: string, password: string) {
     return this.afAuth.createUserWithEmailAndPassword(email, password)
       .then(this.emailVerification.bind(this))
-      .then(this.successHandler.bind(this))
+      .then(this.tap.bind(this))
       .catch(this.errorHandler.bind(this));
   }
 
@@ -24,7 +24,7 @@ export class RegisterUser {
     return this._emailVerification.handle(user);
   }
 
-  protected successHandler(result: any) {
+  protected tap(result: any) {
     console.log('RegisterUserOk', result);
   }
 
