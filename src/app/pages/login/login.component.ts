@@ -15,9 +15,17 @@ export class LoginComponent implements OnInit {
   recordarme = false;
 
   constructor(private authLogin: AuthService,
-    private router: Router) { }
+    private router: Router, public authService: AuthService) { }
 
   ngOnInit(): void {
+  }
+  loginGmail(){
+
+    this.authLogin.GoogleAuth().then(val=>{
+      this.router.navigateByUrl('/home');
+    }).catch(error =>{
+      this.router.navigateByUrl('/register');
+    })
   }
   login(form: NgForm) {
     if ( !form.valid ) {

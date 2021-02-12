@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import { UserModel } from "../models/user.model";
 import { map } from 'rxjs/operators';
-
+import firebase from 'firebase/app';
+import { AngularFireAuth } from '@angular/fire/auth';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,10 +15,25 @@ export class AuthService {
 
   public userToken: string = '';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, public afAuth: AngularFireAuth) {
     this.readToken();
   }
-
+  GoogleAuth() {
+    return this.AuthLogin(new firebase.auth.GoogleAuthProvider());
+  }  
+  
+  // Auth logic to run auth providers
+  AuthLogin(provider:any) {
+    return this.afAuth.signInWithPopup(provider)
+    .then((result:any) => {
+        //console.log('You have been successfully logged in!',result)
+        //console.log('email, user!',result.user['email']+" "+result.user['displayName'])
+        this.saveToken( result.user['refreshToken']);
+        
+    }).catch((error: any) => {
+        console.log(error)
+    })
+  }
   private saveToken( idToken: string ): void{
     this.userToken = idToken;
     localStorage.setItem( 'token', idToken);

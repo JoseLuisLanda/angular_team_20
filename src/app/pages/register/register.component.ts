@@ -5,6 +5,8 @@ import { AuthService } from '../../../app/services/auth.service';
 import { Router } from '@angular/router';
 import { UserModel } from 'src/app/models/user.model';
 
+
+
 @Component({
   selector: 'app-register',
   templateUrl: './register1.html',
@@ -18,7 +20,8 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+ // Sign in with Google
+ 
   onSubmit(form: NgForm) {
     if ( form.invalid ) {
       return;
