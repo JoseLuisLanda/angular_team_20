@@ -41,8 +41,8 @@ export class LoginComponent implements OnInit {
     this.registerUser.handle('naiger67@gmail.com', '1234567');
   }
 
-  login() {
-    this.loginWithCredentials.handle('naiger67@gmail.com', 'nazita').then((response)=>{
+  login(form: any) {
+    this.loginWithCredentials.handle(form.email, form.password).then((response)=>{
       console.log(response);
     });
   }
@@ -67,8 +67,8 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  cambiarContrasenia() {
-    this.sendPasswordResetEmail.handle('naiger67@gmail.com');
+  cambiarContrasenia(form: any) {
+    this.sendPasswordResetEmail.handle(form.email);
   }
 
   confirmPasswordReset() {

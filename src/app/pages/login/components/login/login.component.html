@@ -21,3 +21,10 @@
 <button (click)="verifyUser()">Verify User</button>
 
 <button (click)="cambiarContrasenia()">Enviar correo de cambio de contrasenia</button>
+
+<div>
+  <app-login-form 
+    (onLogin)="login($event)" 
+    (onPasswordRecovery)="cambiarContrasenia($event)">
+  </app-login-form>
+</div>
