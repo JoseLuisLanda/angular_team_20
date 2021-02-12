@@ -4,10 +4,9 @@ import { LoginThirdParties } from 'src/app/firebase/auth/login-third-parties';
 import { LoginWithCredentials } from 'src/app/firebase/auth/login-with-credential';
 import { Logout } from 'src/app/firebase/auth/logout';
 import { RegisterUser } from 'src/app/firebase/auth/register-user';
-import firebase from 'firebase/app';
-import 'firebase/auth'; 
 import { CurrentUserReload } from 'src/app/firebase/auth/current-user-reload';
 import { SendPasswordResetEmail } from 'src/app/firebase/auth/send-password-reset-email';
+import { ConfirmPasswordReset } from 'src/app/firebase/auth/confirm-password-reset';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -19,7 +18,13 @@ export class LoginComponent implements OnInit {
     mode: 'verifyEmail',
     code: ''
   };
+
+  public confirmarPass:any = {
+    password: '',
+    code: ''
+  };
   constructor(
+    private _confirmPasswordReset: ConfirmPasswordReset,
     private registerUser: RegisterUser,
     private loginWithCredentials: LoginWithCredentials,
     private currentUserReload: CurrentUserReload,
@@ -37,7 +42,9 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.loginWithCredentials.handle('naiger67@gmail.com', '1234567');
+    this.loginWithCredentials.handle('naiger67@gmail.com', 'nazita').then((response)=>{
+      console.log(response);
+    });
   }
 
   logout() {
@@ -50,7 +57,7 @@ export class LoginComponent implements OnInit {
 
   emailValidationCallback() {
     let mode = this.verification.mode;
-    let code = this.getCode();
+    let code = this.getCode(this.verification.code);
     this.router.navigate(['auth/email-validation-callback', mode, code]);
   }
 
@@ -64,8 +71,17 @@ export class LoginComponent implements OnInit {
     this.sendPasswordResetEmail.handle('naiger67@gmail.com');
   }
 
-  protected getCode() {
-    let code = this.verification.code.split('&')[1].substring("oobCode=".length);
+  confirmPasswordReset() {
+    let code = this.getCode(this.confirmarPass.code);
+    console.log(code);
+    this._confirmPasswordReset.handle(
+      code, 
+      this.confirmarPass.password
+    );
+  }
+
+  protected getCode(_code: any) {
+    let code = _code.split('&')[1].substring("oobCode=".length);
     return code;
   }
 }

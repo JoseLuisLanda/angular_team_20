@@ -12,6 +12,12 @@
   <button (click)="emailValidationCallback()">Verificar email</button>
 </div>
 
+<div>
+  <input type="text" [(ngModel)]="confirmarPass.code">
+  <input type="password" [(ngModel)]="confirmarPass.password">
+  <button (click)="confirmPasswordReset()">confirmPasswordReset</button>
+</div>
+
 <button (click)="verifyUser()">Verify User</button>
 
 <button (click)="cambiarContrasenia()">Enviar correo de cambio de contrasenia</button>
