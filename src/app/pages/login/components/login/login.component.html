@@ -5,3 +5,9 @@
 <button (click)="loginFacebook()">Login facebook</button>
 
 <button (click)="logout()">Logout</button>
+
+<div>
+  <input type="text" [(ngModel)]="verification.mode">
+  <input type="text" [(ngModel)]="verification.code">
+  <button (click)="emailValidationCallback()">Verificar email</button>
+</div>
