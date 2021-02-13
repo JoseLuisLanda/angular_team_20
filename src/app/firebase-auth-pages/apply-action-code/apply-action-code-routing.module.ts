@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EmailValidationComponent } from './components/email-validation/email-validation.component';
+import { ApplyActionCodeComponent } from './components/apply-action-code/apply-action-code.component';
 
 const routes: Routes = [
-  {path: '', component: EmailValidationComponent}
+  {path: '', component: ApplyActionCodeComponent}
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class EmailValidationRoutingModule { }
+export class ApplyActionCodeRoutingModule { }

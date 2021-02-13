@@ -13,8 +13,18 @@ const routes: Routes = [
     component: DashboardLayoutComponent,
     children: [{
       path: 'profile-user',
-      loadChildren: () => import('./pages/profile-user/profile-user.module').then(
+      loadChildren: () => import('./firebase-auth-pages/profile-user/profile-user.module').then(
         module => module.ProfileUserModule
+      )
+    }, {
+      path: 'apply-action-code/:code',
+      loadChildren: () => import('./firebase-auth-pages/apply-action-code/apply-action-code.module').then(
+        module => module.ApplyActionCodeModule
+      )
+    }, {
+      path: 'send-email-verification',
+      loadChildren: () => import('./firebase-auth-pages/send-email-verification/send-email-verification.module').then(
+        module => module.SendEmailVerificationModule
       )
     }]
   },
@@ -23,28 +33,23 @@ const routes: Routes = [
     component: AuthLayoutComponent,
     children: [{
       path: 'login',
-      loadChildren: () => import('./pages/login/login.module').then(
+      loadChildren: () => import('./firebase-auth-pages/login/login.module').then(
         module => module.LoginModule
       )
     }, {
       path: 'register',
-      loadChildren: () => import('./pages/register-page/register-page.module').then(
+      loadChildren: () => import('./firebase-auth-pages/register-page/register-page.module').then(
         module => module.RegisterPageModule
       )
     }, {
       path: 'send-password-reset/:email',
-      loadChildren: () => import('./pages/send-password-reset-email/send-password-reset-email.module').then(
+      loadChildren: () => import('./firebase-auth-pages/send-password-reset-email/send-password-reset-email.module').then(
         module => module.SendPasswordResetEmailModule
       )
     }, {
       path: 'confirm-password-reset/:code',
-      loadChildren: () => import('./pages/confirm-password-reset/confirm-password-reset.module').then(
+      loadChildren: () => import('./firebase-auth-pages/confirm-password-reset/confirm-password-reset.module').then(
         module => module.ConfirmPasswordResetModule
-      )
-    }, {
-      path: 'email-validation-callback/:mode/:code',
-      loadChildren: () => import('./pages/email-validation/email-validation.module').then(
-        module => module.EmailValidationModule
       )
     }]
   }

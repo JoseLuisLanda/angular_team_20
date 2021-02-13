@@ -6,7 +6,7 @@ import { SetUserData } from "./set-user-data";
 
 import firebase from 'firebase/app';
 import 'firebase/auth'; 
-import { EmailVerification } from "./email-verification";
+import { SendEmailVerification } from "./send-email-verification";
 
 
 @Injectable({ providedIn: 'root' })
@@ -16,7 +16,7 @@ export class LoginThirdParties {
     protected router: Router,
     protected afs: AngularFirestore, 
     protected afAuth: AngularFireAuth,
-    protected _emailVerification: EmailVerification,
+    protected _sendEmailVerification: SendEmailVerification,
     protected _setUserData: SetUserData) {}
 
   facebook() {
@@ -26,7 +26,7 @@ export class LoginThirdParties {
   protected handle(provider: any) {
     return this.afAuth.signInWithPopup(provider)
       .then(this.setUserData.bind(this))
-      .then(this.emailVerification.bind(this))
+      .then(this.sendEmailVerification.bind(this))
       .then(this.tap.bind(this))
       .catch(this.errorHandler.bind(this));
   }
@@ -35,7 +35,7 @@ export class LoginThirdParties {
     return this._setUserData.handle(result.user);
   }
 
-  protected emailVerification(user: any) {
+  protected sendEmailVerification(user: any) {
     
     let emailVerificationHandlers = {
       success(resolve: any, reject: any) {
@@ -55,7 +55,7 @@ export class LoginThirdParties {
         resolve(user);
         return;
       }
-      this._emailVerification.handle(user)
+      this._sendEmailVerification.handle(user)
         .then(emailVerificationHandlers.success(resolve, reject).bind(this))
         .catch(emailVerificationHandlers.error(resolve, reject).bind(this));
     });

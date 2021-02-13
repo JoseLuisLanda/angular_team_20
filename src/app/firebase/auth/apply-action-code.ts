@@ -4,24 +4,21 @@ import { AngularFirestore } from "@angular/fire/firestore";
 import { Router } from "@angular/router";
 
 @Injectable({providedIn: 'root'})
-export class EmailVerification {
+export class ApplyActionCode {
   constructor(
     protected ngZone: NgZone,
     protected router: Router,
     protected afs: AngularFirestore, 
     protected afAuth: AngularFireAuth) {}
 
-  handle(user: any) {
-    return this.afAuth.currentUser
-    .then(this.sendEmailVerification)
+  handle(code: any) {
+    return this.afAuth.applyActionCode(code)
+    .then(this.tap.bind(this))
     .catch(this.error.bind(this));
   }
 
-  protected sendEmailVerification(currentUser: any) {
-    return currentUser.sendEmailVerification().then((response: any)=>{
-      console.log("serrrr", response);
-      return response;
-    });
+  protected tap(response: any) {
+    console.log("response", response);
   }
 
   protected error(error: any) {
