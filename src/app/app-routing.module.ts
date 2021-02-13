@@ -9,12 +9,12 @@ const routes: Routes = [
       module => module.WelcomeModule
     )
   }, {
-    path: '',
+    path: 'main',
     component: DashboardLayoutComponent,
     children: [{
       path: 'profile-user',
-      loadChildren: () => import('./pages/welcome/welcome.module').then(
-        module => module.WelcomeModule
+      loadChildren: () => import('./pages/profile-user/profile-user.module').then(
+        module => module.ProfileUserModule
       )
     }]
   },
