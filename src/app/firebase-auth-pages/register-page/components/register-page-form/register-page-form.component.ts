@@ -23,7 +23,7 @@ export class RegisterPageFormComponent implements OnInit {
   protected _form() {
     return  this.fb.group({
       email: new FormControl({value:'',disabled:false}, [Validators.required, Validators.email]),
-      password: new FormControl({value:'',disabled:false}, [Validators.required])
+      password: new FormControl({value:'',disabled:false}, [Validators.required, Validators.minLength(6)])
     });
   }
 

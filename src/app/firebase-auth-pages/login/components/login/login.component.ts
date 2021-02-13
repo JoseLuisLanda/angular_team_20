@@ -39,9 +39,10 @@ export class LoginComponent implements OnInit {
   }
 
   login(form: any) {
-    this.loginWithCredentials.handle(form.email, form.password).then((response)=>{
+    console.log('login', form);
+    /*this.loginWithCredentials.handle(form.email, form.password).then((response)=>{
       //
-    });
+    });*/
   }
 
   logout() {
@@ -50,7 +51,7 @@ export class LoginComponent implements OnInit {
 
   loginFacebook(event: any) {
     console.log('login con facebook', 898);
-    this.loginThirdParties.facebook();
+    //this.loginThirdParties.facebook();
   }
 
   cambiarContrasenia(form: any) {
