@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginThirdParties } from 'src/app/firebase/auth/login-third-parties';
 import { LoginWithCredentials } from 'src/app/firebase/auth/login-with-credential';
@@ -47,21 +47,29 @@ export class LoginComponent implements OnInit {
   }
 
   loginFacebook(event: any) {
+    let self = this;
     let handlers = {
       success(response: any) {
         console.log("loginThirdParties facebook ok", response);
+        self.router.navigate(['main']);
       },
       error(response: any) {
-        console.log("loginThirdParties facebook error", response);
+        if(self.isAccountExistsWithDifferentCredential(response.code)){
+          alert("isAccountExistsWithDifferentCredential: "+ JSON.stringify(response));
+        }
       }
     };
 
     this.loginThirdParties.facebook()
-      .then(handlers.success.bind(this))
-      .catch(handlers.error.bind(this));
+      .then(handlers.success)
+      .catch(handlers.error);
   }
 
   cambiarContrasenia(form: any) {
     this.router.navigate(['auth/send-password-reset', form.email]);
+  }
+
+  protected isAccountExistsWithDifferentCredential(code: any) {
+    return  "auth/account-exists-with-different-credential" === code;
   }
 }

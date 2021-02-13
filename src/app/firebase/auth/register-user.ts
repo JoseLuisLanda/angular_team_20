@@ -21,7 +21,7 @@ export class RegisterUser {
   }
 
   protected sendEmailVerification(user: any) {
-    return this._sendEmailVerification.handle(user);
+    return this._sendEmailVerification.handle();
   }
 
   protected tap(result: any) {

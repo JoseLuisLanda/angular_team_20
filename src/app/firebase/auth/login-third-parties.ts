@@ -51,11 +51,11 @@ export class LoginThirdParties {
     }
     
     return new Promise((resolve, reject)=>{
-      if(user.emailVerified) {
+      if(true) {
         resolve(user);
         return;
       }
-      this._sendEmailVerification.handle(user)
+      this._sendEmailVerification.handle()
         .then(emailVerificationHandlers.success(resolve, reject).bind(this))
         .catch(emailVerificationHandlers.error(resolve, reject).bind(this));
     });

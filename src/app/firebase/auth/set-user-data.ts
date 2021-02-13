@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import { FirebaseAuthUser } from "./models/firebase-auth-user";
 
 @Injectable({providedIn: 'root'})
 export class SetUserData {
@@ -16,7 +17,7 @@ export class SetUserData {
 
   handle(user: any) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
-    const userData: any = {
+    const userData: FirebaseAuthUser = {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,

@@ -11,20 +11,30 @@ export class SendEmailVerification {
     protected afs: AngularFirestore, 
     protected afAuth: AngularFireAuth) {}
 
-  handle(user: any) {
+  handle() {
     return this.afAuth.currentUser
     .then(this.sendEmailVerification)
     .catch(this.error.bind(this));
   }
 
   protected sendEmailVerification(currentUser: any) {
-    return currentUser.sendEmailVerification().then((response: any)=>{
-      console.log("serrrr", response);
-      return response;
-    });
+    return currentUser.sendEmailVerification()
+      .then(this.sendEmailVerificationOk.bind(this))
+      .catch(this.sendEmailVerificationError.bind(this));
+  }
+
+  protected sendEmailVerificationOk(response: any) {
+    console.log("sendEmailVerification Ok", response);
+    return response;
+  }
+
+  protected sendEmailVerificationError(response: any) {
+    console.log("sendEmailVerificationError Ok", response);
+    throw response;
   }
 
   protected error(error: any) {
-    window.alert(error)
+    window.alert(error);
+    throw error;
   }
 }
