@@ -26,11 +26,7 @@ export class LoginComponent implements OnInit {
   };
   constructor(
     private authButtonActionEvent: AuthButtonActionEvent,
-    private _confirmPasswordReset: ConfirmPasswordReset,
-    private registerUser: RegisterUser,
     private loginWithCredentials: LoginWithCredentials,
-    private currentUserReload: CurrentUserReload,
-    private sendPasswordResetEmail: SendPasswordResetEmail,
     private _logout: Logout,
     protected router: Router,
     private loginThirdParties: LoginThirdParties) { }
@@ -42,16 +38,10 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  registrarUsuario() {
-    this.registerUser.handle('naiger67@gmail.com', '1234567');
-  }
-
   login(form: any) {
-    console.log('login', form);
-
-    /*this.loginWithCredentials.handle(form.email, form.password).then((response)=>{
-      console.log(response);
-    });*/
+    this.loginWithCredentials.handle(form.email, form.password).then((response)=>{
+      //
+    });
   }
 
   logout() {
@@ -60,36 +50,10 @@ export class LoginComponent implements OnInit {
 
   loginFacebook(event: any) {
     console.log('login con facebook', 898);
-    //this.loginThirdParties.facebook();
-  }
-
-  emailValidationCallback() {
-    let mode = this.verification.mode;
-    let code = this.getCode(this.verification.code);
-    this.router.navigate(['auth/email-validation-callback', mode, code]);
-  }
-
-  verifyUser() {
-    this.currentUserReload.handle()?.then((currentUser)=>{
-      console.log("currentUser", currentUser);
-    });
+    this.loginThirdParties.facebook();
   }
 
   cambiarContrasenia(form: any) {
     this.router.navigate(['auth/send-password-reset', form.email]);
-  }
-
-  confirmPasswordReset() {
-    let code = this.getCode(this.confirmarPass.code);
-    console.log(code);
-    this._confirmPasswordReset.handle(
-      code, 
-      this.confirmarPass.password
-    );
-  }
-
-  protected getCode(_code: any) {
-    let code = _code.split('&')[1].substring("oobCode=".length);
-    return code;
   }
 }

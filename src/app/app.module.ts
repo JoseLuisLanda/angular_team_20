@@ -10,6 +10,7 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
 import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
 import { AuthNavbarComponent } from './layouts/components/auth-navbar/auth-navbar.component';
 import { AuthButtonActionComponent } from './layouts/components/auth-button-action/auth-button-action.component';
+import { DashboardNavbarComponent } from './layouts/components/dashboard-navbar/dashboard-navbar.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { AuthButtonActionComponent } from './layouts/components/auth-button-acti
     AuthLayoutComponent,
     DashboardLayoutComponent,
     AuthNavbarComponent,
-    AuthButtonActionComponent
+    AuthButtonActionComponent,
+    DashboardNavbarComponent
   ],
   imports: [
     BrowserModule,
