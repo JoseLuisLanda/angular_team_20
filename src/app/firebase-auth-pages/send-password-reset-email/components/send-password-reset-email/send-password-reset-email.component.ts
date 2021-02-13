@@ -43,13 +43,18 @@ export class SendPasswordResetEmailComponent implements OnInit {
   }
 
   protected sendPasswordResetEmailOk(response: any) {
-    console.log("sendPasswordResetEmailOk", response);
+    alert("sendPasswordResetEmailOk: "+ JSON.stringify(response));
   }
 
   protected sendPasswordResetEmailError(response: any) {
-    console.log("sendPasswordResetEmailError", response);
+    if(this.isUserNotFound(response.code)) {
+      alert("sendPasswordResetEmailError: "+ JSON.stringify(response));
+    }
+
   }
 
-
+  protected isUserNotFound(code: any) {
+    return "auth/user-not-found" === code;
+  }
 
 }

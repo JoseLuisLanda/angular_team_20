@@ -18,7 +18,8 @@ export class ConfirmPasswordReset {
         return response;
       })
       .catch(err => {
-        console.log("neiiiiiiiiii");
+        console.log("confirmPasswordReset error", err);
+        throw err;
       });
   }
 }

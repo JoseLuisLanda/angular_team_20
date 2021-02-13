@@ -39,7 +39,17 @@ export class ConfirmPasswordResetComponent implements OnInit {
   }
 
   confirmPasswordReset(code: any, password: any) {
-    this._confirmPasswordReset.handle(code, password);
+    this._confirmPasswordReset.handle(code, password)
+      .then(this.confirmPasswordResetOk.bind(this))
+      .catch(this.confirmPasswordResetErr.bind(this));
+  }
+
+  protected confirmPasswordResetOk(response: any) {
+    alert("confirmPasswordResetOk: "+JSON.stringify(response));
+  }
+
+  protected confirmPasswordResetErr(response: any) {
+    alert("confirmPasswordResetErr: "+JSON.stringify(response));
   }
 
 }

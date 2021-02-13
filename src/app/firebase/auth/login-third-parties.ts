@@ -63,9 +63,11 @@ export class LoginThirdParties {
 
   protected tap(user: any) {
     console.log("******datos del usuario para determinar si valido o no el correo:", user);
+    return user;
   }
 
   protected errorHandler(error: any) {
     console.log("LoginThirdParties errorHandler", error);
+    throw error;
   }
 }

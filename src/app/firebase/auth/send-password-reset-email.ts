@@ -14,6 +14,9 @@ export class SendPasswordResetEmail {
   handle(email: any) {
     return this.afAuth.sendPasswordResetEmail(email)
       .then(() => console.log('sent Password Reset Email!'))
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        throw error;
+      });
   }
 }

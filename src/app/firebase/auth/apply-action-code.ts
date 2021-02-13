@@ -22,6 +22,7 @@ export class ApplyActionCode {
   }
 
   protected error(error: any) {
-    window.alert(error)
+    window.alert(error);
+    throw error;
   }
 }
