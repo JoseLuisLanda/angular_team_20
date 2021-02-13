@@ -5,10 +5,14 @@ import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-l
 
 const routes: Routes = [
   {
+    path: 'welcome', loadChildren: () => import('./pages/welcome/welcome.module').then(
+      module => module.WelcomeModule
+    )
+  }, {
     path: '',
     component: DashboardLayoutComponent,
     children: [{
-      path: 'welcome',
+      path: 'profile-user',
       loadChildren: () => import('./pages/welcome/welcome.module').then(
         module => module.WelcomeModule
       )
