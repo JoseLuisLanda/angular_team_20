@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SendEmailVerification } from 'src/app/firebase/auth/send-email-verification';
 
 @Component({
   selector: 'app-send-email-verification',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SendEmailVerificationComponent implements OnInit {
 
-  constructor() { }
+  constructor(private sendEmailVerification: SendEmailVerification) { }
 
   ngOnInit(): void {
+  }
+
+  verificarEmail() {
+    this.sendEmailVerification.handle()
+      .then(this.verificarEmailOk.bind(this))
+      .catch(this.verificarEmailError.bind(this))
+  }
+
+  protected verificarEmailOk(response: any) {
+    console.log("verificarEmailOk", response);
+  }
+
+  protected verificarEmailError(response: any) {
+    console.log("verificarEmailError", response);
   }
 
 }

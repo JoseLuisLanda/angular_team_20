@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 import { FirebaseAuthUser } from 'src/app/firebase/auth/models/firebase-auth-user';
-import { SendEmailVerification } from 'src/app/firebase/auth/send-email-verification';
 import { SetUserData } from 'src/app/firebase/auth/set-user-data';
 
 @Component({
@@ -20,7 +20,7 @@ export class ProfileUserComponent implements OnInit {
   };
 
   constructor(
-    private sendEmailVerification: SendEmailVerification,
+    private router: Router,
     private setUserData: SetUserData,
     private _firebaseAuth: AngularFireAuth) { }
 
@@ -55,18 +55,7 @@ export class ProfileUserComponent implements OnInit {
   }
 
   verificarEmail() {
-    this.sendEmailVerification.handle()
-      .then(this.verificarEmailOk.bind(this))
-      .catch(this.verificarEmailError.bind(this))
-  }
-
-  protected verificarEmailOk(response: any) {
-    console.log("verificarEmailOk", response);
-  }
-
-  protected verificarEmailError(response: any) {
-    console.log("verificarEmailError", response);
-  }
-  
+    this.router.navigate(['main/send-email-verification']);
+  }  
 
 }
