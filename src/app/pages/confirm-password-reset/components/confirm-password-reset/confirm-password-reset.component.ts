@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-confirm-password-reset',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConfirmPasswordResetComponent implements OnInit {
 
-  constructor() { }
+  constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    let params = this.activatedRoute.snapshot.params;
+  }
+
+  confirmarPasswordResetAction(form: any) {
+    console.log("ConfirmPasswordResetComponent", form);
   }
 
 }
