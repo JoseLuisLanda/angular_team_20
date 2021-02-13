@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-
+import { debounceTime } from 'rxjs/operators';
 @Component({
   selector: 'app-confirm-password-reset-form',
   templateUrl: './confirm-password-reset-form.component.html',
@@ -15,6 +15,11 @@ export class ConfirmPasswordResetFormComponent implements OnInit {
 
   constructor(protected fb: FormBuilder) { 
     this.form = this._form();
+
+    this.form.valueChanges.pipe(debounceTime(200)).subscribe(()=>{
+      let form = this.form.getRawValue();
+      this.error = (form['password'] !== form['confirmPassword']) || this.form.invalid;
+    });
   }
 
   ngOnInit(): void {
