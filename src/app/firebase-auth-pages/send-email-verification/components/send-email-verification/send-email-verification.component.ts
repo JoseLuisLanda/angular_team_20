@@ -42,13 +42,14 @@ export class SendEmailVerificationComponent implements OnInit {
   protected setUserDataOk(response: any) {
     console.log("setUserDataOk", response);
     this.email = response.email;
+    this.verificarEmail();
   }
 
   protected setUserDataErr(response: any) {
     console.log("setUserDataErr", response);
   }
 
-  verificarEmail() {
+  protected verificarEmail() {
     this.sendEmailVerification.handle()
       .then(this.verificarEmailOk.bind(this))
       .catch(this.verificarEmailError.bind(this))

@@ -17,7 +17,7 @@ export class SendEmailVerificationCbComponent implements OnInit {
   }
 
   confirmar() {
-    this.router.navigate(['auth/apply-action-code/:code', this.getCode(this.code)]);
+    this.router.navigate(['main/apply-action-code', this.getCode(this.code)]);
   }
 
   protected getCode(_code: any) {

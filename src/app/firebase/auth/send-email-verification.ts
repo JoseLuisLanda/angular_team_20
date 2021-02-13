@@ -13,7 +13,7 @@ export class SendEmailVerification {
 
   handle() {
     return this.afAuth.currentUser
-    .then(this.sendEmailVerification)
+    .then(this.sendEmailVerification.bind(this))
     .catch(this.error.bind(this));
   }
 

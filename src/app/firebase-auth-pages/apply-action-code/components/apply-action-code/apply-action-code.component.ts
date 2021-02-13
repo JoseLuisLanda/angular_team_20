@@ -25,11 +25,11 @@ export class ApplyActionCodeComponent implements OnInit {
   }
 
   protected applyActionCodeOk(response: any) {
-    console.log("applyActionCodeOk", response);
+    alert("applyActionCodeOk:"+ JSON.stringify(response));
   }
 
   protected applyActionCodeErr(erro: any) {
-    console.log("applyActionCodeErr", erro);
+    alert("applyActionCodeErr:"+ JSON.stringify(erro));
   }
 
 }
