@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-send-email-verification-cb',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SendEmailVerificationCbComponent implements OnInit {
 
-  constructor() { }
+  @Input() debug: boolean = false;
+  public code = "";
+  
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  confirmar() {
+    this.router.navigate(['auth/apply-action-code/:code', this.getCode(this.code)]);
+  }
+
+  protected getCode(_code: any) {
+    let code = _code.split('&')[1].substring("oobCode=".length);
+    return code;
   }
 
 }

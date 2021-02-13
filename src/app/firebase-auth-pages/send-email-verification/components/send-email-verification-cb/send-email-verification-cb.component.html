@@ -1,1 +1,9 @@
-<p>send-email-verification-cb works!</p>
+<div *ngIf="debug">
+  <div>
+    Copia el enlace recibido por correo aqui
+  </div>
+  <input type="text" [(ngModel)]="code">
+  <div>
+    <button (click)="confirmar()" [disabled]="!code.length">Confirmar</button>
+  </div>
+</div>
