@@ -33,6 +33,11 @@ const routes: Routes = [
         module => module.SendPasswordResetEmailModule
       )
     }, {
+      path: 'confirm-password-reset/:code',
+      loadChildren: () => import('./pages/send-password-reset-email/send-password-reset-email.module').then(
+        module => module.SendPasswordResetEmailModule
+      )
+    }, {
       path: 'email-validation-callback/:mode/:code',
       loadChildren: () => import('./pages/email-validation/email-validation.module').then(
         module => module.EmailValidationModule

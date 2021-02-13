@@ -16,7 +16,12 @@ export class SendPasswordResetEmailCbComponent implements OnInit {
   }
 
   confirmar() {
-    this.router.navigate(['auth/confirm-password-reset']);
+    this.router.navigate(['auth/confirm-password-reset', this.getCode(this.code)]);
+  }
+
+  protected getCode(_code: any) {
+    let code = _code.split('&')[1].substring("oobCode=".length);
+    return code;
   }
 
 }
