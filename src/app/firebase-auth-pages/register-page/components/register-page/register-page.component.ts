@@ -21,7 +21,26 @@ export class RegisterPageComponent implements OnInit {
   }
 
   register(form: any) {
-    this.registerUser.handle(form.email, form.password);
+    let self = this;
+    let handlers = {
+      success(response: any) {
+        console.log("registerUser ok", response);
+      },
+      error(response: any) {
+        if(self.isUserRegister(response.code)) {
+          alert("isUserregister error: " + JSON.stringify(response));
+        }
+      }
+    };
+
+    this.registerUser.handle(form.email, form.password)
+      .then(handlers.success)
+      .catch(handlers.error)
+  }
+
+  protected isUserRegister(code: any) {
+    let isUserRegister = 'auth/email-already-in-use';
+    return code === isUserRegister;
   }
 
 }

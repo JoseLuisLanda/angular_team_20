@@ -26,9 +26,11 @@ export class RegisterUser {
 
   protected tap(result: any) {
     console.log('RegisterUserOk', result);
+    return result;
   }
 
   protected errorHandler(error: any) {
     console.log('RegisterUserError', error);
+    throw error;
   }
 }
