@@ -22,7 +22,7 @@ export class SendPasswordResetEmailComponent implements OnInit {
     let params = this.activatedRoute.snapshot.params;
     this.updateCorreo(params.email);
     this.resetAuthButtonAction();
-    //this.sendPasswordResetEmail(params.email);
+    this.sendPasswordResetEmail(params.email);
   }
 
   public updateCorreo(email: any) {
@@ -37,7 +37,17 @@ export class SendPasswordResetEmailComponent implements OnInit {
   }
 
   protected sendPasswordResetEmail(email: any) {
-    this._sendPasswordResetEmail.handle(email);
+    this._sendPasswordResetEmail.handle(email)
+      .then(this.sendPasswordResetEmailOk.bind(this))
+      .catch(this.sendPasswordResetEmailError.bind(this));
+  }
+
+  protected sendPasswordResetEmailOk(response: any) {
+    console.log("sendPasswordResetEmailOk", response);
+  }
+
+  protected sendPasswordResetEmailError(response: any) {
+    console.log("sendPasswordResetEmailError", response);
   }
 
 

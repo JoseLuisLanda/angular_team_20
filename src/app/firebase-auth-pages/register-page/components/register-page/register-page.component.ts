@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { RegisterUser } from 'src/app/firebase/auth/register-user';
 import { AuthButtonActionEvent } from 'src/app/layouts/components/auth-button-action/auth-button-action.event';
 
@@ -10,6 +11,7 @@ import { AuthButtonActionEvent } from 'src/app/layouts/components/auth-button-ac
 export class RegisterPageComponent implements OnInit {
 
   constructor(
+    private router: Router,
     private registerUser: RegisterUser,
     private authButtonActionEvent: AuthButtonActionEvent) { }
 
@@ -25,6 +27,7 @@ export class RegisterPageComponent implements OnInit {
     let handlers = {
       success(response: any) {
         console.log("registerUser ok", response);
+        self.router.navigate(['auth/login']);
       },
       error(response: any) {
         if(self.isUserRegister(response.code)) {

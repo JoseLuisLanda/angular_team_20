@@ -26,10 +26,11 @@ export class LoginComponent implements OnInit {
   }
 
   login(form: any) {
-
+    let self = this;
     let handlers = {
       success(response: any) {
         console.log("loginWithCredentials ok", response);
+        self.router.navigate(['main']);
       },
       error(response: any) {
         console.log("loginWithCredentials error", response);
@@ -37,8 +38,8 @@ export class LoginComponent implements OnInit {
     };
 
     this.loginWithCredentials.handle(form.email, form.password)
-      .then(handlers.success.bind(this))
-      .catch(handlers.error.bind(this));
+      .then(handlers.success)
+      .catch(handlers.error);
   }
 
   logout() {
