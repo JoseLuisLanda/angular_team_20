@@ -12,7 +12,6 @@ export class SendPasswordResetEmailComponent implements OnInit {
 
   public debug = true;
   public email = "";
-  public code = "";
 
   constructor(
     private authButtonActionEvent: AuthButtonActionEvent,
@@ -41,6 +40,6 @@ export class SendPasswordResetEmailComponent implements OnInit {
     this._sendPasswordResetEmail.handle(email);
   }
 
-  
+
 
 }

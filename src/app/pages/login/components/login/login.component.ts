@@ -76,8 +76,7 @@ export class LoginComponent implements OnInit {
   }
 
   cambiarContrasenia(form: any) {
-    console.log('form2', form);
-    //this.sendPasswordResetEmail.handle(form.email);
+    this.router.navigate(['auth/send-password-reset', form.email]);
   }
 
   confirmPasswordReset() {
