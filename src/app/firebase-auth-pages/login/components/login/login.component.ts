@@ -1,4 +1,4 @@
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginThirdParties } from 'src/app/firebase/auth/login-third-parties';
 import { LoginWithCredentials } from 'src/app/firebase/auth/login-with-credential';
@@ -26,20 +26,18 @@ export class LoginComponent implements OnInit {
   }
 
   login(form: any) {
-    let self = this;
-    let handlers = {
-      success(response: any) {
-        console.log("loginWithCredentials ok", response);
-        self.router.navigate(['main']);
-      },
-      error(response: any) {
-        console.log("loginWithCredentials error", response);
-      }
-    };
-
     this.loginWithCredentials.handle(form.email, form.password)
-      .then(handlers.success)
-      .catch(handlers.error);
+      .then(this.loginWithCredentialsOk.bind(this))
+      .catch(this.loginWithCredentialsErr.bind(this));
+  }
+
+  protected loginWithCredentialsOk(response: any) {
+    console.log("loginWithCredentials error", response);
+  }
+
+  protected loginWithCredentialsErr(response: any) {
+    console.log("loginWithCredentials ok", response);
+    this.router.navigate(['main']);
   }
 
   logout() {
@@ -47,22 +45,20 @@ export class LoginComponent implements OnInit {
   }
 
   loginFacebook(event: any) {
-    let self = this;
-    let handlers = {
-      success(response: any) {
-        console.log("loginThirdParties facebook ok", response);
-        self.router.navigate(['main']);
-      },
-      error(response: any) {
-        if(self.isAccountExistsWithDifferentCredential(response.code)){
-          alert("isAccountExistsWithDifferentCredential: "+ JSON.stringify(response));
-        }
-      }
-    };
-
     this.loginThirdParties.facebook()
-      .then(handlers.success)
-      .catch(handlers.error);
+      .then(this.loginThirdPartiesOk.bind(this))
+      .catch(this.loginThirdPartiesErr.bind(this));
+  }
+
+  protected loginThirdPartiesOk(response: any) {
+    console.log("loginThirdParties facebook ok", response);
+    this.router.navigate(['main']);
+  }
+
+  protected loginThirdPartiesErr(response: any) {
+    if(this.isAccountExistsWithDifferentCredential(response.code)){
+      alert("isAccountExistsWithDifferentCredential: "+ JSON.stringify(response));
+    }
   }
 
   cambiarContrasenia(form: any) {
