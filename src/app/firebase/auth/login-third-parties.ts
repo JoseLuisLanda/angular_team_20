@@ -26,7 +26,7 @@ export class LoginThirdParties {
   protected handle(provider: any) {
     return this.afAuth.signInWithPopup(provider)
       .then(this.setUserData.bind(this))
-      .then(this.sendEmailVerification.bind(this))
+      //.then(this.sendEmailVerification.bind(this))
       .then(this.tap.bind(this))
       .catch(this.errorHandler.bind(this));
   }
@@ -36,29 +36,27 @@ export class LoginThirdParties {
   }
 
   protected sendEmailVerification(user: any) {
-    
-    let emailVerificationHandlers = {
-      success(resolve: any, reject: any) {
-        return (response: any) => {
-          resolve({response, name: 'emailVerificationHandlers ok'});
-        };
-      },
-      error(resolve: any, reject: any) {
-        return (response: any) => {
-          reject({response, name: 'emailVerificationHandlers error'});
-        };
-      }
-    }
-    
     return new Promise((resolve, reject)=>{
-      if(true) {
+      if(user.emailVerified) {
         resolve(user);
         return;
       }
       this._sendEmailVerification.handle()
-        .then(emailVerificationHandlers.success(resolve, reject).bind(this))
-        .catch(emailVerificationHandlers.error(resolve, reject).bind(this));
+        .then(this.sendEmailVerificationOk(resolve, reject).bind(this))
+        .catch(this.sendEmailVerificationErr(resolve, reject).bind(this));
     });
+  }
+
+  protected sendEmailVerificationOk(resolve: any, reject: any) {
+    return (response: any) => {
+      resolve({response, name: 'emailVerificationHandlers ok'});
+    };
+  }
+
+  protected sendEmailVerificationErr(resolve: any, reject: any) {
+    return (response: any) => {
+      reject({response, name: 'emailVerificationHandlers error'});
+    };
   }
 
   protected tap(user: any) {
