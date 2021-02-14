@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CurrentUser } from 'src/app/firebase/auth/current-user';
 import { SendEmailVerification } from 'src/app/firebase/auth/send-email-verification';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-send-email-verification',
@@ -11,7 +12,7 @@ import { SendEmailVerification } from 'src/app/firebase/auth/send-email-verifica
 export class SendEmailVerificationComponent implements OnInit {
 
   public email = "";
-  public debug = true;
+  public debug = environment.firebaseDebug;
   public isSendMail = false;
 
   constructor(

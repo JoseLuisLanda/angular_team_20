@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SendPasswordResetEmail } from 'src/app/firebase/auth/send-password-reset-email';
 import { AuthButtonActionEvent } from 'src/app/layouts/components/auth-button-action/auth-button-action.event';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-send-password-reset-email',
@@ -10,7 +11,7 @@ import { AuthButtonActionEvent } from 'src/app/layouts/components/auth-button-ac
 })
 export class SendPasswordResetEmailComponent implements OnInit {
 
-  public debug = true;
+  public debug = environment.firebaseDebug;
   public email = "";
   public isSendEmail = false;
 
