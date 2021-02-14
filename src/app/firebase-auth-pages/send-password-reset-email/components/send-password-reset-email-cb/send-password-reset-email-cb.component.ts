@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./send-password-reset-email-cb.component.css']
 })
 export class SendPasswordResetEmailCbComponent implements OnInit {
+  @Output() onConfirmar: EventEmitter<any> = new EventEmitter<any>();
   @Input() debug: boolean = false;
   public code = "";
   
@@ -16,7 +17,7 @@ export class SendPasswordResetEmailCbComponent implements OnInit {
   }
 
   confirmar() {
-    this.router.navigate(['auth/confirm-password-reset', this.getCode(this.code)]);
+    this.onConfirmar.next(this.getCode(this.code));
   }
 
   protected getCode(_code: any) {

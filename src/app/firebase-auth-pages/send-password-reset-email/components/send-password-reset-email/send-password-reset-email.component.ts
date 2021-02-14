@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SendPasswordResetEmail } from 'src/app/firebase/auth/send-password-reset-email';
 import { AuthButtonActionEvent } from 'src/app/layouts/components/auth-button-action/auth-button-action.event';
 
@@ -14,6 +14,7 @@ export class SendPasswordResetEmailComponent implements OnInit {
   public email = "";
 
   constructor(
+    private router: Router,
     private authButtonActionEvent: AuthButtonActionEvent,
     private activatedRoute: ActivatedRoute,
     private _sendPasswordResetEmail: SendPasswordResetEmail) { }
@@ -22,7 +23,6 @@ export class SendPasswordResetEmailComponent implements OnInit {
     let params = this.activatedRoute.snapshot.params;
     this.updateCorreo(params.email);
     this.resetAuthButtonAction();
-    this.sendPasswordResetEmail(params.email);
   }
 
   public updateCorreo(email: any) {
@@ -34,6 +34,10 @@ export class SendPasswordResetEmailComponent implements OnInit {
       login: true,
       register: false
     });
+  }
+
+  sendPasswordResetEmailAction() {
+    this.sendPasswordResetEmail(this.email);
   }
 
   protected sendPasswordResetEmail(email: any) {
@@ -50,11 +54,14 @@ export class SendPasswordResetEmailComponent implements OnInit {
     if(this.isUserNotFound(response.code)) {
       alert("sendPasswordResetEmailError: "+ JSON.stringify(response));
     }
-
   }
 
   protected isUserNotFound(code: any) {
     return "auth/user-not-found" === code;
+  }
+
+  confirmar(code: any) {
+    this.router.navigate(['auth/confirm-password-reset', code]);
   }
 
 }

@@ -32,12 +32,12 @@ export class LoginComponent implements OnInit {
   }
 
   protected loginWithCredentialsOk(response: any) {
-    console.log("loginWithCredentials error", response);
+    console.log("loginWithCredentials ok", response);
+    this.router.navigate(['main']);
   }
 
   protected loginWithCredentialsErr(response: any) {
-    console.log("loginWithCredentials ok", response);
-    this.router.navigate(['main']);
+    console.log("loginWithCredentialsErr ok", response);
   }
 
   logout() {
