@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
+import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 import { AuthGuard } from './layouts/guards/auth-guard';
+import { LoginGuard } from './layouts/guards/login-guard';
 
 const routes: Routes = [
   {
@@ -33,7 +35,7 @@ const routes: Routes = [
   {
     path: 'auth',
     component: AuthLayoutComponent,
-    canActivate: [AuthGuard],
+    canActivate: [LoginGuard],
     children: [{
       path: 'login',
       loadChildren: () => import('./firebase-auth-pages/login/login.module').then(

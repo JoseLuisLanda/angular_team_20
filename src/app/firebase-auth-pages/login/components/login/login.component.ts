@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginThirdParties } from 'src/app/firebase/auth/login-third-parties';
 import { LoginWithCredentials } from 'src/app/firebase/auth/login-with-credential';
-import { Logout } from 'src/app/firebase/auth/logout';
 import { AuthButtonActionEvent } from 'src/app/layouts/components/auth-button-action/auth-button-action.event';
 @Component({
   selector: 'app-login',
@@ -14,7 +13,6 @@ export class LoginComponent implements OnInit {
   constructor(
     private authButtonActionEvent: AuthButtonActionEvent,
     private loginWithCredentials: LoginWithCredentials,
-    private _logout: Logout,
     protected router: Router,
     private loginThirdParties: LoginThirdParties) { }
 
@@ -38,10 +36,6 @@ export class LoginComponent implements OnInit {
 
   protected loginWithCredentialsErr(response: any) {
     console.log("loginWithCredentialsErr ok", response);
-  }
-
-  logout() {
-    this._logout.handle();
   }
 
   loginFacebook(event: any) {
