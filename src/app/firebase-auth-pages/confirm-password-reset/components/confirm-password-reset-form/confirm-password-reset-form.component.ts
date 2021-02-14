@@ -15,15 +15,13 @@ export class ConfirmPasswordResetFormComponent implements OnInit {
 
   constructor(protected fb: FormBuilder) { 
     this.form = this._form();
+  }
 
+  ngOnInit(): void {
     this.form.valueChanges.pipe(debounceTime(200)).subscribe(()=>{
       let form = this.form.getRawValue();
       this.error = (form['password'] !== form['confirmPassword']) || this.form.invalid;
     });
-  }
-
-  ngOnInit(): void {
-
   }
 
   protected _form() {

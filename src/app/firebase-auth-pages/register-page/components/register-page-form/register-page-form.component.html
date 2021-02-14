@@ -14,7 +14,19 @@
         <label for="">Password</label>
         <input type="password" formControlName="password">
         <div [hidden]="!form.controls['password'].errors || form.controls['password'].pristine">
-          password error
+          password error 1
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s6">
+        <label for="">Confirm Password</label>
+        <input type="password" formControlName="confirmPassword">
+        <div [hidden]="!form.controls['confirmPassword'].errors || form.controls['confirmPassword'].pristine">
+          password error 2
+        </div>
+        <div [hidden]="!passwordMismatch">
+          Las contrasenias no son iguales
         </div>
       </div>
     </div>
