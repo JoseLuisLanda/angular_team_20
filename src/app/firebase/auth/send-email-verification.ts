@@ -12,6 +12,7 @@ export class SendEmailVerification {
     protected afAuth: AngularFireAuth) {}
 
   handle() {
+    return Promise.resolve({});
     return this.afAuth.currentUser
     .then(this.sendEmailVerification.bind(this))
     .catch(this.error.bind(this));
