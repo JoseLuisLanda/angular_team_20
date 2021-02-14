@@ -14,7 +14,9 @@ export class ApplyActionCodeComponent implements OnInit {
     private _applyActionCode: ApplyActionCode) { }
 
   ngOnInit(): void {
-    this.applyActionCode(this.activatedRoute.snapshot.params);
+    setTimeout(()=>{
+      this.applyActionCode(this.activatedRoute.snapshot.params);
+    }, 1000);
   }
 
   protected applyActionCode(params: any) {

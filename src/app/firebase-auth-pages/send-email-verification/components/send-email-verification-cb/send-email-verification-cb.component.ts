@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class SendEmailVerificationCbComponent implements OnInit {
 
+  @Output() onConfirmar: EventEmitter<any> = new EventEmitter<any>();
   @Input() debug: boolean = false;
   public code = "";
   
@@ -17,7 +18,7 @@ export class SendEmailVerificationCbComponent implements OnInit {
   }
 
   confirmar() {
-    this.router.navigate(['main/apply-action-code', this.getCode(this.code)]);
+    this.onConfirmar.next(this.getCode(this.code));
   }
 
   protected getCode(_code: any) {
