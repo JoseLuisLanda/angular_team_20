@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { CurrentUser } from 'src/app/firebase/auth/current-user';
 import { FirebaseAuthUser } from 'src/app/firebase/auth/models/firebase-auth-user';
-import { SetUserData } from 'src/app/firebase/auth/set-user-data';
 
 @Component({
   selector: 'app-profile-user',
@@ -21,37 +20,26 @@ export class ProfileUserComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private setUserData: SetUserData,
-    private _firebaseAuth: AngularFireAuth) { }
+    private _currentUser: CurrentUser) { }
 
   ngOnInit(): void {
     this.currentUser();
   }
 
   protected currentUser() {
-    this._firebaseAuth.authState.subscribe(
+    this._currentUser.handle().subscribe(
       this.currentUserOk.bind(this), 
       this.currentUserdErr.bind(this)
     );
   }
 
   protected currentUserOk(response: any) {
-    this.setUserData.handle(response)
-      .then(this.setUserDataOk.bind(this))
-      .catch(this.setUserDataErr.bind(this));
+    console.log("currentUserOk", response);
+    this.authUser = response;
   }
 
   protected currentUserdErr(response: any) {
     console.log("currentUserdErr", response);
-  }
-
-  protected setUserDataOk(response: any) {
-    console.log("setUserDataOk", response);
-    this.authUser = response;
-  }
-
-  protected setUserDataErr(response: any) {
-    console.log("setUserDataErr", response);
   }
 
   verificarEmail() {
