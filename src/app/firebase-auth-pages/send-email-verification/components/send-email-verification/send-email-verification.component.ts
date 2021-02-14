@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { CurrentUser } from 'src/app/firebase/auth/current-user';
 import { SendEmailVerification } from 'src/app/firebase/auth/send-email-verification';
-import { SetUserData } from 'src/app/firebase/auth/set-user-data';
 
 @Component({
   selector: 'app-send-email-verification',
@@ -12,10 +11,10 @@ export class SendEmailVerificationComponent implements OnInit {
 
   public email = "";
   public debug = true;
+
   constructor(
-    private _firebaseAuth: AngularFireAuth,
-    private setUserData: SetUserData,
-    private sendEmailVerification: SendEmailVerification) { }
+    private _currentUser: CurrentUser,
+    private _sendEmailVerification: SendEmailVerification) { }
 
   ngOnInit(): void {
     this.currentUser();
@@ -23,44 +22,34 @@ export class SendEmailVerificationComponent implements OnInit {
 
   
   protected currentUser() {
-    this._firebaseAuth.authState.subscribe(
+    this._currentUser.handle().subscribe(
       this.currentUserOk.bind(this), 
       this.currentUserdErr.bind(this)
     );
   }
 
   protected currentUserOk(response: any) {
-    this.setUserData.handle(response)
-      .then(this.setUserDataOk.bind(this))
-      .catch(this.setUserDataErr.bind(this));
+    this.email = response.email;
+    //this.sendEmailVerification();
   }
 
   protected currentUserdErr(response: any) {
     console.log("currentUserdErr: "+ JSON.stringify(response));
+    throw response;
   }
 
-  protected setUserDataOk(response: any) {
-    console.log("setUserDataOk", response);
-    this.email = response.email;
-    //this.verificarEmail();
+  protected sendEmailVerification() {
+    this._sendEmailVerification.handle()
+      .then(this.sendEmailVerificationOk.bind(this))
+      .catch(this.sendEmailVerificationErr.bind(this));
   }
 
-  protected setUserDataErr(response: any) {
-    console.log("setUserDataErr", response);
+  protected sendEmailVerificationOk(response: any) {
+    console.log("sendEmailVerificationOk: "+ JSON.stringify(response));
   }
 
-  protected verificarEmail() {
-    this.sendEmailVerification.handle()
-      .then(this.verificarEmailOk.bind(this))
-      .catch(this.verificarEmailError.bind(this))
-  }
-
-  protected verificarEmailOk(response: any) {
-    console.log("verificarEmailOk: "+ JSON.stringify(response));
-  }
-
-  protected verificarEmailError(response: any) {
-    console.log("verificarEmailError: "+ JSON.stringify(response));
+  protected sendEmailVerificationErr(response: any) {
+    console.log("sendEmailVerificationErr: "+ JSON.stringify(response));
   }
 
 }

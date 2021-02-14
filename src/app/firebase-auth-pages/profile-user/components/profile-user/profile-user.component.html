@@ -3,40 +3,13 @@
   <div>
     <div class="row">
       <div class="col s6">
-        <div>
-          <h4>Informacion personal</h4>
-          <div>
-            <!--{{authUser | json}}-->
-            <div>
-              <span>Foto: </span>
-              <span>{{authUser.photoURL}}</span>
-            </div>
-            <div>
-              <span>Email: </span>
-              <span>{{authUser.email}}</span>
-            </div>
-            <div>
-              <span>Display Name: </span>
-              <span>{{authUser.displayName}}</span>
-            </div>
-            <div>
-              <span>Email Verified: </span>
-              <span>{{authUser.emailVerified}}</span>
-            </div>
-          </div>
-        </div>
+        <app-informacion-personal [authUser]="authUser"></app-informacion-personal>
       </div>
       <div class="col s6">
-        <div>
-          <h4>Verificacion de correo</h4>
-          <div *ngIf="authUser.emailVerified">
-            <span>Tu email esta verificado</span>
-          </div>
-          <div *ngIf="!authUser.emailVerified">
-            <span>Debes verificar tu email</span>
-            <button (click)="verificarEmail()">Verificar email</button>
-          </div>
-        </div>
+        <app-profile-user-validation 
+          [authUser]="authUser" 
+          (onSendEmailVerfication)="verificarEmail()">
+        </app-profile-user-validation>
       </div>
     </div>
   <div>

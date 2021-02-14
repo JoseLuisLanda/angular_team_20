@@ -1,0 +1,10 @@
+<div>
+  <h4>Verificacion de correo</h4>
+  <div *ngIf="authUser.emailVerified">
+    <span>Tu email esta verificado</span>
+  </div>
+  <div *ngIf="!authUser.emailVerified">
+    <span>Debes verificar tu email</span>
+    <button (click)="verificarEmail()">Verificar email</button>
+  </div>
+</div>
