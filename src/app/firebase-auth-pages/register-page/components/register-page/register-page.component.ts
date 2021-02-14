@@ -23,22 +23,20 @@ export class RegisterPageComponent implements OnInit {
   }
 
   register(form: any) {
-    let self = this;
-    let handlers = {
-      success(response: any) {
-        console.log("registerUser ok", response);
-        self.router.navigate(['auth/login']);
-      },
-      error(response: any) {
-        if(self.isUserRegister(response.code)) {
-          alert("isUserregister error: " + JSON.stringify(response));
-        }
-      }
-    };
-
     this.registerUser.handle(form.email, form.password)
-      .then(handlers.success)
-      .catch(handlers.error)
+      .then(this.registerOk.bind(this))
+      .catch(this.registerErr.bind(this))
+  }
+
+  protected registerOk(response: any) {
+    console.log("registerUser ok", response);
+    this.router.navigate(['auth/login']);
+  }
+
+  protected registerErr(response: any) {
+    if(this.isUserRegister(response.code)) {
+      alert("isUserregister error: " + JSON.stringify(response));
+    }
   }
 
   protected isUserRegister(code: any) {
