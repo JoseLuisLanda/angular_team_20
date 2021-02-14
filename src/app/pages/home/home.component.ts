@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { auth } from 'firebase-admin';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
-  constructor() { }
+  displayName:any;
+  constructor(private auth:AuthService) { }
 
   ngOnInit(): void {
+  
+      
   }
+
 
 }

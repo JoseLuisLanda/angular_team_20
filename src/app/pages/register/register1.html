@@ -1,27 +1,27 @@
 
 <div class="limiter animated fadeInDown">
     <div class="container-login100">
-        <div class="wrap-login100 p-t-50 p-b-90">
+        <div style="padding-left: 20px;padding-right: 20px;" class="wrap-login100 p-t-50 p-b-90">
             <form (ngSubmit)="onSubmit( f )" #f="ngForm" class="login100-form validate-form flex-sb flex-w">
 
                 <span class="login100-form-title p-b-51">
                   Crear nueva cuenta
               </span>
-              <span *ngIf="f.submitted && f.controls['name'].errors" class="text-danger animated fadeIn">El nombre es obligatorio, al menos 5 letras</span>
+              <span *ngIf="f.submitted && f.controls['name'].errors" class="text-danger animated fadeIn">El nombre es obligatorio, al menos 5 caracteres.</span>
               <div class="wrap-input100 m-b-16">
                   <input [(ngModel)]="user.name" required minlength="5" name="name" class="input100" type="text" placeholder="Nombre">
 
                   <span class="focus-input100"></span>
               </div>
-                <span *ngIf="f.submitted && f.controls['email'].errors" class="text-danger animated fadeIn">El correo es obligatorio</span>
+                <span *ngIf="f.submitted && f.controls['email'].errors" class="text-danger animated fadeIn">Un correo válido es obligatorio.</span>
                 <div class="wrap-input100 m-b-16">
-                    <input [(ngModel)]="user.email" name="email" maxlength="30" type="email" required class="input100" name="email" placeholder="Email">
+                    <input [(ngModel)]="user.email" name="email" maxlength="30" type="email" required class="input100" name="email" placeholder="Email" email>
 
                     <span class="focus-input100"></span>
                 </div>
               
 
-                <span *ngIf="f.submitted && f.controls['pass'].errors" class="text-danger animated fadeIn">El password es obligatorio, al menos 5 caracteres</span>
+                <span *ngIf="f.submitted && f.controls['pass'].errors" class="text-danger animated fadeIn">El password es obligatorio, al menos 5 caracteres.</span>
                 <div class="wrap-input100 m-b-16" data-validate="Password is required">
                     <input [(ngModel)]="user.password" required minlength="6" class="input100" type="password" name="pass" placeholder="Password">
                     <span class="focus-input100"></span>

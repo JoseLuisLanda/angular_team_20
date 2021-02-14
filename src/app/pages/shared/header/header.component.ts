@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
+  displayName : any;
   logged = false;
   constructor(public nav: NavbarService,
               private authService: AuthService,
@@ -18,7 +18,9 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
 
-    this.isLogged();
+    var logged = this.isLogged();
+    if(logged)
+      this.displayName = this.authService.getUserName();
     console.log('isLogged', this.isLogged());
   }
 
@@ -26,9 +28,9 @@ export class HeaderComponent implements OnInit {
     return this.logged = this.authService.isAuthenticated();
   }
   logOut() {
-    this.authService.logOut();
+    var out = this.authService.logOut();
     this.logged = false;
     this.ngOnInit();
-    this.router.navigateByUrl('/home');
+    this.router.navigateByUrl('/login');
   }
 }

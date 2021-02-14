@@ -1,22 +1,22 @@
 <div class="limiter animated fadeInLeft">
     <div class="container-login100">
-        <div class="wrap-login100 p-t-50 p-b-90">
-            <form (ngSubmit)="login(f) " #f="ngForm" class="login100-form validate-form flex-sb flex-w">
+        <div style="padding-left: 20px;padding-right: 20px;" class="wrap-login100 p-t-50 p-b-90">
+            <form (ngSubmit)="login(f) " #f="ngForm"  class="login100-form validate-form flex-sb flex-w">
 
                 <span class="login100-form-title p-b-51">
                   Login
               </span>
 
-                <span *ngIf="f.submitted && f.controls['email'].errors" class="text-danger">El correo es obligatorio</span>
+                <span *ngIf="f.submitted && f.controls['email'].errors" class="text-danger">Un correo válido es obligatorio</span>
                 <div class="wrap-input100 m-b-16">
-                    <input [(ngModel)]="user.email" required maxlength="30" class="input100" type="email" name="email" placeholder="email">
+                    <input [(ngModel)]="user.email" required maxlength="30" class="input100" type="email" name="email" placeholder="Email" email>
 
                     <span class="focus-input100"></span>
                 </div>
 
-                <span *ngIf="f.submitted && f.controls['pass'].errors" class="text-danger">La contraseña debe de ser más de 6 letras</span>
+                <span *ngIf="f.submitted && f.controls['pass'].errors" class="text-danger">La contraseña debe contener más de 6 caracteres.</span>
                 <div class="wrap-input100 m-b-16" data-validate="Password is required">
-                    <input [(ngModel)]="user.password" required minlength="5" class="input100" type="password" name="pass" placeholder="Password">
+                    <input [(ngModel)]="user.password" required minlength="5" class="input100" type="password" name="pass" placeholder="Contraseña">
                     <span class="focus-input100"></span>
                 </div>
 
@@ -39,11 +39,22 @@
                     <button class="login100-form-btn" type="submit">
                       Ingresar
                   </button>
-                  <button type="button" (click)="loginGmail()">
-                    Log in with Google
-                  </button>
+                 
                 </div>
-
+                <div class="container-login100-form-btn m-t-17">
+                    <div class="col-6 text-center">
+                      <button (click)="loginFace()" type="button"  class="btn btn-sm btn-info btn-block ">Inicia Sesión  <i class="fab fa-facebook"></i></button>
+                    </div>
+                    <div class="col-6 text-center">
+                      <button (click)="loginGmail()" type="button" class="btn btn-sm btn-danger btn-block ">Inicia Sesión  <i class="fab fa-google"></i></button>
+                    </div>
+                  </div>
+                  <div class="container-login100-form-btn m-t-17">
+                    <div class="col-12  text-center">
+                      <button (click)="recoveryPass(user.email)" type="button"  class="btn btn-sm btn-danger btn-block ">Recuperar mi contraseña</button>
+                    </div>
+                  </div>
+                <p class="text-danger">{{errMsg}}</p>
             </form>
         </div>
     </div>
