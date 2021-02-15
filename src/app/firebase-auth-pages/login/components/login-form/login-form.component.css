@@ -1,0 +1,16 @@
+.emailError {
+  cursor: text;
+  color: #ff6b6b;
+  text-decoration: none;
+}
+
+label {
+  top: 20% !important;
+}
+
+.msg-error {
+  color: #ff6b6b;
+  font-size: .8em;
+  position: absolute;
+  bottom: 4px;
+}
