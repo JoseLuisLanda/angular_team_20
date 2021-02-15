@@ -1,38 +1,29 @@
-<!--div>
-  <h1>Login</h1>
-  <div>
-    <app-login-form 
-      (onLogin)="login($event)" 
-      (onPasswordRecovery)="cambiarContrasenia($event)">
-    </app-login-form>
-    <div>
-  </div>
-    <app-login-terceras-partes 
-      (onLoginFacebook)="loginFacebook($event)">
-    </app-login-terceras-partes>
-  </div>
-</div-->
-<div class="content">
-  <div class="container">
+<div class="card o-hidden border-0 shadow-lg my-5">
+  <div class="card-body p-0">
+    <!-- Nested Row within Card Body -->
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-lg-6 d-none d-lg-block bg-login-image" style="padding: 4rem">
         <img src="assets/images/undraw_remotely_2j6y.svg" alt="Image" class="img-fluid">
       </div>
-      <div class="col-md-6 contents">
-        <div class="row justify-content-center">
-          <div class="col-md-8">
-            <div class="mb-4" style="position: relative;">
-              <h3>Sign In</h3>
-              <p class="mb-4">Angular & Firebase Implementation.</p>
-            </div>
+      <div class="col-lg-6">
+        <div class="p-5">
+          <div class="text-center">
+            <h1 class="h4 text-gray-400 mb-4">Sign in</h1>
+          </div>
+          <div>
             <app-login-form (onLogin)="login($event)" (onPasswordRecovery)="cambiarContrasenia($event)">
             </app-login-form>
+          </div>
+          <div>
             <app-login-terceras-partes (onLoginFacebook)="loginFacebook($event)">
             </app-login-terceras-partes>
+          </div>
+          <hr>
+          <div class="text-center">
+            <a class="small" href="register.html">Create an Account!</a>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-

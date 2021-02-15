@@ -1,6 +1,6 @@
 .emailError {
   cursor: text;
-  color: #ff6b6b;
+  color: #d1d5db;
   text-decoration: none;
 }
 
@@ -12,5 +12,5 @@ label {
   color: #ff6b6b;
   font-size: .8em;
   position: absolute;
-  bottom: 4px;
+  bottom: -1rem;
 }
