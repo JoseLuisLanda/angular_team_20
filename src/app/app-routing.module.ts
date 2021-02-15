@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
-import { AuthGuard } from './firebase/guards/auth-guard';
+import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { LoginGuard } from './firebase/guards/login-guard';
+import { AuthGuard } from './firebase/guards/auth-guard';
 
 const routes: Routes = [
   {

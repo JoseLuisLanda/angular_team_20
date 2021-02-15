@@ -11,6 +11,7 @@ import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-l
 import { AuthNavbarComponent } from './layouts/components/auth-navbar/auth-navbar.component';
 import { AuthButtonActionComponent } from './layouts/components/auth-button-action/auth-button-action.component';
 import { DashboardNavbarComponent } from './layouts/components/dashboard-navbar/dashboard-navbar.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { DashboardNavbarComponent } from './layouts/components/dashboard-navbar/
     BrowserModule,
     CommonModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
