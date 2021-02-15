@@ -63,4 +63,8 @@ export class LoginComponent implements OnInit {
   protected isAccountExistsWithDifferentCredential(code: any) {
     return  "auth/account-exists-with-different-credential" === code;
   }
+
+  register() {
+    this.router.navigate(['auth/register']);
+  }
 }
