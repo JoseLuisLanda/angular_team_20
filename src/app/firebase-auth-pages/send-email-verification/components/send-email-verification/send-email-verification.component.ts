@@ -51,12 +51,12 @@ export class SendEmailVerificationComponent implements OnInit {
   }
 
   protected sendEmailVerificationOk(response: any) {
-    console.log("sendEmailVerificationOk: "+ JSON.stringify(response));
+    alert("sendEmailVerificationOk: "+ JSON.stringify(response));
     this.isSendMail = true;
   }
 
   protected sendEmailVerificationErr(response: any) {
-    console.log("sendEmailVerificationErr: "+ JSON.stringify(response));
+    alert("sendEmailVerificationErr: "+ JSON.stringify(response));
   }
 
   confirmar(code: any) {

@@ -19,6 +19,10 @@ export class SendEmailVerification {
   }
 
   protected sendEmailVerification(currentUser: any) {
+    if(currentUser.emailVerified) {
+      return Promise.resolve(currentUser);
+    }
+    
     return currentUser.sendEmailVerification()
       .then(this.sendEmailVerificationOk.bind(this))
       .catch(this.sendEmailVerificationError.bind(this));

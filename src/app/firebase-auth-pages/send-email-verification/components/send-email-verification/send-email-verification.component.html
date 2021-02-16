@@ -2,7 +2,7 @@
   <h1 class="h4 text-gray-900 mb-2">Send email verification</h1>
   <p class="mb-4">Te vamos a enviar un enlace al correo electronico para que puedas validar tu cuenta:</p>
   <p>
-    <button class="btn btn-primary"><span>Enviar correo a: </span><b>{{email}}</b></button>
+    <button class="btn btn-primary" (click)="sendMail()" [disabled]="isSendMail"><span>Enviar correo a: </span><b>{{email}}</b></button>
   </p>
 </div>
 <div>
