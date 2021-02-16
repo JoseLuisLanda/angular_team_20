@@ -1,22 +1,24 @@
 <div>
-  <h4>Informacion personal</h4>
-  <div>
-    <!--{{authUser | json}}-->
-    <div>
-      <span>Foto: </span>
-      <span>{{authUser.photoURL}}</span>
-    </div>
-    <div>
-      <span>Email: </span>
-      <span>{{authUser.email}}</span>
-    </div>
-    <div>
-      <span>Display Name: </span>
-      <span>{{authUser.displayName}}</span>
-    </div>
-    <div>
-      <span>Email Verified: </span>
-      <span>{{authUser.emailVerified}}</span>
+  <h2 class="h5 text-gray-700 mb-3">Informacion personal</h2>
+  <div class="card">
+    <div class="card-body shadow">
+      <!--{{authUser | json}}-->
+      <div class="mb-1">
+        <span class="text-black-50">Foto: </span>
+        <span>{{authUser.photoURL}}</span>
+      </div>
+      <div class="mb-1">
+        <span class="text-black-50">Email: </span>
+        <span>{{authUser.email}}</span>
+      </div>
+      <div class="mb-1">
+        <span class="text-black-50">Display Name: </span>
+        <span>{{authUser.displayName}}</span>
+      </div>
+      <div class="mb-1">
+        <span class="text-black-50">Email Verified: </span>
+        <span>{{authUser.emailVerified}}</span>
+      </div>
     </div>
   </div>
 </div>

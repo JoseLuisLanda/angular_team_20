@@ -3,6 +3,7 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { Router } from "@angular/router";
 import { ReplaySubject } from "rxjs";
+import { take } from "rxjs/operators";
 import { SetUserData } from "./set-user-data";
 
 @Injectable({providedIn: 'root'})
@@ -23,7 +24,7 @@ export class CurrentUser {
       this.currentUserdErr.bind(this)
     );
 
-    return this.get$.asObservable();
+    return this.get$.asObservable().pipe(take(1));
   }
 
   protected currentUserOk(response: any) {

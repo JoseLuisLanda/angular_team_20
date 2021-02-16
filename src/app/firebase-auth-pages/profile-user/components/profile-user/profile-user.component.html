@@ -1,11 +1,13 @@
 <div>
-  <h1>Profile user</h1>
+  <div>
+    <h1 class="h4 text-gray-800 mb-5">Profile user</h1>
+  </div>
   <div>
     <div class="row">
-      <div class="col s6">
+      <div class="col-md-6">
         <app-informacion-personal [authUser]="authUser"></app-informacion-personal>
       </div>
-      <div class="col s6">
+      <div class="col-md-6">
         <app-profile-user-validation 
           [authUser]="authUser" 
           (onSendEmailVerfication)="verificarEmail()">

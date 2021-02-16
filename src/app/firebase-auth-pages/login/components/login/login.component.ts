@@ -52,6 +52,14 @@ export class LoginComponent implements OnInit {
     if(this.isUserNotFound(response.code)) {
       alert("isUserNotFound: "+ JSON.stringify(response));
     }
+
+    if(this.isWrongPassword(response.code)) {
+      alert("isWrongPassword: "+ JSON.stringify(response));
+    }
+
+    if(this.toManyRequest(response.code)) {
+      alert("toManyRequest: "+ JSON.stringify(response));
+    }
   }
 
   loginFacebook(event: any) {
@@ -81,6 +89,14 @@ export class LoginComponent implements OnInit {
 
   protected isUserNotFound(code: any) {
     return  "auth/user-not-found" === code;
+  }
+
+  protected isWrongPassword(code: any) {
+    return  "auth/wrong-password" === code;
+  }
+
+  protected toManyRequest(code: any) {
+    return  "auth/too-many-requests" === code;
   }
 
   register() {

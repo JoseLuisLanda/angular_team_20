@@ -1,7 +1,27 @@
-<div class="row">
-  <div class="col s4">Logo</div>
-  <div class="col s8">
-    <button (click)="profileUserNavigate()">Mi Perfil</button>
-    <button (click)="salirNavigate()">Salir</button>
-  </div>
-</div>
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top">
+  <ul class="navbar-nav ml-auto">
+    <div class="topbar-divider d-none d-sm-block"></div>
+    <li class="nav-item dropdown no-arrow">
+      <div class="btn-group mr-3">
+        <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+          <a class="nav-link dropdown-toggle" ngbDropdownToggle>
+            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+            <img class="img-profile rounded-circle" src="assets/images/undraw_profile.svg"
+              style="width: 32px; height: 32px;">
+          </a>
+          <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" ngbDropdownMenu>
+            <button ngbDropdownItem (click)="profileUserNavigate()">
+              <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+              Profile
+            </button>
+            <div class="dropdown-divider"></div>
+            <button ngbDropdownItem (click)="salirNavigate()">
+              <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+              Salir
+            </button>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</nav>

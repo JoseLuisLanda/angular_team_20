@@ -1,10 +1,15 @@
 <div>
-  <h1>Send email verification</h1>
-  <div>
-    <span>Te vamos a enviar un enlace al correo electronico para que puedas actualizar tu cuenta:</span>
-    <span style="font-weight: bold;">{{email}}</span>
-    <button (click)="sendMail()" [disabled]="isSendMail">Enviar</button>
+  <h1 class="h4 text-gray-900 mb-2">Send email verification</h1>
+  <p class="mb-4">Te vamos a enviar un enlace al correo electronico para que puedas validar tu cuenta:</p>
+  <p>
+    <button class="btn btn-primary"><span>Enviar correo a: </span><b>{{email}}</b></button>
+  </p>
+</div>
+<div>
+  <div class="row">
+    <div class="col-md-6">
+      <app-send-email-verification-cb [debug]="debug" [hidden]="!isSendMail" (onConfirmar)="confirmar($event)"></app-send-email-verification-cb>
+    </div>
   </div>
-  <app-send-email-verification-cb [debug]="debug" [hidden]="!isSendMail" (onConfirmar)="confirmar($event)"></app-send-email-verification-cb>
 </div>
 
