@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { debounceTime } from 'rxjs/operators';
+import { pipe, ReplaySubject } from 'rxjs';
+import { debounceTime, filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login-form',
@@ -10,7 +11,6 @@ import { debounceTime } from 'rxjs/operators';
 export class LoginFormComponent implements OnInit {
 
   @Output() onLogin: EventEmitter<any> = new EventEmitter<any>();
-  @Output() onPasswordRecovery: EventEmitter<any> = new EventEmitter<any>();
 
   public form: FormGroup;
   public emailError: any = true;
@@ -43,9 +43,11 @@ export class LoginFormComponent implements OnInit {
     this.onLogin.next(form);
   }
 
-  restablecerPassword() {
-    if(this.form.get('email')?.invalid) return;
-    this.onPasswordRecovery.next(this.form.getRawValue());
+  isShowRestablecerPassword$() {
+    let field =  this.form.get('email') as FormControl;
+    return field.valueChanges.pipe(map(()=>{
+      return {value: field.value, valid: field.valid};
+    }),debounceTime(200));
   }
 
 }

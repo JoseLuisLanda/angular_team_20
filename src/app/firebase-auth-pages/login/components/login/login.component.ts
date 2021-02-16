@@ -1,26 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginThirdParties } from 'src/app/firebase/auth/login-third-parties';
 import { LoginWithCredentials } from 'src/app/firebase/auth/login-with-credential';
-import { AuthButtonActionEvent } from 'src/app/layouts/components/auth-button-action/auth-button-action.event';
+import { LoginFormComponent } from '../login-form/login-form.component';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  @ViewChild("registrosLoteList") registrosLoteList: LoginFormComponent | undefined;
 
+  public disabledForgotPassword = true;
+  
   constructor(
-    private authButtonActionEvent: AuthButtonActionEvent,
     private loginWithCredentials: LoginWithCredentials,
     protected router: Router,
     private loginThirdParties: LoginThirdParties) { }
 
   ngOnInit(): void {
-    this.authButtonActionEvent.event$.next({
-      login: false,
-      register: true
+    
+  }
+
+  ngAfterViewInit() {
+    this.registrosLoteList?.isShowRestablecerPassword$().subscribe((event)=>{
+      //console.log("isShowRestablecerPassword", event);
+      this.setDisabledForgotPassword(!event.valid); 
     });
+  }
+
+  protected setDisabledForgotPassword(disabledForgotPassword: any) {
+    this.disabledForgotPassword = disabledForgotPassword;
   }
 
   login(form: any) {
