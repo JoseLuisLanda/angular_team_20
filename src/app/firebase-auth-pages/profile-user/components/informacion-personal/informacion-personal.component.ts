@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FirebaseAuthUser } from 'src/app/firebase/auth/models/firebase-auth-user';
 
 @Component({
@@ -8,6 +8,8 @@ import { FirebaseAuthUser } from 'src/app/firebase/auth/models/firebase-auth-use
 })
 export class InformacionPersonalComponent implements OnInit {
 
+  @Output() onSendEmailVerfication: EventEmitter<any> = new EventEmitter<any>();
+  
   @Input() authUser: FirebaseAuthUser = {
     uid: '',
     email: '',
@@ -18,6 +20,10 @@ export class InformacionPersonalComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  verificarEmail() {
+    this.onSendEmailVerfication.next(this.authUser);
   }
 
 }

@@ -20,11 +20,6 @@ const routes: Routes = [
         module => module.ProfileUserModule
       )
     }, {
-      path: 'apply-action-code/:code',
-      loadChildren: () => import('./firebase-auth-pages/apply-action-code/apply-action-code.module').then(
-        module => module.ApplyActionCodeModule
-      )
-    }, {
       path: 'send-email-verification',
       loadChildren: () => import('./firebase-auth-pages/send-email-verification/send-email-verification.module').then(
         module => module.SendEmailVerificationModule
@@ -49,11 +44,6 @@ const routes: Routes = [
       path: 'send-password-reset/:email',
       loadChildren: () => import('./firebase-auth-pages/send-password-reset-email/send-password-reset-email.module').then(
         module => module.SendPasswordResetEmailModule
-      )
-    }, {
-      path: 'confirm-password-reset/:code',
-      loadChildren: () => import('./firebase-auth-pages/confirm-password-reset/confirm-password-reset.module').then(
-        module => module.ConfirmPasswordResetModule
       )
     }]
   }

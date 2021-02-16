@@ -17,7 +17,8 @@
       </div>
       <div class="mb-1">
         <span class="text-black-50">Email Verified: </span>
-        <span>{{authUser.emailVerified}}</span>
+        <span *ngIf="authUser.emailVerified">{{authUser.emailVerified}}</span>
+        <button *ngIf="!authUser.emailVerified" (click)="verificarEmail()" class="btn btn-link">Verificar email</button>
       </div>
     </div>
   </div>

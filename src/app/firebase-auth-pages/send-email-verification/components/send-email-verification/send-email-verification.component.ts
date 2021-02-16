@@ -59,8 +59,4 @@ export class SendEmailVerificationComponent implements OnInit {
     alert("sendEmailVerificationErr: "+ JSON.stringify(response));
   }
 
-  confirmar(code: any) {
-    this.router.navigate(['main/apply-action-code', code]);
-  }
-
 }
