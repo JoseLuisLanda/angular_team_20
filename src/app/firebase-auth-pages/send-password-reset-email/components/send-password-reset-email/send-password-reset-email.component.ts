@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SendPasswordResetEmail } from 'src/app/firebase/auth/send-password-reset-email';
-import { AuthButtonActionEvent } from 'src/app/layouts/components/auth-button-action/auth-button-action.event';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -17,25 +16,16 @@ export class SendPasswordResetEmailComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authButtonActionEvent: AuthButtonActionEvent,
     private activatedRoute: ActivatedRoute,
     private _sendPasswordResetEmail: SendPasswordResetEmail) { }
 
   ngOnInit(): void {
     let params = this.activatedRoute.snapshot.params;
     this.updateCorreo(params.email);
-    this.resetAuthButtonAction();
   }
 
   public updateCorreo(email: any) {
     this.email = email;
-  }
-
-  protected resetAuthButtonAction() {
-    this.authButtonActionEvent.event$.next({
-      login: true,
-      register: false
-    });
   }
 
   sendPasswordResetEmailAction() {
@@ -66,6 +56,14 @@ export class SendPasswordResetEmailComponent implements OnInit {
 
   confirmar(code: any) {
     this.router.navigate(['auth/confirm-password-reset', code]);
+  }
+
+  login() {
+    this.router.navigate(['auth/login']);
+  }
+
+  register() {
+    this.router.navigate(['auth/register']);
   }
 
 }

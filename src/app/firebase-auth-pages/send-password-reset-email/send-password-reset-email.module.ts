@@ -5,10 +5,11 @@ import { SendPasswordResetEmailRoutingModule } from './send-password-reset-email
 import { SendPasswordResetEmailComponent } from './components/send-password-reset-email/send-password-reset-email.component';
 import { SendPasswordResetEmailCbComponent } from './components/send-password-reset-email-cb/send-password-reset-email-cb.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SendPasswordResetEmailFormComponent } from './components/send-password-reset-email-form/send-password-reset-email-form.component';
 
 
 @NgModule({
-  declarations: [SendPasswordResetEmailComponent, SendPasswordResetEmailCbComponent],
+  declarations: [SendPasswordResetEmailComponent, SendPasswordResetEmailCbComponent, SendPasswordResetEmailFormComponent],
   imports: [
     CommonModule,
     FormsModule,
