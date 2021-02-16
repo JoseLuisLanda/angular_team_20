@@ -11,7 +11,10 @@ import { LoginFormComponent } from '../login-form/login-form.component';
 export class LoginComponent implements OnInit {
   @ViewChild("registrosLoteList") registrosLoteList: LoginFormComponent | undefined;
 
-  public disabledForgotPassword = true;
+  public isShowRestablecerPassword = {
+    email: '',
+    disabled: true
+  };
   
   constructor(
     private loginWithCredentials: LoginWithCredentials,
@@ -25,12 +28,12 @@ export class LoginComponent implements OnInit {
   ngAfterViewInit() {
     this.registrosLoteList?.isShowRestablecerPassword$().subscribe((event)=>{
       //console.log("isShowRestablecerPassword", event);
-      this.setDisabledForgotPassword(!event.valid); 
+      this.setIsShowRestablecerPassword(event); 
     });
   }
 
-  protected setDisabledForgotPassword(disabledForgotPassword: any) {
-    this.disabledForgotPassword = disabledForgotPassword;
+  protected setIsShowRestablecerPassword(isShowRestablecerPassword: any) {
+    this.isShowRestablecerPassword = isShowRestablecerPassword;
   }
 
   login(form: any) {

@@ -11,6 +11,4 @@ label {
 .msg-error {
   color: #ff6b6b;
   font-size: .8em;
-  position: absolute;
-  bottom: -1rem;
 }

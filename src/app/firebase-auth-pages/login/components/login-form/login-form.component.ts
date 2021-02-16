@@ -46,7 +46,7 @@ export class LoginFormComponent implements OnInit {
   isShowRestablecerPassword$() {
     let field =  this.form.get('email') as FormControl;
     return field.valueChanges.pipe(map(()=>{
-      return {value: field.value, valid: field.valid};
+      return {email: field.value, disabled: field.invalid};
     }),debounceTime(200));
   }
 
