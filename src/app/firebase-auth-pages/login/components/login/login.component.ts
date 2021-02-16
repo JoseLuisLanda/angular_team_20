@@ -49,6 +49,9 @@ export class LoginComponent implements OnInit {
 
   protected loginWithCredentialsErr(response: any) {
     console.log("loginWithCredentialsErr ok", response);
+    if(this.isUserNotFound(response.code)) {
+      alert("isUserNotFound: "+ JSON.stringify(response));
+    }
   }
 
   loginFacebook(event: any) {
@@ -68,13 +71,16 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  cambiarContrasenia(form: any) {
-    console.log("si frao", form);
-    this.router.navigate(['auth/send-password-reset', form.email]);
+  cambiarContrasenia() {
+    this.router.navigate(['auth/send-password-reset', this.isShowRestablecerPassword.email]);
   }
 
   protected isAccountExistsWithDifferentCredential(code: any) {
     return  "auth/account-exists-with-different-credential" === code;
+  }
+
+  protected isUserNotFound(code: any) {
+    return  "auth/user-not-found" === code;
   }
 
   register() {

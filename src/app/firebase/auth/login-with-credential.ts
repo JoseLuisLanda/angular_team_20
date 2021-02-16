@@ -51,7 +51,6 @@ export class LoginWithCredentials {
   }
 
   protected error(error: any) {
-    window.alert(error);
     throw error;
   }
 }
