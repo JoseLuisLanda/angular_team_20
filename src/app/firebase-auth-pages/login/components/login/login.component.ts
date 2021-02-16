@@ -1,8 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { LoginThirdParties } from 'src/app/firebase/auth/login-third-parties';
 import { LoginWithCredentials } from 'src/app/firebase/auth/login-with-credential';
 import { LoginFormComponent } from '../login-form/login-form.component';
+import firebase from 'firebase/app';
+import 'firebase/auth'; 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -19,6 +23,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private loginWithCredentials: LoginWithCredentials,
     protected router: Router,
+    protected afAuth: AngularFireAuth,
     private loginThirdParties: LoginThirdParties) { }
 
   ngOnInit(): void {
@@ -44,6 +49,7 @@ export class LoginComponent implements OnInit {
 
   protected loginWithCredentialsOk(response: any) {
     console.log("loginWithCredentials ok", response);
+    this.persistenceManager();
     this.router.navigate(['main']);
   }
 
@@ -70,6 +76,7 @@ export class LoginComponent implements OnInit {
 
   protected loginThirdPartiesOk(response: any) {
     console.log("loginThirdParties facebook ok", response);
+    this.persistenceManager();
     this.router.navigate(['main']);
   }
 
@@ -97,6 +104,14 @@ export class LoginComponent implements OnInit {
 
   protected toManyRequest(code: any) {
     return  "auth/too-many-requests" === code;
+  }
+
+  persistenceManager() {
+    let remberme = false;
+    let persistence = remberme 
+      ? firebase.auth.Auth.Persistence.LOCAL
+      : firebase.auth.Auth.Persistence.SESSION;
+    //firebase.auth().setPersistence(persistence);
   }
 
   register() {

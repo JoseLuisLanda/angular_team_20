@@ -9,10 +9,12 @@ import { AppComponent } from './app.component';
 import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
 import { DashboardNavbarComponent } from './layouts/dashboard-layout/components/dashboard-navbar/dashboard-navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    AuthLayoutComponent,
     DashboardLayoutComponent,
     DashboardNavbarComponent
   ],

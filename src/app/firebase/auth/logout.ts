@@ -12,6 +12,7 @@ export class Logout {
     protected afAuth: AngularFireAuth) {}
 
   handle() {
+    //return Promise.resolve();
     return this.afAuth.signOut().then(() => {
       /*localStorage.removeItem('user');
       this.router.navigate(['sign-in']);*/
