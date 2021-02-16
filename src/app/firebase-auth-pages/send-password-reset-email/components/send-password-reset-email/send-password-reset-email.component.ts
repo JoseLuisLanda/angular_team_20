@@ -41,7 +41,6 @@ export class SendPasswordResetEmailComponent implements OnInit {
   protected sendPasswordResetEmailOk(response: any) {
     alert("sendPasswordResetEmailOk: "+ JSON.stringify(response));
     this.isSendEmail = true;
-
   }
 
   protected sendPasswordResetEmailError(response: any) {

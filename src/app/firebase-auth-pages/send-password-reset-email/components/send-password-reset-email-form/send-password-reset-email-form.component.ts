@@ -8,6 +8,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class SendPasswordResetEmailFormComponent implements OnInit {
 
   @Input() email = "";
+  @Input() isSendEmail = false;
   @Output() onResetPassword: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() { }
