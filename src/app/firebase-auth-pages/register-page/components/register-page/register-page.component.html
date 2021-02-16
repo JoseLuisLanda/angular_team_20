@@ -11,10 +11,17 @@
             <h1 class="h4 text-gray-400 mb-4">Register</h1>
           </div>
           <div>
-            <app-register-page-form (onRegister)="register($event)"></app-register-page-form>
-          <div>
+            <app-register-page-form (onRegister)="register($event)" #registerPageFormComponent></app-register-page-form>
+            <div>
+              <hr>
+              <div class="text-center">
+                <button type="button" class="btn btn-link" (click)="cambiarContrasenia()" [disabled]="isShowRestablecerPassword.disabled">Forgot Password?</button>
+              </div>
+              <div class="text-center">
+                <button type="button" class="btn btn-link" (click)="login()">Already have an account? Login!</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>

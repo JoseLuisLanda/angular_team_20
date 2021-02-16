@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { RegisterUser } from 'src/app/firebase/auth/register-user';
-import { AuthButtonActionEvent } from 'src/app/layouts/components/auth-button-action/auth-button-action.event';
+import { RegisterPageFormComponent } from '../register-page-form/register-page-form.component';
 
 @Component({
   selector: 'app-register-page',
@@ -10,16 +10,30 @@ import { AuthButtonActionEvent } from 'src/app/layouts/components/auth-button-ac
 })
 export class RegisterPageComponent implements OnInit {
 
+  @ViewChild("registerPageFormComponent") registerPageFormComponent: RegisterPageFormComponent | undefined;
+
+  public isShowRestablecerPassword = {
+    email: '',
+    disabled: true
+  };
+
   constructor(
     private router: Router,
-    private registerUser: RegisterUser,
-    private authButtonActionEvent: AuthButtonActionEvent) { }
+    private registerUser: RegisterUser) { }
 
   ngOnInit(): void {
-    this.authButtonActionEvent.event$.next({
-      login: true,
-      register: false
+    
+  }
+
+  ngAfterViewInit() {
+    this.registerPageFormComponent?.isShowRestablecerPassword$().subscribe((event)=>{
+      //console.log("isShowRestablecerPassword", event);
+      this.setIsShowRestablecerPassword(event); 
     });
+  }
+
+  protected setIsShowRestablecerPassword(isShowRestablecerPassword: any) {
+    this.isShowRestablecerPassword = isShowRestablecerPassword;
   }
 
   register(form: any) {
@@ -30,7 +44,7 @@ export class RegisterPageComponent implements OnInit {
 
   protected registerOk(response: any) {
     console.log("registerUser ok", response);
-    this.router.navigate(['auth/login']);
+    this.login();
   }
 
   protected registerErr(response: any) {
@@ -42,6 +56,14 @@ export class RegisterPageComponent implements OnInit {
   protected isUserRegister(code: any) {
     let isUserRegister = 'auth/email-already-in-use';
     return code === isUserRegister;
+  }
+
+  cambiarContrasenia() {
+    this.router.navigate(['auth/send-password-reset', this.isShowRestablecerPassword.email]);
+  }
+
+  login() {
+    this.router.navigate(['auth/login']);
   }
 
 }

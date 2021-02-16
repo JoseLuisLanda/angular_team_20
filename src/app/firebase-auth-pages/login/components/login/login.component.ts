@@ -9,7 +9,7 @@ import { LoginFormComponent } from '../login-form/login-form.component';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  @ViewChild("registrosLoteList") registrosLoteList: LoginFormComponent | undefined;
+  @ViewChild("loginFormComponent") loginFormComponent: LoginFormComponent | undefined;
 
   public isShowRestablecerPassword = {
     email: '',
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.registrosLoteList?.isShowRestablecerPassword$().subscribe((event)=>{
+    this.loginFormComponent?.isShowRestablecerPassword$().subscribe((event)=>{
       //console.log("isShowRestablecerPassword", event);
       this.setIsShowRestablecerPassword(event); 
     });

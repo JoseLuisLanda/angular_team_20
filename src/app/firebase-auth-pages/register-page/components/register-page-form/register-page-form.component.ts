@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { debounceTime } from 'rxjs/operators';
+import { debounceTime, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-register-page-form',
@@ -36,5 +36,12 @@ export class RegisterPageFormComponent implements OnInit {
   submit() {
     let form = this.form.getRawValue();
     this.onRegister.next(form);
+  }
+
+  isShowRestablecerPassword$() {
+    let field =  this.form.get('email') as FormControl;
+    return field.valueChanges.pipe(map(()=>{
+      return {email: field.value, disabled: field.invalid};
+    }),debounceTime(200));
   }
 }
