@@ -17,6 +17,7 @@ export class SendPasswordResetEmailFormComponent implements OnInit {
   }
 
   resetPassword() {
+    this.isSendEmail = true;
     this.onResetPassword.next();
   }
 
