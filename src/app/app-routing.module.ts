@@ -29,7 +29,7 @@ const routes: Routes = [
   {
     path: 'auth',
     component: AuthLayoutComponent,
-    canActivate: [LoginGuard],
+    //canActivate: [LoginGuard],
     children: [{
       path: 'login',
       loadChildren: () => import('./firebase-auth-pages/login/login.module').then(

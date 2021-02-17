@@ -6,6 +6,9 @@ import { LoginWithCredentials } from 'src/app/firebase/auth/login-with-credentia
 import { LoginFormComponent } from '../login-form/login-form.component';
 import firebase from 'firebase/app';
 import 'firebase/auth'; 
+import { AuthSession } from 'src/app/services/auth-session';
+import { CurrentUser } from 'src/app/firebase/auth/current-user';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -24,6 +27,8 @@ export class LoginComponent implements OnInit {
     private loginWithCredentials: LoginWithCredentials,
     protected router: Router,
     protected afAuth: AngularFireAuth,
+    private authSession: AuthSession,
+    private currentUser: CurrentUser,
     private loginThirdParties: LoginThirdParties) { }
 
   ngOnInit(): void {
@@ -34,6 +39,20 @@ export class LoginComponent implements OnInit {
     this.loginFormComponent?.isShowRestablecerPassword$().subscribe((event)=>{
       //console.log("isShowRestablecerPassword", event);
       this.setIsShowRestablecerPassword(event); 
+    });
+
+    this.loginFormComponent?.onChangeRememberMe$.subscribe((event)=>{
+      this.authSession.setRemembeMe(event);
+      this.currentUser.handle().pipe(take(1)).subscribe((user: any)=>{
+        this.loginFormComponent?.loginRemenber$.next({user, remember: event});
+      });
+    });
+
+    this.loginFormComponent?.redirectMain$.subscribe(()=>{
+      this.currentUser.handle().pipe(take(1)).subscribe((user: any)=>{
+        this.authSession.setAuthUser(user);
+        this.router.navigate(['main']);
+      });
     });
   }
 
@@ -49,7 +68,6 @@ export class LoginComponent implements OnInit {
 
   protected loginWithCredentialsOk(response: any) {
     console.log("loginWithCredentials ok", response);
-    this.persistenceManager();
     this.router.navigate(['main']);
   }
 
@@ -76,7 +94,6 @@ export class LoginComponent implements OnInit {
 
   protected loginThirdPartiesOk(response: any) {
     console.log("loginThirdParties facebook ok", response);
-    this.persistenceManager();
     this.router.navigate(['main']);
   }
 
@@ -106,12 +123,12 @@ export class LoginComponent implements OnInit {
     return  "auth/too-many-requests" === code;
   }
 
-  persistenceManager() {
+  protected persistenceManager() {
     let remberme = false;
     let persistence = remberme 
       ? firebase.auth.Auth.Persistence.LOCAL
       : firebase.auth.Auth.Persistence.SESSION;
-    //firebase.auth().setPersistence(persistence);
+    firebase.auth().setPersistence(persistence);
   }
 
   register() {

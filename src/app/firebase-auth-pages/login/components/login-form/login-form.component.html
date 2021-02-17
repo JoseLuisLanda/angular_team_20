@@ -7,19 +7,26 @@
         <b>{{ form.controls['email'].value }}</b> is incorrect
       </div>
     </div>
-    <div class="form-group last mb-4" style="position: relative;">
-      <label for="password">Password</label>
-      <input type="password" class="form-control" id="password" formControlName="password">
-      <div [hidden]="!form.controls['password'].errors || form.controls['password'].pristine" class="msg-error">
-        Password min 6 caracters
+    <div>
+      <div class="form-group last mb-4" style="position: relative;" [hidden]="loginRemember">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" formControlName="password">
+        <div [hidden]="!form.controls['password'].errors || form.controls['password'].pristine" class="msg-error">
+          Password min 6 caracters
+        </div>
+      </div>
+      <div class="d-flex mb-5 align-items-center">
+        <label class="control control--checkbox mb-0"><span class="caption">Remember me</span>
+          <input type="checkbox" formControlName="remember" />
+          <div class="control__indicator"></div>
+        </label>
+      </div>
+      <div [hidden]="loginRemember">
+        <button type="button" class="btn btn-block btn-primary" (click)="submit()" [disabled]="form.invalid">Log In</button>
+      </div>
+      <div [hidden]="!loginRemember">
+        <button type="button" class="btn btn-block btn-primary" (click)="redirectMain()">Log In.</button>
       </div>
     </div>
-    <div class="d-flex mb-5 align-items-center">
-      <label class="control control--checkbox mb-0"><span class="caption">Remember me</span>
-        <input type="checkbox" checked="checked" />
-        <div class="control__indicator"></div>
-      </label>
-    </div>
-    <button type="button" class="btn btn-block btn-primary" (click)="submit()" [disabled]="form.invalid">Log In</button>
   </form>
 </div>
