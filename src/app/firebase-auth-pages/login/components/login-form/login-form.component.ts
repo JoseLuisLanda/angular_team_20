@@ -1,7 +1,8 @@
-import { AfterViewInit, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ReplaySubject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { debounceTime, filter, map, switchMap, tap } from 'rxjs/operators';
+import { CurrentUser } from 'src/app/firebase/auth/current-user';
 import { AuthSession } from 'src/app/services/auth-session';
 
 @Component({
@@ -9,18 +10,19 @@ import { AuthSession } from 'src/app/services/auth-session';
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.css']
 })
-export class LoginFormComponent implements OnInit, AfterViewInit {
+export class LoginFormComponent implements OnInit {
 
   @Output() onLogin: EventEmitter<any> = new EventEmitter<any>();
   public loginRemenber$: ReplaySubject<any> = new ReplaySubject<any>();
-  public onChangeRememberMe$: ReplaySubject<any> = new ReplaySubject<any>();
   public redirectMain$: ReplaySubject<any> = new ReplaySubject<any>();
 
   public form: FormGroup;
   public emailError: any = true;
-  public loginRemember = false;
+  public loginRemember = false; 
+  public userRememberMe: any = {user: null, rememberMe: null};
 
   constructor(
+    private currentUser: CurrentUser,
     protected fb: FormBuilder, 
     private authSession: AuthSession) { 
     this.form = this.getForm();
@@ -28,21 +30,20 @@ export class LoginFormComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.onChangeEmail();
-  }
-
-  ngAfterViewInit(): void {
-
-    this.onChangeRememberMe().subscribe((value)=>{
-      this.onChangeRememberMe$.next(value);
-    });
-
-    this.loginRemenber$.subscribe((event)=>{
-      if(!event.user) return;
-      this.form.get('email')?.setValue(event.user.email);
-      this.loginRemember = event.remember;
+    this.onChangeRememberMe().subscribe((data)=>{
+      this.userRememberMe = data;
+      this.form.get('email')?.setValue(data.user?.email);
     });
 
     this.setRemember(this.authSession.getRemembeMe());
+  }
+
+  protected getForm() {
+    return  this.fb.group({
+      email: new FormControl({value:'',disabled:false}, [Validators.required, Validators.email]),
+      password: new FormControl({value:'',disabled:false}, [Validators.required, Validators.minLength(6)]),
+      remember: new FormControl({value:false,disabled:false}, []),
+    });
   }
 
   protected setRemember(remember: any) {
@@ -55,14 +56,6 @@ export class LoginFormComponent implements OnInit, AfterViewInit {
       .subscribe(()=>{
         this.emailError = this.form.get('email')?.invalid;
       });
-  }
-
-  protected getForm() {
-    return  this.fb.group({
-      email: new FormControl({value:'',disabled:false}, [Validators.required, Validators.email]),
-      password: new FormControl({value:'',disabled:false}, [Validators.required, Validators.minLength(6)]),
-      remember: new FormControl({value:false,disabled:false}, []),
-    });
   }
 
   submit() {
@@ -79,13 +72,31 @@ export class LoginFormComponent implements OnInit, AfterViewInit {
 
   protected onChangeRememberMe() {
     let field =  this.form.get('remember') as FormControl;
-    return field.valueChanges.pipe(map((value)=>{
-      return value;
-    }));
+    return field.valueChanges.pipe(
+      tap((value)=>{
+        this.loginRemember = value;
+        this.authSession.setRemembeMe(value);
+      }),
+      filter(value=>value),
+      switchMap((value: any)=>{
+        return this.currentUser.handle().pipe(
+          map(user=>{ 
+            if(!user) {
+              this.loginRemember = false;
+            }
+            return {user, rememberMe: value}
+          }),
+          filter(data=>{
+            return data.user ? true : false;
+          })
+        );
+      })
+    );
   }
 
   redirectMain() {
-    this.redirectMain$.next();
+    if(!this.userRememberMe.user)  return;
+    this.redirectMain$.next(this.userRememberMe.user);
   }
 
 }

@@ -5,8 +5,6 @@ import { LoginThirdParties } from 'src/app/firebase/auth/login-third-parties';
 import { LoginWithCredentials } from 'src/app/firebase/auth/login-with-credential';
 import { LoginFormComponent } from '../login-form/login-form.component';
 import { AuthSession } from 'src/app/services/auth-session';
-import { CurrentUser } from 'src/app/firebase/auth/current-user';
-import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +24,6 @@ export class LoginComponent implements OnInit {
     protected router: Router,
     protected afAuth: AngularFireAuth,
     private authSession: AuthSession,
-    private currentUser: CurrentUser,
     private loginThirdParties: LoginThirdParties) { }
 
   ngOnInit(): void {
@@ -39,18 +36,9 @@ export class LoginComponent implements OnInit {
       this.setIsShowRestablecerPassword(event); 
     });
 
-    this.loginFormComponent?.onChangeRememberMe$.subscribe((event)=>{
-      this.authSession.setRemembeMe(event);
-      this.currentUser.handle().pipe(take(1)).subscribe((user: any)=>{
-        this.loginFormComponent?.loginRemenber$.next({user, remember: event});
-      });
-    });
-
-    this.loginFormComponent?.redirectMain$.subscribe(()=>{
-      this.currentUser.handle().pipe(take(1)).subscribe((user: any)=>{
-        this.authSession.setAuthUser(user);
-        this.router.navigate(['main']);
-      });
+    this.loginFormComponent?.redirectMain$.subscribe((user)=>{
+      this.authSession.setAuthUser(user);
+      this.router.navigate(['main']);
     });
   }
 
