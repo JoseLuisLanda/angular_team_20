@@ -4,8 +4,6 @@ import { Router } from '@angular/router';
 import { LoginThirdParties } from 'src/app/firebase/auth/login-third-parties';
 import { LoginWithCredentials } from 'src/app/firebase/auth/login-with-credential';
 import { LoginFormComponent } from '../login-form/login-form.component';
-import firebase from 'firebase/app';
-import 'firebase/auth'; 
 import { AuthSession } from 'src/app/services/auth-session';
 import { CurrentUser } from 'src/app/firebase/auth/current-user';
 import { take } from 'rxjs/operators';
@@ -121,14 +119,6 @@ export class LoginComponent implements OnInit {
 
   protected toManyRequest(code: any) {
     return  "auth/too-many-requests" === code;
-  }
-
-  protected persistenceManager() {
-    let remberme = false;
-    let persistence = remberme 
-      ? firebase.auth.Auth.Persistence.LOCAL
-      : firebase.auth.Auth.Persistence.SESSION;
-    firebase.auth().setPersistence(persistence);
   }
 
   register() {

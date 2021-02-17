@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Logout } from 'src/app/firebase/auth/logout';
+import { AuthSession } from 'src/app/services/auth-session';
 
 @Component({
   selector: 'app-dashboard-navbar',
@@ -9,11 +10,22 @@ import { Logout } from 'src/app/firebase/auth/logout';
 })
 export class DashboardNavbarComponent implements OnInit {
 
+  public authUser:any = {
+    img: 'assets/images/undraw_profile.svg',
+    name: ''
+  }
+
   constructor(
+    private authSession: AuthSession,
     private _logout: Logout,
     private router: Router) { }
 
   ngOnInit(): void {
+    let authUser = this.authSession.getAuthUser();
+    if(authUser) {
+      this.authUser.img = authUser.photoURL || this.authUser.img;
+      this.authUser.name = authUser.displayName || authUser.email;
+    }
   }
 
   profileUserNavigate() {
