@@ -1,22 +1,17 @@
-import { Injectable, NgZone } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
-import { AngularFirestore } from "@angular/fire/firestore";
-import { Router } from "@angular/router";
 import { SetUserData } from "./set-user-data";
 
 import firebase from 'firebase/app';
 import 'firebase/auth'; 
-import { SendEmailVerification } from "./send-email-verification";
+import { AuthSession } from "src/app/services/auth-session";
 
 
 @Injectable({ providedIn: 'root' })
 export class LoginThirdParties {
   constructor(
-    protected ngZone: NgZone,
-    protected router: Router,
-    protected afs: AngularFirestore, 
     protected afAuth: AngularFireAuth,
-    protected _sendEmailVerification: SendEmailVerification,
+    protected authSession: AuthSession, 
     protected _setUserData: SetUserData) {}
 
   facebook() {
@@ -26,8 +21,7 @@ export class LoginThirdParties {
   protected handle(provider: any) {
     return this.afAuth.signInWithPopup(provider)
       .then(this.setUserData.bind(this))
-      //.then(this.sendEmailVerification.bind(this))
-      .then(this.tap.bind(this))
+      .then(this.setUserLocalStorage.bind(this))
       .catch(this.errorHandler.bind(this));
   }
 
@@ -35,32 +29,8 @@ export class LoginThirdParties {
     return this._setUserData.handle(result.user);
   }
 
-  protected sendEmailVerification(user: any) {
-    return new Promise((resolve, reject)=>{
-      if(user.emailVerified) {
-        resolve(user);
-        return;
-      }
-      this._sendEmailVerification.handle()
-        .then(this.sendEmailVerificationOk(resolve, reject).bind(this))
-        .catch(this.sendEmailVerificationErr(resolve, reject).bind(this));
-    });
-  }
-
-  protected sendEmailVerificationOk(resolve: any, reject: any) {
-    return (response: any) => {
-      resolve({response, name: 'emailVerificationHandlers ok'});
-    };
-  }
-
-  protected sendEmailVerificationErr(resolve: any, reject: any) {
-    return (response: any) => {
-      reject({response, name: 'emailVerificationHandlers error'});
-    };
-  }
-
-  protected tap(user: any) {
-    console.log("******datos del usuario para determinar si valido o no el correo:", user);
+  protected setUserLocalStorage(user: any) {
+    this.authSession.setAuthUser(user);
     return user;
   }
 

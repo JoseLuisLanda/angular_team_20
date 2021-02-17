@@ -1,14 +1,13 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { pipe, ReplaySubject } from 'rxjs';
-import { debounceTime, filter, map } from 'rxjs/operators';
+import { debounceTime, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.css']
 })
-export class LoginFormComponent implements OnInit {
+export class LoginFormComponent implements OnInit, AfterViewInit {
 
   @Output() onLogin: EventEmitter<any> = new EventEmitter<any>();
 
@@ -19,9 +18,15 @@ export class LoginFormComponent implements OnInit {
     this.form = this.getForm();
   }
 
+  ngAfterViewInit(): void {
+    
+  }
+
   ngOnInit(): void {
     this.onChangeEmail();
   }
+
+
 
   protected onChangeEmail() {
     this.form.get('email')?.valueChanges
