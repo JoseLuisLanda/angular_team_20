@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SendPasswordResetEmail } from 'src/app/firebase/auth/send-password-reset-email';
+import { SwalService } from 'src/app/services/swal-service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -15,6 +16,7 @@ export class SendPasswordResetEmailComponent implements OnInit {
   public isSendEmail = false;
 
   constructor(
+    private swalService: SwalService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private _sendPasswordResetEmail: SendPasswordResetEmail) { }
@@ -39,13 +41,13 @@ export class SendPasswordResetEmailComponent implements OnInit {
   }
 
   protected sendPasswordResetEmailOk(response: any) {
-    alert("sendPasswordResetEmailOk: "+ JSON.stringify(response));
+    this.swalService.success("Ok!", "Send password reset email");
     this.isSendEmail = true;
   }
 
   protected sendPasswordResetEmailError(response: any) {
     if(this.isUserNotFound(response.code)) {
-      alert("sendPasswordResetEmailError: "+ JSON.stringify(response));
+      this.swalService.error("Error: "+response.code, JSON.stringify(response));
     }
   }
 

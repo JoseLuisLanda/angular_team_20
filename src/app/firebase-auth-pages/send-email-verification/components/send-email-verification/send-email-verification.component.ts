@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CurrentUser } from 'src/app/firebase/auth/current-user';
 import { SendEmailVerification } from 'src/app/firebase/auth/send-email-verification';
+import { SwalService } from 'src/app/services/swal-service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -16,6 +17,7 @@ export class SendEmailVerificationComponent implements OnInit {
   public isSendMail = false;
 
   constructor(
+    private swalService: SwalService,
     private router: Router,
     private _currentUser: CurrentUser,
     private _sendEmailVerification: SendEmailVerification) { }
@@ -51,12 +53,12 @@ export class SendEmailVerificationComponent implements OnInit {
   }
 
   protected sendEmailVerificationOk(response: any) {
-    alert("sendEmailVerificationOk: "+ JSON.stringify(response));
+    this.swalService.success("Ok!", "Send email verification");
     this.isSendMail = true;
   }
 
   protected sendEmailVerificationErr(response: any) {
-    alert("sendEmailVerificationErr: "+ JSON.stringify(response));
+    this.swalService.error("Error: "+response.code, JSON.stringify(response));
   }
 
 }
