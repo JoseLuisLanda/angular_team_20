@@ -4,6 +4,7 @@ import { LoginThirdParties } from 'src/app/firebase/auth/login-third-parties';
 import { LoginWithCredentials } from 'src/app/firebase/auth/login-with-credential';
 import { LoginFormComponent } from '../login-form/login-form.component';
 import { AuthSession } from 'src/app/services/auth-session';
+import { SwalService } from 'src/app/services/swal-service';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ export class LoginComponent implements OnInit {
   };
   
   constructor(
+    private swalService: SwalService,
     private loginWithCredentials: LoginWithCredentials,
     protected router: Router,
     private authSession: AuthSession,
@@ -58,15 +60,15 @@ export class LoginComponent implements OnInit {
   protected loginWithCredentialsErr(response: any) {
     console.log("loginWithCredentialsErr ok", response);
     if(this.isUserNotFound(response.code)) {
-      alert("isUserNotFound: "+ JSON.stringify(response));
+      this.swalService.error("Error: "+response.code, JSON.stringify(response));
     }
 
     if(this.isWrongPassword(response.code)) {
-      alert("isWrongPassword: "+ JSON.stringify(response));
+      this.swalService.error("Error: "+response.code, JSON.stringify(response));
     }
 
     if(this.toManyRequest(response.code)) {
-      alert("toManyRequest: "+ JSON.stringify(response));
+      this.swalService.error("Error: "+response.code, JSON.stringify(response));
     }
   }
 
@@ -89,7 +91,7 @@ export class LoginComponent implements OnInit {
 
   protected loginThirdPartiesErr(response: any) {
     if(this.isAccountExistsWithDifferentCredential(response.code)){
-      alert("isAccountExistsWithDifferentCredential: "+ JSON.stringify(response));
+      this.swalService.error("Error: "+response.code, JSON.stringify(response));
     }
   }
 

@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { RegisterUser } from 'src/app/firebase/auth/register-user';
+import { SwalService } from 'src/app/services/swal-service';
 import { RegisterPageFormComponent } from '../register-page-form/register-page-form.component';
+import swal from "sweetalert2";
 
 @Component({
   selector: 'app-register-page',
@@ -18,6 +20,7 @@ export class RegisterPageComponent implements OnInit {
   };
 
   constructor(
+    private swalService: SwalService,
     private router: Router,
     private registerUser: RegisterUser) { }
 
@@ -49,7 +52,7 @@ export class RegisterPageComponent implements OnInit {
 
   protected registerErr(response: any) {
     if(this.isUserRegister(response.code)) {
-      alert("isUserregister error: " + JSON.stringify(response));
+      this.swalService.error("Error: "+response.code, JSON.stringify(response));
     }
   }
 
