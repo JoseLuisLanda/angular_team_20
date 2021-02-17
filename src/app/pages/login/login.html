@@ -54,6 +54,18 @@
                       <button (click)="recoveryPass(user.email)" type="button"  class="btn btn-sm btn-danger btn-block ">Recuperar mi contraseña</button>
                     </div>
                   </div>
+                  <div class="container-login100-form-btn m-t-17">
+                    <div>
+                      <p>Al registrarte aceptas nuestra política de <a routerLink="/terms" class="txt1">
+                        Terminos y condiciones.
+                    </a>
+                    así como nuestra
+                    <a routerLink="/copyright" class="txt1">
+                      Politica de privacidad y protección de datos.
+                  </a></p>
+              
+                </div>
+                  </div>
                 <p class="text-danger">{{errMsg}}</p>
             </form>
         </div>

@@ -19,6 +19,7 @@ import { HeaderComponent } from './pages/shared/header/header.component';
 import { FooterComponent } from './pages/shared/footer/footer.component';
 import { HomeComponent } from './pages/home/home.component';
 import { CopyrightComponent } from './pages/copyright/copyright.component';
+import { TermsprivacyComponent } from './pages/termsprivacy/termsprivacy.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { CopyrightComponent } from './pages/copyright/copyright.component';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    CopyrightComponent
+    CopyrightComponent,
+    TermsprivacyComponent
   ],
   imports: [
     BrowserModule,
