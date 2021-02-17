@@ -105,8 +105,11 @@ export class LoginComponent implements OnInit {
      }, (err) => {
        if(err.error.error.message == "INVALID_PASSWORD" || err.error.error.message == "INVALID_EMAIL")
         this.errMsg = "Email o contraseña invalidos";
+        else if(err.error.error.message == "EMAIL_NOT_FOUND")
+        this.errMsg = "No estas registrado";
         else
-        Swal.fire('Error','No se pudo autenticar al usuario, intenta mas tarde','error');
+        this.errMsg = "Intenta más tarde";
+        Swal.fire('Error de autenticación',this.errMsg,'error');
 
         console.log(err.error.error.message);
      }
