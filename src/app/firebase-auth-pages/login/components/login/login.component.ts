@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { LoginThirdParties } from 'src/app/firebase/auth/login-third-parties';
 import { LoginWithCredentials } from 'src/app/firebase/auth/login-with-credential';
@@ -22,7 +21,6 @@ export class LoginComponent implements OnInit {
   constructor(
     private loginWithCredentials: LoginWithCredentials,
     protected router: Router,
-    protected afAuth: AngularFireAuth,
     private authSession: AuthSession,
     private loginThirdParties: LoginThirdParties) { }
 

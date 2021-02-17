@@ -1,14 +1,11 @@
-import { Injectable, NgZone } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
-import { AngularFirestore } from "@angular/fire/firestore";
-import { Router } from "@angular/router";
 import { AuthSession } from "src/app/services/auth-session";
 
 @Injectable({providedIn: 'root'})
 export class Logout {
   constructor(
     protected authSession: AuthSession,
-    protected afs: AngularFirestore, 
     protected afAuth: AngularFireAuth) {}
 
   handle() {
