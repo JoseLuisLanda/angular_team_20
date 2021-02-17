@@ -14,11 +14,9 @@ export class ConfirmPasswordReset {
   handle(code: any, password: any) {
     return this.afAuth.confirmPasswordReset(code, password)
       .then((response)=>{
-        console.log("confirmPasswordReset ok", response);
         return response;
       })
       .catch(err => {
-        console.log("confirmPasswordReset error", err);
         throw err;
       });
   }

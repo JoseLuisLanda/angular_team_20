@@ -21,6 +21,10 @@ export class DashboardNavbarComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
+    this.setAuthUser();
+  }
+
+  protected setAuthUser() {
     let authUser = this.authSession.getAuthUser();
     if(authUser) {
       this.authUser.img = authUser.photoURL || this.authUser.img;

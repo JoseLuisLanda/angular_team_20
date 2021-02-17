@@ -17,12 +17,10 @@ export class RegisterUser {
       .catch(this.errorHandler.bind(this));
   }
   protected tap(result: any) {
-    console.log('RegisterUserOk', result);
     return result;
   }
 
   protected errorHandler(error: any) {
-    console.log('RegisterUserError', error);
     throw error;
   }
 }

@@ -39,7 +39,6 @@ export class LoginThirdParties {
   }
 
   protected errorHandler(error: any) {
-    console.log("LoginThirdParties errorHandler", error);
     throw error;
   }
 }
