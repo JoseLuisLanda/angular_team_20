@@ -18,6 +18,10 @@ export class LoginThirdParties {
     return this.handle(new firebase.auth.FacebookAuthProvider());
   }
 
+  google() {
+    return this.handle(new firebase.auth.GoogleAuthProvider());
+  }
+
   protected handle(provider: any) {
     return this.afAuth.signInWithPopup(provider)
       .then(this.setUserData.bind(this))

@@ -8,7 +8,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class LoginTercerasPartesComponent implements OnInit {
 
   @Output() onLoginFacebook: EventEmitter<any> = new EventEmitter<any>();
-  
+  @Output() onLoginGoogle: EventEmitter<any> = new EventEmitter<any>();
+
   constructor() { }
 
   ngOnInit(): void {
@@ -16,6 +17,10 @@ export class LoginTercerasPartesComponent implements OnInit {
 
   loginFacebook() {
     this.onLoginFacebook.next();
+  }
+
+  loginGoogle() {
+    this.onLoginGoogle.next();
   }
 
 }

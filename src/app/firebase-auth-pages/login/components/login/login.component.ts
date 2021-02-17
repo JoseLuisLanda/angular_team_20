@@ -72,6 +72,12 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  loginGoogle(event: any) {
+    this.loginThirdParties.google()
+      .then(this.loginThirdPartiesOk.bind(this))
+      .catch(this.loginThirdPartiesErr.bind(this));
+  }
+
   loginFacebook(event: any) {
     this.loginThirdParties.facebook()
       .then(this.loginThirdPartiesOk.bind(this))
@@ -79,7 +85,7 @@ export class LoginComponent implements OnInit {
   }
 
   protected loginThirdPartiesOk(response: any) {
-    console.log("loginThirdParties facebook ok", response);
+    console.log("loginThirdParties ok", response);
     this.router.navigate(['main']);
   }
 
