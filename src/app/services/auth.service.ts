@@ -1,23 +1,34 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import { UserModel } from "../models/user.model";
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import firebase from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ElementId } from '../models/element';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { Observable, of } from 'rxjs';
+import { RoleValidator } from '../helpers/roleValidator';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService extends RoleValidator {
   //private url: string = 'urlApi';
   //private apiKey: string = 'apiKey';
   private url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty';
   private apiKey = 'AIzaSyDHxlKfchpJrycT_fAOX3JjBCWp_uFlcjI';
 
   public userToken: string = '';
-
-  constructor(private http: HttpClient, public afAuth: AngularFireAuth, private db: AngularFirestore,) {
+  public user$: Observable<any>;
+  constructor(private http: HttpClient, public afAuth: AngularFireAuth, private db: AngularFirestore) {
+    super();
+    this.user$ = this.afAuth.authState.pipe(
+      switchMap((user:any) => {
+        if (user) {
+          return this.db.doc<UserModel>(`users/${user.uid}`).valueChanges();
+        }
+        return of(null);
+      })
+    );
     this.readToken();
   }
   GoogleAuth() {
@@ -27,40 +38,23 @@ export class AuthService {
     return this.AuthLogin(new firebase.auth.FacebookAuthProvider());
 
   }
+  async sendVerificationEmail(): Promise<void>{
+    return (await this.afAuth.currentUser)?.sendEmailVerification();
+  }
   recoveryPassword(emailAddress:string){
 
-    return this.afAuth.sendPasswordResetEmail(emailAddress);/*.then(function() {
-      // Email sent.
-      console.log('Email sent!');
-    }).catch(function(error) {
-      // An error happened.
-      console.log('Email error!',error);
-    });*/
+    return this.afAuth.sendPasswordResetEmail(emailAddress);
   }
+
   // Auth logic to run auth providers
   AuthLogin(provider:any) {
     this.logOut();
     return this.afAuth.signInWithPopup(provider)
     .then((result:any) => {
         console.log('You have been successfully logged in!',result);
-         /* @type {firebase.auth.OAuthCredential} 
-    var credential = result.credential;
-
-    // The signed-in user info.
-    var user = result.user;
-
-    // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-    var accessToken = credential.accessToken;*/
-
         console.log('email, user!',result.user['email']+" "+result.user['displayName'])
-        const userData: UserModel = {
-            email : result.user['email'],
-            displayName: result.user['displayName'] == "" && result.user['displayName'] == undefined ? 
-            result.user['email'].split("@")[0]:result.user['displayName'],
-            organization: result.user['email'].split("@")[1]
-        };
-        this.insertUserBD(userData);
-        this.saveToken( result.user['refreshToken'], userData);
+        this.updateUserData(result.user);
+        //this.saveToken( result.user['refreshToken'], userData);
         
     }).catch((error: any) => {
         console.log(error)
@@ -82,8 +76,32 @@ export class AuthService {
     }
     return this.userToken;
   }
+  async login(userData: UserModel): Promise<any> {
+    try {
+      const { user } = await this.afAuth.signInWithEmailAndPassword(
+        userData.email,
+        userData.password!
+      );
+      this.updateUserData(user);
+      return user;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-   newUser(user: UserModel){
+  async newUser(userData: UserModel): Promise<any> {
+    try {
+      const { user } = await this.afAuth.createUserWithEmailAndPassword(
+        userData.email,
+        userData.password!
+      );
+      await this.sendVerificationEmail();
+      return user;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+   newUser1(user: UserModel){
     const authData = {
       email: user.email,
       password: user.password,
@@ -96,6 +114,11 @@ export class AuthService {
     ).pipe(
       map( (response: any)  => {
         console.log('entro en el map()');
+        this.sendVerificationEmail().then((value:any)=>{
+          console.log("Email sent!" + value);
+        }).catch((error: any)=>{
+          console.log("Email failed!" + error);
+        });
         //this.saveToken( response['idToken'], response);
         this.insertUserBD(user);
         return response;
@@ -118,7 +141,7 @@ export class AuthService {
       //this.router.navigateByUrl('/login');
     });
   }
-  login(user: UserModel) {
+  loginNormal(user: UserModel) {
     this.logOut();
     const authData = {
       email : user.email,
@@ -146,6 +169,13 @@ export class AuthService {
     this.userToken = '';
     return true;
   }
+  async logout(): Promise<void> {
+    try {
+      await this.afAuth.signOut();
+    } catch (error) {
+      console.log(error);
+    }
+  }
   getUserName(){
     return localStorage.getItem('displayName') != "" ? localStorage.getItem('displayName'):"empty"
   }
@@ -160,6 +190,21 @@ export class AuthService {
     expiresDate.setTime(expires);
     return expiresDate > new Date();
   }
+  private updateUserData(user: any) {
+    const userRef: AngularFirestoreDocument<UserModel> = this.db.doc(
+      `users/${user.uid}`
+    );
 
+    const data: UserModel = {
+      uid: user.uid,
+      email: user.email,
+      emailVerified: user.emailVerified,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      role: 'ADMIN',
+    };
+
+    return userRef.set(data, { merge: true });
+  }
 
 }

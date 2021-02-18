@@ -25,29 +25,29 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
   }
- // Sign in with Google
  
-  onSubmit(form: NgForm) {
+  async onSubmit(form: NgForm) {
     if ( form.invalid ) {
       return;
     }
-    console.log(form);
-    Swal.fire('Cargando','Espera por Favor','info');
-    Swal.showLoading();
-    this.authService.newUser(this.user).subscribe(
-      resp => {
-        Swal.close();
-        if ( this.recordarme ) {
-          localStorage.setItem('email', this.user.email);
-       }
-       this.router.navigateByUrl('/login');
-       
-          //console.log(resp);
-      }, (err) => {
-        Swal.fire('Error','No se pudo dar de alta al usuario','error');
-          console.log(err);
-      });
+    try {
+      const user = await this.authService.newUser(this.user);
+      if (user) {
+        this.checkUserIsVerified(user);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
+  private checkUserIsVerified(user: UserModel) {
+    if (user && user.emailVerified) {
+      this.router.navigate(['/home']);
+    } else if (user) {
+      this.router.navigate(['/verification']);
+    } else {
+      this.router.navigate(['/register']);
+    }
   }
 
 }

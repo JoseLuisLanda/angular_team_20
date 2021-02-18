@@ -6,4 +6,11 @@ export interface UserModel {
   facebook?: boolean;
   displayName?: string;
   organization?: string;
+  uid: string;
+  
+  emailVerified: boolean;
+  
+  photoURL?: string;
+  role?: Roles;
 }
+export type Roles = 'SUSCRIPTOR' | 'EDITOR' | 'ADMIN';
