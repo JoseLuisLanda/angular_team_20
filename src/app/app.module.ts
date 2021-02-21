@@ -20,6 +20,7 @@ import { FooterComponent } from './pages/shared/footer/footer.component';
 import { HomeComponent } from './pages/home/home.component';
 import { CopyrightComponent } from './pages/copyright/copyright.component';
 import { TermsprivacyComponent } from './pages/termsprivacy/termsprivacy.component';
+import { RouterModule } from '@angular/router';
 import { VerificationEmailComponent } from './pages/utils/verification-email/verification-email.component';
 
 @NgModule({
@@ -39,6 +40,7 @@ import { VerificationEmailComponent } from './pages/utils/verification-email/ver
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    RouterModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
