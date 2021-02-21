@@ -1,31 +1,71 @@
 <nav *ngIf="nav.visible" class="navbar navbar-expand-lg navbar-dark">
-  <a class="navbar-brand" href="#">Comfeco</a>
-  <img src="https://www.comfeco.com/images/logo.svg" width="150px" alt="comfeco">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon"></span>
-</button>
+  <a class="navbar-brand" [routerLink]="['/']">Comfeco</a>
+  <a [routerLink]="['/']">
+    <img
+      src="https://www.comfeco.com/images/logo.svg"
+      width="150px"
+      alt="comfeco"
+      [routerLink]="['/']"
+    />
+  </a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-         
-          <li *ngIf="isLogged()" class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Admin
-      </a>
-             
-          </li>
-
-      </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <li *ngIf="isLogged()" class="nav-item dropdown">
-          <button class="nav-link dropdown-toggle" id="navbarDropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    {{displayName}}
-          </button>
-         
+    <ul class="navbar-nav mr-auto">
+      <li *ngIf="isLogged()" class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="navbarDropdown"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Admin
+        </a>
       </li>
-          <!--input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"-->
-          <button [ngClass]="{'visible':logged, invisible:!logged}" (click)="logOut()" class="btn btn-outline-success my-2 my-sm-0" type="button">Logout</button>
-          <button [ngClass]="{'invisible':logged, visible: !logged}" class="btn btn-outline-success my-2 my-sm-0" routerLink="/login" type="button">Login</button>
-      </form>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <li *ngIf="isLogged()" class="nav-item dropdown">
+        <button
+          class="nav-link dropdown-toggle"
+          id="navbarDropdown"
+          type="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          {{ displayName }}
+        </button>
+      </li>
+      <!--input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"-->
+      <button
+        [ngClass]="{ visible: logged, invisible: !logged }"
+        (click)="logOut()"
+        class="btn btn-outline-success my-2 my-sm-0"
+        type="button"
+      >
+        Logout
+      </button>
+      <button
+        [ngClass]="{ invisible: logged, visible: !logged }"
+        class="btn btn-outline-success my-2 my-sm-0"
+        routerLink="/login"
+        type="button"
+      >
+        Login
+      </button>
+    </form>
   </div>
 </nav>
