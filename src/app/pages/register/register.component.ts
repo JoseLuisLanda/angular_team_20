@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import Swal from 'sweetalert2';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { NgForm } from '@angular/forms';
-import { AuthService } from '../../../app/services/auth.service';
 import { Router } from '@angular/router';
+
+import { AuthService } from '../../../app/services/auth.service';
 import { UserModel } from 'src/app/models/user.model';
 import { FirestoreService } from 'src/app/services/firebase.service';
-import { AngularFirestore } from '@angular/fire/firestore';
-
 
 
 @Component({
@@ -14,24 +13,32 @@ import { AngularFirestore } from '@angular/fire/firestore';
   templateUrl: './register1.html',
   styleUrls: ['./register.component.css']
 })
+
 export class RegisterComponent implements OnInit {
   user: UserModel = {} as UserModel;
   recordarme = false;
-  ruta = "users";
-  constructor(private authService: AuthService,
+  ruta = 'users';
+  passwordConfirm = '';
+
+  constructor(
+    private authLogin: AuthService,
     private db: AngularFirestore,
-    private _firestoreService: FirestoreService,
-    private router: Router) { }
+    private firestoreService: FirestoreService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
   }
- 
-  async onSubmit(form: NgForm) {
-    if ( form.invalid ) {
+
+  async onSubmit(form: NgForm): Promise<void> {
+    if (form.invalid) {
       return;
     }
     try {
-      const user = await this.authService.newUser(this.user);
+      if ( this.user.password !== this.passwordConfirm ) {
+        return;
+      }
+      const user = await this.authLogin.newUser(this.user);
       if (user) {
         this.checkUserIsVerified(user);
       }
@@ -40,7 +47,7 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  private checkUserIsVerified(user: UserModel) {
+  private checkUserIsVerified(user: UserModel): void {
     if (user && user.emailVerified) {
       this.router.navigate(['/home']);
     } else if (user) {
@@ -50,4 +57,23 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  loginFace(): void {
+    this.authLogin.FacebookAuth()
+    .then(val => {
+      this.router.navigateByUrl('/home');
+    })
+    .catch(error => {
+      this.router.navigateByUrl('/register');
+    });
+  }
+
+  loginGmail(): void {
+    this.authLogin.GoogleAuth()
+    .then(val => {
+      this.router.navigateByUrl('/home');
+    })
+    .catch(error => {
+      this.router.navigateByUrl('/register');
+    });
+  }
 }
