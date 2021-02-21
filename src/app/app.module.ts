@@ -21,6 +21,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { CopyrightComponent } from './pages/copyright/copyright.component';
 import { TermsprivacyComponent } from './pages/termsprivacy/termsprivacy.component';
 import { RouterModule } from '@angular/router';
+import { VerificationEmailComponent } from './pages/utils/verification-email/verification-email.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { RouterModule } from '@angular/router';
     FooterComponent,
     HomeComponent,
     CopyrightComponent,
-    TermsprivacyComponent
+    TermsprivacyComponent,
+    VerificationEmailComponent
   ],
   imports: [
     BrowserModule,

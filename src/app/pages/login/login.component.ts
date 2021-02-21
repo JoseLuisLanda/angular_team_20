@@ -32,10 +32,6 @@ export class LoginComponent implements OnInit {
   }
   recoveryPass(mail: string){
     this.errMsg = "";
-   /* if(mail == undefined || mail == ""){
-      this.errMsg = "Inserta Email!";
-      return;
-    }*/
     Swal
     .fire({
         title: "Inserta tu email",
@@ -67,14 +63,6 @@ export class LoginComponent implements OnInit {
         }
     });
      
-    /*var emailAddress = "luis.joshep186193@hotmail.com";
-    this.authService.recoveryPassword(mail).then(()=>{
-        this.errMsg = "Email enviado!";
-        this.user.email ="";
-    }).catch((error) => {
-      // An error happened.
-      this.errMsg = "Email NO enviado!: "+ error.message;
-    });*/
   }
   loginFace(){
 
@@ -84,7 +72,33 @@ export class LoginComponent implements OnInit {
       this.router.navigateByUrl('/register');
     })
   }
-  login(form: NgForm) {
+
+  async onLogin(form: NgForm) {
+    this.errMsg = "";
+    if ( !form.valid ) {
+      this.errMsg = "Tus datos contienen algún error.";
+     return;
+    }
+    try {
+      const user = await this.authService.login(this.user);
+      if (user) {
+        this.checkUserIsVerified(user);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
+  private checkUserIsVerified(user: UserModel) {
+    if (user && user.emailVerified) {
+      this.router.navigate(['/home']);
+    } else if (user) {
+      this.router.navigate(['/verification']);
+    } else {
+      this.router.navigate(['/register']);
+    }
+  }
+ /* login(form: NgForm) {
     this.errMsg = "";
     if ( !form.valid ) {
       this.errMsg = "Tus datos contienen algún error.";
@@ -115,5 +129,5 @@ export class LoginComponent implements OnInit {
      }
     );
     console.log(form);
-  }
+  }*/
 }

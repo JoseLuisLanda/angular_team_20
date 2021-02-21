@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavbarService } from '../../../services/navbar.service';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -9,28 +10,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  displayName : any;
-  logged = false;
-  constructor(public nav: NavbarService,
-              private authService: AuthService,
-              private router: Router) {
-              }
+  public user$: Observable<any> = this.authSvc.afAuth.user;
 
-  ngOnInit() {
-
-    var logged = this.isLogged();
-    if(logged)
-      this.displayName = this.authService.getUserName();
-    console.log('isLogged', this.isLogged());
+  constructor(public authSvc: AuthService, private router: Router) {}
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
   }
 
-  isLogged(): boolean {
-    return this.logged = this.authService.isAuthenticated();
-  }
-  logOut() {
-    var out = this.authService.logOut();
-    this.logged = false;
-    this.ngOnInit();
-    this.router.navigateByUrl('/login');
+  async onLogout() {
+    try {
+      await this.authSvc.logout();
+      this.router.navigate(['/login']);
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
