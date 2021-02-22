@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(public authSvc: AuthService, private router: Router) {}
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    //throw new Error('Method not implemented.');
   }
 
   async onLogout() {
