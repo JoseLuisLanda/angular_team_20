@@ -1,5 +1,9 @@
 export interface Elemento {
     name?: string;
+    displayName?: string;
+    emailVerified?: boolean;
+    photoURL?: string;
+    role?: string;
     duration?: number;
     dateCreated?: Date;
     dateModified?: Date;
@@ -11,6 +15,9 @@ export interface Elemento {
     psw?: string;
     tokn?: string;
     elements?: ElementId[];
+    id?:string;
+    owner?: string;
+    idUser?: string;
 }
 
-export interface ElementId extends Elemento { id: string; }
+export interface ElementId extends Elemento { uid: string; }

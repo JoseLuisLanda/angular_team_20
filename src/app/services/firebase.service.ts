@@ -23,9 +23,9 @@ import { ElementId } from '../models/element';
 
     }
 
-    public updateDoc(data: ElementId){
-      
-      this.db.collection("users",ref => ref.where('email', '==', data.email)).doc(data.email).set(data)
+    public updateDoc(collection: string, uid: string, data: ElementId){
+      // with ref = (collection,ref => ref.where('uid', '==', uid))
+      this.db.collection(collection).doc(uid).set(data)
       .then(() => {
         console.log("Document successfully updated!");
       })
@@ -33,52 +33,25 @@ import { ElementId } from '../models/element';
         console.error("Error writing document: ", error);
       });
     }
-  public getCollection (nameCollection: string) {
-    this.elementsId = this.elementsId.splice(0, this.elementsId.length);
-    //this.itemsCollection = null;
-    //this.items = null;
-    this.itemsCollection = this.db.collection<ElementId>(nameCollection);
+
+    public getCollection (nameCollection: string, count: number = 5) {
+    this.itemsCollection = this.db.collection<ElementId>(nameCollection,ref => ref.limit(count));
     this.elementsString = '';
     this.items = this.itemsCollection.snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data();
         const id = a.payload.doc.id;
-        this.elementsId.push({  ...data });
-        this.elementsString += JSON.stringify({  ...data }) + '.,';
-        localStorage.setItem(nameCollection, JSON.stringify(this.elementsString));
-        return {  ...data };
+        return { id, ...data };
       }))
       );
       console.log('getting collection: ', nameCollection);
-      console.log('elements: ', this.items);
       return this.items;
   }
 
-  public getStringArray (elementType: string) {
-    let retrievedObject = localStorage.getItem(elementType);
-    retrievedObject = retrievedObject!.substring(0, retrievedObject!.length - 3) + '"';
-    const cadena = JSON.parse(retrievedObject);
-    return cadena.split('.,');
-  }
   public guardarFile(file: any, ruta: string) {
 
     this.db.collection(`/${ruta}`).add(file);
     this.getCollection(file);
   }
 
-  getLists(collectionName: string) {
-    //this.newElements = undefined;
-    this.newElements = [];
-    this.elementsId = this.elementsId.splice(0, this.elementsId.length);
-    const splitted = this.getStringArray(collectionName);
-    splitted.forEach((element: any) => {
-       const nuevoElemtoID: ElementId = JSON.parse(element);
-       if (!this.newElements.find(e => e.id === nuevoElemtoID.id)) {
-        this.newElements.push(nuevoElemtoID);
-        console.log('added: ', nuevoElemtoID.id);
-       }
-    });
-    console.log('elementIds: ', this.elementsId);
-     return this.newElements;
-  }
   }
