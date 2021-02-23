@@ -13,21 +13,28 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarColor01">
+    <div>
+      <!--p *ngIf="user$ | async as user"><a class="nav-link"> {{ user | json }}</a></p-->
+    </div>
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" routerLink="/">Home</a>
+        <a class="nav-link" routerLink="/home">Home</a>
       </li>
       <li class="nav-item active" *ngIf="user$ | async as user">
         <a class="nav-link" routerLink="/upload-image">Upload</a>
       </li>
     </ul>
     <ul class="navbar-nav mx-auto" *ngIf="user$ | async as user; else login">
+      <li class="nav-item">
+        
+        <a class="btn btn-warning" (click)="checkUserIsVerified()"> {{ user?.email }}</a>
+      
+      </li>
       <li class="nav-item" *ngIf="user">
         <a href="#" class="nav-link" (click)="onLogout()">Logout</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link"> {{ user?.email }}</a>
-      </li>
+      
+      
     </ul>
     <ng-template #login>
       <ul class="navbar-nav mx-auto">

@@ -1,0 +1,14 @@
+<div *ngIf = "user; else login">
+<a class="nav-link"> {{ user?.uid }}</a>
+<a class="nav-link"> {{ user?.displayName }}</a>
+<a class="nav-link"> {{ user?.emailVerified }}</a>
+<a class="nav-link"> {{ user?.providerData[0]?.providerId  }}</a>
+<a class="nav-link"> {{ user?.apiKey  }}</a>
+<a class="nav-link"> {{ user?.isAnonymous }}</a>
+</div>
+<ng-template #login>
+   
+        <a class="nav-link" routerLink="/login">Login</a>
+   
+    
+  </ng-template>

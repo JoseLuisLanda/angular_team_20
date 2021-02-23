@@ -80,54 +80,21 @@ export class LoginComponent implements OnInit {
      return;
     }
     try {
-      const user = await this.authService.login(this.user);
-      if (user) {
-        this.checkUserIsVerified(user);
-      }
+      await this.authService.login(this.user).then(res=>{
+        if (res.code) {
+          Swal.fire("Error al iniciar sesión",res.message,"error");
+        console.log("error login: "+res);
+        }else{
+          this.router.navigate(['/home']);
+        }
+      }).catch(error=>{
+        Swal.fire("Error al iniciar sesión",error.message,"error");
+        console.log("error login: "+error);
+      });
+      
     } catch (error) {
-      console.log(error);
+     
+      console.log("error login: "+error);
     }
   }
-  
-  private checkUserIsVerified(user: UserModel) {
-    if (user && user.emailVerified) {
-      this.router.navigate(['/home']);
-    } else if (user) {
-      this.router.navigate(['/verification']);
-    } else {
-      this.router.navigate(['/register']);
-    }
-  }
- /* login(form: NgForm) {
-    this.errMsg = "";
-    if ( !form.valid ) {
-      this.errMsg = "Tus datos contienen algún error.";
-     return;
-    }
-    Swal.fire('Autenticando','Espera por Favor','info');
-    Swal.showLoading();
-    this.authLogin.login( this.user ).subscribe(
-     resp => {
-      //console.log("USERDATA!",resp);
-       Swal.close();
-       this.router.navigateByUrl('/home');
-       
-
-       if ( this.recordarme ) {
-          localStorage.setItem('email', this.user.email);
-       }
-     }, (err) => {
-       if(err.error.error.message == "INVALID_PASSWORD" || err.error.error.message == "INVALID_EMAIL")
-        this.errMsg = "Email o contraseña invalidos";
-        else if(err.error.error.message == "EMAIL_NOT_FOUND")
-        this.errMsg = "No estas registrado";
-        else
-        this.errMsg = "Intenta más tarde";
-        Swal.fire('Error de autenticación',this.errMsg,'error');
-
-        console.log(err.error.error.message);
-     }
-    );
-    console.log(form);
-  }*/
 }
