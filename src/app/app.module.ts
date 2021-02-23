@@ -21,6 +21,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { CopyrightComponent } from './pages/copyright/copyright.component';
 import { TermsprivacyComponent } from './pages/termsprivacy/termsprivacy.component';
 import { VerificationEmailComponent } from './pages/utils/verification-email/verification-email.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { VerificationEmailComponent } from './pages/utils/verification-email/ver
     HomeComponent,
     CopyrightComponent,
     TermsprivacyComponent,
-    VerificationEmailComponent
+    VerificationEmailComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

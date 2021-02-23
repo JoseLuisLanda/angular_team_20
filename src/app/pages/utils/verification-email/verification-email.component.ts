@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 import { UserModel } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -9,16 +10,27 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./verification-email.component.css']
 })
 
-  export class VerificationEmailComponent implements OnDestroy {
-    public user$: Observable<any> = this.authSvc.afAuth.user;
-  
-    constructor(private authSvc: AuthService) {}
-  
+  export class VerificationEmailComponent implements OnDestroy, OnInit {
+    user$: Observable<any> = this.authSvc.afAuth.user;
+    user:any;
+    constructor(private authSvc: AuthService, private router: Router) {
+      
+    }
+  ngOnInit(): void {
+    //this.doConsult();
+  }
+  async doConsult() {
+    const userData = await this.authSvc.isAuthenticated();
+    if(userData && userData.emailVerified)
+    this.router.navigate(['/profile']);
+    else
+    this.router.navigate(['/home']);
+  }
     onSendEmail(): void {
       this.authSvc.sendVerificationEmail();
     }
   
     ngOnDestroy() {
-      this.authSvc.logout();
+      //this.authSvc.logout();
     }
   }

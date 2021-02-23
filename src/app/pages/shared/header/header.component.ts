@@ -15,14 +15,26 @@ export class HeaderComponent implements OnInit {
   constructor(public authSvc: AuthService, private router: Router) {}
   ngOnInit(): void {
     //throw new Error('Method not implemented.');
+   
   }
 
   async onLogout() {
     try {
       await this.authSvc.logout();
-      this.router.navigate(['/login']);
+      this.router.navigate(['/home']);
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  async checkUserIsVerified() {
+    const userDta = await this.authSvc.isAuthenticated();
+    if (userDta && userDta.emailVerified) {
+      this.router.navigate(['/profile']);
+    } else if (userDta) {
+      this.router.navigate(['/verification']);
+    } else {
+      this.router.navigate(['/register']);
     }
   }
 }

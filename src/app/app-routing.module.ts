@@ -7,15 +7,17 @@ import {HomeComponent} from "./pages/home/home.component";
 import { CopyrightComponent } from './pages/copyright/copyright.component';
 import { TermsprivacyComponent } from './pages/termsprivacy/termsprivacy.component';
 import { VerificationEmailComponent } from './pages/utils/verification-email/verification-email.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'copyright', component: CopyrightComponent},
   {path: 'verification', component: VerificationEmailComponent},
+  {path: 'profile', component: ProfileComponent, canActivate:[AuthGuard]},
   {path: 'terms', component: TermsprivacyComponent},
   {path: 'home', component: HomeComponent},
-  {path: '**', redirectTo: 'login'}
+  {path: '**', redirectTo: 'home'}
 ];
 
 @NgModule({

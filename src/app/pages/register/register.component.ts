@@ -40,20 +40,20 @@ export class RegisterComponent implements OnInit {
       }
       const user = await this.authLogin.newUser(this.user);
       if (user) {
-        this.checkUserIsVerified(user);
+        
+        this.router.navigate(['/home']);
       }
     } catch (error) {
       console.log(error);
     }
+    
   }
 
   private checkUserIsVerified(user: UserModel): void {
-    if (user && user.emailVerified) {
-      this.router.navigate(['/home']);
-    } else if (user) {
+    if (!user.emailVerified) {
       this.router.navigate(['/verification']);
     } else {
-      this.router.navigate(['/register']);
+      this.router.navigate(['/home']);
     }
   }
 

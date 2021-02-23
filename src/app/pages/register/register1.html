@@ -5,11 +5,11 @@
         <span class="login100-form-title p-b-51">
             Crear nueva cuenta
         </span>
-        <span *ngIf="f.submitted && f.controls['name'].errors" class="text-danger animated fadeIn">
+        <span *ngIf="f.submitted && f.controls['displayName'].errors" class="text-danger animated fadeIn">
           El nombre es obligatorio, al menos 5 caracteres.
         </span>
         <div class="wrap-input100 m-b-16">
-          <input [(ngModel)]="user.name" required minlength="5" name="name" class="input100" type="text" placeholder="Nick">
+          <input [(ngModel)]="user.displayName" required minlength="5" name="displayName" class="input100" type="text" placeholder="Nick">
           <span class="focus-input100"></span>
         </div>
         <span *ngIf="f.submitted && f.controls['email'].errors" class="text-danger animated fadeIn">
