@@ -1,24 +1,16 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
 import { UserModel } from "../models/user.model";
-import { first, map, switchMap } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 import firebase from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { ElementId } from '../models/element';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Observable, of } from 'rxjs';
 import { RoleValidator } from '../helpers/roleValidator';
-@Injectable({
-  providedIn: 'root'
-})
+
+@Injectable({providedIn: 'root'})
 export class AuthService extends RoleValidator {
-  //private url: string = 'urlApi';
-  //private apiKey: string = 'apiKey';
-  private url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty';
-  private apiKey = 'AIzaSyDHxlKfchpJrycT_fAOX3JjBCWp_uFlcjI';
 
   public userToken: string = '';
-  constructor(private http: HttpClient, public afAuth: AngularFireAuth, private db: AngularFirestore) {
+  constructor(public afAuth: AngularFireAuth, private db: AngularFirestore) {
     super();
   }
   GoogleAuth() {
@@ -99,11 +91,12 @@ export class AuthService extends RoleValidator {
     this.userToken = '';
     return true;
   }
+
   async logout(): Promise<void> {
     try {
-      await this.afAuth.signOut();
+      return await this.afAuth.signOut();
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
   
