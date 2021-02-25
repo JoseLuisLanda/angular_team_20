@@ -24,7 +24,6 @@ import { RouterModule } from '@angular/router';
 import { VerificationEmailComponent } from './pages/utils/verification-email/verification-email.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { CounterComponent } from './pages/section/counter/counter.component';
-import { CountdownModule } from 'ngx-countdown';
 import {TimeService} from './services/time.service';
 
 @NgModule({
@@ -51,7 +50,6 @@ import {TimeService} from './services/time.service';
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
-    CountdownModule
   ],
   providers: [ TimeService ],
   bootstrap: [AppComponent]
