@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" href="\">ComfecoApp</a>
+  <a class="navbar-brand" href="\home">ComfecoApp</a>
   <button
     class="navbar-toggler"
     type="button"
@@ -21,7 +21,13 @@
         <a class="nav-link" routerLink="/home">Home</a>
       </li>
       <li class="nav-item active" *ngIf="user$ | async as user">
-        <a class="nav-link" routerLink="/upload-image">Upload</a>
+        <a class="nav-link" routerLink="/counter">Counter</a>
+      </li>
+      <li class="nav-item active" *ngIf="user$ | async as user">
+        <a class="nav-link" routerLink="/sponsor">Sponsor</a>
+      </li>
+      <li class="nav-item active" *ngIf="user$ | async as user">
+        <a class="nav-link" routerLink="/comunidad">Comunidad</a>
       </li>
     </ul>
     <ul class="navbar-nav mx-auto" *ngIf="user$ | async as user; else login">

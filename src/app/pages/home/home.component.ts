@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { auth } from 'firebase-admin';
 import { Observable } from 'rxjs';
 import { ElementId } from 'src/app/models/element';
 import { AuthService } from 'src/app/services/auth.service';
 import { FirestoreService } from 'src/app/services/firebase.service';
+import { CoursesComponent } from '../section/course/courses/courses.component';
+import { SponsorsComponent } from '../section/sponsor/sponsors/sponsors.component';
 
 @Component({
   selector: 'app-home',
@@ -18,35 +20,24 @@ export class HomeComponent implements OnInit {
    
     
   }
+  onActivate(component: SponsorsComponent) {
+    /*if (component == "sponsor") {
+      console.log("----------------loaded sponsor component-----------------")
+      //component.list = this.sponsors;
+    } else if (component =="course") {
+      console.log("----------------loaded course component-----------------")
+      //component.list = this.sponsors;
+    }else
+    console.log("----------------loaded otro component-----------------", component)*/
+    
+ }
 
   ngOnInit(): void {
-    this.doConsult(); 
+  
       
   }
   async doConsult() {
-     this.user = await this.auth.isAuthenticated();
-    if (this.user) {
-      
-      this.fsService.getCollection("users").subscribe(data => {
-        this.users = data;
-        console.log('getting users: ', data);
-      });
-      this.fsService.getCollection("sponsors").subscribe(data => {
-        this.users = data;
-        console.log('getting sponsors: ', data);
-      });
-      this.fsService.getCollection("mentores").subscribe(data => {
-        this.users = data;
-        console.log('getting mentores: ', data);
-      });
-      this.fsService.getCollection("talleres").subscribe(data => {
-        this.users = data;
-        console.log('getting talleres: ', data);
-      });
-    
-    } else {
-      console.log("No autenticado: ");
-   }
+  
  }
 
 }

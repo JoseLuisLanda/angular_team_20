@@ -22,7 +22,7 @@ export class CounterComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.datos$ = this.segundo.getInfoReloj( new Date("2021-02-28") );
+    this.datos$ = this.segundo.getInfoReloj( new Date("2022-02-28") );
     this.datos$.subscribe(x => {
       this.dia = x.dia;
       this.hora = x.hora;

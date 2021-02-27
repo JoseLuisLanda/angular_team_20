@@ -25,6 +25,7 @@ import { VerificationEmailComponent } from './pages/utils/verification-email/ver
 import { ProfileComponent } from './pages/profile/profile.component';
 import { CounterComponent } from './pages/section/counter/counter.component';
 import {TimeService} from './services/time.service';
+//import { SponsorsComponent } from './pages/section/sponsor/sponsors/sponsors.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {TimeService} from './services/time.service';
     TermsprivacyComponent,
     VerificationEmailComponent,
     ProfileComponent,
-    CounterComponent
+    CounterComponent,
+   // SponsorsComponent
   ],
   imports: [
     BrowserModule,
