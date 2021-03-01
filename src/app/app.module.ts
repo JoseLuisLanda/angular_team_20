@@ -24,8 +24,9 @@ import { RouterModule } from '@angular/router';
 import { VerificationEmailComponent } from './pages/utils/verification-email/verification-email.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { CounterComponent } from './pages/section/counter/counter.component';
-import {TimeService} from './services/time.service';
+import { TimeService } from './core/services/time.service';
 //import { SponsorsComponent } from './pages/section/sponsor/sponsors/sponsors.component';
+import { ComponentsModule } from './shared/components/components.module';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,7 @@ import {TimeService} from './services/time.service';
     VerificationEmailComponent,
     ProfileComponent,
     CounterComponent,
-   // SponsorsComponent
+    // SponsorsComponent
   ],
   imports: [
     BrowserModule,
@@ -52,8 +53,9 @@ import {TimeService} from './services/time.service';
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
+    ComponentsModule,
   ],
-  providers: [ TimeService ],
-  bootstrap: [AppComponent]
+  providers: [TimeService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

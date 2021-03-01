@@ -1,4 +1,4 @@
-import { UserModel } from "../models/user.model";
+import { UserModel } from '../models/user.model';
 
 export class RoleValidator {
   isSuscriptor(user: UserModel): boolean {

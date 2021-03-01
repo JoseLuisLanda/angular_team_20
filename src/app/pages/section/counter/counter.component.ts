@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {TimeService, ActualReloj} from '../../../services/time.service';
+import {TimeService, ActualReloj} from '../../../core/services/time.service';
 import {Observable} from 'rxjs';
 
 @Component({
