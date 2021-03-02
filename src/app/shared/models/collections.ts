@@ -7,12 +7,16 @@ export interface Comunidad {
 }
 export interface Taller {
   uid: string;
+  id: string;
   autor: string;
   autorLink: string;
   description: string;
   link: string;
   title: string;
   categoria: string;
-  // image: string;
-  date: Date;
+  date: firebase.default.firestore.Timestamp;
+}
+export interface Categoria {
+  id: string;
+  name: string;
 }

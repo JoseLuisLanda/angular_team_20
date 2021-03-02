@@ -18,14 +18,10 @@ export class HomeComponent implements OnInit {
   users: ElementId[] = [];
   user: any;
   comunidades: Comunidad[] = [];
-  talleres: Taller[] = [];
   constructor(private auth: AuthService, private fsService: FirestoreService) {}
 
   ngOnInit(): void {
     this.fsService.getCollection('comunidades', 5).subscribe((v: any) => {
-      this.comunidades = v;
-    });
-    this.fsService.getCollection('talleres', 5).subscribe((v: any) => {
       this.comunidades = v;
     });
   }
