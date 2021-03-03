@@ -8,7 +8,7 @@ import Swiper from 'swiper';
 @Component({
   selector: 'app-sponsors',
   templateUrl: './sponsors.component.html',
-  styleUrls: ['./sponsors.component.css'],
+  styleUrls: ['./sponsors.component.css']
 })
 export class SponsorsComponent implements OnInit, AfterViewInit {
   sponsors: ElementId[] = [{uid: 'as', name: 'nombre'}];

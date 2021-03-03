@@ -1,17 +1,14 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import {LoginComponent} from './pages/login/login.component';
-import {AuthGuard} from './core/guards/auth.guard';
+import {AuthGuard} from './guards/auth.guard';
 import {RegisterComponent} from './pages/register/register.component';
 import {HomeComponent} from './pages/home/home.component';
 import { CopyrightComponent } from './pages/copyright/copyright.component';
 import { TermsprivacyComponent } from './pages/termsprivacy/termsprivacy.component';
 import { VerificationEmailComponent } from './pages/utils/verification-email/verification-email.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { ProfiledetailsComponent } from './pages/profile/profiledetails/profiledetails.component';
-import { ProfilegruposComponent } from './pages/profile/profilegrupos/profilegrupos.component';
-import { ProfileinsigniasComponent } from './pages/profile/profileinsignias/profileinsignias.component';
-import { ProfileventosComponent } from './pages/profile/profileventos/profileventos.component';
+
 
 const routes: Routes = [
  // {path:'',outlet:'sponsor', loadChildren: () => import('./pages/section/sponsor/sponsor.module').then(mod => mod.SponsorModule)},
@@ -43,10 +40,6 @@ const routes: Routes = [
       }
     ]
   },
-  {path: 'profiledetails', component: ProfiledetailsComponent},
-  {path: 'profilegrupos', component: ProfilegruposComponent},
-  {path: 'profileinsignias', component: ProfileinsigniasComponent},
-  {path: 'profileventos', component: ProfileventosComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'copyright', component: CopyrightComponent},

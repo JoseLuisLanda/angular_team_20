@@ -50,7 +50,7 @@ import {TimeService} from './services/time.service';
     AngularFirestoreModule,
     AngularFireStorageModule,
   ],
-  providers: [TimeService],
-  bootstrap: [AppComponent],
+  providers: [ TimeService ],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

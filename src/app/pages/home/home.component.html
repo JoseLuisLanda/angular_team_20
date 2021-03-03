@@ -1,31 +1,24 @@
-<div class="row">
-  <div class="col-md-3 col-12">
-    <div class="jumbotron px-2 text-center lista">
-      <h2>Comunidades</h2>
-      <ul *ngFor="let comunidad of comunidades" class="mx-auto">
-        <li>
-          <app-comunidad [comunidad]="comunidad"></app-comunidad>
-        </li>
-      </ul>
+<div class="main form-inline">
+ 
+    <div class="col-lg-3 col-12">
+        <router-outlet name="comunidad" ></router-outlet>
     </div>
-  </div>
-  <div class="col-lg-6 col-12">
-    <div class="jumbotron col-12">
-      <h1>Bienvenido a Comfeco App</h1>
-      <h2>Testeando actions for github to firebase automatic deploy</h2>
+    <div class="col-lg-6 col-12">
+        <div class="jumbotron col-12">
+            <h1>Bienvenido a Comfeco App</h1>
+            <h2>Testeando actions for github to firebase automatic deploy</h2>
+        </div>
+       
+    <div class="container">
+        <router-outlet name="sponsor" (activate)="onActivate($event)"></router-outlet>
     </div>
     <div class="container">
         <router-outlet name="counter" (activate)="onActivate($event)"></router-outlet>
     </div>
-    <div class="container">
-      <app-counter></app-counter>
     </div>
-  </div>
-
-  <div class="col-lg-3 col-12">
-    <div class="jumbotron px-2 text-center lista">
-      <h2>Talleres</h2>
-      <app-taller></app-taller>
+   
+    <div class="col-lg-3 col-12">
+        <router-outlet name="course" (activate)="onActivate($event)"></router-outlet>
     </div>
-  </div>
 </div>
+
