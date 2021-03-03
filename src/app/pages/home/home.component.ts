@@ -4,8 +4,6 @@ import { Observable } from 'rxjs';
 import { ElementId } from 'src/app/shared/models/element';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { FirestoreService } from 'src/app/core/services/firebase.service';
-import { CoursesComponent } from '../section/course/courses/courses.component';
-import { SponsorsComponent } from '../section/sponsor/sponsors/sponsors.component';
 import { Comunidad, Taller } from '../../shared/models/collections';
 
 @Component({

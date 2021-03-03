@@ -10,6 +10,10 @@ import { VerificationEmailComponent } from './pages/utils/verification-email/ver
 import { ProfileComponent } from './pages/profile/profile.component';
 import { CounterComponent } from './pages/section/counter/counter.component';
 import { SponsorsComponent } from './pages/section/sponsor/sponsors/sponsors.component';
+import { ProfiledetailsComponent } from './pages/profile/profiledetails/profiledetails.component';
+import { ProfilegruposComponent } from './pages/profile/profilegrupos/profilegrupos.component';
+import { ProfileinsigniasComponent } from './pages/profile/profileinsignias/profileinsignias.component';
+import { ProfileventosComponent } from './pages/profile/profileventos/profileventos.component';
 
 const routes: Routes = [
  // {path:'',outlet:'sponsor', loadChildren: () => import('./pages/section/sponsor/sponsor.module').then(mod => mod.SponsorModule)},
@@ -28,13 +32,13 @@ const routes: Routes = [
         path: '',
         outlet: 'comunidad',
         loadChildren: () => import('./pages/section/comunidad/comunidad.module').then(mod => mod.ComunidadModule)
-    },
-    {
-      path: '',
-        outlet: 'course',
-        loadChildren: () => import('./pages/section/course/course.module').then(mod => mod.CourseModule)},
+    }
     ]
   },
+  {path: 'profiledetails', component: ProfiledetailsComponent},
+  {path: 'profilegrupos', component: ProfilegruposComponent},
+  {path: 'profileinsignias', component: ProfileinsigniasComponent},
+  {path: 'profileventos', component: ProfileventosComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'copyright', component: CopyrightComponent},

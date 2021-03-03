@@ -27,6 +27,10 @@ import { CounterComponent } from './pages/section/counter/counter.component';
 import { TimeService } from './core/services/time.service';
 //import { SponsorsComponent } from './pages/section/sponsor/sponsors/sponsors.component';
 import { ComponentsModule } from './shared/components/components.module';
+import { ProfiledetailsComponent } from './pages/profile/profiledetails/profiledetails.component';
+import { ProfileinsigniasComponent } from './pages/profile/profileinsignias/profileinsignias.component';
+import { ProfilegruposComponent } from './pages/profile/profilegrupos/profilegrupos.component';
+import { ProfileventosComponent } from './pages/profile/profileventos/profileventos.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +45,10 @@ import { ComponentsModule } from './shared/components/components.module';
     VerificationEmailComponent,
     ProfileComponent,
     CounterComponent,
+    ProfiledetailsComponent,
+    ProfileinsigniasComponent,
+    ProfilegruposComponent,
+    ProfileventosComponent,
     // SponsorsComponent
   ],
   imports: [
