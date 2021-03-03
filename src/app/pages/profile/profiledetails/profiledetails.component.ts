@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css'],
+  selector: 'app-profiledetails',
+  templateUrl: './profiledetails.component.html',
+  styleUrls: ['./profiledetails.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class ProfiledetailsComponent implements OnInit {
   user: any;
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
     this.loadUser();
@@ -16,4 +16,5 @@ export class ProfileComponent implements OnInit {
   async loadUser() {
     this.user = await this.auth.isAuthenticated();
   }
+
 }
