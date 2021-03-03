@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-//forms
+// forms
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-//firebase
+// firebase
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -23,9 +23,8 @@ import { TermsprivacyComponent } from './pages/termsprivacy/termsprivacy.compone
 import { RouterModule } from '@angular/router';
 import { VerificationEmailComponent } from './pages/utils/verification-email/verification-email.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { CounterComponent } from './pages/section/counter/counter.component';
 import {TimeService} from './services/time.service';
-//import { SponsorsComponent } from './pages/section/sponsor/sponsors/sponsors.component';
+
 
 @NgModule({
   declarations: [
@@ -39,8 +38,6 @@ import {TimeService} from './services/time.service';
     TermsprivacyComponent,
     VerificationEmailComponent,
     ProfileComponent,
-    CounterComponent,
-   // SponsorsComponent
   ],
   imports: [
     BrowserModule,

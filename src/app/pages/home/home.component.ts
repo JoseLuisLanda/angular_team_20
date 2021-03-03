@@ -13,12 +13,12 @@ import { SponsorsComponent } from '../section/sponsor/sponsors/sponsors.componen
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  displayName:any;
+  displayName: any;
   users: ElementId[] = [];
-  user:any;
-  constructor(private auth:AuthService, private fsService: FirestoreService) { 
-   
-    
+  user: any;
+  constructor(private auth: AuthService, private fsService: FirestoreService) {
+
+
   }
   onActivate(component: SponsorsComponent) {
     /*if (component == "sponsor") {
@@ -29,15 +29,15 @@ export class HomeComponent implements OnInit {
       //component.list = this.sponsors;
     }else
     console.log("----------------loaded otro component-----------------", component)*/
-    
+
  }
 
   ngOnInit(): void {
-  
-      
+
+
   }
   async doConsult() {
-  
+
  }
 
 }
