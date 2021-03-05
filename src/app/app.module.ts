@@ -25,7 +25,10 @@ import { VerificationEmailComponent } from './pages/utils/verification-email/ver
 import { ProfileComponent } from './pages/profile/profile.component';
 import {TimeService} from './services/time.service';
 
-
+import {SponsorsComponent} from './pages/section/sponsor/sponsors/sponsors.component'
+import {ComunidadesComponent} from './pages/section/comunidad/comunidades/comunidades.component'
+import {CounterComponent} from './pages/section/counter/counter/counter.component'
+import {CoursesComponent} from './pages/section/course/courses/courses.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +41,10 @@ import {TimeService} from './services/time.service';
     TermsprivacyComponent,
     VerificationEmailComponent,
     ProfileComponent,
+    SponsorsComponent,
+    ComunidadesComponent,
+    CounterComponent,
+    CoursesComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +56,12 @@ import {TimeService} from './services/time.service';
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
+  ],
+  entryComponents: [
+    SponsorsComponent,
+    ComunidadesComponent,
+    CounterComponent,
+    CoursesComponent
   ],
   providers: [ TimeService ],
   bootstrap: [AppComponent]

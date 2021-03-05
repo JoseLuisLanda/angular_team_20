@@ -8,6 +8,7 @@ import { CopyrightComponent } from './pages/copyright/copyright.component';
 import { TermsprivacyComponent } from './pages/termsprivacy/termsprivacy.component';
 import { VerificationEmailComponent } from './pages/utils/verification-email/verification-email.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { ComunidadesComponent } from './pages/section/comunidad/comunidades/comunidades.component';
 
 
 const routes: Routes = [
@@ -15,46 +16,40 @@ const routes: Routes = [
   // {path:'course',loadChildren: () => import('./pages/section/course/course.module').then(mod => mod.CourseModule)},
   // {path:'comunidad',loadChildren: () => import('./pages/section/comunidad/comunidad.module').then(mod => mod.ComunidadModule)},
   // {path: 'sponsorList', component: SponsorsComponent},
-  {
-    path: '', component: HomeComponent,
-    children: [
-      {
-        path: '',
-        outlet: 'sponsor',
-        loadChildren: () => import('./pages/section/sponsor/sponsor.module').then(mod => mod.SponsorModule)
-      },
-      {
-        path: '',
-        outlet: 'comunidad',
-        loadChildren: () => import('./pages/section/comunidad/comunidad.module').then(mod => mod.ComunidadModule)
-      },
-      {
-        path: '',
-          outlet: 'course',
-          loadChildren: () => import('./pages/section/course/course.module').then(mod => mod.CourseModule)
-      },
-      {
-        path: '',
-        outlet: 'counter',
-        loadChildren: () => import('./pages/section/counter/counter.module').then( mod => mod.CounterModule)
-      }
-    ]
-  },
+ 
+      // {
+      //   path: 'sponsor',
+      //   outlet: 'sponsor',
+      //   loadChildren: () => import('./pages/section/sponsor/sponsor.module').then(mod => mod.SponsorModule)
+      // },
+      // {
+      //   path: 'comunidad',
+      //   outlet: 'comunidad',
+      //   loadChildren: () => import('./pages/section/comunidad/comunidad.module').then(mod => mod.ComunidadModule)
+      // },
+      // {
+      //   path: 'course',
+      //     outlet: 'course',
+      //     loadChildren: () => import('./pages/section/course/course.module').then(mod => mod.CourseModule)
+      // },
+      // {
+      //   path: 'counter',
+      //   outlet: 'counter',
+      //   loadChildren: () => import('./pages/section/counter/counter.module').then( mod => mod.CounterModule)
+      // }
+   
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'copyright', component: CopyrightComponent},
   {path: 'verification', component: VerificationEmailComponent},
-  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  {path: 'profile', component: ProfileComponent},
   {path: 'terms', component: TermsprivacyComponent},
   {path: 'home', component: HomeComponent},
-  {path: '**', redirectTo: 'home'}
+  {path: '**', redirectTo: 'login'}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    enableTracing: true,
-    preloadingStrategy: PreloadAllModules
-  })],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

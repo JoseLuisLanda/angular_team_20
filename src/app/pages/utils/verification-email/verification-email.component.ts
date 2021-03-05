@@ -20,17 +20,17 @@ import { AuthService } from 'src/app/services/auth.service';
     //this.doConsult();
   }
   async doConsult() {
-    const userData = await this.authSvc.isAuthenticated();
-    if(userData && userData.emailVerified)
-    this.router.navigate(['/profile']);
-    else
-    this.router.navigate(['/home']);
+    // const userData = await this.authSvc.isAuthenticated();
+    // if(userData && userData.emailVerified)
+    // this.router.navigate(['/profile']);
+    // else
+    // this.router.navigate(['/home']);
   }
     onSendEmail(): void {
       this.authSvc.sendVerificationEmail();
     }
   
     ngOnDestroy() {
-      //this.authSvc.logout();
+      this.authSvc.logout();
     }
   }

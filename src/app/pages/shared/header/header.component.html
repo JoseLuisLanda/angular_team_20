@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<!--<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <a class="navbar-brand" href="\home">ComfecoApp</a>
   <button
     class="navbar-toggler"
@@ -14,7 +14,7 @@
 
   <div class="collapse navbar-collapse" id="navbarColor01">
     <div>
-      <!--p *ngIf="user$ | async as user"><a class="nav-link"> {{ user | json }}</a></p-->
+      
     </div>
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
@@ -53,4 +53,82 @@
       </ul>
     </ng-template>
   </div>
-</nav>
+</nav>  -->
+
+<div class="pos-f-t">
+  <div class="collapse" id="navbarToggleExternalContent">
+    <div class="bg-dark p-2">
+      <ul class="navbar-nav w-100" *ngIf="user$ | async as user">
+        
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Comunidades</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Talleres</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Creadores de Contenido</a>
+        </li>
+        <li class="nav-item dropdown ml-auto" style="text-align: left;">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ user?.email }}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" (click)="onLogout()" href="#">Salir</a>
+          </div>
+        </li>
+      </ul> 
+     
+    </div>
+  </div>
+  
+
+    <nav  class="navbar navbar-expand-lg navbar-light bg-light" >
+      <div class="container">
+      
+        <a class="nav-brand px-0" >
+          <img src="{{ 'assets/img_header/logo/logo.png' }}" class="logo" alt=""/>
+        </a>
+      
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav w-100" *ngIf="user$ | async as user; else login">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Comunidades</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Talleres</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Creadores de Contenido</a>
+          </li>
+          <li class="nav-item dropdown ml-auto">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{ user?.email }}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" (click)="onLogout()" href="#">Salir</a>
+            </div>
+          </li>
+        </ul> 
+        <ng-template #login >
+         <!-- <div *ngIf="goLogin()"></div> -->
+        </ng-template> 
+       
+      </div>
+
+      
+     
+    </div>
+      
+    </nav>
+  
+  </div>
