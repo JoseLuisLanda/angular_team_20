@@ -8,7 +8,7 @@ import { CopyrightComponent } from './pages/copyright/copyright.component';
 import { TermsprivacyComponent } from './pages/termsprivacy/termsprivacy.component';
 import { VerificationEmailComponent } from './pages/utils/verification-email/verification-email.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { ComunidadesComponent } from './pages/section/comunidad/comunidades/comunidades.component';
+import { PrincipalComponent } from './pages/perfil/principal/principal.component';
 
 
 const routes: Routes = [
@@ -45,7 +45,12 @@ const routes: Routes = [
   {path: 'profile', component: ProfileComponent},
   {path: 'terms', component: TermsprivacyComponent},
   {path: 'home', component: HomeComponent},
+  {
+    path: 'perfil',
+    loadChildren: () => import('./pages/perfil/perfil.module').then( mod => mod.PerfilModule)
+  },
   {path: '**', redirectTo: 'login'}
+     
 ];
 
 @NgModule({

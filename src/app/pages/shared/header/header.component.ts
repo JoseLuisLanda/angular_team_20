@@ -26,6 +26,12 @@ export class HeaderComponent implements OnInit {
     }
   }
   
+  async onPerfil() {
+    
+      
+      this.router.navigate(['/perfil/principal']);
+   
+  }
 
   
 }
