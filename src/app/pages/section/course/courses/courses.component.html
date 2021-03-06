@@ -1,0 +1,41 @@
+<!-- <h2>Talleres:</h2>
+<ul *ngFor="let course of courses">
+  <li >{{course.id}}</li>
+  <li >{{course.title}}</li>
+</ul> -->
+
+<div class="form-group row">
+  <label class="col-sm-7 col-form-label">
+    <h5 class="">Talleres</h5>
+  </label>
+  <div class="col-sm-5">
+    <label class="col-sm-12 col-form-label"> <a href="/" style="color: cornflowerblue; font-size: small;">Ver más...</a>
+    </label>
+  </div>
+  <div class="col-sm-12 col-form-label">
+    <select class="custom-select w-100">
+      <option selected value="0">Talleres por áreas de conocimiento</option>
+
+    </select>
+  </div>
+  <div class="col-sm-12 col-form-label">
+    <p style="text-align: justify; background: #726f6c; color: white;">&nbsp;&nbsp;&nbsp;Hoy</p>
+
+
+  </div>
+</div>
+
+<div  *ngFor="let course of courses">
+  <div class="form-group row talleres-personalizado">
+    <div class="col-sm-3 col-form-label">
+      <img src="{{ 'assets/img_header/logo/logo.png' }}" width="40vw" height="40vh" class="perfil-redondo">
+    </div>
+    <label class="col-sm-9 col-form-label">
+      <h6 class="">{{course.title}}</h6>
+      <label style="font-size: small;">12:00pm</label>
+      <p><b>By</b><a href="/" style="color: cornflowerblue;">&nbsp;Juan Pablo de la Torre</a></p>
+      <hr>
+    </label>
+  </div>
+
+</div>
