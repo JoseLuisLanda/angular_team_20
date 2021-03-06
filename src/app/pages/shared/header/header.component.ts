@@ -1,37 +1,37 @@
 import { Component, OnInit } from '@angular/core';
-import { NavbarService } from '../../../services/navbar.service';
-import { AuthService } from '../../../services/auth.service';
+import { NavbarService } from '../../../core/services/navbar.service';
+import { AuthService } from '../../../core/services/auth.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
   public user$: Observable<any> = this.authSvc.afAuth.user;
 
   constructor(public authSvc: AuthService, private router: Router) {}
-  ngOnInit(): void {
-    //throw new Error('Method not implemented.');
-  }
+  ngOnInit(): void {}
 
   async onLogout() {
     try {
       await this.authSvc.logout();
-      this.router.navigate(['/login']);
+      this.router.navigate(['/home']);
     } catch (error) {
       console.log(error);
     }
   }
-  
-  async onPerfil() {
-    
-      
-      this.router.navigate(['/perfil/principal']);
-   
-  }
 
-  
+  async checkUserIsVerified() {
+    const userDta = await this.authSvc.isAuthenticated();
+    if (userDta && userDta.emailVerified) {
+      this.router.navigate(['/profile']);
+    } else if (userDta) {
+      this.router.navigate(['/verification']);
+    } else {
+      this.router.navigate(['/register']);
+    }
+  }
 }
