@@ -1,0 +1,31 @@
+<select
+  #select
+  class="form-control"
+  placeholder="Talleres por areas de conocimiento"
+  (change)="onFilter(select.value)"
+>
+  <option value="">Talleres por areas de conocimiento</option>
+  <option [value]="categoria.id" *ngFor="let categoria of categorias">
+    {{ categoria.name | titlecase }}
+  </option>
+</select>
+<div *ngFor="let taller of talleresTemp" class="my-1">
+  <div class="form-inline aling-items-center justify-content-center">
+    <div
+      class="circulo bg-light d-flex aling-items-center justify-content-center mr-2"
+    >
+      <i
+        class="fas my-auto fa-2x"
+        [ngClass]="
+          currentDate > taller.date.toMillis() ? 'fa-check' : 'fa-ellipsis-h'
+        "
+      ></i>
+    </div>
+    {{ taller.title }}
+  </div>
+  <small>{{ taller.date.toDate() | date }}</small>
+  <p>
+    By
+    <a [href]="taller.autorLink">{{ taller.autor }}</a>
+  </p>
+</div>

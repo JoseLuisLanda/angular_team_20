@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SponsorsComponent } from './sponsors/sponsors.component';
 
 const routes: Routes = [
-  {path: '**', component: SponsorsComponent}
+  {path:'**',component:SponsorsComponent}
 ];
 
 @NgModule({
