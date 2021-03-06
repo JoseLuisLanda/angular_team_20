@@ -1,0 +1,80 @@
+<div class="limiter animated fadeInDown">
+  <div class="container-login100">
+    <div style="padding-left: 20px;padding-right: 20px;" class="wrap-login100 p-t-50 p-b-90">
+      <form (ngSubmit)="onSubmit( f )" #f="ngForm" class="login100-form validate-form flex-sb flex-w">
+        <span class="login100-form-title p-b-51">
+            Crear nueva cuenta
+        </span>
+        <span *ngIf="f.submitted && f.controls['displayName'].errors" class="text-danger animated fadeIn">
+          El nombre es obligatorio, al menos 5 caracteres.
+        </span>
+        <div class="wrap-input100 m-b-16">
+          <input [(ngModel)]="user.displayName" required minlength="5" name="displayName" class="input100" type="text" placeholder="Nick">
+          <span class="focus-input100"></span>
+        </div>
+        <span *ngIf="f.submitted && f.controls['email'].errors" class="text-danger animated fadeIn">
+          Un correo válido es obligatorio.
+        </span>
+        <div class="wrap-input100 m-b-16">
+          <input [(ngModel)]="user.email" name="email" maxlength="30" type="email" required class="input100" name="email" placeholder="Correo electrónico" email>
+          <span class="focus-input100"></span>
+        </div>
+        <span *ngIf="f.submitted && f.controls['pass'].errors" class="text-danger animated fadeIn">
+          El password es obligatorio, al menos 5 caracteres.
+        </span>
+        <span *ngIf="f.submitted && user.password !== passwordConfirm" class="text-danger animated fadeIn">
+          La contraseñas no coinciden
+        </span>
+        <div class="wrap-input100 m-b-16" data-validate="Password is required">
+          <input [(ngModel)]="user.password" required minlength="6" class="input100" type="password" name="pass" placeholder="Contraseña">
+          <span class="focus-input100"></span>
+        </div>
+
+        <div class="wrap-input100 m-b-16" data-validate="Password is required">
+          <input
+            [(ngModel)]="passwordConfirm"
+            required
+            minlength="6"
+            class="input100"
+            type="password"
+            name="pass"
+            placeholder="Confirmar contraseña"
+          >
+          <span class="focus-input100"></span>
+        </div>
+
+        <div class="container-login100-form-btn m-t-10">
+          <div class="col-6 text-center">
+            <button (click)="loginFace()" type="button" class="btn btn-sm btn-info btn-block ">
+              Registrarse con <i class="fab fa-facebook"></i>
+            </button>
+          </div>
+          <div class="col-6 text-center">
+            <button (click)="loginGmail()" type="button" class="btn btn-sm btn-danger btn-block ">
+              Registrarse con <i class="fab fa-google"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="container-login100-form-btn m-t-17">
+          <button class="login100-form-btn" type="submit">
+            Crear cuenta
+          </button>
+        </div>
+
+        <div class="container-login100-form-btn m-t-17">
+          <p>
+            Al registrarte aceptas nuestra política de
+            <a routerLink="/terms" class="txt1">
+              Terminos y condiciones.
+            </a>
+            así como nuestra
+            <a routerLink="/copyright" class="txt1">
+              Politica de privacidad y protección de datos.
+            </a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
