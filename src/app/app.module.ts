@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-// forms
+//forms
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-// firebase
+//firebase
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -23,12 +23,15 @@ import { TermsprivacyComponent } from './pages/termsprivacy/termsprivacy.compone
 import { RouterModule } from '@angular/router';
 import { VerificationEmailComponent } from './pages/utils/verification-email/verification-email.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import {TimeService} from './services/time.service';
+import { CounterComponent } from './pages/section/counter/counter.component';
+import { TimeService } from './core/services/time.service';
+//import { SponsorsComponent } from './pages/section/sponsor/sponsors/sponsors.component';
+import { ComponentsModule } from './shared/components/components.module';
+import { ProfiledetailsComponent } from './pages/profile/profiledetails/profiledetails.component';
+import { ProfileinsigniasComponent } from './pages/profile/profileinsignias/profileinsignias.component';
+import { ProfilegruposComponent } from './pages/profile/profilegrupos/profilegrupos.component';
+import { ProfileventosComponent } from './pages/profile/profileventos/profileventos.component';
 
-import {SponsorsComponent} from './pages/section/sponsor/sponsors/sponsors.component'
-import {ComunidadesComponent} from './pages/section/comunidad/comunidades/comunidades.component'
-import {CounterComponent} from './pages/section/counter/counter/counter.component'
-import {CoursesComponent} from './pages/section/course/courses/courses.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,10 +44,12 @@ import {CoursesComponent} from './pages/section/course/courses/courses.component
     TermsprivacyComponent,
     VerificationEmailComponent,
     ProfileComponent,
-    SponsorsComponent,
-    ComunidadesComponent,
     CounterComponent,
-    CoursesComponent
+    ProfiledetailsComponent,
+    ProfileinsigniasComponent,
+    ProfilegruposComponent,
+    ProfileventosComponent,
+    // SponsorsComponent
   ],
   imports: [
     BrowserModule,
@@ -56,14 +61,9 @@ import {CoursesComponent} from './pages/section/course/courses/courses.component
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
+    ComponentsModule,
   ],
-  entryComponents: [
-    SponsorsComponent,
-    ComunidadesComponent,
-    CounterComponent,
-    CoursesComponent
-  ],
-  providers: [ TimeService ],
-  bootstrap: [AppComponent]
+  providers: [TimeService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
