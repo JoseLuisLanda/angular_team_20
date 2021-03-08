@@ -121,7 +121,6 @@ export class AuthService extends RoleValidator {
     const userRef: AngularFirestoreDocument<UserModel> = this.db.doc(
       `users/${user.uid}`
     );
-    //console.log("user saving :"+JSON.stringify(user));
     const data: UserModel = {
       uid: user.uid,
       email: user.email,
@@ -129,7 +128,7 @@ export class AuthService extends RoleValidator {
       displayName: user.displayName,
       photoURL: user.photoURL ? user.photoURL : 'assets/photo',
       refreshToken: user.refreshToken ? user.refreshToken : '',
-      organization: user.email!.split('@')[1],
+      organization: user.email!.split('@')[1]
     };
 
     return userRef.set(data, { merge: true });

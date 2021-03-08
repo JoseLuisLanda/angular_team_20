@@ -52,7 +52,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes,{
-    enableTracing: true,
+    enableTracing: false,
     preloadingStrategy: PreloadAllModules
   })],
   exports: [RouterModule]

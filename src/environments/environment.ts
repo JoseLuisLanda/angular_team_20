@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  serviceURL : "http://localhost:5000/apisvc/us-central1/api",
   firebaseConfig : {
     apiKey: "AIzaSyDHxlKfchpJrycT_fAOX3JjBCWp_uFlcjI",
     authDomain: "comfecoapp.firebaseapp.com",

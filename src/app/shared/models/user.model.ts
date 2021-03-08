@@ -13,5 +13,6 @@ export interface UserModel {
   photoURL?: string;
   role?: Roles;
   rememberme?: boolean;
+  url?:string;
 }
 export type Roles = 'SUSCRIPTOR' | 'EDITOR' | 'ADMIN';

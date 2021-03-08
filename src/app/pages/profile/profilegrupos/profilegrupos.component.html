@@ -1,1 +1,42 @@
-<p>profilegrupos works!</p>
+<div class="row">
+  <div class="col-12 col-md-3">
+      <h3>Mis Grupos:</h3>
+      <div *ngFor="let grupo of currentUser.grupos">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">{{grupo.title}}</h5>
+            <p class="card-text">{{grupo.description}}</p>
+            
+            <div class="col-12 m-t-10">
+              <button class="btn btn-danger text-white text-sm m-b-10" (click)="DeleteEvent(grupo)">X</button>
+            </div>
+            
+          </div>
+    
+        
+      </div>
+      
+  </div>
+  </div>
+  <div class="col-12 col-md-9">
+    <h2>Grupos:</h2>
+    <p class="text-danger">{{errormsg}}</p>
+    <div class="form-inline">
+        <div class="card" style="width: 18rem;" *ngFor="let grupo of grupos">
+            <img src='assets/img/cominudad.jpg' class="card-img-top" alt="image">
+            <div class="card-body">
+              <h5 class="card-title">{{grupo.title}}</h5>
+              <p class="card-text">{{grupo.description}}</p>
+              <a href="taller.url">Màs info</a>
+              <div class="col-12 m-t-10">
+                <button (click)="AddEvent(grupo)" class="btn btn-warning btn-block">Unirme</button>
+                <button (click)="EditEvent(grupo)" class="btn btn-success btn-block">Editar</button>
+              </div>
+              
+            </div>
+          </div>
+    </div>
+  </div>
+  
+  </div>
+
