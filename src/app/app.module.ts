@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 //forms
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 //firebase
 import { AngularFireModule } from '@angular/fire';
@@ -31,6 +31,9 @@ import { ProfiledetailsComponent } from './pages/profile/profiledetails/profiled
 import { ProfileinsigniasComponent } from './pages/profile/profileinsignias/profileinsignias.component';
 import { ProfilegruposComponent } from './pages/profile/profilegrupos/profilegrupos.component';
 import { ProfileventosComponent } from './pages/profile/profileventos/profileventos.component';
+import { EditComponent } from './pages/shared/CRUD/edit/edit.component';
+import { NewComponent } from './pages/shared/CRUD/new/new.component';
+import { ModalComponent } from './pages/shared/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +52,9 @@ import { ProfileventosComponent } from './pages/profile/profileventos/profileven
     ProfileinsigniasComponent,
     ProfilegruposComponent,
     ProfileventosComponent,
+    EditComponent,
+    NewComponent,
+    ModalComponent,
     // SponsorsComponent
   ],
   imports: [
@@ -56,6 +62,7 @@ import { ProfileventosComponent } from './pages/profile/profileventos/profileven
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,

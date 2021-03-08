@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+  serviceURL : "https://us-central1-apisvc.cloudfunctions.net/api",
   firebase: {
     apiKey: "AIzaSyDHxlKfchpJrycT_fAOX3JjBCWp_uFlcjI",
     authDomain: "comfecoapp.firebaseapp.com",

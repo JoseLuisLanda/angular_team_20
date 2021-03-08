@@ -1,0 +1,102 @@
+<button *ngIf="item.id == null" type="button" (click)="formReset()" class="active btn btn-block btn-outline-danger col-6" id="resetBtn">Limpiar</button>
+<form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar()">
+  <h1 *ngIf="item.id == null" class="login100-form-title p-b-51" style="color: black;">
+    {{type}}
+  </h1>
+  <p id="errLbl" style="color: black;"></p>
+
+
+<div *ngIf="forma.value.name | json" class="form-group row">
+  
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Nombre</span>
+    </div>
+    
+    <input  class="form-control" type="text" placeholder="Asigna un Nombre" formControlName="name"
+      [class.is-invalid]="nombreNoValido">
+
+  </div>
+  <div class="col">
+
+
+    <small *ngIf="nombreNoValido" class="text-danger">
+      Ingrese al menos 5 letras
+    </small>
+  </div>
+</div>
+
+<div *ngIf="forma.value.email | json" class="form-group row">
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Email</span>
+    </div>
+    <input class="form-control" type="text" placeholder="Email" formControlName="email"
+      [class.is-invalid]="correoNoValido">
+
+  </div>
+  <div class="col">
+    <small *ngIf="correoNoValido" class="text-danger">
+      Ingrese el email
+    </small>
+  </div>
+</div>
+
+<div *ngIf="forma.value.title | json" class="form-group row">
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Título</span>
+    </div>
+    <input class="form-control" type="text" placeholder="Titulo" formControlName="title"
+      >
+  </div>
+</div>
+
+
+
+
+    <div *ngIf="forma.value.displayName | json" class="form-group row">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Usuario</span>
+        </div>
+        <input class="form-control" type="text" placeholder="Usuario" formControlName="displayName"
+          [class.is-invalid]="displayNameNoValido">
+  
+      </div>
+      <div class="col">
+        <small *ngIf="displayNameNoValido" class="text-danger">
+          Ingrese al menos 5 letras
+        </small>
+      </div>
+    </div>
+    <div *ngIf="forma.value.description | json" class="form-group row">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Descripción</span>
+          </div>
+          <input class="form-control" type="text" [(ngModel)]="item.description" placeholder="Descripción breve" formControlName="description"
+            [class.is-invalid]="descriptionNoValido">
+    
+        </div>
+        <div class="col">
+          <small *ngIf="descriptionNoValido" class="text-danger">
+            Ingrese la descripción
+          </small>
+        </div>
+      </div>
+
+
+
+ 
+  
+  <div class="form-group row">
+    
+    <div class="input-group col">
+      <button type="submit" class="btn btn-outline-primary btn-block">
+        Guardar
+      </button>
+    </div>
+  </div>
+
+</form>

@@ -1,1 +1,16 @@
-<p>profileinsignias works!</p>
+<h2>Insignias:</h2>
+
+<div class="form-inline">
+    <div class="card" style="width: 18rem;" *ngFor="let insignia of insignias">
+        <img src='assets/img/insignia1.jpg' class="card-img-top" alt="image">
+        <div class="card-body">
+          <h5 class="card-title">{{insignia.name}}</h5>
+          <p class="card-text">{{insignia.description}}</p>
+          <a>Màs info</a>
+          <div class="col-12 m-t-10">
+            <button class="btn btn-primary btn-block">La quiero</button>
+          </div>
+          
+        </div>
+      </div>
+</div>

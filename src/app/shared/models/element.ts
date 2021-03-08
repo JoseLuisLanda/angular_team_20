@@ -18,6 +18,26 @@ export interface Elemento {
     id?:string;
     owner?: string;
     idUser?: string;
+    autor?: string;
+    grupos?: ElementId[];
+    insignias?: ElementId[];
+    talleres?: ElementId[];
 }
 
 export interface ElementId extends Elemento { uid: string; }
+export interface Taller extends Elemento{
+    name:string;
+    description: string;
+    dateStart: Date;
+}
+export interface Comunidad extends Elemento{
+    name:string;
+    description: string;
+    dateStart: Date;
+}
+export interface Profile extends Elemento{
+    displayName:string;
+    nick: string;
+    email: string;
+    photoURL: string;
+}

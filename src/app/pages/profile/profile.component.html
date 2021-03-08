@@ -7,16 +7,12 @@
         </li>
         <li class="nav-item">
           <button type="button"   class="nav-link btn btn-block btn-outline-success" id="subCatBtn" data-toggle="list" href="#insignias" role="tab" aria-controls="profile">Insignias</button>
-       
-       
         </li>
         <li class="nav-item">
           <button type="button"   class="nav-link btn btn-block btn-outline-success" id="elemBtn" data-toggle="list" href="#grupos" role="tab" aria-controls="messages">Grupos</button>
-   
         </li>
         <li class="nav-item">
           <button type="button"   class="nav-link btn btn-block btn-outline-success" id="elemBtn" data-toggle="list" href="#eventos" role="tab" aria-controls="messages">Eventos</button>
-   
         </li>
       </ul>
   
@@ -25,30 +21,27 @@
       <div class="tab-content" id="nav-tabContent">
   
         <div class="tab-pane fade show active" id="myprofile" role="tabpanel" aria-labelledby="list-home-list">
-        
-          <!--div myprofile-->
-          <div>
-            <app-profiledetails></app-profiledetails>
+         <div>
+            <app-profiledetails [item]="userProfile" (addItem)="insertItem($event)" > </app-profiledetails>
           </div>
         </div>
   
         <div class="tab-pane fade" id="insignias" role="tabpanel" aria-labelledby="list-profile-list">
-          <!--div insignias-->
           <div>
-            <app-profilegrupos></app-profilegrupos>
+            <app-profileinsignias ></app-profileinsignias>
+            
           </div>
            </div>
   
         <div class="tab-pane fade" id="grupos" role="tabpanel" aria-labelledby="list-messages-list">
-          <!--div grupos-->
           <div>
-            <app-profileinsignias></app-profileinsignias>
+            <app-profilegrupos (addItem)="insertItem($event)" (editItem)="editItem($event)" [user]="userProfile"></app-profilegrupos>
+            
           </div>
         </div>
         <div class="tab-pane fade" id="eventos" role="tabpanel" aria-labelledby="list-messages-list">
-          <!--div eventos-->
-          <div>
-            <app-profileventos></app-profileventos>
+         <div>
+          <app-profileventos (addItem)="insertItem($event)"  (editItem)="editItem($event)" [user]="userProfile"></app-profileventos>
           </div>
         </div>
         
@@ -63,4 +56,9 @@
   <a class="nav-link" routerLink="/login">Login</a>
 </ng-template>
 
+<div>
+  <button  data-toggle="modal"
+  data-target="#exampleModal" id="showModal"></button>
+  <app-modal [area]="caller" [item]="templateElement" (addItem)="insertItem($event)" [type]="modalCaller"></app-modal>
+</div>
 
