@@ -20,10 +20,3 @@ export interface Categoria {
   id: string;
   name: string;
 }
-export interface Insignia {
-  id: string;
-  name: string;
-  description: string;
-  owners: string[];
-  image: string;
-}
