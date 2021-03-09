@@ -1,1 +1,6 @@
-<p>profileinsignias works!</p>
+<h1>Insignias</h1>
+<div class="row">
+  <div class="col-sm-4 col-6 col-md-3" *ngFor="let insignia of insignias">
+    <app-insignia [insignia]="insignia"></app-insignia>
+  </div>
+</div>
