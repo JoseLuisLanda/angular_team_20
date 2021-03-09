@@ -1,7 +1,13 @@
-<a class="nav-link">Id: {{ user?.uid }}</a>
-<a class="nav-link">Nick: {{ user?.displayName }}</a>
-<a class="nav-link">Verified: {{ user?.emailVerified }}</a>
-<a class="nav-link">Provider: {{ user?.providerData[0]?.providerId }}</a>
-<a class="nav-link">ApiKey: {{ user?.apiKey }}</a>
-<a class="nav-link">Anonimous: {{ user?.isAnonymous }}</a>
-<h2>test merge pull</h2>
+<div class="jumbotron">
+    <a class="nav-link">Id: {{ userProfile?.uid }}</a>
+    <a class="nav-link">Nick: {{ userProfile?.displayName }}</a>
+    <a class="nav-link">Verified: {{ userProfile?.emailVerified }}</a>
+    <a class="nav-link">Provider: {{ user?.providerData[0]?.providerId }}</a>
+    <a class="nav-link">ApiKey: {{ userProfile?.apiKey }}</a>
+    <a class="nav-link">Anonimous: {{ userProfile?.isAnonymous }}</a>
+    <div class="col-12 m-t-10">
+        <button (click)="EditProfile(userProfile)" class="btn btn-primary btn-block">Editar</button>
+      </div>
+</div>
+
+

@@ -22,6 +22,17 @@ export class FirestoreService {
 
   constructor(private http: HttpClient, private db: AngularFirestore) {}
 
+  public getDoc(collection: string, uid: string) {
+    // with ref = (collection,ref => ref.where('uid', '==', uid))
+    this.db.collection<any>(collection).snapshotChanges().pipe(map(actions => {
+      return actions.map(a => {
+        const data = a.payload.doc.data();
+        const id = a.payload.doc.id;
+        //console.log('id', id, 'data', data);
+        return {id, data};
+      });
+    })).subscribe();
+  }
   public updateDoc(collection: string, uid: string, data: any) {
     // with ref = (collection,ref => ref.where('uid', '==', uid))
     this.db
@@ -50,7 +61,7 @@ export class FirestoreService {
         })
       )
     );
-    console.log('getting collection: ', nameCollection);
+    //console.log('getting collection: ', nameCollection);
     return this.items;
   }
 

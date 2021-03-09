@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ElementId, Elemento } from './shared/models/element';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'ComfecoApp';
+
 }
+
+
