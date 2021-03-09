@@ -3,6 +3,7 @@ import { NavbarService } from '../../../core/services/navbar.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import firebase from 'firebase/app';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  public user$: Observable<any> = this.authSvc.afAuth.user;
+  public user$: Observable<firebase.User | null> = this.authSvc.afAuth.user;
 
   constructor(public authSvc: AuthService, private router: Router) {}
   ngOnInit(): void {}
