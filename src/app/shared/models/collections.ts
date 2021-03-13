@@ -16,6 +16,13 @@ export interface Taller {
   categoria: string;
   date: firebase.default.firestore.Timestamp;
 }
+export interface Insignia {
+  id: string;
+  description: string;
+  image?: string;
+  name: string;
+  owners: string[];
+}
 export interface Categoria {
   id: string;
   name: string;
