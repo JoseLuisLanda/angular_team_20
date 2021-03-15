@@ -1,8 +1,10 @@
 <div class="row">
   <div class="col-12 col-md-3">
     <h3>Mis Eventos:</h3>
-    <div *ngFor="let taller of currentUser.talleres">
-      <div class="card" style="width: 18rem">
+
+    <div *ngIf="currentUser.talleres | json" >
+      <div class="card" style="width: 18rem;" *ngFor="let taller of currentUser.talleres">
+
         <div class="card-body">
           <h5 class="card-title">{{ taller.title }}</h5>
           <p class="card-text">{{ taller.description }}</p>
@@ -21,30 +23,52 @@
   </div>
   <div class="col-12 col-md-9">
     <h2>Eventos:</h2>
-    <p class="text-danger">{{ errormsg }}</p>
-    <div class="form-inline">
-      <div class="card" style="width: 18rem" *ngFor="let taller of talleres">
-        <img src="assets/img/comunidad.png" class="card-img-top" alt="image" />
-        <div class="card-body">
-          <h5 class="card-title">{{ taller.title }}</h5>
-          <p class="card-text">{{ taller.description }}</p>
-          <a href="#">Màs info</a>
-          <div class="col-12 m-t-10">
-            <button
-              (click)="AddEvent(taller)"
-              class="btn btn-warning btn-block"
-            >
-              Asistir
-            </button>
-            <button
-              (click)="EditEvent(taller)"
-              class="btn btn-success btn-block"
-            >
-              Editar
-            </button>
+    <p class="text-danger">{{errormsg}}</p>
+    <div class="form-inline" *ngIf = "talleres | json">
+        <div class="card" style="width: 18rem;" *ngFor="let taller of talleres">
+          <button (click)="insertImage(taller)" class="btn btn-warning btn-block">Agregar</button>
+          <div *ngIf = "taller.images && taller.images[0]; else imgDefault">
+
+             <!-- Carousel images-->
+             <div id="{{taller.id}}" class="carousel slide" data-ride="carousel" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <div *ngFor="let image of taller.images; let i = index " [ngClass]="{'carousel-item':true, 'active': i == 0}" data-bs-interval="5000">
+                  <img class="d-block w-100" style="max-height: 150px;" [src]='image.url' [alt]="i">
+                  <button class="btn btn-danger" (click)="deleteImage(taller, image)">Eliminar</button>
+                </div>
+    
+              </div>
+              <a *ngIf="taller.images.length > 1" class="carousel-control-prev" href="#{{taller.id}}" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a *ngIf="taller.images.length > 1" class="carousel-control-next" href="#{{taller.id}}"   role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+            <!--END CAROUSEL-->
+           
           </div>
+          <ng-template #imgDefault>
+            <img src='assets/img/comunidad.png' class="card-img-top" alt="image">
+          </ng-template>
+           
+       
+            
+            <div class="card-body">
+              <h5 class="card-title">{{taller.title}}</h5>
+              <p class="card-text">{{taller.description}}</p>
+              <a href="#">Màs info</a>
+              <div class="col-12 m-t-10">
+                <button (click)="AddEvent(taller)" class="btn btn-warning btn-block">Asistir</button>
+                <button (click)="EditEvent(taller)" class="btn btn-success btn-block">Editar</button>
+              </div>
+              
+            </div>
         </div>
-      </div>
     </div>
   </div>
 </div>
+
+

@@ -22,6 +22,8 @@ export interface Elemento {
     grupos?: ElementId[];
     insignias?: ElementId[];
     talleres?: ElementId[];
+    images?: ElementId[];
+    item?: ElementId;
 }
 
 export interface ElementId extends Elemento { uid: string; }
@@ -40,4 +42,22 @@ export interface Profile extends Elemento{
     nick: string;
     email: string;
     photoURL: string;
+}
+export class ElementModel {
+
+    id?: string;
+    name: string;
+    description: string;
+    duration?: number;
+    status: boolean;
+    dateCreated: Date;
+
+
+
+    constructor() {
+        this.name = "",
+        this.description = "";
+         this.status = true;
+         this.dateCreated = new Date();
+    }
 }
