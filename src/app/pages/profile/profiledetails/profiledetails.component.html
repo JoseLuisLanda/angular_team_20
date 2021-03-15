@@ -1,19 +1,13 @@
 <div class="jumbotron">
-  <div class="card" style="width: 18rem; ">
-    <button (click)="insertImage(userProfile)" class="btn btn-warning btn-block">Cambiar</button>
-    <img *ngIf="userProfile?.images && userProfile?.images[0]" style="max-height: 150px;" alt="image" [src]="userProfile?.images[0].url" class=" card-img-top rounded mx-auto d-block"/>
-    <div class="card-body">
-      <a class="nav-link">Nick: {{ userProfile?.displayName }}</a>
-      <a class="nav-link">Verified: {{ userProfile?.emailVerified }}</a>
-      <a class="nav-link">Provider: {{ user?.providerData[0]?.providerId }}</a>
-      <div class="col-12 m-t-10">
-          <button (click)="EditProfile(userProfile)" class="btn btn-success btn-block">Editar</button>
-        </div>
-      
-      
-    </div>
-  </div>
-  
+    <a class="nav-link">Id: {{ userProfile?.uid }}</a>
+    <a class="nav-link">Nick: {{ userProfile?.displayName }}</a>
+    <a class="nav-link">Verified: {{ userProfile?.emailVerified }}</a>
+    <a class="nav-link">Provider: {{ user?.providerData[0]?.providerId }}</a>
+    <a class="nav-link">ApiKey: {{ userProfile?.apiKey }}</a>
+    <a class="nav-link">Anonimous: {{ userProfile?.isAnonymous }}</a>
+    <div class="col-12 m-t-10">
+        <button (click)="EditProfile(userProfile)" class="btn btn-primary btn-block">Editar</button>
+      </div>
 </div>
 
 

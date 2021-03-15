@@ -34,12 +34,9 @@ import { ProfileventosComponent } from './pages/profile/profileventos/profileven
 import { EditComponent } from './pages/shared/CRUD/edit/edit.component';
 import { NewComponent } from './pages/shared/CRUD/new/new.component';
 import { ModalComponent } from './pages/shared/modal/modal.component';
-import { UploadimageComponent } from './pages/utils/uploadimage/uploadimage.component';
-import { NgDropFilesDirective } from 'src/app/core/directives/ng-drop-files.directive';
 
 @NgModule({
   declarations: [
-    NgDropFilesDirective,
     AppComponent,
     RegisterComponent,
     LoginComponent,
@@ -58,7 +55,6 @@ import { NgDropFilesDirective } from 'src/app/core/directives/ng-drop-files.dire
     EditComponent,
     NewComponent,
     ModalComponent,
-    UploadimageComponent,
     // SponsorsComponent
   ],
   imports: [

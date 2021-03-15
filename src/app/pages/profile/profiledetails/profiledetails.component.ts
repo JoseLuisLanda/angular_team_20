@@ -35,12 +35,12 @@ export class ProfiledetailsComponent implements OnInit, OnChanges {
   @Input() area: string = '';
   @Output() addItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
 
-  @Output() editItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
-  @Output() uploadImage: EventEmitter<ElementId> = new EventEmitter<ElementId>();
-  
-  constructor(private auth: AuthService, private dbservice: FirestoreService, 
-    private fsService: AngularFirestore, private afsService : AfsService) { }
-
+  constructor(
+    private auth: AuthService,
+    private dbservice: FirestoreService,
+    private fsService: AngularFirestore,
+    private afsService: AfsService
+  ) {}
   ngOnChanges(changes: SimpleChanges): void {
     this.userProfile = this.item;
   }
@@ -48,14 +48,8 @@ export class ProfiledetailsComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.userProfile = this.item;
   }
-
-  EditProfile(profile: ElementId){
-    //profile.type = "editProfile";
-    this.editItem.emit(profile);
+  EditProfile(profile: ElementId) {
+    profile.type = 'editProfile';
+    // this.addItem.emit(profile);
   }
-  insertImage(profile: ElementId){
-    this.uploadImage.emit(profile);
-  }
-  
-
 }

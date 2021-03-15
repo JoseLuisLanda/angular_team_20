@@ -25,12 +25,9 @@ export class ProfileventosComponent implements OnInit, OnChanges {
   @Input() area = '';
   @Output() addItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   @Output() editItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
-  @Output() uploadImage: EventEmitter<ElementId> = new EventEmitter<ElementId>();
-  @Output() removeImage: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   constructor(private fsService: FirestoreService) {
     this.fsService.getCollection('talleres').subscribe((data) => {
-      this.talleres = data as ElementId [];
-      console.log("TALLERES: "+JSON.stringify(this.talleres))
+      this.talleres = data;
     });
   }
   ngOnChanges(changes: SimpleChanges): void {
@@ -81,14 +78,5 @@ export class ProfileventosComponent implements OnInit, OnChanges {
   EditEvent(event: ElementId) {
     event.url = `talleres/${event.id}`;
     this.editItem.emit(event);
-  }
-  insertImage(event: ElementId){
-    event.url = `talleres/${event.id}`;
-    this.uploadImage.emit(event);
-  }
-  deleteImage(event: ElementId, image: ElementId){
-    //event.url = `comunidades/${event.id}`;
-    event.item = image;
-    this.removeImage.emit(event);
   }
 }
