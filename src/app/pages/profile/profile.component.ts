@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AfsService } from 'src/app/core/services/afs.service';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { FileService } from 'src/app/core/services/file.service';
 import { FirestoreService } from 'src/app/core/services/firebase.service';
 import { ElementId } from 'src/app/shared/models/element';
 
@@ -21,9 +22,12 @@ export class ProfileComponent implements OnInit {
   templateElement = {} as ElementId;
   caller = 'defaultArea';
   modalCaller = 'ejemplo';
-  
+  isEditing = false;
+  uploadImage = false;
+  singleUpload = false;
+
   constructor(private auth: AuthService, private dbservice: FirestoreService, 
-    private fsService: AngularFirestore, private afsService : AfsService) { }
+    private fsService: AngularFirestore, private afsService : AfsService, private fileSvc: FileService) { }
 
   ngOnInit(): void {
     this.loadUser();
@@ -43,14 +47,35 @@ export class ProfileComponent implements OnInit {
         });
   }
   removeItem(element: ElementId){
-    console.log("REGISTRO A Eliminar: ",JSON.stringify(element));
+    //console.log("REGISTRO A Eliminar: ",JSON.stringify(element));
        
    }
   editItem(element: ElementId){
     this.templateElement = element;
+    this.isEditing = true;
+    this.uploadImage = false;
+    this.singleUpload = false;
+    this.userProfile = element;
     (<HTMLInputElement> document.getElementById("showModal")).click();
   }
-
+  singleUploadImg(element: ElementId){
+    this.singleUpload = true;
+    this.userProfile = element;
+    this.insertarImagen(element);
+  }
+  multipleUploadImg(element: ElementId){
+    this.singleUpload = false;
+    this.insertarImagen(element);
+  }
+  insertarImagen(element: ElementId){
+    this.templateElement = element;
+    this.isEditing = false;
+    this.uploadImage = true;
+    (<HTMLInputElement> document.getElementById("showModal")).click();
+  }
+  deleteImagen(element: ElementId){
+    this.fileSvc.deleteFile(element);
+  }
 
   getUserProfile(userId: string){
     //let query = (ref:QueryFn<firebase.default.firestore.DocumentData>) => ref.where('name', '==', 'recargas');

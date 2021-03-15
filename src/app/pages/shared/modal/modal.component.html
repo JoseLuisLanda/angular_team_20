@@ -9,7 +9,8 @@
           </button>
         </div>
         <div class="modal-body">
-          <app-edit *ngIf = "isEditing" [area]="caller" [item]="templateElement" (addItem)="insertItem($event)" [type]="modalCaller"></app-edit>
+          <app-edit *ngIf = "isEditing" [area]="caller" [item]="item" (addItem)="insertItem($event)" [type]="modalCaller"></app-edit>
+          <app-uploadimage *ngIf = "uploadImage" [singleUpload] = "singleUpload" [item]="item"></app-uploadimage>
           </div>
         <div class="modal-footer">
           <button type="button" id="dismissModal" class="btn btn-secondary" data-dismiss="modal">Close</button>
