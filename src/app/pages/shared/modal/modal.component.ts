@@ -11,21 +11,17 @@ export class ModalComponent implements OnInit, OnChanges {
   @Input() type: string = "";
   @Input() item: ElementId = {} as ElementId;
   @Input() area: string = "";
-  @Input() isEditing = false;
-  @Input() uploadImage = false;
-  @Input() singleUpload = false;
-  @Input() userProfile: ElementId = {} as ElementId;
-    @Output() addItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
+  @Output() addItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   title = 'ComfecoApp';
+  templateElement = {} as ElementId;
   caller = 'defaultArea';
   modalCaller = 'ejemplo';
- 
-  
+  isEditing = false;
   constructor() { }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("changes modal: ", JSON.stringify(this.item))
-    
-    //this.isEditing = true;
+    //console.log("changes modal: ", JSON.stringify(this.item))
+    this.templateElement = this.item;
+    this.isEditing = true;
   }
 
   ngOnInit(): void {

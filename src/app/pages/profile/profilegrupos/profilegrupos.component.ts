@@ -16,13 +16,11 @@ export class ProfilegruposComponent implements OnInit, OnChanges {
   @Input() area: string = "";
   @Output() addItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   @Output() editItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
-  @Output() uploadImage: EventEmitter<ElementId> = new EventEmitter<ElementId>();
-  @Output() removeImage: EventEmitter<ElementId> = new EventEmitter<ElementId>();
 
 
   constructor(private fsService: FirestoreService) {
     this.fsService.getCollection('comunidades').subscribe((data) => {
-      this.grupos = data as ElementId [];
+      this.grupos = data;
     });
    }
   ngOnChanges(changes: SimpleChanges): void {
@@ -62,17 +60,5 @@ export class ProfilegruposComponent implements OnInit, OnChanges {
     event.url = `comunidades/${event.id}`;
     this.editItem.emit(event);
   }
-  insertImage(event: ElementId){
-    event.url = `comunidades/${event.id}`;
-    this.uploadImage.emit(event);
-  }
-  deleteImage(event: ElementId, image: ElementId){
-    //event.url = `comunidades/${event.id}`;
-    //console.log("antes de eliminar:"+JSON.stringify(image))
-    event.item = image;
-    /*console.log("antes de eliminar:"+JSON.stringify(event))
-    event.images?.splice(event.images?.indexOf(event.item!),1)
-    console.log("despues de eliminar:"+JSON.stringify(event))*/
-    this.removeImage.emit(event);
-  }
+
 }
