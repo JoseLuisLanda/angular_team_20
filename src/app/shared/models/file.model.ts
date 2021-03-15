@@ -2,7 +2,7 @@ export class FileModel {
 
     public archivo: File;
     public nombreArchivo: string;
-    public url: string;
+    public uri?: string;
     public estaSubiendo: boolean;
     public progreso: number;
     public duration: number;
@@ -10,7 +10,7 @@ export class FileModel {
     constructor( archivo: File) {
         this.archivo = archivo;
         this.nombreArchivo = archivo.name;
-        this.url = "assets/img/drop-images.png";
+
         this.estaSubiendo = false;
         this.progreso = 0;
         this.duration = 5;
