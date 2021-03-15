@@ -30,7 +30,7 @@ export class ProfileventosComponent implements OnInit, OnChanges {
   constructor(private fsService: FirestoreService) {
     this.fsService.getCollection('talleres').subscribe((data) => {
       this.talleres = data as ElementId [];
-      console.log("TALLERES: "+JSON.stringify(this.talleres))
+      //console.log("TALLERES: "+JSON.stringify(this.talleres))
     });
   }
   ngOnChanges(changes: SimpleChanges): void {

@@ -23,7 +23,7 @@ export class ModalComponent implements OnInit, OnChanges {
   
   constructor() { }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("changes modal: ", JSON.stringify(this.item))
+    //console.log("changes modal: ", JSON.stringify(this.item))
     
     //this.isEditing = true;
   }
