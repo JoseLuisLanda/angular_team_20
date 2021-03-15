@@ -24,14 +24,22 @@ export class FirestoreService {
 
   public getDoc(collection: string, uid: string) {
     // with ref = (collection,ref => ref.where('uid', '==', uid))
-    this.db.collection<any>(collection).snapshotChanges().pipe(map(actions => {
-      return actions.map(a => {
-        const data = a.payload.doc.data();
-        const id = a.payload.doc.id;
-        //console.log('id', id, 'data', data);
-        return {id, data};
-      });
-    })).subscribe();
+    // this.db.collection<any>(collection).snapshotChanges().pipe(map(actions => {
+    //   return actions.map(a => {
+    //     const data = a.payload.doc.data();
+    //     const id = a.payload.doc.id;
+    //     return {id, data};
+    //   });
+    // })).subscribe();
+    return this.db
+      .collection(collection)
+      .doc(uid)
+      .valueChanges()
+      .pipe(
+        map((v: any) => {
+          return { ...v, id: uid };
+        })
+      );
   }
   public updateDoc(collection: string, uid: string, data: any) {
     // with ref = (collection,ref => ref.where('uid', '==', uid))
