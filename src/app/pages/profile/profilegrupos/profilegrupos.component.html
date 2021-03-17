@@ -1,42 +1,117 @@
 <div class="row">
   <div class="col-12 col-md-3">
-      <h3>Mis Grupos:</h3>
-      <div *ngFor="let grupo of currentUser.grupos">
-        <div class="card" style="width: 18rem;">
+    <h3>Mis Grupos:</h3>
+    <div>
+      <select
+        [value]="comunidadActiva"
+        #selector
+        [(ngModel)]="comunidadActiva"
+        class="form-control mb-3"
+        *ngIf="totalMyGrupos() > 0; else noGrupos"
+      >
+        <ng-container *ngFor="let grupo of grupos">
+          <option [value]="grupo.id" *ngIf="isMyComunidad(grupo)">
+            {{ grupo.name }}
+          </option>
+        </ng-container>
+      </select>
+      <ng-template #noGrupos>
+        <h5>No perteces a ningún grupo</h5>
+      </ng-template>
+    </div>
+    <div *ngFor="let grupo of grupos">
+      <ng-container
+        *ngIf="isMyComunidad(grupo) && grupo.id === comunidadActiva"
+      >
+        <div class="card">
           <div class="card-body">
-            <h5 class="card-title">{{grupo.title}}</h5>
-            <p class="card-text">{{grupo.description}}</p>
-            
-            <div class="col-12 m-t-10">
-              <button class="btn btn-danger text-white text-sm m-b-10" (click)="DeleteEvent(grupo)">X</button>
+            <h5 class="card-title">{{ grupo.name }}</h5>
+            <!-- <p class="card-text">{{ grupo.description }}</p> -->
+            <h6>Miembros</h6>
+            <div *ngFor="let userId of grupo.users">
+              <ng-container
+                *ngIf="isMyComunidad(grupo, userId) && getUser(userId) as u"
+              >
+                <div class="d-flex">
+                  <div class="div-img mr-2">
+                    <img [src]="u.photoURL" class="img" />
+                  </div>
+                  <span>{{ u.displayName }}</span>
+                </div>
+              </ng-container>
             </div>
-            
           </div>
-    
-        
-      </div>
-      
-  </div>
+          <div class="col-12 m-t-10">
+            <button
+              class="btn btn-danger text-white text-sm m-b-10"
+              (click)="DeleteEvent(grupo)"
+            >
+              Abandonar
+            </button>
+          </div>
+        </div>
+      </ng-container>
+    </div>
   </div>
   <div class="col-12 col-md-9">
     <h2>Grupos:</h2>
-    <p class="text-danger">{{errormsg}}</p>
-    <div class="form-inline">
-        <div class="card" style="width: 18rem;" *ngFor="let grupo of grupos">
-            <img src='assets/img/cominudad.jpg' class="card-img-top" alt="image">
+    <div class="row">
+      <select
+        [(ngModel)]="lenguajeActivo"
+        class="form-control mr-2 mb-3 col-sm-4"
+      >
+        <option value="">Todos los lenguajes</option>
+        <option *ngFor="let lenguaje of lenguajes" [value]="lenguaje">
+          {{ lenguaje }}
+        </option>
+      </select>
+      <input
+        class="form-control col-sm-7"
+        [(ngModel)]="filterName"
+        placeholder="Busca un grupo"
+      />
+    </div>
+    <div class="row">
+      <ng-container *ngFor="let grupo of grupos">
+        <div
+          class="col-md-4"
+          *ngIf="
+            (lenguajeActivo === '' || grupo.lenguaje === lenguajeActivo) &&
+            (filterName === '' || filterByName(grupo.name))
+          "
+        >
+          <div class="card">
+            <img
+              src="assets/img/cominudad.jpg"
+              class="card-img-top"
+              alt="image"
+            />
             <div class="card-body">
-              <h5 class="card-title">{{grupo.title}}</h5>
-              <p class="card-text">{{grupo.description}}</p>
+              <h5 class="card-title">{{ grupo.name | titlecase }}</h5>
+              <p class="card-text">{{ grupo.description }}</p>
               <a href="taller.url">Màs info</a>
               <div class="col-12 m-t-10">
-                <button (click)="AddEvent(grupo)" class="btn btn-warning btn-block">Unirme</button>
-                <button (click)="EditEvent(grupo)" class="btn btn-success btn-block">Editar</button>
+                <button
+                  *ngIf="!isMyComunidad(grupo); else unido"
+                  (click)="addEvent(grupo)"
+                  class="btn btn-warning btn-block"
+                >
+                  Unirme
+                </button>
+                <ng-template #unido>
+                  <button class="btn btn-success btn-block">Miembro</button>
+                </ng-template>
+                <!-- <button
+                  (click)="EditEvent(grupo)"
+                  class="btn btn-success btn-block"
+                >
+                  Editar
+                </button> -->
               </div>
-              
             </div>
           </div>
+        </div>
+      </ng-container>
     </div>
   </div>
-  
-  </div>
-
+</div>

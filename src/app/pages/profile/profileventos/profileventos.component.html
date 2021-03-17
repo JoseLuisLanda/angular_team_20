@@ -1,12 +1,13 @@
 <div class="row">
   <div class="col-12 col-md-3">
     <h3>Mis Eventos:</h3>
-    <div *ngFor="let taller of currentUser.talleres">
-      <div class="card" style="width: 18rem">
+    <ng-container *ngFor="let taller of talleres">
+      <div class="card" *ngIf="isMyEvent(taller)">
         <div class="card-body">
           <h5 class="card-title">{{ taller.title }}</h5>
           <p class="card-text">{{ taller.description }}</p>
-
+          <small>{{ taller.date.toDate() | date }}</small>
+          <a [href]="taller.autorLink">By {{ taller.autor | titlecase }}</a>
           <div class="col-12 m-t-10">
             <button
               class="btn btn-danger text-white text-sm m-b-10"
@@ -17,31 +18,46 @@
           </div>
         </div>
       </div>
-    </div>
+    </ng-container>
   </div>
   <div class="col-12 col-md-9">
     <h2>Eventos:</h2>
     <p class="text-danger">{{ errormsg }}</p>
-    <div class="form-inline">
-      <div class="card" style="width: 18rem" *ngFor="let taller of talleres">
-        <img src="assets/img/comunidad.png" class="card-img-top" alt="image" />
-        <div class="card-body">
-          <h5 class="card-title">{{ taller.title }}</h5>
-          <p class="card-text">{{ taller.description }}</p>
-          <a href="#">Màs info</a>
-          <div class="col-12 m-t-10">
-            <button
-              (click)="AddEvent(taller)"
-              class="btn btn-warning btn-block"
-            >
-              Asistir
-            </button>
-            <button
-              (click)="EditEvent(taller)"
-              class="btn btn-success btn-block"
-            >
-              Editar
-            </button>
+    <div class="row">
+      <div class="col-sm-6 col-md-4" *ngFor="let taller of talleres">
+        <div class="card">
+          <img
+            src="assets/img/comunidad.png"
+            class="card-img-top"
+            alt="image"
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{ taller.title }}</h5>
+            <p class="card-text">{{ taller.description }}</p>
+            <small class="card-text">{{ taller.date.toDate() | date }}</small>
+            <!-- <a href="#">Màs info</a> -->
+            <div class="col-12 m-t-10">
+              <button
+                (click)="AddEvent(taller)"
+                *ngIf="!isMyEvent(taller)"
+                [disabled]="!canIAsist(taller)"
+                class="btn btn-warning btn-block"
+              >
+                Asistir
+              </button>
+              <button
+                *ngIf="isMyEvent(taller)"
+                class="btn btn-success btn-block"
+              >
+                Asistiendo
+              </button>
+              <!-- <button
+                (click)="EditEvent(taller)"
+                class="btn btn-success btn-block"
+              >
+                Editar
+              </button> -->
+            </div>
           </div>
         </div>
       </div>
