@@ -1,4 +1,5 @@
 export interface Elemento {
+
     name?: string;
     displayName?: string;
     emailVerified?: boolean;
@@ -24,25 +25,29 @@ export interface Elemento {
     talleres?: ElementId[];
     images?: ElementId[];
     item?: ElementId;
+
 }
 
-export interface ElementId extends Elemento { uid: string; }
-export interface Taller extends Elemento{
-    name:string;
-    description: string;
-    dateStart: Date;
+export interface ElementId extends Elemento {
+  uid: string;
 }
-export interface Comunidad extends Elemento{
-    name:string;
-    description: string;
-    dateStart: Date;
+export interface Taller extends Elemento {
+  name: string;
+  description: string;
+  date: Date;
 }
-export interface Profile extends Elemento{
-    displayName:string;
-    nick: string;
-    email: string;
-    photoURL: string;
+export interface Comunidad extends Elemento {
+  name: string;
+  description: string;
+  dateStart: Date;
 }
+export interface Profile extends Elemento {
+  displayName: string;
+  nick: string;
+  email: string;
+  photoURL: string;
+}
+
 export class ElementModel {
 
     id?: string;
@@ -61,3 +66,4 @@ export class ElementModel {
          this.dateCreated = new Date();
     }
 }
+
