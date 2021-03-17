@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { of } from 'rxjs';
 import { AfsService } from 'src/app/core/services/afs.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { FileService } from 'src/app/core/services/file.service';
 import { FirestoreService } from 'src/app/core/services/firebase.service';
-import { ElementId } from 'src/app/shared/models/element';
+import { ElementId, Item } from 'src/app/shared/models/element';
 
 @Component({
   selector: 'app-profile',
@@ -23,8 +24,10 @@ export class ProfileComponent implements OnInit {
   caller = 'defaultArea';
   modalCaller = 'ejemplo';
   isEditing = false;
+  isNewItem = false;
   uploadImage = false;
   singleUpload = false;
+  itemTemplate: string  = "perfil";
 
   constructor(private auth: AuthService, private dbservice: FirestoreService, 
     private fsService: AngularFirestore, private afsService : AfsService, private fileSvc: FileService) { }
@@ -52,10 +55,21 @@ export class ProfileComponent implements OnInit {
    }
   editItem(element: ElementId){
     this.templateElement = element;
+    this.isNewItem = false;
     this.isEditing = true;
     this.uploadImage = false;
     this.singleUpload = false;
-    this.userProfile = element;
+    //this.userProfile = element;
+    (<HTMLInputElement> document.getElementById("showModal")).click();
+  }
+  newItem(element: string){
+    //this.itemTemplate = element;
+    this.itemTemplate = element;
+    this.isNewItem = true;
+    this.isEditing = false;
+    this.uploadImage = false;
+    this.singleUpload = false;
+    //this.userProfile = element;
     (<HTMLInputElement> document.getElementById("showModal")).click();
   }
   singleUploadImg(element: ElementId){

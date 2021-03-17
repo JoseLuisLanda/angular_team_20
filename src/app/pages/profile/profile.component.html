@@ -35,13 +35,13 @@
   
         <div class="tab-pane fade" id="grupos" role="tabpanel" aria-labelledby="list-messages-list">
           <div>
-            <app-profilegrupos (removeImage)="deleteImagen($event)" (uploadImage) = "multipleUploadImg($event)" (addItem)="insertItem($event)" (editItem)="editItem($event)" [user]="userProfile"></app-profilegrupos>
+            <app-profilegrupos (removeImage)="deleteImagen($event)" (uploadImage) = "multipleUploadImg($event)" (addItem)="insertItem($event)" (editItem)="editItem($event)" (newItem)="newItem($event)" [user]="userProfile"></app-profilegrupos>
             
           </div>
         </div>
         <div class="tab-pane fade" id="eventos" role="tabpanel" aria-labelledby="list-messages-list">
          <div>
-          <app-profileventos (removeImage)="deleteImagen($event)" (uploadImage) = "multipleUploadImg($event)" (addItem)="insertItem($event)"  (editItem)="editItem($event)" [user]="userProfile"></app-profileventos>
+          <app-profileventos (removeImage)="deleteImagen($event)" (uploadImage) = "multipleUploadImg($event)" (addItem)="insertItem($event)"  (editItem)="editItem($event)" (newItem)="newItem($event)" [user]="userProfile"></app-profileventos>
           </div>
         </div>
         
@@ -59,6 +59,6 @@
 <div>
   <button  data-toggle="modal"
   data-target="#exampleModal" id="showModal"></button>
-  <app-modal [singleUpload] = "singleUpload" [userProfile] = "userProfile" [area]="caller" [isEditing]="isEditing" [uploadImage]="uploadImage"  [item]="templateElement" (addItem)="insertItem($event)" [type]="modalCaller"></app-modal>
+  <app-modal [singleUpload] = "singleUpload" [userProfile] = "userProfile" [area]="caller" [isEditing]="isEditing" [isNewItem]="isNewItem" [uploadImage]="uploadImage"  [item]="templateElement" [newitem]="itemTemplate" (addItem)="insertItem($event)" [type]="modalCaller"></app-modal>
 </div>
 

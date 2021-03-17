@@ -14,7 +14,7 @@
     <div
       class="circulo bg-light d-flex aling-items-center justify-content-center mr-2"
     >
-      <i
+      <i *ngIf = "taller.date"
         class="fas my-auto fa-2x"
         [ngClass]="
           currentDate > taller.date.toMillis() ? 'fa-check' : 'fa-ellipsis-h'
@@ -23,7 +23,7 @@
     </div>
     {{ taller.title }}
   </div>
-  <small>{{ taller.date.toDate() | date }}</small>
+  <small *ngIf = "taller.date">{{ taller.date.toDate() | date }}</small>
   <p>
     By
     <a [href]="taller.autorLink">{{ taller.autor }}</a>

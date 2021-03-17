@@ -18,7 +18,7 @@ export class ProfilegruposComponent implements OnInit, OnChanges {
   @Output() editItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   @Output() uploadImage: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   @Output() removeImage: EventEmitter<ElementId> = new EventEmitter<ElementId>();
-
+  @Output() newItem: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private fsService: FirestoreService) {
     this.fsService.getCollection('comunidades').subscribe((data) => {
@@ -61,6 +61,9 @@ export class ProfilegruposComponent implements OnInit, OnChanges {
   EditEvent(event: ElementId){
     event.url = `comunidades/${event.id}`;
     this.editItem.emit(event);
+  }
+  newEvent() {
+    this.newItem.emit("comunidad");
   }
   insertImage(event: ElementId){
     event.url = `comunidades/${event.id}`;

@@ -27,15 +27,40 @@ export interface Elemento {
 }
 
 export interface ElementId extends Elemento { uid: string; }
-export interface Taller extends Elemento{
+
+export class Item implements Elemento{
     name:string;
     description: string;
-    dateStart: Date;
+    url: string;
+    id:string;
+
+    constructor() {
+        this.name = "";
+        this.description = "";
+        this.url = "";
+        this.id="";
+    }
 }
-export interface Comunidad extends Elemento{
-    name:string;
-    description: string;
-    dateStart: Date;
+export class Comunidad extends Item{
+    owner:string;
+    tags: string;
+    constructor() {
+        super();
+        this.owner = "";
+        this.tags = "";
+        
+    }
+}
+export class Taller extends Item{
+    autor:string;
+    link: string;
+    constructor() {
+        super();
+        this.autor = "";
+        this.link = "";
+        
+    }
+   
 }
 export interface Profile extends Elemento{
     displayName:string;

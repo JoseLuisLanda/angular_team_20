@@ -14,5 +14,6 @@ export interface UserModel {
   role?: Roles;
   rememberme?: boolean;
   url?:string;
+  type?:string;
 }
 export type Roles = 'SUSCRIPTOR' | 'EDITOR' | 'ADMIN';

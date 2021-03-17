@@ -55,8 +55,8 @@ export class HeaderComponent implements OnInit, OnChanges {
    this.currentUser = res as ElementId;
    if(this.currentUser.images){
     this.imagePath = this.currentUser.images[0].url!;
-   }
-   
+   }else
+   this.imagePath = this.currentUser.photoURL!;
   },err=>{console.log("error: "+err);})
   }
 }

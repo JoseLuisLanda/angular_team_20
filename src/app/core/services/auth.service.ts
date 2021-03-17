@@ -10,6 +10,8 @@ import {
 } from '@angular/fire/firestore';
 import { Observable, of } from 'rxjs';
 import { RoleValidator } from '../../shared/helpers/roleValidator';
+import { AfsService } from './afs.service';
+import { ElementId } from 'src/app/shared/models/element';
 @Injectable({
   providedIn: 'root',
 })
@@ -23,7 +25,8 @@ export class AuthService extends RoleValidator {
   constructor(
     private http: HttpClient,
     public afAuth: AngularFireAuth,
-    private db: AngularFirestore
+    private db: AngularFirestore,
+    private afsService : AfsService
   ) {
     super();
   }
@@ -46,28 +49,29 @@ export class AuthService extends RoleValidator {
     return this.afAuth
       .signInWithPopup(provider)
       .then((result: any) => {
-        console.log('You have been successfully logged in!', result);
-        console.log(
-          'email, user!',
-          result.user['email'] + ' ' + result.user['displayName']
-        );
-        this.updateUserData(result.user);
+      this.getUserProfile(result.user['uid'], result)
+    
       })
       .catch((error: any) => {
         console.log(error);
       });
   }
-
+  getUserProfile(userId: string, result: any){
+    //let query = (ref:QueryFn<firebase.default.firestore.DocumentData>) => ref.where('name', '==', 'recargas');
+   var doc = this.afsService.doc$(`users/${ userId }`).subscribe(res=>{
+     var resp:ElementId = res as ElementId;
+    if(resp === undefined){
+     // console.log("updating register")
+      this.updateUserData(result.user);
+    }
+  },err=>{console.log("error: "+err);})
+  }
   async login(userData: UserModel): Promise<any> {
     try {
       const { user } = await this.afAuth.signInWithEmailAndPassword(
         userData.email,
         userData.password!
       );
-      if (user) {
-        this.updateUserData(user);
-      }
-      console.log('recordarme: ' + userData.rememberme);
       if (userData.rememberme)
         this.afAuth.setPersistence(firebase.auth.Auth.Persistence.SESSION);
       else this.afAuth.setPersistence(firebase.auth.Auth.Persistence.NONE);
@@ -117,10 +121,12 @@ export class AuthService extends RoleValidator {
   isAuthenticated() {
     return this.afAuth.authState.pipe(first()).toPromise();
   }
+  
   private updateUserData(user: any) {
     const userRef: AngularFirestoreDocument<UserModel> = this.db.doc(
       `users/${user.uid}`
     );
+
     const data: UserModel = {
       uid: user.uid,
       email: user.email,
@@ -128,7 +134,9 @@ export class AuthService extends RoleValidator {
       displayName: user.displayName,
       photoURL: user.photoURL ? user.photoURL : 'assets/photo',
       refreshToken: user.refreshToken ? user.refreshToken : '',
-      organization: user.email!.split('@')[1]
+      organization: user.email!.split('@')[1],
+      type: user.email!.split('@')[1] === "gmail.com" ? "user":"admin",
+      url:`users/${user.uid}`
     };
 
     return userRef.set(data, { merge: true });
