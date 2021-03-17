@@ -1,8 +1,10 @@
 <div class="row">
   <div class="col-12 col-md-3">
     <h3>Mis Eventos:</h3>
+
     <ng-container *ngFor="let taller of talleres">
       <div class="card" *ngIf="isMyEvent(taller)">
+
         <div class="card-body">
           <h5 class="card-title">{{ taller.title }}</h5>
           <p class="card-text">{{ taller.description }}</p>
@@ -49,18 +51,36 @@
                 *ngIf="isMyEvent(taller)"
                 class="btn btn-success btn-block"
               >
-                Asistiendo
+                Asistiré
               </button>
-              <!-- <button
+              <button
                 (click)="EditEvent(taller)"
                 class="btn btn-success btn-block"
               >
                 Editar
-              </button> -->
+              </button>
             </div>
+
           </div>
+          <ng-template #imgDefault>
+            <img src='assets/img/comunidad.png' class="card-img-top" alt="image">
+          </ng-template>
+           
+       
+            
+            <div class="card-body">
+              <h5 class="card-title">{{taller.title}}</h5>
+              <p class="card-text">{{taller.description}}</p>
+              <a href="#">Màs info</a>
+              <div class="col-12 m-t-10">
+                <button (click)="AddEvent(taller)" class="btn btn-warning btn-block">Asistir</button>
+                <button (click)="EditEvent(taller)" class="btn btn-success btn-block">Editar</button>
+              </div>
+              
+            </div>
         </div>
-      </div>
     </div>
   </div>
 </div>
+
+

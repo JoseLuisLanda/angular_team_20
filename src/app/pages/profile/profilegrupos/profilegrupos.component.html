@@ -24,6 +24,7 @@
         *ngIf="isMyComunidad(grupo) && grupo.id === comunidadActiva"
       >
         <div class="card">
+
           <div class="card-body">
             <h5 class="card-title">{{ grupo.name }}</h5>
             <!-- <p class="card-text">{{ grupo.description }}</p> -->
@@ -55,6 +56,7 @@
   </div>
   <div class="col-12 col-md-9">
     <h2>Grupos:</h2>
+
     <div class="row">
       <select
         [(ngModel)]="lenguajeActivo"
@@ -86,6 +88,8 @@
               class="card-img-top"
               alt="image"
             />
+
+
             <div class="card-body">
               <h5 class="card-title">{{ grupo.name | titlecase }}</h5>
               <p class="card-text">{{ grupo.description }}</p>

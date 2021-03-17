@@ -1,27 +1,31 @@
 export interface Elemento {
-  name?: string;
-  displayName?: string;
-  emailVerified?: boolean;
-  photoURL?: string;
-  role?: string;
-  duration?: number;
-  dateCreated?: Date;
-  dateModified?: Date;
-  title?: string;
-  description?: string;
-  type?: string;
-  url?: string;
-  email?: string;
-  psw?: string;
-  tokn?: string;
-  elements?: ElementId[];
-  id?: string;
-  owner?: string;
-  idUser?: string;
-  autor?: string;
-  grupos?: ElementId[];
-  insignias?: ElementId[];
-  talleres?: Taller[];
+
+    name?: string;
+    displayName?: string;
+    emailVerified?: boolean;
+    photoURL?: string;
+    role?: string;
+    duration?: number;
+    dateCreated?: Date;
+    dateModified?: Date;
+    title?: string;
+    description?: string;
+    type?: string;
+    url?: string;
+    email?: string;
+    psw?: string;
+    tokn?: string;
+    elements?: ElementId[];
+    id?:string;
+    owner?: string;
+    idUser?: string;
+    autor?: string;
+    grupos?: ElementId[];
+    insignias?: ElementId[];
+    talleres?: ElementId[];
+    images?: ElementId[];
+    item?: ElementId;
+
 }
 
 export interface ElementId extends Elemento {
@@ -43,3 +47,23 @@ export interface Profile extends Elemento {
   email: string;
   photoURL: string;
 }
+
+export class ElementModel {
+
+    id?: string;
+    name: string;
+    description: string;
+    duration?: number;
+    status: boolean;
+    dateCreated: Date;
+
+
+
+    constructor() {
+        this.name = "",
+        this.description = "";
+         this.status = true;
+         this.dateCreated = new Date();
+    }
+}
+

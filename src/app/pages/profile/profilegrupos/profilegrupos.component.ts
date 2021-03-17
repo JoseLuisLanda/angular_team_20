@@ -160,5 +160,6 @@ export class ProfilegruposComponent implements OnInit, OnChanges {
       return true;
     }
     return false;
+
   }
 }
