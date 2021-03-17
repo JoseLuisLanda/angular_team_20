@@ -19,7 +19,7 @@ export class TallerComponent implements OnInit {
       this.categorias = v;
     });
     this.fsService.getCollection('talleres').subscribe((v: any) => {
-      console.log(v);
+      //console.log(v);
 
       this.talleres = v;
       this.talleresTemp = this.talleres;

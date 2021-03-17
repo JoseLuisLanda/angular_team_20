@@ -1,3 +1,4 @@
+<button *ngIf="currentUser.type === 'admin'" class="btn btn-success" (click)="newEvent()">Nuevo</button>
 <div class="row">
   <div class="col-12 col-md-3">
       <h3>Mis Grupos:</h3>
@@ -23,7 +24,7 @@
     <p class="text-danger">{{errormsg}}</p>
     <div class="form-inline" *ngIf = "grupos | json">
         <div class="card" style="width: 18rem;" *ngFor="let grupo of grupos">
-          <button (click)="insertImage(grupo)" class="btn btn-warning btn-block">Agregar</button>
+          <button *ngIf="currentUser.type === 'admin'" (click)="insertImage(grupo)" class="btn btn-success btn-block">Agregar</button>
           <div *ngIf = "grupo.images && grupo.images[0]; else imgDefault">
 
             <!-- Carousel images-->
@@ -31,7 +32,7 @@
               <div class="carousel-inner">
                 <div *ngFor="let image of grupo.images; let i = index " [ngClass]="{'carousel-item':true, 'active': i == 0}" data-bs-interval="5000">
                   <img class="d-block w-100" style="max-height: 150px;" [src]='image.url' [alt]="i">
-                  <button class="btn btn-danger" (click)="deleteImage(grupo, image)">Remove</button>
+                  <button *ngIf="currentUser.type === 'admin'" class="btn btn-danger btn-block" (click)="deleteImage(grupo, image)">Remove</button>
                 </div>
     
               </div>
@@ -50,12 +51,12 @@
             <img src='assets/img/cominudad.jpg' class="card-img-top" style="max-height: 150px;" alt="image">
           </ng-template>
             <div class="card-body">
-              <h5 class="card-title">{{grupo.title}}</h5>
+              <h5 class="card-title">{{grupo.name}}</h5>
               <p class="card-text">{{grupo.description}}</p>
               <a href="taller.url">Màs info</a>
               <div class="col-12 m-t-10">
                 <button (click)="AddEvent(grupo)" class="btn btn-warning btn-block">Unirme</button>
-                <button (click)="EditEvent(grupo)" class="btn btn-success btn-block">Editar</button>
+                <button *ngIf="currentUser.type === 'admin'" (click)="EditEvent(grupo)" class="btn btn-success btn-block">Editar</button>
               </div>
               
             </div>

@@ -4,8 +4,7 @@
     <img *ngIf="userProfile?.images && userProfile?.images[0]" style="max-height: 150px;" alt="image" [src]="userProfile?.images[0].url" class=" card-img-top rounded mx-auto d-block"/>
     <div class="card-body">
       <a class="nav-link">Nick: {{ userProfile?.displayName }}</a>
-      <a class="nav-link">Verified: {{ userProfile?.emailVerified }}</a>
-      <a class="nav-link">Provider: {{ user?.providerData[0]?.providerId }}</a>
+      <a class="nav-link">Email: {{ userProfile?.email }}</a>
       <div class="col-12 m-t-10">
           <button (click)="EditProfile(userProfile)" class="btn btn-success btn-block">Editar</button>
         </div>

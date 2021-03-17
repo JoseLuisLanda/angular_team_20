@@ -24,8 +24,8 @@ export class UploadimageComponent implements OnInit , OnChanges{
     this.addImage = new EventEmitter<ElementId[]>();
   }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("ITEM UPLOADIMAGE COMPONENT: "+JSON.stringify(this.item))
-    console.log("SINGLEUPLOAD UPLOADIMAGE COMPONENT: "+this.singleUpload)
+    //console.log("ITEM UPLOADIMAGE COMPONENT: "+JSON.stringify(this.item))
+    //console.log("SINGLEUPLOAD UPLOADIMAGE COMPONENT: "+this.singleUpload)
   }
 
   ngOnInit(): void {
@@ -34,7 +34,7 @@ export class UploadimageComponent implements OnInit , OnChanges{
     this.archivos = [];
     }
   async cargarImagenes() {
-    console.log("saving image with SingleUpload: "+this.singleUpload)
+    //console.log("saving image with SingleUpload: "+this.singleUpload)
     this.fileSvc.guaradarFile(this.archivos, this.item, this.singleUpload).then(()=>{
       console.log("FILE uploaded");
       this.borrarElementos();

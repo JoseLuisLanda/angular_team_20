@@ -21,7 +21,10 @@ export class ProfileinsigniasComponent implements OnInit {
     });
   }
   isMine(i: Insignia): boolean {
+    if(this.user.uid !== null)
     return i.owners.find((v) => v === this.user.uid) ? true : false;
+    else
+    return false;
   }
   ngOnInit(): void {}
 }

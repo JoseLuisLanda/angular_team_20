@@ -26,7 +26,9 @@ export class AfsService {
   doc<T>(ref: DocPredicate<T>): AngularFirestoreDocument<T>{
     return typeof ref === 'string' ? this.angularfs.doc<T>(ref): ref
   }
-
+createId(){
+  return this.angularfs.createId();
+}
 /// Get Data
 
 doc$<T>(ref: DocPredicate<T>): Observable<T>{

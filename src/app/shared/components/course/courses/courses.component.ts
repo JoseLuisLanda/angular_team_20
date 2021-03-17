@@ -11,7 +11,7 @@ export class CoursesComponent implements OnInit {
   constructor(private fsService: FirestoreService) {
     this.fsService.getCollection('talleres').subscribe((data) => {
       this.courses = data;
-      console.log('getting courses: ', data);
+      //console.log('getting courses: ', data);
     });
   }
 

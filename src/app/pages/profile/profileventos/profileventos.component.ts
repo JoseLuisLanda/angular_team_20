@@ -8,7 +8,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { FirestoreService } from 'src/app/core/services/firebase.service';
-import { ElementId } from 'src/app/shared/models/element';
+import { ElementId, Item } from 'src/app/shared/models/element';
 import { Insignia } from '../../../shared/models/collections';
 
 @Component({
@@ -27,6 +27,7 @@ export class ProfileventosComponent implements OnInit, OnChanges {
   @Output() editItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   @Output() uploadImage: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   @Output() removeImage: EventEmitter<ElementId> = new EventEmitter<ElementId>();
+  @Output() newItem: EventEmitter<string> = new EventEmitter<string>();
   constructor(private fsService: FirestoreService) {
     this.fsService.getCollection('talleres').subscribe((data) => {
       this.talleres = data as ElementId [];
@@ -79,8 +80,12 @@ export class ProfileventosComponent implements OnInit, OnChanges {
     this.addItem.emit(this.currentUser);
   }
   EditEvent(event: ElementId) {
+    //agrega un nuevo registro si no tiene un id que editar
     event.url = `talleres/${event.id}`;
     this.editItem.emit(event);
+  }
+  newEvent() {
+    this.newItem.emit("taller");
   }
   insertImage(event: ElementId){
     event.url = `talleres/${event.id}`;
