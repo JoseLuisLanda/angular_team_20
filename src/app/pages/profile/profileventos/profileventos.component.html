@@ -1,14 +1,20 @@
-<button *ngIf="currentUser.type === 'admin'" class="btn btn-success" (click)="newEvent()">Nuevo</button>
+<div *ngIf="!child" class="row">
+  <div class="col-12">
+    <button *ngIf="currentUser.type === 'admin'" class="btn btn-primary col-4 float-right" (click)="newEvent()">Nuevo</button>
+  </div>
+</div>
 <div class="row">
-  <div class="col-12 col-md-3">
+  <div [ngClass]="{'col-12 col-md-3':!child,'col-12':child}">
     <h3>Mis Eventos:</h3>
 
     <div *ngIf="currentUser.talleres | json" >
-      <div class="card" style="width: 18rem;" *ngFor="let taller of currentUser.talleres">
+      <div class="card" style="width: 15rem;" *ngFor="let taller of currentUser.talleres">
 
         <div class="card-body">
-          <h5 class="card-title">{{ taller.title }}</h5>
+          
+          <h5 class="card-title">{{ taller.name }}</h5>
           <p class="card-text">{{ taller.description }}</p>
+          
 
           <div class="col-12 m-t-10">
             <button
@@ -22,7 +28,7 @@
       </div>
     </div>
   </div>
-  <div class="col-12 col-md-9">
+  <div *ngIf="!child" class="col-12 col-md-9">
     <h2>Eventos:</h2>
     <p class="text-danger">{{errormsg}}</p>
     <div class="form-inline" *ngIf = "talleres | json">
@@ -58,8 +64,9 @@
        
             
             <div class="card-body">
-              <h5 class="card-title">{{taller.name}}</h5>
-              <p class="card-text">{{taller.description}}</p>
+              <h5 class="card-title">Nombre: {{taller.name}}</h5>
+              <p class="card-text">Detalle: {{taller.description}}</p>
+              <p class="card-text">Por: {{ taller.autor }}</p>
               <a href="#">Màs info</a>
               <div class="col-12 m-t-10">
                 <button (click)="AddEvent(taller)" class="btn btn-warning btn-block">Asistir</button>

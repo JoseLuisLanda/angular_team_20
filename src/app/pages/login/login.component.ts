@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/home');
       })
       .catch((error) => {
-        this.router.navigateByUrl('/register');
+        this.router.navigateByUrl('/login');
       });
   }
   recoveryPass(mail: string) {
@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/home');
       })
       .catch((error) => {
-        this.router.navigateByUrl('/register');
+        this.router.navigateByUrl('/login');
       });
   }
 

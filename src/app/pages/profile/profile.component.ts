@@ -43,10 +43,11 @@ export class ProfileComponent implements OnInit {
   }
 
   insertItem(element: ElementId){
+    //console.log("INSERTANDO: ",JSON.stringify(element))
         this.afsService.set(element.url!,element).then(res =>{
           //console.log("INSERTADO: ",JSON.stringify(res))
         }).catch(error=>{
-          //console.log("ERROR DE INSERCION: ");
+          console.log("ERROR DE INSERCION: "+JSON.stringify(error));
         });
   }
   removeItem(element: ElementId){

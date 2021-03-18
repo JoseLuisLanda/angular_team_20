@@ -1,6 +1,7 @@
-<h2>Insignias:</h2>
+<div class="container jumbotron">
+<h2>{{title}}</h2>
 <div class="form-inline">
-  <div class="card" style="width: 18rem" *ngFor="let insignia of insignias">
+  <div class="card" style="width: 10rem" *ngFor="let insignia of insignias">
     <img
       [src]="insignia.image || 'assets/img/insignia1.jpg'"
       class="card-img-top"
@@ -25,4 +26,5 @@
       </div> -->
     </div>
   </div>
+</div>
 </div>

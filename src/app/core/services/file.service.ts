@@ -112,7 +112,7 @@ export class FileService {
       
     }
     private updateUserData(element: any, url: string) {
-      console.log("FGUARDANDO FILE: "+ JSON.stringify(element)+" TO: "+ url);
+      //console.log("FGUARDANDO FILE: "+ JSON.stringify(element)+" TO: "+ url);
       this.imagenes = [];
       const userRef = this.db.doc(url);
       return userRef.set(element, { merge: true });
@@ -120,7 +120,7 @@ export class FileService {
     
     deleteFile(element: ElementId) {
       var name = element.item!.id +"/"+ element.item!.name?.split(".")[0];
-     console.log("deleting file: "+name)
+     //console.log("deleting file: "+name)
      element.images?.splice(element.images?.indexOf(element.item!),1)
        this.updateUserData({images:element.images}, element.url!) 
       

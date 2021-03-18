@@ -32,7 +32,7 @@ export class ProfiledetailsComponent implements OnInit, OnChanges {
   userProfile: any;
   @Input() type: string = '';
   @Input() item: ElementId = {} as ElementId;
-  @Input() area: string = '';
+  @Input() child: boolean = false;
   @Output() addItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
 
   @Output() editItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
@@ -50,7 +50,14 @@ export class ProfiledetailsComponent implements OnInit, OnChanges {
   }
 
   EditProfile(profile: ElementId){
-    //profile.type = "editProfile";
+    profile.dateBirth = profile.dateBirth === undefined ?"19/02/1991":profile.dateBirth;
+    profile.pais = profile.pais === undefined ?"":profile.pais;
+    profile.genero = profile.genero === undefined ?"":profile.genero;
+    profile.facebook = profile.facebook === undefined ?"":profile.facebook;
+    profile.linkedin = profile.linkedin === undefined ?"":profile.linkedin;
+    profile.twitter = profile.twitter === undefined ?"":profile.twitter;
+    profile.github = profile.github === undefined ?"":profile.github;
+
     this.editItem.emit(profile);
   }
   insertImage(profile: ElementId){

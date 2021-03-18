@@ -22,7 +22,7 @@ export class ProfileventosComponent implements OnInit, OnChanges {
   errormsg = '';
   @Input() user: ElementId = {} as ElementId;
   @Input() item: ElementId = {} as ElementId;
-  @Input() area = '';
+  @Input() child:boolean = false;
   @Output() addItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   @Output() editItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   @Output() uploadImage: EventEmitter<ElementId> = new EventEmitter<ElementId>();
@@ -31,7 +31,6 @@ export class ProfileventosComponent implements OnInit, OnChanges {
   constructor(private fsService: FirestoreService) {
     this.fsService.getCollection('talleres').subscribe((data) => {
       this.talleres = data as ElementId [];
-      //console.log("TALLERES: "+JSON.stringify(this.talleres))
     });
   }
   ngOnChanges(changes: SimpleChanges): void {
@@ -48,7 +47,7 @@ export class ProfileventosComponent implements OnInit, OnChanges {
 
     var newEvent: ElementId = {
       uid: event.id!,
-      title: event.title,
+      name: event.name,
       description: event.description,
       url: `talleres/${event.id}`,
     };

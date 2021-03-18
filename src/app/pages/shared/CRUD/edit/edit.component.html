@@ -27,7 +27,7 @@
 <div *ngIf="forma.value.displayName | json" class="form-group row">
   <div class="input-group mb-3">
     <div class="input-group-prepend">
-      <span class="input-group-text">Usuario</span>
+      <span class="input-group-text">*Usuario</span>
     </div>
     <input class="form-control" type="text" placeholder="Usuario" formControlName="displayName"
       [class.is-invalid]="displayNameNoValido">
@@ -89,7 +89,7 @@
 <div *ngIf="forma.value.email | json" class="form-group row">
   <div class="input-group mb-3">
     <div class="input-group-prepend">
-      <span class="input-group-text">Email</span>
+      <span class="input-group-text">*Email</span>
     </div>
     <input class="form-control" type="text" placeholder="Email" formControlName="email"
       [class.is-invalid]="correoNoValido">
@@ -133,14 +133,62 @@
         </div>
       </div>
 
+      <div *ngIf="forma.value.genero | json" class="form-group row">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Género</span>
+          </div>
+          <input class="form-control" type="text" placeholder="Género" formControlName="genero">
+        </div>
+      </div>
 
+      <div *ngIf="forma.value.dateBirth | json" class="form-group row">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Cumpleaños</span>
+          </div>
+          <input class="form-control" type="text" placeholder="Fecha Nacimiento" formControlName="dateBirth">
+        </div>
+      </div>
+      <div *ngIf="forma.value.facebook | json" class="form-group row">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Facebook</span>
+          </div>
+          <input class="form-control" type="text" placeholder="Facebook" formControlName="facebook">
+        </div>
+      </div>
+      <div *ngIf="forma.value.twitter | json" class="form-group row">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Twitter</span>
+          </div>
+          <input class="form-control" type="text" placeholder="Twitter" formControlName="twitter">
+        </div>
+      </div>
+      <div *ngIf="forma.value.linkedin | json" class="form-group row">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Linkedin</span>
+          </div>
+          <input class="form-control" type="text" placeholder="Linkedin" formControlName="linkedin">
+        </div>
+      </div>
+      <div *ngIf="forma.value.github | json" class="form-group row">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">GitHub</span>
+          </div>
+          <input class="form-control" type="text" placeholder="GitHub" formControlName="github">
+        </div>
+      </div>
 
  
   
   <div class="form-group row">
     
     <div class="input-group col">
-      <button type="submit" class="btn btn-outline-primary btn-block">
+      <button type="submit" class="btn btn-primary btn-block">
         Guardar
       </button>
     </div>

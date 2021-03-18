@@ -10,7 +10,7 @@ export class ModalComponent implements OnInit, OnChanges {
 
   @Input() type: string = "";
   @Input() item: ElementId = {} as ElementId;
-  @Input() newitem: string = {} as string;
+  @Input() newitem: string = "";
   @Input() area: string = "";
   @Input() isEditing = false;
   @Input() isNewItem = false;
