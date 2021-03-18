@@ -1,4 +1,42 @@
-<h2>Insignias:</h2>
+
+<!-- <center><h2>Insignias:</h2></center> -->
+<section class="pt-0">
+  <div class="container">
+    <div class="row centrar">
+      <label class="col-sm-12 col-form-label text-center">
+        <h5 class="">Insignias</h5>
+      </label>
+      <div class="col-lg-2 card" *ngFor="let insignia of insignias" style="margin-left: 1vw;">
+        
+        <div class="form-group row" >
+          <div class="col-sm-12 col-form-label" style="text-align: center;">
+            <img [src]="insignia.image || 'assets/img/insignia1.jpg'" width="130vw" height="130vh" class="perfil-redondo">
+          </div>
+          <label class="col-sm-12 col-form-label" style="text-align: center;">
+            <h6 class="">{{ insignia.name | titlecase }}</h6>
+          </label>
+          <label class="col-sm-12 col-form-label" style="text-align: justify;">
+            {{ insignia.description }}
+          </label>
+          <div class="col-sm-12 col-form-label" style="text-align: justify; font-size: small;">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.
+          </div> 
+        </div>
+        <div class="card-footer text-muted row">
+          <div class="col-lg-12 col-md-12 text-center">
+            
+          </div>
+        </div>
+
+
+      </div>
+    
+    
+    </div>
+  </div>
+</section>
+
+<!-- <h2>Insignias:</h2>
 <div class="form-inline">
   <div class="card" style="width: 18rem" *ngFor="let insignia of insignias">
     <img
@@ -20,9 +58,7 @@
           <p class="badge badge-danger">No obtenida</p>
         </ng-template>
       </ng-container>
-      <!-- <div class="col-12 m-t-10">
-        <button class="btn btn-primary btn-block">La quiero</button>
-      </div> -->
+     
     </div>
   </div>
-</div>
+</div> -->

@@ -1,0 +1,8 @@
+.perfil-redondo {
+    border-radius: 100%;
+    object-fit: cover;
+  }
+
+  .centrar {
+    justify-content:center
+  }

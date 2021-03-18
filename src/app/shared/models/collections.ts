@@ -27,3 +27,9 @@ export interface Categoria {
   id: string;
   name: string;
 }
+
+export interface Sponsor {
+  id: string;
+  name: string;
+  foto: string;
+}

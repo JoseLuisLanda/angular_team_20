@@ -1,21 +1,21 @@
 <div class="limiter animated fadeInDown">
   <div class="container-login100">
-    <div style="padding-left: 20px;padding-right: 20px;" class="wrap-login100 p-t-50 p-b-90">
+    <div style="padding-left: 20px;padding-right: 20px; padding: 1vw;" class="wrap-login100">
       <form (ngSubmit)="onSubmit( f )" #f="ngForm" class="login100-form validate-form flex-sb flex-w">
-        <span class="login100-form-title p-b-51">
+        <span class="login100-form-title p-b-20">
             Crear nueva cuenta
         </span>
         <span *ngIf="f.submitted && f.controls['displayName'].errors" class="text-danger animated fadeIn">
           El nombre es obligatorio, al menos 5 caracteres.
         </span>
-        <div class="wrap-input100 m-b-16">
+        <div class="wrap-input100 m-b-10">
           <input [(ngModel)]="user.displayName" required minlength="5" name="displayName" class="input100" type="text" placeholder="Nick">
           <span class="focus-input100"></span>
         </div>
         <span *ngIf="f.submitted && f.controls['email'].errors" class="text-danger animated fadeIn">
           Un correo válido es obligatorio.
         </span>
-        <div class="wrap-input100 m-b-16">
+        <div class="wrap-input100 m-b-10">
           <input [(ngModel)]="user.email" name="email" maxlength="30" type="email" required class="input100" name="email" placeholder="Correo electrónico" email>
           <span class="focus-input100"></span>
         </div>
@@ -25,12 +25,12 @@
         <span *ngIf="f.submitted && user.password !== passwordConfirm" class="text-danger animated fadeIn">
           La contraseñas no coinciden
         </span>
-        <div class="wrap-input100 m-b-16" data-validate="Password is required">
+        <div class="wrap-input100 m-b-10" data-validate="Password is required">
           <input [(ngModel)]="user.password" required minlength="6" class="input100" type="password" name="pass" placeholder="Contraseña">
           <span class="focus-input100"></span>
         </div>
 
-        <div class="wrap-input100 m-b-16" data-validate="Password is required">
+        <div class="wrap-input100 m-b-10" data-validate="Password is required">
           <input
             [(ngModel)]="passwordConfirm"
             required
@@ -43,13 +43,13 @@
           <span class="focus-input100"></span>
         </div>
 
-        <div class="container-login100-form-btn m-t-17">
+        <div class="container-login100-form-btn m-t-10">
           <button class="login100-form-btn" type="submit">
             Crear cuenta
           </button>
         </div>
 
-        <div class="container-login100-form-btn m-t-17">
+        <div class="container-login100-form-btn m-t-15" style="text-align: justify;">
           <p>
             Al registrarte aceptas nuestra política de
             <a routerLink="/terms" class="txt1">

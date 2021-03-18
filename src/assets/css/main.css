@@ -9,7 +9,7 @@
   
   /*//////////////////////////////////////////////////////////////////
   [ RESTYLE TAG ]*/
-  
+  /*
   * {
       margin: 0px; 
       padding: 0px; 
@@ -21,7 +21,7 @@
       font-family: Ubuntu-Regular, sans-serif;
   }
   
-  /*---------------------------------------------*/
+  
   a {
       font-family: Ubuntu-Regular;
       font-size: 14px;
@@ -42,7 +42,7 @@
       text-decoration: none;
     color: #403866;
   }
-  
+  */
   /*---------------------------------------------*/
   h1,h2,h3,h4,h5,h6 {
       margin: 0px;
