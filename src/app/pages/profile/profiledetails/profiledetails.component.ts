@@ -19,6 +19,7 @@ import {
 } from '@angular/fire/firestore';
 import { AfsService } from 'src/app/core/services/afs.service';
 import { ElementId } from 'src/app/shared/models/element';
+import { Taller } from 'src/app/shared/models/collections';
 
 type DocPredicate<T> = string | AngularFirestoreDocument<T>;
 type CollectionPredicate<T> = string | AngularFirestoreCollection<T>;
@@ -36,10 +37,15 @@ export class ProfiledetailsComponent implements OnInit, OnChanges {
   @Output() addItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
 
   @Output() editItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
-  @Output() uploadImage: EventEmitter<ElementId> = new EventEmitter<ElementId>();
-  
-  constructor(private auth: AuthService, private dbservice: FirestoreService, 
-    private fsService: AngularFirestore, private afsService : AfsService) { }
+  @Output()
+  uploadImage: EventEmitter<ElementId> = new EventEmitter<ElementId>();
+
+  constructor(
+    private auth: AuthService,
+    private dbservice: FirestoreService,
+    private fsService: AngularFirestore,
+    private afsService: AfsService
+  ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     this.userProfile = this.item;
@@ -49,13 +55,11 @@ export class ProfiledetailsComponent implements OnInit, OnChanges {
     this.userProfile = this.item;
   }
 
-  EditProfile(profile: ElementId){
+  EditProfile(profile: ElementId) {
     //profile.type = "editProfile";
     this.editItem.emit(profile);
   }
-  insertImage(profile: ElementId){
+  insertImage(profile: ElementId) {
     this.uploadImage.emit(profile);
   }
-  
-
 }

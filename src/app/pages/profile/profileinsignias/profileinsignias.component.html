@@ -1,64 +1,48 @@
-
-<!-- <center><h2>Insignias:</h2></center> -->
-<section class="pt-0">
-  <div class="container">
-    <div class="row centrar">
-      <label class="col-sm-12 col-form-label text-center">
-        <h5 class="">Insignias</h5>
-      </label>
-      <div class="col-lg-2 card" *ngFor="let insignia of insignias" style="margin-left: 1vw;">
-        
-        <div class="form-group row" >
-          <div class="col-sm-12 col-form-label" style="text-align: center;">
-            <img [src]="insignia.image || 'assets/img/insignia1.jpg'" width="130vw" height="130vh" class="perfil-redondo">
+<h2 *ngIf="!onlyIcon">Insignias:</h2>
+<div class="row">
+  <ng-container *ngIf="onlyIcon ? countMyInsignias() > 0 : true; else notFound">
+    <ng-container *ngIf="!onlyIcon">
+      <div class="col-6 col-md-4 col-lg-3" *ngFor="let insignia of insignias">
+        <div class="card">
+          <img
+            [src]="insignia.image || 'assets/img/insignia1.jpg'"
+            class="card-img-top"
+          />
+          <div class="card-body" *ngIf="!onlyIcon">
+            <h5 class="card-title">{{ insignia.name | titlecase }}</h5>
+            <p class="card-text">{{ insignia.description }}</p>
+            <p>
+              <a>Màs info</a>
+            </p>
+            <ng-container>
+              <p class="badge badge-primary" *ngIf="isMine(insignia); else e">
+                Obtenida
+              </p>
+              <ng-template #e>
+                <p class="badge badge-danger">No obtenida</p>
+              </ng-template>
+            </ng-container>
+            <!-- <div class="col-12 m-t-10">
+              <button class="btn btn-primary btn-block">La quiero</button>
+            </div> -->
           </div>
-          <label class="col-sm-12 col-form-label" style="text-align: center;">
-            <h6 class="">{{ insignia.name | titlecase }}</h6>
-          </label>
-          <label class="col-sm-12 col-form-label" style="text-align: justify;">
-            {{ insignia.description }}
-          </label>
-          <div class="col-sm-12 col-form-label" style="text-align: justify; font-size: small;">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.
-          </div> 
         </div>
-        <div class="card-footer text-muted row">
-          <div class="col-lg-12 col-md-12 text-center">
-            
-          </div>
-        </div>
-
-
       </div>
-    
-    
-    </div>
-  </div>
-</section>
-
-<!-- <h2>Insignias:</h2>
-<div class="form-inline">
-  <div class="card" style="width: 18rem" *ngFor="let insignia of insignias">
-    <img
-      [src]="insignia.image || 'assets/img/insignia1.jpg'"
-      class="card-img-top"
-      alt="image"
-    />
-    <div class="card-body">
-      <h5 class="card-title">{{ insignia.name | titlecase }}</h5>
-      <p class="card-text">{{ insignia.description }}</p>
-      <p>
-        <a>Màs info</a>
-      </p>
-      <ng-container>
-        <p class="badge badge-primary" *ngIf="isMine(insignia); else e">
-          Obtenida
-        </p>
-        <ng-template #e>
-          <p class="badge badge-danger">No obtenida</p>
-        </ng-template>
+    </ng-container>
+    <ng-container *ngIf="onlyIcon">
+      <ng-container *ngFor="let insignia of insignias">
+        <div class="col-2" *ngIf="isMine(insignia)">
+          <div class="div-image">
+            <img
+              [src]="insignia.image || 'assets/img/insignia1.jpg'"
+              class="card-img-top"
+            />
+          </div>
+        </div>
       </ng-container>
-     
-    </div>
-  </div>
-</div> -->
+    </ng-container>
+  </ng-container>
+  <ng-template #notFound>
+    <p>No tienes ninguna insignia, ve al módulo insignias para ver como</p>
+  </ng-template>
+</div>
