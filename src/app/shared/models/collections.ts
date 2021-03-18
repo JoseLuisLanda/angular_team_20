@@ -4,6 +4,16 @@ export interface Comunidad {
   uid: string;
   link: string;
   image: string;
+  users: string[];
+  images: Image[];
+  lenguaje: string;
+  description: string;
+}
+export interface Image {
+  id: string;
+  name: string;
+  uid: string;
+  url: string;
 }
 export interface Taller {
   uid: string;
@@ -11,10 +21,16 @@ export interface Taller {
   autor: string;
   autorLink: string;
   description: string;
+  image?: string;
   link: string;
   title: string;
   categoria: string;
   date: firebase.default.firestore.Timestamp;
+  asistentes: Asistente[];
+}
+export interface Asistente {
+  id: string;
+  status: boolean;
 }
 export interface Insignia {
   id: string;
