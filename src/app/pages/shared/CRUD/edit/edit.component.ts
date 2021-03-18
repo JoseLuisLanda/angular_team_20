@@ -53,15 +53,25 @@ export class EditComponent implements OnInit, OnChanges {
        }
        this.formElement.id = id;
     }
-    else
-    this.formElement = this.item;
-    //console.log("form: "+JSON.stringify(this.formElement))
+    else{
+      console.log("itemTemplate: "+this.newitem)
+      this.formElement = this.item;
+    }
+    
+    console.log("form datebirth: "+JSON.stringify(this.formElement.dateBirth))
     this.forma = this.fb.group(this.formElement);
     //ading default fields to form name and description
     this.formElement.name !== undefined ? this.addTextInput('name', this.formElement.name != null ? this.formElement.name : "") : null;
     this.formElement.owner !== undefined ? this.addTextInput('owner', this.formElement.owner != null ? this.formElement.owner : "") : null;
     this.formElement.autor !== undefined ? this.addTextInput('autor', this.formElement.autor != null ? this.formElement.autor : "") : null;
     this.formElement.link !== undefined ? this.addTextInput('link', this.formElement.link != null ? this.formElement.link : "") : null;
+    this.formElement.pais !== undefined ? this.addTextInputOp('pais', this.formElement.pais != null ? this.formElement.pais : "") : null;
+    this.formElement.genero !== undefined ? this.addTextInputOp('genero', this.formElement.genero != null ? this.formElement.genero : "") : null;
+    this.formElement.dateBirth !== undefined ? this.addTextInputOp('dateBirth', this.formElement.dateBirth != null ? this.formElement.dateBirth : "") : null;
+    this.formElement.facebook !== undefined ? this.addTextInputOp('facebook', this.formElement.facebook != null ? this.formElement.facebook : "") : null;
+    this.formElement.linkedin !== undefined ? this.addTextInputOp('linkedin', this.formElement.linkedin != null ? this.formElement.linkedin : "") : null;
+    this.formElement.twitter !== undefined ? this.addTextInputOp('twitter', this.formElement.twitter != null ? this.formElement.twitter : "") : null;
+    this.formElement.github !== undefined ? this.addTextInputOp('github', this.formElement.github != null ? this.formElement.github : "") : null;
     this.formElement.description !== undefined ? this.addTextInput('description',
       this.formElement.description != null ? this.formElement.description : "") : null;
    // this.item.status !== undefined ? this.agregarStatus() : null;
@@ -74,6 +84,9 @@ export class EditComponent implements OnInit, OnChanges {
   
   addTextInput(field: string, value: string) {
     this.forma.setControl(field, this.fb.control(value, [Validators.required, Validators.minLength(5)]));
+  }
+  addTextInputOp(field: string, value: string) {
+    this.forma.setControl(field, this.fb.control(value));
   }
   addNumberInput(field: string, value: number) {
     this.forma.setControl(field, this.fb.control(value, [Validators.required, Validators.min(0), Validators.max(1000000000000000)]));
@@ -120,9 +133,9 @@ export class EditComponent implements OnInit, OnChanges {
   }
 
   guardar() {
-    //console.log(this.forma);
+    console.log(this.forma);
     if (this.forma.invalid) {
-      //console.log( "invalid form" );
+      console.log( "invalid form" );
       return Object.values(this.forma.controls).forEach(control => {
 
         if (control instanceof FormGroup) {
@@ -133,6 +146,7 @@ export class EditComponent implements OnInit, OnChanges {
       });
 
     }
+    
     //this.item = this.forma.value;
     if(this.forma.get('email')?.value !== undefined)
        this.formElement.email = this.forma.get('email')?.value;
@@ -142,14 +156,28 @@ export class EditComponent implements OnInit, OnChanges {
        this.formElement.description = this.forma.get('description')?.value;
     if(this.forma.get('title')?.value !== undefined)  
        this.formElement.title = this.forma.get('title')?.value;
-       if(this.forma.get('autor')?.value !== undefined)
+    if(this.forma.get('autor')?.value !== undefined)
        this.formElement.autor = this.forma.get('autor')?.value;
     if(this.forma.get('name')?.value !== undefined)   
        this.formElement.name = this.forma.get('name')?.value;
     if(this.forma.get('owner')?.value !== undefined)  
        this.formElement.owner = this.forma.get('owner')?.value;
-       if(this.forma.get('link')?.value !== undefined)  
+    if(this.forma.get('link')?.value !== undefined)  
        this.formElement.link = this.forma.get('link')?.value;
+    if(this.forma.get('pais')?.value !== undefined)  
+       this.formElement.pais = this.forma.get('pais')?.value;
+    if(this.forma.get('genero')?.value !== undefined)
+       this.formElement.genero = this.forma.get('genero')?.value;
+    if(this.forma.get('linkedin')?.value !== undefined)   
+       this.formElement.linkedin = this.forma.get('linkedin')?.value;
+    if(this.forma.get('facebook')?.value !== undefined)  
+       this.formElement.facebook = this.forma.get('facebook')?.value;
+    if(this.forma.get('github')?.value !== undefined)  
+       this.formElement.github = this.forma.get('github')?.value;
+    if(this.forma.get('twitter')?.value !== undefined)  
+       this.formElement.twitter = this.forma.get('twitter')?.value;
+    if(this.forma.get('dateBirth')?.value !== undefined)  
+       this.formElement.dateBirth = this.forma.get('dateBirth')?.value;
 
       this.afsService.set(this.formElement.url!,this.formElement).then(res =>{
         console.log("EDITADO: ",JSON.stringify(res))

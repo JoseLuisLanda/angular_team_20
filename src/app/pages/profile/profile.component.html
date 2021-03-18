@@ -28,7 +28,7 @@
   
         <div class="tab-pane fade" id="insignias" role="tabpanel" aria-labelledby="list-profile-list">
           <div>
-            <app-profileinsignias ></app-profileinsignias>
+            <app-profileinsignias [item] = "userProfile"></app-profileinsignias>
             
           </div>
            </div>
@@ -55,10 +55,10 @@
 <ng-template #login>
   <a class="nav-link" routerLink="/login">Login</a>
 </ng-template>
-
-<div>
-  <button  data-toggle="modal"
-  data-target="#exampleModal" id="showModal"></button>
+<button  data-toggle="modal"
+data-target=".bd-example-modal-lg" id="showModal"></button>
+<div class="main">
+  
   <app-modal [singleUpload] = "singleUpload" [userProfile] = "userProfile" [area]="caller" [isEditing]="isEditing" [isNewItem]="isNewItem" [uploadImage]="uploadImage"  [item]="templateElement" [newitem]="itemTemplate" (addItem)="insertItem($event)" [type]="modalCaller"></app-modal>
 </div>
 

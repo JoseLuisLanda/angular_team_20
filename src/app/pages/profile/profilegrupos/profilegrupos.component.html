@@ -1,10 +1,8 @@
-<button
-  *ngIf="currentUser.type === 'admin'"
-  class="btn btn-success"
-  (click)="newEvent()"
->
-  Nuevo
-</button>
+<div class="row">
+  <div class="col-12">
+    <button *ngIf="currentUser.type === 'admin'" class="btn btn-primary col-4 float-right" (click)="newEvent()">Nuevo</button>
+  </div>
+</div>
 <div class="row">
   <div class="col-12 col-md-3">
     <h3>Mis Grupos:</h3>

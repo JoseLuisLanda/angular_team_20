@@ -24,6 +24,14 @@ export interface Elemento {
     talleres?: ElementId[];
     images?: ElementId[];
     item?: ElementId;
+    dateBirth?: string;
+    pais?: string;
+    genero?: string;
+    facebook?:string;
+    linkedin?: string;
+    twitter?: string;
+    github?: string;
+    date?: Date;
 }
 
 export interface ElementId extends Elemento { uid: string; }
