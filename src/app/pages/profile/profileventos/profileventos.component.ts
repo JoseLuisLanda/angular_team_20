@@ -11,6 +11,9 @@ import { FirestoreService } from 'src/app/core/services/firebase.service';
 import { Taller } from 'src/app/shared/models/collections';
 import { ElementId } from 'src/app/shared/models/element';
 import Swal from 'sweetalert2';
+import { Insignia } from '../../../shared/models/collections';
+import { AuthService } from '../../../core/services/auth.service';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-profileventos',
@@ -21,21 +24,39 @@ export class ProfileventosComponent implements OnInit, OnChanges {
   talleres: Taller[] = [];
   currentUser: ElementId = {} as ElementId;
   errormsg = '';
-  @Input() user: ElementId = {} as ElementId;
+  myTalleres = 0;
+  @Input() user: any = {};
   @Input() item: ElementId = {} as ElementId;
+  @Input() onlyIcon = false;
   @Input() area = '';
   @Output() addItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   @Output() editItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
-  @Output() uploadImage: EventEmitter<ElementId> = new EventEmitter<ElementId>();
-  @Output() removeImage: EventEmitter<ElementId> = new EventEmitter<ElementId>();
-  constructor(private fsService: FirestoreService) {
-    this.fsService.getCollection('talleres').subscribe((data) => {
-      this.talleres = data as ElementId [];
-      //console.log("TALLERES: "+JSON.stringify(this.talleres))
+  @Output()
+  uploadImage: EventEmitter<ElementId> = new EventEmitter<ElementId>();
+  @Output()
+  removeImage: EventEmitter<ElementId> = new EventEmitter<ElementId>();
+  constructor(private fsService: FirestoreService, private auth: AuthService) {
+    this.fsService.getCollection('talleres', 10).subscribe((data) => {
+      this.talleres = data as any[];
+      this.countMyEvents();
+    });
+    this.auth.afAuth.user.subscribe((v) => {
+      if (v) {
+        console.log('User', v);
+        this.user = v;
+        this.currentUser = this.user;
+        console.log(this.countMyEvents());
+      }
     });
   }
   ngOnChanges(changes: SimpleChanges): void {
-    this.currentUser = this.user;
+    // this.currentUser = this.user;
+    this.countMyEvents();
+  }
+  countMyEvents(): number {
+    const d = this.talleres.filter((v) => this.isMyEvent(v)).length;
+    this.myTalleres = d;
+    return d;
   }
   ngOnInit(): void {
     this.currentUser = this.user;
@@ -73,7 +94,23 @@ export class ProfileventosComponent implements OnInit, OnChanges {
         }
         if (!this.isMyEvent(event)) {
           event.asistentes.push({ id: this.currentUser.uid, status: true });
+          console.log(event);
           this.fsService.updateDoc('talleres', event.id, event);
+          this.fsService
+            .getDoc('insignias', 'TaOJdHwQdbFBtqYzg2xz')
+            .subscribe((insignia: Insignia) => {
+              const f = insignia.owners.find(
+                (id) => id === this.currentUser.uid
+              );
+              if (!f) {
+                insignia.owners.push(this.currentUser.uid);
+                this.fsService.updateDoc(
+                  'insignias',
+                  'TaOJdHwQdbFBtqYzg2xz',
+                  insignia
+                );
+              }
+            });
         }
       }
     });
@@ -141,11 +178,11 @@ export class ProfileventosComponent implements OnInit, OnChanges {
     // event.url = `talleres/${event.id}`;
     // this.editItem.emit(event);
   }
-  insertImage(event: ElementId){
+  insertImage(event: ElementId) {
     event.url = `talleres/${event.id}`;
     this.uploadImage.emit(event);
   }
-  deleteImage(event: ElementId, image: ElementId){
+  deleteImage(event: ElementId, image: ElementId) {
     //event.url = `comunidades/${event.id}`;
     event.item = image;
     this.removeImage.emit(event);

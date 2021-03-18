@@ -21,6 +21,7 @@ export interface Taller {
   autor: string;
   autorLink: string;
   description: string;
+  image?: string;
   link: string;
   title: string;
   categoria: string;

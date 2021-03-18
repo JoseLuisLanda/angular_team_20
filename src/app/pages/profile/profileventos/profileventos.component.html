@@ -1,10 +1,10 @@
-<div class="row">
+{{ myTalleres }}
+<div class="row" *ngIf="!onlyIcon">
   <div class="col-12 col-md-3">
     <h3>Mis Eventos:</h3>
 
     <ng-container *ngFor="let taller of talleres">
       <div class="card" *ngIf="isMyEvent(taller)">
-
         <div class="card-body">
           <h5 class="card-title">{{ taller.title }}</h5>
           <p class="card-text">{{ taller.description }}</p>
@@ -29,7 +29,7 @@
       <div class="col-sm-6 col-md-4" *ngFor="let taller of talleres">
         <div class="card">
           <img
-            src="assets/img/comunidad.png"
+            [src]="taller.image || 'assets/img/comunidad.png'"
             class="card-img-top"
             alt="image"
           />
@@ -53,34 +53,48 @@
               >
                 Asistiré
               </button>
-              <button
+              <!-- <button
                 (click)="EditEvent(taller)"
                 class="btn btn-success btn-block"
               >
                 Editar
-              </button>
+              </button> -->
             </div>
-
           </div>
           <ng-template #imgDefault>
-            <img src='assets/img/comunidad.png' class="card-img-top" alt="image">
+            <img
+              src="assets/img/comunidad.png"
+              class="card-img-top"
+              alt="image"
+            />
           </ng-template>
-           
-       
-            
-            <div class="card-body">
-              <h5 class="card-title">{{taller.title}}</h5>
-              <p class="card-text">{{taller.description}}</p>
-              <a href="#">Màs info</a>
-              <div class="col-12 m-t-10">
-                <button (click)="AddEvent(taller)" class="btn btn-warning btn-block">Asistir</button>
-                <button (click)="EditEvent(taller)" class="btn btn-success btn-block">Editar</button>
-              </div>
-              
-            </div>
         </div>
+      </div>
     </div>
   </div>
 </div>
-
-
+<div class="row" *ngIf="onlyIcon">
+  <ng-container *ngIf="myTalleres > 0; else notFound">
+    <ng-container *ngFor="let taller of talleres">
+      <div
+        class="div-whit-image justify-content-center d-flex align-items-end"
+        [ngStyle]="{
+          'background-image':
+            'url(' + (taller.image || 'assets/img/comunidad.png') + ')'
+        }"
+      >
+        <h2 class="text-center">{{ taller.title }}</h2>
+      </div>
+      <div class="card" *ngIf="isMyEvent(taller)">
+        <!-- <img
+          [src]="taller.image || 'assets/img/comunidad.png'"
+          class="card-img-top"
+          alt="image"
+        /> -->
+      </div>
+    </ng-container>
+  </ng-container>
+  <ng-template #notFound>
+    <pre class="ml-2">No estás apuntado a ningún evento</pre>
+  </ng-template>
+</div>

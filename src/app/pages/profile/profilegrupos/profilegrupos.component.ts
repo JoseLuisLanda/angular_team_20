@@ -153,7 +153,7 @@ export class ProfilegruposComponent implements OnInit, OnChanges {
     return i;
   }
   filterByName(name: string) {
-    if (this.filterName === '') {
+    if (this.filterName.trim() === '') {
       return true;
     }
     if (name.indexOf(this.filterName) !== -1) {

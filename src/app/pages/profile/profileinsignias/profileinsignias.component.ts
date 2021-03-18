@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FirestoreService } from 'src/app/core/services/firebase.service';
 import { Insignia } from '../../../shared/models/collections';
 import { UserModel } from '../../../shared/models/user.model';
@@ -10,8 +10,9 @@ import { AuthService } from '../../../core/services/auth.service';
   styleUrls: ['./profileinsignias.component.css'],
 })
 export class ProfileinsigniasComponent implements OnInit {
-  insignias!: Insignia[];
+  insignias: Insignia[] = [];
   user!: UserModel;
+  @Input() onlyIcon = false;
   constructor(private fsService: FirestoreService, private auth: AuthService) {
     this.auth.afAuth.user.subscribe((v: any) => {
       this.user = v;
@@ -22,6 +23,9 @@ export class ProfileinsigniasComponent implements OnInit {
   }
   isMine(i: Insignia): boolean {
     return i.owners.find((v) => v === this.user.uid) ? true : false;
+  }
+  countMyInsignias(): number {
+    return this.insignias.filter((v) => this.isMine(v)).length;
   }
   ngOnInit(): void {}
 }

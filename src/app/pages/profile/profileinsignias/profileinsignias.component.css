@@ -1,0 +1,7 @@
+.div-image {
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}

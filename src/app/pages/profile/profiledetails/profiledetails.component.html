@@ -1,19 +1,51 @@
-<div class="jumbotron">
-  <div class="card" style="width: 18rem; ">
-    <button (click)="insertImage(userProfile)" class="btn btn-warning btn-block">Cambiar</button>
-    <img *ngIf="userProfile?.images && userProfile?.images[0]" style="max-height: 150px;" alt="image" [src]="userProfile?.images[0].url" class=" card-img-top rounded mx-auto d-block"/>
-    <div class="card-body">
-      <a class="nav-link">Nick: {{ userProfile?.displayName }}</a>
-      <a class="nav-link">Verified: {{ userProfile?.emailVerified }}</a>
-      <a class="nav-link">Provider: {{ user?.providerData[0]?.providerId }}</a>
-      <div class="col-12 m-t-10">
-          <button (click)="EditProfile(userProfile)" class="btn btn-success btn-block">Editar</button>
-        </div>
-      
-      
+<div class="row">
+  <div class="col-sm-3">
+    <div class="card">
+      <button
+        (click)="insertImage(userProfile)"
+        class="btn btn-warning btn-block"
+      >
+        Cambiar
+      </button>
+      <div class="div-img">
+        <!-- *ngIf="userProfile?.images && userProfile?.images[0]" -->
+        <img
+          style="max-height: 150px"
+          alt="image"
+          [src]="userProfile.photoURL || 'assets/img/no-profile.png'"
+          class="card-img-top rounded mx-auto d-block"
+        />
+      </div>
+      <div class="card-body">
+        <p class="text-center font-weight-bolder">
+          {{ userProfile?.displayName }}
+        </p>
+        <p class="nav-link">Verified: {{ userProfile?.emailVerified }}</p>
+        <a class="nav-link"
+          >Provider: {{ user?.providerData[0]?.providerId }}</a
+        >
+      </div>
+      <button
+        (click)="EditProfile(userProfile)"
+        class="btn btn-success btn-block"
+      >
+        Editar
+      </button>
     </div>
   </div>
-  
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <p>Insignias</p>
+        <app-profileinsignias [onlyIcon]="true"></app-profileinsignias>
+      </div>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="card">
+      <div class="card-body">
+        <app-profileventos [onlyIcon]="true"></app-profileventos>
+      </div>
+    </div>
+  </div>
 </div>
-
-
