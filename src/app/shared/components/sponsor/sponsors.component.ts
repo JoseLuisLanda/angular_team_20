@@ -7,21 +7,12 @@ import { Sponsor } from '../../models/collections';
   styleUrls: ['./sponsors.component.scss'],
 })
 export class SponsorsComponent implements OnInit {
-  images = [
-    {path: 'https://assets.entrepreneur.com/images/misc/1464722957_coca_cola_logo.jpg', width:'10%'},
-    {path: 'https://assets.entrepreneur.com/images/misc/1464722957_coca_cola_logo.jpg', width:'10%'},
-    {path: 'https://assets.entrepreneur.com/images/misc/1464722957_coca_cola_logo.jpg', width:'10%'},
-    {path: 'https://assets.entrepreneur.com/images/misc/1464722957_coca_cola_logo.jpg', width:'10%'},
-    {path: 'https://assets.entrepreneur.com/images/misc/1464722957_coca_cola_logo.jpg', width:'10%'},
-    {path: 'https://assets.entrepreneur.com/images/misc/1464722957_coca_cola_logo.jpg', width:'10%'},
-    {path: 'https://assets.entrepreneur.com/images/misc/1464722957_coca_cola_logo.jpg', width:'10%'}
-]
+  images: any = [];
 
   sponsors: Sponsor[] = [];
   constructor(private fsService: FirestoreService) {
     this.fsService.getCollection('sponsors').subscribe((data) => {
-      this.sponsors = data;
-      console.log(this.sponsors)
+      this.images = data;
     });
   }
 
