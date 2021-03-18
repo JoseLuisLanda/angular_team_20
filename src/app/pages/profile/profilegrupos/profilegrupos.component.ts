@@ -39,7 +39,7 @@ export class ProfilegruposComponent implements OnInit, OnChanges {
           
       var newEvent:ElementId = {
       uid : event.id!,
-      title : event.title,
+      name : event.name,
       description : event.description,
       url: `comunidades/${event.id}`
       };
@@ -51,7 +51,7 @@ export class ProfilegruposComponent implements OnInit, OnChanges {
       }
       else
       {
-        this.errormsg = "Ya tienes agregado este evento en tu lista.";
+        this.errormsg = "Ya tienes agregado este grupo en tu lista.";
       }
     }
   DeleteEvent(event: ElementId){

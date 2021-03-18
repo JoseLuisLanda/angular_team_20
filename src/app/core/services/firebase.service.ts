@@ -48,17 +48,24 @@ export class FirestoreService {
       .doc(uid)
       .set(data)
       .then(() => {
-        console.log('Document successfully updated!');
+        //console.log('Document successfully updated!');
       })
       .catch(function (error) {
-        console.error('Error writing document: ', error);
+        //console.error('Error writing document: ', error);
       });
   }
 
-  public getCollection(nameCollection: string, count: number = 5) {
-    this.itemsCollection = this.db.collection<any>(nameCollection, (ref) =>
-      ref.limit(count)
-    );
+  public getCollection(nameCollection: string, count: number = 5,collection:string = "",value:string = "") {
+    if(collection === "" && value === "")
+    {
+      this.itemsCollection = this.db.collection<any>(nameCollection, (ref) =>
+      ref.limit(count));
+    }else{
+      //console.log("CALLING WHERE: "+collection + value)
+      this.itemsCollection = this.db.collection<any>(nameCollection, (ref) =>
+      ref.where(collection, 'array-contains',value));
+    }
+    
     this.elementsString = '';
     this.items = this.itemsCollection.snapshotChanges().pipe(
       map((actions) =>
