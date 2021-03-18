@@ -6,3 +6,8 @@
 .btn-profile img {
   margin: 0;
 }
+
+.perfil-redondo {
+  border-radius: 100%;
+  object-fit: cover;
+}

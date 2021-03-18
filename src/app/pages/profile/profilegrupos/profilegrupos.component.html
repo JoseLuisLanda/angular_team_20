@@ -3,71 +3,190 @@
     <button *ngIf="currentUser.type === 'admin'" class="btn btn-primary col-4 float-right" (click)="newEvent()">Nuevo</button>
   </div>
 </div>
-
 <div class="row">
   <div class="col-12 col-md-3">
-      <h3>Mis Grupos:</h3>
-      <div *ngIf = "currentUser.grupos | json" >
-        <div class="card" style="width: 15rem;" *ngFor="let grupo of currentUser.grupos">
+    <h3>Mis Grupos:</h3>
+    <div>
+      <select
+        [value]="comunidadActiva"
+        #selector
+        [(ngModel)]="comunidadActiva"
+        class="form-control mb-3"
+        *ngIf="totalMyGrupos() > 0; else noGrupos"
+      >
+        <ng-container *ngFor="let grupo of grupos">
+          <option [value]="grupo.id" *ngIf="isMyComunidad(grupo)">
+            {{ grupo.name }}
+          </option>
+        </ng-container>
+      </select>
+      <ng-template #noGrupos>
+        <h5>No perteces a ningún grupo</h5>
+      </ng-template>
+    </div>
+    <div *ngFor="let grupo of grupos">
+      <ng-container
+        *ngIf="isMyComunidad(grupo) && grupo.id === comunidadActiva"
+      >
+        <div class="card">
           <div class="card-body">
-            <h5 class="card-title">{{grupo.title}}</h5>
-            <p class="card-text">{{grupo.description}}</p>
-            
-            <div class="col-12 m-t-10">
-              <button class="btn btn-danger text-white text-sm m-b-10" (click)="DeleteEvent(grupo)">X</button>
+            <h5 class="card-title">{{ grupo.name }}</h5>
+            <!-- <p class="card-text">{{ grupo.description }}</p> -->
+            <h6>Miembros</h6>
+            <div *ngFor="let userId of grupo.users">
+              <ng-container
+                *ngIf="isMyComunidad(grupo, userId) && getUser(userId) as u"
+              >
+                <div class="d-flex">
+                  <div class="div-img mr-2">
+                    <img [src]="u.photoURL" class="img" />
+                  </div>
+                  <span>{{ u.displayName }}</span>
+                </div>
+              </ng-container>
             </div>
-            
           </div>
-    
-        
-      </div>
-      
-  </div>
+          <div class="col-12 m-t-10">
+            <button
+              class="btn btn-danger text-white text-sm m-b-10"
+              (click)="DeleteEvent(grupo)"
+            >
+              Abandonar
+            </button>
+          </div>
+        </div>
+      </ng-container>
+    </div>
   </div>
   <div class="col-12 col-md-9">
     <h2>Grupos:</h2>
-    <p class="text-danger">{{errormsg}}</p>
-    <div class="form-inline" *ngIf = "grupos | json">
-        <div class="card" style="width: 18rem;" *ngFor="let grupo of grupos">
-          <button *ngIf="currentUser.type === 'admin'" (click)="insertImage(grupo)" class="btn btn-success btn-block">Agregar</button>
-          <div *ngIf = "grupo.images && grupo.images[0]; else imgDefault">
-
-            <!-- Carousel images-->
-            <div id="{{grupo.id}}" class="carousel slide" data-ride="carousel" data-bs-ride="carousel">
-              <div class="carousel-inner">
-                <div *ngFor="let image of grupo.images; let i = index " [ngClass]="{'carousel-item':true, 'active': i == 0}" data-bs-interval="5000">
-                  <img class="d-block w-100" style="max-height: 150px;" [src]='image.url' [alt]="i">
-                  <button *ngIf="currentUser.type === 'admin'" class="btn btn-danger btn-block" (click)="deleteImage(grupo, image)">Remove</button>
+    <div class="row">
+      <select
+        [(ngModel)]="lenguajeActivo"
+        class="form-control mr-2 mb-3 col-sm-4"
+      >
+        <option value="">Todos los lenguajes</option>
+        <option *ngFor="let lenguaje of lenguajes" [value]="lenguaje">
+          {{ lenguaje }}
+        </option>
+      </select>
+      <input
+        class="form-control col-sm-7"
+        [(ngModel)]="filterName"
+        placeholder="Busca un grupo"
+      />
+    </div>
+    <!-- <p class="text-danger">{{ errormsg }}</p> -->
+    <div class="row" *ngIf="grupos | json">
+      <ng-container *ngFor="let grupo of grupos">
+        <div
+          class="col-6 col-md-4"
+          *ngIf="
+            (lenguajeActivo === '' || grupo.lenguaje === lenguajeActivo) &&
+            (filterName === '' || filterByName(grupo.name))
+          "
+        >
+          <div class="card">
+            <button
+              *ngIf="currentUser.type === 'admin'"
+              (click)="insertImage(grupo)"
+              class="btn btn-success btn-block"
+            >
+              Agregar
+            </button>
+            <div *ngIf="grupo.images && grupo.images[0]; else imgDefault">
+              <!-- Carousel images-->
+              <div
+                id="{{ grupo.id }}"
+                class="carousel slide"
+                data-ride="carousel"
+                data-bs-ride="carousel"
+              >
+                <div class="carousel-inner">
+                  <div
+                    *ngFor="let image of grupo.images; let i = index"
+                    [ngClass]="{ 'carousel-item': true, active: i == 0 }"
+                    data-bs-interval="5000"
+                  >
+                    <img
+                      class="d-block w-100"
+                      style="max-height: 150px"
+                      [src]="image.url"
+                      [alt]="i"
+                    />
+                    <button
+                      *ngIf="currentUser.type === 'admin'"
+                      class="btn btn-danger btn-block"
+                      (click)="deleteImage(grupo, image)"
+                    >
+                      Remove
+                    </button>
+                  </div>
                 </div>
-    
+                <a
+                  *ngIf="grupo.images.length > 1"
+                  class="carousel-control-prev"
+                  href="#{{ grupo.id }}"
+                  role="button"
+                  data-slide="prev"
+                >
+                  <span
+                    class="carousel-control-prev-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a
+                  *ngIf="grupo.images.length > 1"
+                  class="carousel-control-next"
+                  href="#{{ grupo.id }}"
+                  role="button"
+                  data-slide="next"
+                >
+                  <span
+                    class="carousel-control-next-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="sr-only">Next</span>
+                </a>
               </div>
-              <a *ngIf="grupo.images.length > 1" class="carousel-control-prev" href="#{{grupo.id}}" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-              </a>
-              <a *ngIf="grupo.images.length > 1" class="carousel-control-next" href="#{{grupo.id}}"   role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-              </a>
+              <!--END CAROUSEL-->
             </div>
-            <!--END CAROUSEL-->
-          </div>
-          <ng-template #imgDefault>
-            <img src='assets/img/cominudad.jpg' class="card-img-top" style="max-height: 150px;" alt="image">
-          </ng-template>
+            <ng-template #imgDefault>
+              <img
+                src="assets/img/cominudad.jpg"
+                class="card-img-top"
+                style="max-height: 150px"
+                alt="image"
+              />
+            </ng-template>
             <div class="card-body">
-              <h5 class="card-title">{{grupo.name}}</h5>
-              <p class="card-text">{{grupo.description}}</p>
+              <h5 class="card-title">{{ grupo.name }}</h5>
+              <p class="card-text">{{ grupo.description }}</p>
               <a href="taller.url">Màs info</a>
               <div class="col-12 m-t-10">
-                <button (click)="AddEvent(grupo)" class="btn btn-warning btn-block">Unirme</button>
-                <button *ngIf="currentUser.type === 'admin'" (click)="EditEvent(grupo)" class="btn btn-success btn-block">Editar</button>
+                <button
+                  *ngIf="!isMyComunidad(grupo); else unido"
+                  (click)="addEvent(grupo)"
+                  class="btn btn-warning btn-block"
+                >
+                  Unirme
+                </button>
+                <ng-template #unido>
+                  <button class="btn btn-success btn-block">Miembro</button>
+                </ng-template>
+                <button
+                  *ngIf="currentUser.type === 'admin'"
+                  (click)="EditEvent(grupo)"
+                  class="btn btn-success btn-block"
+                >
+                  Editar
+                </button>
               </div>
-              
             </div>
           </div>
+        </div>
+      </ng-container>
     </div>
   </div>
-  
-  </div>
-
+</div>

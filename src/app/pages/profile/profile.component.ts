@@ -63,7 +63,7 @@ export class ProfileComponent implements OnInit {
     //this.userProfile = element;
     (<HTMLInputElement> document.getElementById("showModal")).click();
   }
-  newItem(element: string){
+  newItem(element: any){
     //this.itemTemplate = element;
     this.itemTemplate = element;
     this.isNewItem = true;
@@ -78,7 +78,7 @@ export class ProfileComponent implements OnInit {
     this.userProfile = element;
     this.insertarImagen(element);
   }
-  multipleUploadImg(element: ElementId){
+  multipleUploadImg(element: any){
     this.singleUpload = false;
     this.insertarImagen(element);
   }
@@ -88,7 +88,7 @@ export class ProfileComponent implements OnInit {
     this.uploadImage = true;
     (<HTMLInputElement> document.getElementById("showModal")).click();
   }
-  deleteImagen(element: ElementId){
+  deleteImagen(element: any){
     this.fileSvc.deleteFile(element);
   }
 

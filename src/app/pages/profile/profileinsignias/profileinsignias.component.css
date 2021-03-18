@@ -1,0 +1,15 @@
+.perfil-redondo {
+    border-radius: 100%;
+    object-fit: cover;
+  }
+
+  .centrar {
+    justify-content:center
+  }
+.div-image {
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}

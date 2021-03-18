@@ -1,31 +1,60 @@
-<select
-  #select
-  class="form-control"
-  placeholder="Talleres por areas de conocimiento"
-  (change)="onFilter(select.value)"
->
-  <option value="">Talleres por areas de conocimiento</option>
-  <option [value]="categoria.id" *ngFor="let categoria of categorias">
-    {{ categoria.name | titlecase }}
-  </option>
-</select>
-<div *ngFor="let taller of talleresTemp" class="my-1">
+<div style="background: rgb(236, 236, 236);">
+<div class="form-group row" style="margin-right: 0.3vh; margin-left: 0.3vh;">
+  <label class="col-sm-7 col-form-label">
+    <h5 class="">Talleres</h5>
+  </label>
+  <div class="col-sm-5">
+    <label class="col-sm-12 col-form-label"></label> <a href="/" style="color: cornflowerblue; font-size: small;">Ver más...</a>
+    
+  </div>
+  <div class="col-sm-12 col-form-label">
+    <select #select class="form-control" placeholder="Talleres por areas de conocimiento"
+      (change)="onFilter(select.value)">
+      <option value="">Talleres por areas de conocimiento</option>
+      <option [value]="categoria.id" *ngFor="let categoria of categorias">
+        {{ categoria.name | titlecase }}
+      </option>
+    </select>
+  </div>
+  <div class="col-sm-12 col-form-label">
+    <p style="text-align: justify; background: #726f6c; color: white;">&nbsp;&nbsp;&nbsp;Hoy</p>
+ </div>
+</div>
+
+<div  *ngFor="let taller of talleresTemp" >
+  <div class="form-group row talleres-personalizado" style="margin-right: 0.3vh; margin-left: 0.3vh;">
+    <div class="col-sm-3 col-form-label">
+      <img src="{{ 'assets/img/logo/logo.png' }}" width="40vw" height="40vh" class="perfil-redondo">
+    </div>
+    <label class="col-sm-9 col-form-label">
+      <h6 class="">{{taller.title}}</h6>
+      <!-- <label style="font-size: small;">12:00pm</label> -->
+      <small *ngIf="taller.date">{{ taller.date.toDate() | date }}</small>
+      <!-- <p><b>By</b><a href="/" style="color: cornflowerblue;">&nbsp;Juan Pablo de la Torre</a></p> -->
+      <p>
+        By
+        <a [href]="taller.autorLink">{{ taller.autor }}</a>
+      </p>
+      <hr>
+    </label>
+  </div>
+
+</div>
+</div>
+
+
+<!-- <div *ngFor="let taller of talleresTemp" class="my-1">
   <div class="form-inline aling-items-center justify-content-center">
-    <div
-      class="circulo bg-light d-flex aling-items-center justify-content-center mr-2"
-    >
-      <i *ngIf = "taller.date"
-        class="fas my-auto fa-2x"
-        [ngClass]="
+    <div class="circulo bg-light d-flex aling-items-center justify-content-center mr-2">
+      <i *ngIf="taller.date" class="fas my-auto fa-2x" [ngClass]="
           currentDate > taller.date.toMillis() ? 'fa-check' : 'fa-ellipsis-h'
-        "
-      ></i>
+        "></i>
     </div>
     {{ taller.title }}
   </div>
-  <small *ngIf = "taller.date">{{ taller.date.toDate() | date }}</small>
+  <small *ngIf="taller.date">{{ taller.date.toDate() | date }}</small>
   <p>
     By
     <a [href]="taller.autorLink">{{ taller.autor }}</a>
   </p>
-</div>
+</div> -->

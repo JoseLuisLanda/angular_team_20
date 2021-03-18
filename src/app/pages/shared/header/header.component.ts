@@ -33,6 +33,7 @@ export class HeaderComponent implements OnInit, OnChanges {
     }
   }
 
+  usuario?:boolean;
   async checkUserIsVerified() {
     const userDta = await this.authSvc.isAuthenticated();
     if (userDta && userDta.emailVerified) {
@@ -43,8 +44,10 @@ export class HeaderComponent implements OnInit, OnChanges {
       this.router.navigate(['/register']);
     }
     if(userDta?.uid !== undefined){
+      this.usuario = true;
       this.getUserProfile(userDta?.uid)
     }else{
+      this.usuario = false;
       console.log("No user"+JSON.stringify(userDta))
     }
   }

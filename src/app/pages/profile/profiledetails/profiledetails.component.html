@@ -1,3 +1,93 @@
+<section class="pt-0">
+  <div class="container">
+    <div class="row ">
+
+      <div class="col-lg-3 col-md-12 col-sm-12 order-2 order-lg-1 order-md-2 card">
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">
+            <h5 class=""></h5>
+          </label>
+          <div class="col-sm-9" style="text-align: right;">
+            <label class="col-sm-12 col-form-label"> <a href="/" style="color: cornflowerblue; font-size: small;">Editar
+                Perfil</a> </label>
+          </div>
+          <div class="div-img">
+            <!-- *ngIf="userProfile?.images && userProfile?.images[0]" -->
+            <img
+              style="max-height: 150px"
+              alt="image"
+              [src]="userProfile.photoURL || 'assets/img/no-profile.png'"
+              class="card-img-top rounded mx-auto d-block"
+            />
+          </div>
+          <label class="col-sm-12 col-form-label" style="text-align: center;">
+            <h6 class="">{{ userProfile?.displayName }}</h6>
+          </label>
+          <label class="col-sm-12 col-form-label" style="text-align: center;">
+            Fronted Developer / UI/UX
+          </label>
+          <div class="col-sm-12 col-form-label" style="text-align: justify; font-size: small;">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's.
+          </div>
+        </div>
+        <div class="card-footer text-muted row">
+          <div class="col-lg-12 col-md-12 text-center">
+            <ul class="footer-bottom-social">
+              <li><a href=""><i class="fab fa-facebook"></i></a>&nbsp;&nbsp;&nbsp;
+                <a href=""><i class="fab fa-twitter"></i></a>&nbsp;&nbsp;&nbsp;
+                <a href=""><i class="fab fa-instagram"></i></a>&nbsp;&nbsp;&nbsp;
+                <a href=""><i class="fab fa-linkedin"></i></a>&nbsp;&nbsp;&nbsp;
+              </li>
+            </ul>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="col-lg-6 col-md-12 col-sm-12 order-2 order-lg-1 order-md-2">
+
+
+
+
+        <div class="card text-center">
+          <div class="card-header">
+            <label style="text-align: left;">Insignias</label>
+            <app-profileinsignias [onlyIcon]="true"></app-profileinsignias>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title" style="text-align: left;">Actividad Reciente</h5>
+            <p class="card-text" style="text-align: justify ;">Te has unido al evento Community Fest and Code</p>
+
+          </div>
+          <div class="card-footer text-muted">
+
+          </div>
+        </div>
+
+
+
+      </div>
+      <div class="col-lg-3 col-md-12 col-sm-12 order-2 order-lg-1 order-md-2">
+        <div class="form-group row">
+          <label class="col-sm-7 col-form-label">
+            <h6 style="font-size: small;" class="">Eventos de tu interés</h6>
+          </label>
+          <div class="col-sm-5">
+            <label class="col-sm-12 col-form-label"> <a href="/" style="color: cornflowerblue; font-size: small;">Ver
+                más...</a> </label>
+          </div>
+
+
+        </div>
+        <app-profileventos [onlyIcon]="true"></app-profileventos>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <div class="jumbotron">
+  <div class="card" style="width: 18rem; ">
 <div class="main row">
 <div class="col-12 col-md-2">
   <div class="card" style="width: 12rem; ">
@@ -13,16 +103,4 @@
       
     </div>
   </div>
-  
-</div>
-<div class="col-12 col-md-8">
- <app-profileinsignias [child]="true" [item] = "userProfile"></app-profileinsignias>
-  
-</div>
-<div class="col-12 col-md-2">
-  <app-profileventos [child]="true" [user]="userProfile"></app-profileventos>
-   
- </div>
-
-
-</div>
+</div> -->
