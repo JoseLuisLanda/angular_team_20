@@ -1,3 +1,28 @@
+# Bienvenido a la propuesta oficial de la App COMFECO
+![xantolo](./images/comfeco.png)
+
+Esta solución se basa en un proyecto de Angular +11 como Front-End y Firebase services como backend. Cuenta con los servicios de Firebase hosting en un ambiente de producción https://comfecoapp.firebaseapp.com/, la información se encuentra almacenada en firestore de firebase y se utilizan 3 servicios de autenticación:
+
+Login con Firebase:
+<img src="./images/authfire.png" data-canonical-src="authfire.png" width="300" /><br/>
+Login con Facebook:
+<img src="./images/faceauth.jpeg" data-canonical-src="./images/faceauth.jpeg" width="300" /><br/>
+Login con Google/Gmail:
+<img src="./images/google.png" data-canonical-src="./images/google.png" width="300" /><br/>
+
+
+# Versión QuickApp
+Existe una versión de Huawei quickapp para la misma sin embargo aquí solo funcionara una cuenta que registres con correo electrónico, ni google auth ni facebook funcionan en la version 1.0 de esta app:
+
+<img src="./images/quick.png" data-canonical-src="quick.png" /><br/>
+
+# Algunas pantallas de la aplicación
+<img src="./images/iniciosesion.png" data-canonical-src="iniciosesion.png" /><br/>
+<img src="./images/registro.png" data-canonical-src="registro.png" /><br/>
+<img src="./images/insignias.png" data-canonical-src="insignias.png" /><br/>
+<img src="./images/insertarcomunidad.png" data-canonical-src="insertarcomunidad.png" /><br/>
+
+
 # ComfecoApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.4.
