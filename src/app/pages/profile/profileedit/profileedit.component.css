@@ -1,0 +1,42 @@
+
+.perfil-redondo {
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.perfil-personalizado {
+  max-height: calc(100vh - 150px);
+  overflow: auto;
+}
+/* Tamaño del scroll */
+.perfil-personalizado::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+/* Estilos barra (thumb) de scroll */
+.perfil-personalizado::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.perfil-personalizado::-webkit-scrollbar-thumb:active {
+  background-color: #999999;
+}
+
+.perfil-personalizado::-webkit-scrollbar-thumb:hover {
+  background: #b3b3b3;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos track de scroll */
+.perfil-personalizado::-webkit-scrollbar-track {
+  background: #e1e1e1;
+  border-radius: 4px;
+}
+
+.perfil-personalizado::-webkit-scrollbar-track:hover,
+.perfil-personalizado::-webkit-scrollbar-track:active {
+  background: #d4d4d4;
+}
+

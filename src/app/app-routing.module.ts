@@ -14,6 +14,7 @@ import { ProfiledetailsComponent } from './pages/profile/profiledetails/profiled
 import { ProfilegruposComponent } from './pages/profile/profilegrupos/profilegrupos.component';
 import { ProfileinsigniasComponent } from './pages/profile/profileinsignias/profileinsignias.component';
 import { ProfileventosComponent } from './pages/profile/profileventos/profileventos.component';
+import { ProfileeditComponent } from './pages/profile/profileedit/profileedit.component';
 
 const routes: Routes = [
  // {path:'',outlet:'sponsor', loadChildren: () => import('./pages/section/sponsor/sponsor.module').then(mod => mod.SponsorModule)},
@@ -36,6 +37,7 @@ const routes: Routes = [
     ]
   },
   {path: 'profiledetails', component: ProfiledetailsComponent},
+  {path: 'profileedit', component: ProfileeditComponent},
   {path: 'profilegrupos', component: ProfilegruposComponent},
   {path: 'profileinsignias', component: ProfileinsigniasComponent},
   {path: 'profileventos', component: ProfileventosComponent},

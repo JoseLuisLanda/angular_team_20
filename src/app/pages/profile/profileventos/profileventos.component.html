@@ -9,10 +9,7 @@
           <p class="card-text">{{ taller.description }}</p>
 
           <div class="col-12 m-t-10">
-            <button
-              class="btn btn-danger text-white text-sm m-b-10"
-              (click)="DeleteEvent(taller)"
-            >
+            <button class="btn btn-danger text-white text-sm m-b-10" (click)="DeleteEvent(taller)">
               X
             </button>
           </div>
@@ -26,29 +23,18 @@
     <div class="row">
       <div class="col-sm-6 col-md-4" *ngFor="let taller of talleres">
         <div class="card">
-          <img
-            [src]="taller.image || 'assets/img/comunidad.png'"
-            class="card-img-top"
-            alt="image"
-          />
+          <img [src]="taller.image || 'assets/img/comunidad.png'" class="card-img-top" alt="image" />
           <div class="card-body">
             <h5 class="card-title">{{ taller.title }}</h5>
             <p class="card-text">{{ taller.description }}</p>
             <small class="card-text">{{ taller.date.toDate() | date }}</small>
             <!-- <a href="#">Màs info</a> -->
             <div class="col-12 m-t-10">
-              <button
-                (click)="AddEvent(taller)"
-                *ngIf="!isMyEvent(taller)"
-                [disabled]="!canIAsist(taller)"
-                class="btn btn-warning btn-block"
-              >
+              <button (click)="AddEvent(taller)" *ngIf="!isMyEvent(taller)" [disabled]="!canIAsist(taller)"
+                class="btn btn-warning btn-block">
                 Asistir
               </button>
-              <button
-                *ngIf="isMyEvent(taller)"
-                class="btn btn-success btn-block"
-              >
+              <button *ngIf="isMyEvent(taller)" class="btn btn-success btn-block">
                 Asistiré
               </button>
               <!-- <button
@@ -60,20 +46,66 @@
             </div>
           </div>
           <ng-template #imgDefault>
-            <img
-              src="assets/img/comunidad.png"
-              class="card-img-top"
-              alt="image"
-            />
+            <img src="assets/img/comunidad.png" class="card-img-top" alt="image" />
           </ng-template>
         </div>
       </div>
     </div>
   </div>
 </div>
-<div class="row" *ngIf="onlyIcon">
-  <ng-container *ngIf="myTalleres > 0; else notFound">
-    <ng-container *ngFor="let taller of talleres">
+<div  *ngIf="onlyIcon">
+  <div *ngIf="myTalleres > 0; else notFound"  class="talleres-personalizado">
+
+    <div *ngFor="let taller of talleres" >
+      <div class="form-group row">
+        <!-- <div class="col-sm-6 col-form-label" style="text-align: center;">
+          <img [src]="'assets/img/comunidad.png' || taller.image" width="120vw" height="70vh" >
+          <div class="btn-group" style="font-size: xx-small;">
+            <button  class="btn btn-sm btn-warning">Abandonar</button><br>
+          <button  class="btn btn-sm btn-primary">Más información</button>
+          </div>
+
+        </div> -->
+        <div class="col-sm-12">
+          <div class="card">
+            <div class="card-header">
+              <img [src]="'assets/img/comunidad.png' || taller.image" width="50vw" height="50vh"
+                class="perfil-redondo">&nbsp;
+              <b>{{ taller.title }}</b>
+              <div style="font-size: x-small;">
+                <b>Descripción:</b>
+                <label>{{ taller.description }}</label>
+              </div>
+              <hr>
+            <div id='toolbar'>
+              <div class='wrapper text-center'>
+                <div class="btn-group" style="font-size: xx-small;">
+                  <button type="button" style="font-size: x-small;"
+                    class="btn btn-danger">Abandonar</button>&nbsp;&nbsp;
+                  <button type="button" style="font-size: x-small;" class="btn btn-success">Más información</button>
+                </div>
+              </div>
+            </div>
+            </div>
+            <!-- <div class="">
+              <div class="btn-group" style="text-align: center;">
+                <button class="btn btn-primary boton" type="button">Abandonar</button>
+                <button class="btn btn-success boton" type="button">Más información</button>
+              </div>
+            </div> -->
+            
+
+            
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- <ng-container *ngFor="let taller of talleres">
       <div
         class="div-whit-image justify-content-center d-flex align-items-end"
         [ngStyle]="{
@@ -84,14 +116,14 @@
         <h2 class="text-center">{{ taller.title }}</h2>
       </div>
       <div class="card" *ngIf="isMyEvent(taller)">
-        <!-- <img
+        <img
           [src]="taller.image || 'assets/img/comunidad.png'"
           class="card-img-top"
           alt="image"
-        /> -->
+        />
       </div>
-    </ng-container>
-  </ng-container>
+    </ng-container> -->
+  </div>
   <ng-template #notFound>
     <pre class="ml-2">No estás apuntado a ningún evento</pre>
   </ng-template>

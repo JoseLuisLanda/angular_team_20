@@ -2,23 +2,19 @@
   <div class="container">
     <div class="row ">
 
-      <div class="col-lg-3 col-md-12 col-sm-12 order-2 order-lg-1 order-md-2 card">
+      <div class="col-lg-3">
         <div class="form-group row">
           <label class="col-sm-3 col-form-label">
             <h5 class=""></h5>
           </label>
           <div class="col-sm-9" style="text-align: right;">
-            <label class="col-sm-12 col-form-label"> <a href="/" style="color: cornflowerblue; font-size: small;">Editar
+            <label class="col-sm-12 col-form-label"> <a routerLink="/profileedit" style="color: cornflowerblue; font-size: small;">Editar
                 Perfil</a> </label>
           </div>
           <div class="div-img">
             <!-- *ngIf="userProfile?.images && userProfile?.images[0]" -->
-            <img
-              style="max-height: 150px"
-              alt="image"
-              [src]="userProfile.photoURL || 'assets/img/no-profile.png'"
-              class="card-img-top rounded mx-auto d-block"
-            />
+            <img style="max-height: 50vh" alt="image" [src]="'assets/img/no-profile.png' || userProfile.photoURL"
+              class="card-img-top rounded mx-auto d-block" />
           </div>
           <label class="col-sm-12 col-form-label" style="text-align: center;">
             <h6 class="">{{ userProfile?.displayName }}</h6>
@@ -45,11 +41,7 @@
 
 
       </div>
-      <div class="col-lg-6 col-md-12 col-sm-12 order-2 order-lg-1 order-md-2">
-
-
-
-
+      <div class="col-lg-6">
         <div class="card text-center">
           <div class="card-header">
             <label style="text-align: left;">Insignias</label>
@@ -68,19 +60,22 @@
 
 
       </div>
-      <div class="col-lg-3 col-md-12 col-sm-12 order-2 order-lg-1 order-md-2">
+      <div class="col-lg-3">
         <div class="form-group row">
-          <label class="col-sm-7 col-form-label">
-            <h6 style="font-size: small;" class="">Eventos de tu interés</h6>
+          <label class="col-sm-7 col-form-label" style="font-size: small;">
+
+            <label>Eventos de tu interés</label>
           </label>
           <div class="col-sm-5">
-            <label class="col-sm-12 col-form-label"> <a href="/" style="color: cornflowerblue; font-size: small;">Ver
-                más...</a> </label>
+            <label class="col-sm-12 col-form-label"></label>
+            <a href="/" style="color: cornflowerblue; font-size: small;">Ver más...</a>
+          </div>
+          <div class="col-sm-12">
+            <app-profileventos [onlyIcon]="true"></app-profileventos>
           </div>
 
-
         </div>
-        <app-profileventos [onlyIcon]="true"></app-profileventos>
+
       </div>
     </div>
   </div>
