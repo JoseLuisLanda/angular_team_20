@@ -36,6 +36,7 @@ import { NewComponent } from './pages/shared/CRUD/new/new.component';
 import { ModalComponent } from './pages/shared/modal/modal.component';
 import { UploadimageComponent } from './pages/utils/uploadimage/uploadimage.component';
 import { NgDropFilesDirective } from 'src/app/core/directives/ng-drop-files.directive';
+import { ProfileeditComponent } from './pages/profile/profileedit/profileedit.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { NgDropFilesDirective } from 'src/app/core/directives/ng-drop-files.dire
     ModalComponent,
     UploadimageComponent,
     // SponsorsComponent
+    ProfileeditComponent
   ],
   imports: [
     BrowserModule,

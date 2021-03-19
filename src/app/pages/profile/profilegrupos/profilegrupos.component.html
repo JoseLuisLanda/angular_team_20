@@ -1,8 +1,4 @@
-<div class="row">
-  <div class="col-12">
-    <button *ngIf="currentUser.type === 'admin'" class="btn btn-primary col-4 float-right" (click)="newEvent()">Nuevo</button>
-  </div>
-</div>
+
 <div class="row">
   <div class="col-12 col-md-3">
     <h3>Mis Grupos:</h3>
@@ -30,18 +26,20 @@
       >
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">{{ grupo.name }}</h5>
+            <h5 class="card-title" style="font-size: large; text-align: justify;"><b>{{ grupo.name }}</b></h5>
             <!-- <p class="card-text">{{ grupo.description }}</p> -->
-            <h6>Miembros</h6>
+            <h6 style="font-size: small; text-align: justify;"><b>Miembros </b></h6>
             <div *ngFor="let userId of grupo.users">
               <ng-container
                 *ngIf="isMyComunidad(grupo, userId) && getUser(userId) as u"
               >
                 <div class="d-flex">
                   <div class="div-img mr-2">
-                    <img [src]="u.photoURL" class="img" />
+                    <img [src]="u.photoURL || 'assets/img/no-profile.png'" class="perfil-redondo" width="30vw" height="30vh" />
+                    
                   </div>
-                  <span>{{ u.displayName }}</span>
+                 
+                  <span style="line-height: 5vh;">{{ u.displayName }}</span>
                 </div>
               </ng-container>
             </div>
@@ -71,10 +69,13 @@
         </option>
       </select>
       <input
-        class="form-control col-sm-7"
+        class="form-control col-sm-6"
         [(ngModel)]="filterName"
         placeholder="Busca un grupo"
       />
+      <div class="col-1">
+        <button *ngIf="currentUser.type === 'admin'" class="btn btn-sm btn-primary m-1" (click)="newEvent()">Nuevo</button>
+      </div>
     </div>
     <!-- <p class="text-danger">{{ errormsg }}</p> -->
     <div class="row" *ngIf="grupos | json">

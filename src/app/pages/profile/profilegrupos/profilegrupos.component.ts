@@ -192,4 +192,6 @@ export class ProfilegruposComponent implements OnInit, OnChanges {
     }
     return false;
   }
+
+  
 }
