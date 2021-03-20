@@ -3,33 +3,25 @@
   <label class="col-sm-7 col-form-label">
     <h5 class="">Comunidades</h5>
   </label>
-  <div class="col-sm-5">
-    <label class="col-sm-12 col-form-label"></label>
-      <a href="/" style="color: cornflowerblue; font-size: small;">Ver más...</a> 
-  </div>
+
 </div>
 
 <div class="form-group row" *ngFor="let comunidad of comunidades" style="margin-right: 0.3vh; margin-left: 0.3vh;">
   <div class="col-sm-2 col-form-label">
     <img [src]="comunidad.image || defaultImage" width="40vw" height="40vh" class="perfil-redondo">
   </div>
-  <label class="col-sm-5 col-form-label" style="text-align: justify; font-size: small;">
+  <label class="col-sm-9 col-form-label m-l-5" style="text-align: justify; font-size: small;">
     <b >{{comunidad.name}}</b>
+    
   </label>
-  <div class="col-sm-5" style="text-align: left;">
-    <label class="col-sm-12 col-form-label"> <a href="/" style="color: cornflowerblue; font-size: small;">Unirme</a>
+  <div class="col-12" style="text-align: left;">
+    <label class="col-12 col-form-label"> <button (click)="irGrupos()" class="col-12 btn btn-sm btn-primary">Unirme</button>
     </label>
     
   </div>
+ 
   <div class="col-sm-12">
     <hr>  
   </div>
 </div>
 </div>
-<!-- <div>
-  <div class="form-inline aling-items-center justify-content-center">
-    <img [src]="comunidad.image || defaultImage" class="img-thumbnail mr-2" />
-    <p class="my-1 mx-2">{{ comunidad.name }}</p>
-    <a [href]="comunidad.link" class="btn btn-link">Unirse</a>
-  </div>
-</div> -->
