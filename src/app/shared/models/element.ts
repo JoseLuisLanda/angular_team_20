@@ -31,7 +31,7 @@ export interface Elemento {
     linkedin?: string;
     twitter?: string;
     github?: string;
-    date?: Date;
+    date?: firebase.default.firestore.Timestamp;
 }
 
 export interface ElementId extends Elemento { uid: string; }
