@@ -9,6 +9,12 @@ export interface Comunidad {
   lenguaje: string;
   description: string;
 }
+export interface Leaders {
+  id: string;
+  name: string;
+  path: string;
+  tecnologia: string;
+}
 export interface Image {
   id: string;
   name: string;
