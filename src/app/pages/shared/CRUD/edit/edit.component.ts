@@ -30,7 +30,8 @@ export class EditComponent implements OnInit, OnChanges {
     //this.crearFormulario();
   }
   crearFormulario() {
-    console.log("newel: "+JSON.stringify(this.newitem)+"item: "+JSON.stringify(this.item))
+    this.formReset();
+   // console.log("newel: "+JSON.stringify(this.newitem)+"item: "+JSON.stringify(this.item))
     
     if(this.isNewElement)
     {
@@ -54,7 +55,7 @@ export class EditComponent implements OnInit, OnChanges {
        this.formElement.id = id;
     }
     else{
-      console.log("itemTemplate: "+this.newitem)
+      //console.log("itemTemplate: "+this.newitem)
       this.formElement = this.item;
     }
     
@@ -96,10 +97,10 @@ export class EditComponent implements OnInit, OnChanges {
     this.forma.setControl('name', this.fb.control({ value: this.formElement.name, disabled: enabled }, [Validators.required, Validators.minLength(6)]));
   }
   formReset() {
-    const description = this.formElement.description;
+    //const description = this.formElement.description;
     this.forma.reset();
-    this.formElement.elements = [];
-    this.formElement.description = '';
+    //this.formElement.elements = [];
+    //this.formElement.description = '';
   }
 
   //DELETINGS CONTROLS

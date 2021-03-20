@@ -16,6 +16,7 @@ export interface Image {
   url: string;
 }
 export interface Taller {
+  name: string;
   uid: string;
   id: string;
   autor: string;
