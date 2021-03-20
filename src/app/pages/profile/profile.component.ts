@@ -1,19 +1,21 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { of } from 'rxjs';
 import { AfsService } from 'src/app/core/services/afs.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { FileService } from 'src/app/core/services/file.service';
 import { FirestoreService } from 'src/app/core/services/firebase.service';
+import { ProfileService } from 'src/app/core/services/profile.service';
 import { ElementId, Item } from 'src/app/shared/models/element';
 import { UserModel } from 'src/app/shared/models/user.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, AfterViewInit {
   user:any;
   userProfile:ElementId = {} as ElementId;
   @Input() type: string = "";
@@ -31,11 +33,28 @@ export class ProfileComponent implements OnInit {
   itemTemplate: string  = "perfil";
   editProfile = false;
   userModel: UserModel = {} as UserModel;
+  selectedTab:string = "default";
 
-  constructor(private auth: AuthService, private dbservice: FirestoreService, 
-    private fsService: AngularFirestore, private afsService : AfsService, private fileSvc: FileService) { }
+  constructor(private auth: AuthService, private afsService : AfsService, 
+    private fileSvc: FileService, private profileService: ProfileService) { }
+  ngAfterViewInit(): void {
+    
+    setTimeout( () => {
+      console.log("tabselected: "+this.selectedTab);
+      if(this.selectedTab !== "default"){
+        (<HTMLInputElement> document.getElementById(this.selectedTab)).click();
+        Swal.close();
+      }
+      this.profileService.setSelectedTab("default");
+  }, 500);
+   
+   
+  }
 
   ngOnInit(): void {
+    this.selectedTab = this.profileService.getSelectedTab();
+    if(this.selectedTab !== "default")
+    Swal.showLoading()
    this.loadUser();
   }
   async loadUser() {
@@ -43,6 +62,7 @@ export class ProfileComponent implements OnInit {
     if(this.user?.uid){
       this.getUserProfile(this.user?.uid)
     }
+    
   }
 
   insertItem(element: ElementId){
@@ -69,13 +89,6 @@ export class ProfileComponent implements OnInit {
   editPerfil(element: UserModel){
     this.editProfile = true;
     this.userModel = element;
-    /*this.templateElement = element;
-    this.isNewItem = false;
-    this.isEditing = true;
-    this.uploadImage = false;
-    this.singleUpload = false;
-    //this.userProfile = element;
-    (<HTMLInputElement> document.getElementById("showModal")).click();*/
   }
   newItem(element: any){
     //this.itemTemplate = element;

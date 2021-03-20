@@ -15,6 +15,7 @@ import { Insignia } from '../../../shared/models/collections';
 import { AuthService } from '../../../core/services/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ProfileService } from '../../../core/services/profile.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profileventos',
@@ -29,7 +30,7 @@ export class ProfileventosComponent implements OnInit, OnChanges {
   @Input() user: any = {};
   @Input() item: ElementId = {} as ElementId;
   @Input() onlyIcon = false;
-  @Input() area = '';
+  @Input() child:boolean = false;
   @Output() addItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   @Output() editItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   @Output()
@@ -38,7 +39,8 @@ export class ProfileventosComponent implements OnInit, OnChanges {
   removeImage: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   @Output()
   newItem: EventEmitter<string> = new EventEmitter<string>();
-  constructor(private fsService: FirestoreService, private auth: AuthService,private profileService: ProfileService) {
+  constructor(private fsService: FirestoreService, private auth: AuthService,
+    private profileService: ProfileService, private router: Router) {
     this.fsService.getCollection('talleres', 10).subscribe((data) => {
       this.talleres = data as any[];
       this.countMyEvents();
@@ -64,38 +66,9 @@ export class ProfileventosComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.currentUser = this.user;
   }
-  // AddEvent(event: ElementId) {
-  //   this.currentUser.talleres = this.currentUser.talleres
-  //     ? this.currentUser.talleres
-  //     : [];
-  //   this.currentUser.url = `users/${this.currentUser.uid}`;
-
-  //   var newEvent: ElementId = {
-  //     uid: event.id!,
-  //     title: event.title,
-  //     description: event.description,
-  //     url: `talleres/${event.id}`,
-  //   };
-
-  //   const index = this.currentUser.talleres!.findIndex(
-  //     (ev) => ev.uid === event.id
-  //   );
-  //   if (index === -1) {
-  //     this.currentUser.talleres?.push(newEvent);
-  //     this.addItem.emit(this.currentUser);
-  //     this.fsService
-  //       .getDoc('insignias', 'TaOJdHwQdbFBtqYzg2xz')
-  //       .subscribe((v: Insignia) => {
-  //         const f = v.owners.find((id) => id === this.currentUser.uid);
-  //         if (!f) {
-  //           v.owners.push(this.currentUser.uid);
-  //           this.fsService.updateDoc('insignias', 'TaOJdHwQdbFBtqYzg2xz', v);
-  //         }
-  //       });
-  //   } else {
-  //     this.errormsg = 'Ya tienes agregado este evento en tu lista.';
-  //   }
-  // }
+  iraEventos(){
+    (<HTMLInputElement> document.getElementById("evento")).click();
+  }
   AddEvent(event: Taller) {
     Swal.fire({
       title: '¿Estás seguro?',
@@ -139,37 +112,11 @@ export class ProfileventosComponent implements OnInit, OnChanges {
         }
       }
     });
-
-    // this.currentUser.talleres = this.currentUser.talleres
-    //   ? this.currentUser.talleres
-    //   : [];
-    // this.currentUser.url = `users/${this.currentUser.uid}`;
-
-    // const newEvent: Taller = {
-    //   uid: event.id!,
-    //   title: event.title,
-    //   description: event.description,
-    //   url: `talleres/${event.id}`,
-    // };
-
-    // const index = this.currentUser.talleres!.findIndex(
-    //   (ev) => ev.uid === event.id
-    // );
-    // if (index === -1) {
-    //   this.currentUser.talleres?.push(newEvent);
-    //   this.addItem.emit(this.currentUser);
-    //   this.fsService
-    //     .getDoc('insignias', 'TaOJdHwQdbFBtqYzg2xz')
-    //     .subscribe((v: Insignia) => {
-    //       const f = v.owners.find((id) => id === this.currentUser.uid);
-    //       if (!f) {
-    //         v.owners.push(this.currentUser.uid);
-    //         this.fsService.updateDoc('insignias', 'TaOJdHwQdbFBtqYzg2xz', v);
-    //       }
-    //     });
-    // } else {
-    //   this.errormsg = 'Ya tienes agregado este evento en tu lista.';
-    // }
+    
+  }
+  misEventos(){
+    this.profileService.setSelectedTab("evento");
+    this.router.navigate(['/profile']);
   }
   canIAsist(event: Taller): boolean {
     if (this.isMyEvent(event)) {

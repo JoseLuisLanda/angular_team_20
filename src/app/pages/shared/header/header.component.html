@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light" style="background: rgb(236, 236, 236);">
+<nav class="navbar navbar-expand-lg navbar-light" style="background: rgb(236, 236, 236);" >
   <img src="{{ 'assets/img/logo/logo_footer.png' }}" class="logo" alt="" width="170vw" height="40vh"/>
       
   <button
@@ -14,24 +14,19 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarColor01">
-    <ul class="navbar-nav mr-auto">
-      <!-- <li class="nav-item active">
-        <a class="nav-link" routerLink="/home">Inicio</a>
-      </li> -->
-    </ul>
     <ul class="navbar-nav mr-auto" *ngIf="user$ | async as user">
     
       <li class="nav-item active" >
-        <a class="nav-link"  routerLink="/home">Inicio</a>
+        <a class="nav-link"  data-toggle="collapse" data-target=".navbar-collapse.show" routerLink="/home">Inicio</a>
       </li>
       <li class="nav-item" >
-        <a class="nav-link" href="#">Comunidades</a>
+        <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" routerLink="/profilegrupos">Comunidades</a>
       </li>
       <li class="nav-item" >
-        <a class="nav-link" href="#">Talleres</a>
+        <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" routerLink="/profileventos">Talleres</a>
       </li>
       <li class="nav-item" >
-        <a class="nav-link" href="#">Creadores de Contenido</a>
+        <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" routerLink="/sponsors">Creadores de Contenido</a>
       </li>
  
     </ul>
@@ -51,7 +46,7 @@
           <a href="#" class="nav-link" (click)="onLogout()">Salir</a>
         </li> -->
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" data-target=".navbar-collapse.show" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-user-circle fa-1x"></i> &nbsp;{{ user?.email }}
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="font-size: small;">
@@ -69,10 +64,10 @@
         <ul class="navbar-nav mx-auto" >
         
           <li class="nav-item" >
-            <a class="nav-link" routerLink="/login">Iniciar Sesión</a>
+            <a data-toggle="collapse" data-target=".navbar-collapse.show" class="nav-link" routerLink="/login">Iniciar Sesión</a>
           </li>
           <li class="nav-item" >
-            <a class="nav-link" routerLink="/register">Crear Cuenta</a>
+            <a data-toggle="collapse" data-target=".navbar-collapse.show" class="nav-link" routerLink="/register">Crear Cuenta</a>
           </li>
         </ul>
       </form>

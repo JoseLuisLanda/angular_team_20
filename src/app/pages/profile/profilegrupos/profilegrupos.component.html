@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-12 col-md-3">
+  <div *ngIf="child" class="col-12 col-md-3">
     <h3>Mis Grupos:</h3>
     <div>
       <select
@@ -66,9 +66,12 @@
       </ng-container>
     </div>
   </div>
-  <div class="col-12 col-md-9">
-    <h2>Grupos:</h2>
-    <div class="row">
+  <div [ngClass]="{'col-12 col-md-9':child,'container jumbotron m-t-10':!child}">
+    <div>
+      <h2>Grupos:</h2>
+      <button (click)="misGrupos()" class="btn btn-outline-primary float-right" *ngIf="!child">Unirme a un grupo</button>
+    </div>
+    <div class="row m-t-10">
       <select
         [(ngModel)]="lenguajeActivo"
         class="form-control mr-2 mb-3 col-sm-4"
@@ -180,8 +183,7 @@
             <div class="card-body">
               <h5 class="card-title">{{ grupo.name }}</h5>
               <p class="card-text">{{ grupo.description }}</p>
-              <a href="taller.url">Màs info</a>
-              <div class="col-12 m-t-10">
+              <div *ngIf="child" class="col-12 m-t-10">
                 <button
                   *ngIf="!isMyComunidad(grupo); else unido"
                   (click)="addEvent(grupo)"

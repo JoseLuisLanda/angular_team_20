@@ -65,8 +65,6 @@ set<T>(ref: DocPredicate<T>, data: any){
   const timestamp = this.getTimeStamp
   return this.doc(ref).set({
     ...data,
-   // dateCreated: firebase.firestore.FieldValue.serverTimestamp(),
-    //dateModified: firebase.firestore.FieldValue.serverTimestamp()
   })
 }
 
@@ -82,9 +80,6 @@ getSubcollection(url: string) {
     authData
   ).pipe(
     map( resp => {
-      //console.log('RECIBIENDO collections --> '+JSON.stringify(resp));
-      //+" "+resp.emailVerified+" "+resp.password+" "+resp.photoURL+" "+resp.uid);
-      //this.guardarToken( resp['idToken']);
       return resp;
     })
   );

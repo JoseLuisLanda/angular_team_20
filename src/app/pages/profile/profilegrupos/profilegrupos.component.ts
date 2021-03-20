@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 import { Comunidad } from '../../../shared/models/collections';
 import { UserModel } from '../../../shared/models/user.model';
 import { ProfileService } from '../../../core/services/profile.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profilegrupos',
@@ -26,7 +27,7 @@ export class ProfilegruposComponent implements OnInit, OnChanges {
   lenguajes: string[] = [];
   @Input() user: ElementId = {} as ElementId;
   @Input() item: ElementId = {} as ElementId;
-  @Input() area: string = '';
+  @Input() child: boolean = false;
   @Output() addItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   @Output() editItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   @Output()
@@ -40,7 +41,7 @@ export class ProfilegruposComponent implements OnInit, OnChanges {
   users: UserModel[] = [];
   constructor(
     private fsService: FirestoreService,
-    private profileService: ProfileService
+    private profileService: ProfileService, private router: Router
   ) {
     this.fsService.getCollection('comunidades').subscribe((data: any) => {
       this.grupos = data;
@@ -99,29 +100,10 @@ export class ProfilegruposComponent implements OnInit, OnChanges {
     }
     return i;
   }
-  // AddEvent(event: ElementId) {
-  //   this.currentUser.grupos = this.currentUser.grupos
-  //     ? this.currentUser.grupos
-  //     : [];
-  //   this.currentUser.url = `users/${this.currentUser.uid}`;
-
-  //   const newEvent: ElementId = {
-  //     uid: event.id!,
-  //     title: event.title,
-  //     description: event.description,
-  //     url: `comunidades/${event.id}`,
-  //   };
-
-  //   const index = this.currentUser.grupos!.findIndex(
-  //     (ev) => ev.uid === event.id
-  //   );
-  //   if (index === -1) {
-  //     this.currentUser.grupos?.push(newEvent);
-  //     this.addItem.emit(this.currentUser);
-  //   } else {
-  //     this.errormsg = 'Ya tienes agregado este evento en tu lista.';
-  //   }
-  // }
+  misGrupos(){
+    this.profileService.setSelectedTab("grupo");
+    this.router.navigate(['/profile']);
+  }
   addEvent(comunidad: Comunidad): void {
     const isMine = comunidad.users?.find((v) => v === this.currentUser.uid);
     if (!isMine) {
@@ -170,8 +152,6 @@ export class ProfilegruposComponent implements OnInit, OnChanges {
   EditEvent(event: Comunidad) {
     var grupo:ElementId = {...event}; 
     grupo.url = `comunidades/${event.id}`;
-    //console.log("grupo: "+JSON.stringify(grupo))
-    //console.log("event: "+JSON.stringify(event))
     this.editItem.emit(grupo);
   }
   newEvent() {
@@ -191,11 +171,7 @@ export class ProfilegruposComponent implements OnInit, OnChanges {
   }
   deleteImage(event: ElementId, image: ElementId) {
     event.url = `comunidades/${event.id}`;
-    //console.log("antes de eliminar:"+JSON.stringify(image))
     event.item = image;
-    /*console.log("antes de eliminar:"+JSON.stringify(event))
-    event.images?.splice(event.images?.indexOf(event.item!),1)
-    console.log("despues de eliminar:"+JSON.stringify(event))*/
     this.removeImage.emit(event);
   }
   filterByName(name: string) {

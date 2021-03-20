@@ -23,6 +23,7 @@ import firebase from 'firebase/app';
     private newElements: any[] = [];
     public elementsId: any[] = [];
     private elementsString = '';
+    private selectedTab:string = "default";
   
     constructor(private http: HttpClient, private db: AngularFirestore, private auth:AuthService ) {
       this.auth.afAuth.user.subscribe((v: any) => {
@@ -30,6 +31,12 @@ import firebase from 'firebase/app';
           this.user = v;
         }
       });
+    }
+    setSelectedTab(tab: string){
+        this.selectedTab = tab;
+    }
+    getSelectedTab(){
+      return this.selectedTab;
     }
     public updateDoc(collection: string, uid: string, data: any): void {
       // with ref = (collection,ref => ref.where('uid', '==', uid))
