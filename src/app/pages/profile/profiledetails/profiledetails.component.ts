@@ -37,7 +37,7 @@ export class ProfiledetailsComponent implements OnInit, OnChanges {
   @Input() child: boolean = false;
   @Output() addItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
 
-  @Output() editItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
+  @Output() editProfile: EventEmitter<UserModel> = new EventEmitter<UserModel>();
   @Output()
   uploadImage: EventEmitter<ElementId> = new EventEmitter<ElementId>();
 
@@ -56,18 +56,20 @@ export class ProfiledetailsComponent implements OnInit, OnChanges {
     this.userProfile = this.item;
   }
 
-  EditProfile(profile: ElementId){
-    profile.dateBirth = profile.dateBirth === undefined ?"19/02/1991":profile.dateBirth;
-    profile.pais = profile.pais === undefined ?"":profile.pais;
-    profile.genero = profile.genero === undefined ?"":profile.genero;
-    profile.facebook = profile.facebook === undefined ?"":profile.facebook;
-    profile.linkedin = profile.linkedin === undefined ?"":profile.linkedin;
-    profile.twitter = profile.twitter === undefined ?"":profile.twitter;
-    profile.github = profile.github === undefined ?"":profile.github;
+  editarPerfil(){
+    
+    
+    this.userProfile.dateBirth = this.userProfile.dateBirth === undefined ?"19/02/1991":this.userProfile.dateBirth;
+    this.userProfile.pais = this.userProfile.pais === undefined ?"":this.userProfile.pais;
+    this.userProfile.genero = this.userProfile.genero === undefined ?"":this.userProfile.genero;
+    this.userProfile.facebook = this.userProfile.facebook === undefined ?"":this.userProfile.facebook;
+    this.userProfile.linkedin = this.userProfile.linkedin === undefined ?"":this.userProfile.linkedin;
+    this.userProfile.twitter = this.userProfile.twitter === undefined ?"":this.userProfile.twitter;
+    this.userProfile.github = this.userProfile.github === undefined ?"":this.userProfile.github;
 
-    this.editItem.emit(profile);
+    
+    //console.log("editar profile");
+    this.editProfile.emit(this.userProfile);
   }
-  insertImage(profile: ElementId) {
-    this.uploadImage.emit(profile);
-  }
+ 
 }

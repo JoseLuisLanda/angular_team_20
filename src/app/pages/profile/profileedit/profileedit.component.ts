@@ -18,6 +18,9 @@ import {
   QueryFn,
 } from '@angular/fire/firestore';
 import { AfsService } from 'src/app/core/services/afs.service';
+import { ElementId } from 'src/app/shared/models/element';
+import { UserModel } from 'src/app/shared/models/user.model';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -27,8 +30,14 @@ import { AfsService } from 'src/app/core/services/afs.service';
 })
 export class ProfileeditComponent implements OnInit {
  
+  @Input() user: UserModel = {} as UserModel;
+  @Output() addItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
 
-  constructor(
+  @Output() editProfile: EventEmitter<UserModel> = new EventEmitter<UserModel>();
+  @Output()
+  uploadImage: EventEmitter<ElementId> = new EventEmitter<ElementId>();
+  forma: FormGroup = this.fb.group({} as ElementId);
+  constructor(private fb: FormBuilder, 
     private auth: AuthService,
     private dbservice: FirestoreService,
     private fsService: AngularFirestore,
@@ -37,8 +46,10 @@ export class ProfileeditComponent implements OnInit {
 
  
   ngOnInit(): void {
-    
+    this.forma = this.fb.group(this.user);
   }
 
- 
+  insertImage(profile: ElementId) {
+    this.uploadImage.emit(profile);
+  }
 }

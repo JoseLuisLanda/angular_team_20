@@ -1,8 +1,10 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { GroupedObservable, of } from 'rxjs';
 import { AfsService } from 'src/app/core/services/afs.service';
 import { Comunidad, ElementId, Elemento, Item , Taller} from 'src/app/shared/models/element';
+import { UserModel } from 'src/app/shared/models/user.model';
 
 @Component({
   selector: 'app-edit',
@@ -14,11 +16,14 @@ export class EditComponent implements OnInit, OnChanges {
   forma: FormGroup = this.fb.group({} as ElementId);
   @Input() isNewElement: boolean = false;
   @Input() item: ElementId = {} as ElementId;
+  @Input() profile: UserModel = {} as UserModel;
+  @Input() editingProfile: boolean = false;
   @Input() newitem: string = "";
   @Output() addItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
+  @Output() itemSaved: EventEmitter<boolean> = new EventEmitter<boolean>();
   formElement : any;
 
-  constructor(private fb: FormBuilder, private afsService : AfsService) { 
+  constructor(private fb: FormBuilder, private afsService : AfsService,private router: Router) { 
    
   }
   ngOnChanges(changes: SimpleChanges): void {
@@ -53,13 +58,15 @@ export class EditComponent implements OnInit, OnChanges {
         
        }
        this.formElement.id = id;
+    }else if(this.editingProfile){
+      this.formElement = this.profile;
     }
     else{
       //console.log("itemTemplate: "+this.newitem)
       this.formElement = this.item;
     }
     
-    console.log("form datebirth: "+JSON.stringify(this.formElement.dateBirth))
+    //console.log("form datebirth: "+JSON.stringify(this.formElement.dateBirth))
     this.forma = this.fb.group(this.formElement);
     //ading default fields to form name and description
     this.formElement.name !== undefined ? this.addTextInput('name', this.formElement.name != null ? this.formElement.name : "") : null;
@@ -134,7 +141,7 @@ export class EditComponent implements OnInit, OnChanges {
   }
 
   guardar() {
-    console.log(this.forma);
+   // console.log(this.forma);
     if (this.forma.invalid) {
       console.log( "invalid form" );
       return Object.values(this.forma.controls).forEach(control => {
@@ -182,9 +189,19 @@ export class EditComponent implements OnInit, OnChanges {
 
       this.afsService.set(this.formElement.url!,this.formElement).then(res =>{
         console.log("EDITADO: ",JSON.stringify(res))
+        if(this.editingProfile){
+          //this.router.navigate(['/profile']);
+          this.itemSaved.emit(true);
+        }
+        
       }).catch(error=>{
         console.log("ERROR DE EDICION: ");
-      }).finally(()=>{(<HTMLInputElement> document.getElementById("dismissModal")).click();});
+      }).finally(()=>{
+       
+        (<HTMLInputElement> document.getElementById("dismissModal")).click();
+      
+        
+      });
       
 
     

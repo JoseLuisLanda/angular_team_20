@@ -3,7 +3,6 @@ export interface UserModel {
   password?: string;
   name?: string;
   google?: boolean;
-  facebook?: boolean;
   displayName?: string;
   organization?: string;
   uid: string;
@@ -16,7 +15,15 @@ export interface UserModel {
   url?: string;
   type?: string;
   actividadReciente?: Actividad[];
+  dateBirth?: string;
+  pais?:string;
+  genero?:string;
+  linkedin?:string;
+  twitter?:string;
+  github?:string;
+  facebook?:string;
 }
+
 export interface Actividad {
   date: string;
   description: string;

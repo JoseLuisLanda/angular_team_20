@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { FileService } from 'src/app/core/services/file.service';
 import { FirestoreService } from 'src/app/core/services/firebase.service';
 import { ElementId, Item } from 'src/app/shared/models/element';
+import { UserModel } from 'src/app/shared/models/user.model';
 
 @Component({
   selector: 'app-profile',
@@ -28,6 +29,8 @@ export class ProfileComponent implements OnInit {
   uploadImage = false;
   singleUpload = false;
   itemTemplate: string  = "perfil";
+  editProfile = false;
+  userModel: UserModel = {} as UserModel;
 
   constructor(private auth: AuthService, private dbservice: FirestoreService, 
     private fsService: AngularFirestore, private afsService : AfsService, private fileSvc: FileService) { }
@@ -63,6 +66,17 @@ export class ProfileComponent implements OnInit {
     //this.userProfile = element;
     (<HTMLInputElement> document.getElementById("showModal")).click();
   }
+  editPerfil(element: UserModel){
+    this.editProfile = true;
+    this.userModel = element;
+    /*this.templateElement = element;
+    this.isNewItem = false;
+    this.isEditing = true;
+    this.uploadImage = false;
+    this.singleUpload = false;
+    //this.userProfile = element;
+    (<HTMLInputElement> document.getElementById("showModal")).click();*/
+  }
   newItem(element: any){
     //this.itemTemplate = element;
     this.itemTemplate = element;
@@ -91,7 +105,10 @@ export class ProfileComponent implements OnInit {
   deleteImagen(element: any){
     this.fileSvc.deleteFile(element);
   }
-
+  itemSaved(event: boolean){
+    this.editProfile = false;
+    this.ngOnInit();
+  }
   getUserProfile(userId: string){
     //let query = (ref:QueryFn<firebase.default.firestore.DocumentData>) => ref.where('name', '==', 'recargas');
    var doc = this.afsService.doc$(`users/${ userId }`).subscribe(res=>{
