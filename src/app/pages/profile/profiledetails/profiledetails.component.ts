@@ -50,10 +50,15 @@ export class ProfiledetailsComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.userProfile = this.item;
+    if(this.item?.images && this.item?.images[0])
+    this.userProfile.photoURL = this.item?.images[0].url;
   }
 
   ngOnInit(): void {
+    
     this.userProfile = this.item;
+    if(this.item?.images && this.item?.images[0])
+    this.userProfile.photoURL = this.item?.images[0].url;
   }
 
   editarPerfil(){
@@ -70,6 +75,9 @@ export class ProfiledetailsComponent implements OnInit, OnChanges {
     
     //console.log("editar profile");
     this.editProfile.emit(this.userProfile);
+  }
+  insertImage(profile: ElementId){
+    this.uploadImage.emit(profile);
   }
  
 }

@@ -13,7 +13,8 @@
           </div>
           <div class="div-img">
             <!-- *ngIf="userProfile?.images && userProfile?.images[0]" -->
-            <img style="max-height: 50vh" alt="image" [src]="'assets/img/no-profile.png' || userProfile.photoURL"
+            <img *ngIf="item?.images && item?.images[0]" (click)="insertImage(userProfile)" style="max-height: 150px; cursor: pointer;" alt="image" [src]="item?.images[0].url" class=" card-img-top rounded mx-auto d-block"/>
+            <img *ngIf="item?.images === undefined" (click)="insertImage(userProfile)" style="max-height: 50vh; cursor: pointer;" alt="image" [src]="'assets/img/no-profile.png' || userProfile.photoURL"
               class="card-img-top rounded mx-auto d-block" />
           </div>
           <label class="col-sm-12 col-form-label" style="text-align: center;">
