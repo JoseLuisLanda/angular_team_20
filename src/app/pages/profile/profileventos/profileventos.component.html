@@ -1,5 +1,31 @@
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+<div *ngIf="!child" class="row">
+  <div class="col-12">
+    <button *ngIf="currentUser.type === 'admin'" class="btn btn-primary col-2 col-md-3 float-right" (click)="newEvent()">Nuevo</button>
+  </div>
+</div>
+>>>>>>> Stashed changes
 <div class="row" *ngIf="!onlyIcon">
   <div class="col-12 col-md-3">
+=======
+<div *ngIf="!child" class="row">
+  <div class="col-12">
+<<<<<<< Updated upstream
+    <button *ngIf="currentUser.type === 'admin'" class="btn btn-primary col-4 float-right" (click)="newEvent()">Nuevo</button>
+  </div>
+</div>
+<div class="row">
+  <div [ngClass]="{'col-12 col-md-3':!child,'col-12':child}">
+=======
+    <button *ngIf="currentUser.type === 'admin'" class="btn btn-primary col-2 col-md-3 float-right" (click)="newEvent()">Nuevo</button>
+  </div>
+</div>
+<div class="row" *ngIf="!onlyIcon">
+  <div class="col-12 col-md-3">
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
     <h3>Mis Eventos:</h3>
 
     <ng-container *ngFor="let taller of talleres">
@@ -19,6 +45,10 @@
   </div>
   <div class="col-12 col-md-9">
     <h2>Eventos:</h2>
+
+
+   
+
     <p class="text-danger">{{ errormsg }}</p>
     <div class="row">
       <div class="col-sm-6 col-md-4" *ngFor="let taller of talleres">
@@ -37,23 +67,92 @@
               <button *ngIf="isMyEvent(taller)" class="btn btn-success btn-block">
                 Asistiré
               </button>
-              <!-- <button
+<<<<<<< Updated upstream
+
+              <button
+
+=======
+              <button
+>>>>>>> Stashed changes
                   (click)="EditEvent(taller)"
                   class="btn btn-success btn-block"
                 >
                   Editar
+<<<<<<< Updated upstream
+
                 </button> -->
+
+=======
+                </button>
+>>>>>>> Stashed changes
             </div>
           </div>
           <ng-template #imgDefault>
             <img src="assets/img/comunidad.png" class="card-img-top" alt="image" />
           </ng-template>
+
+           
+       
+            
+            <div class="card-body">
+              <h5 class="card-title">Nombre: {{taller.name}}</h5>
+              <p class="card-text">Detalle: {{taller.description}}</p>
+              <p class="card-text">Por: {{ taller.autor }}</p>
+              <a href="#">Màs info</a>
+              <div class="col-12 m-t-10">
+                <button (click)="AddEvent(taller)" class="btn btn-warning btn-block">Asistir</button>
+                <button *ngIf="currentUser.type === 'admin'" (click)="EditEvent(taller)" class="btn btn-success btn-block">Editar</button>
+
         </div>
       </div>
     </div>
   </div>
 </div>
+<div class="row" *ngIf="onlyIcon">
+<<<<<<< Updated upstream
+  <div *ngIf="myTalleres > 0; else notFound"  class="talleres-personalizado">
+
+    <div *ngFor="let taller of talleres" >
+      <div class="form-group row">
+        <!-- <div class="col-sm-6 col-form-label" style="text-align: center;">
+          <img [src]="'assets/img/comunidad.png' || taller.image" width="120vw" height="70vh" >
+          <div class="btn-group" style="font-size: xx-small;">
+            <button  class="btn btn-sm btn-warning">Abandonar</button><br>
+          <button  class="btn btn-sm btn-primary">Más información</button>
+          </div>
+
+        </div> -->
+        <div class="col-sm-12">
+          <div class="card">
+            <div class="card-header">
+              <img [src]="'assets/img/comunidad.png' || taller.image" width="50vw" height="50vh"
+                class="perfil-redondo">&nbsp;
+              <b>{{ taller.title }}</b>
+              <div style="font-size: x-small;">
+                <b>Descripción:</b>
+                <label>{{ taller.description }}</label>
+              </div>
+              <hr>
+            <div id='toolbar'>
+              <div class='wrapper text-center'>
+                <div class="btn-group" style="font-size: xx-small;">
+                  <button type="button" style="font-size: x-small;"
+                    class="btn btn-danger">Abandonar</button>&nbsp;&nbsp;
+                  <button type="button" style="font-size: x-small;" class="btn btn-success">Más información</button>
+                </div>
+
+              </div>
+              
+            </div>
+
+        </div>
+      </div>
+    </div>
+  
+
 <div  *ngIf="onlyIcon">
+=======
+>>>>>>> Stashed changes
   <div *ngIf="myTalleres > 0; else notFound"  class="talleres-personalizado">
 
     <div *ngFor="let taller of talleres" >

@@ -33,7 +33,7 @@ export class ProfileComponent implements OnInit {
     private fsService: AngularFirestore, private afsService : AfsService, private fileSvc: FileService) { }
 
   ngOnInit(): void {
-    this.loadUser();
+   this.loadUser();
   }
   async loadUser() {
     this.user = await this.auth.isAuthenticated();

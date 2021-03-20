@@ -133,6 +133,7 @@ export class ProfilegruposComponent implements OnInit, OnChanges {
       });
     }
   }
+<<<<<<< Updated upstream
   DeleteEvent(comunidad: Comunidad) {
     // this.currentUser.grupos?.splice(
     //   this.currentUser.grupos!.findIndex((ev) => ev.uid === event.id),
@@ -156,8 +157,47 @@ export class ProfilegruposComponent implements OnInit, OnChanges {
     });
   }
   EditEvent(event: ElementId) {
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
+  EditEvent(event: ElementId){
+>>>>>>> Stashed changes
     event.url = `comunidades/${event.id}`;
     this.editItem.emit(event);
+=======
+  DeleteEvent(comunidad: Comunidad) {
+    // this.currentUser.grupos?.splice(
+    //   this.currentUser.grupos!.findIndex((ev) => ev.uid === event.id),
+    //   1
+    // );
+    // this.addItem.emit(this.currentUser);
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Estas a punto de abandonar la comunidad ' + comunidad.name,
+      confirmButtonText: 'Estoy seguro',
+      cancelButtonText: 'Cancelar',
+      showCancelButton: true,
+    }).then((v) => {
+      if (v.isConfirmed) {
+        comunidad.users.splice(
+          comunidad.users.findIndex((d) => d === this.currentUser.uid),
+          1
+        );
+        this.fsService.updateDoc('comunidades', comunidad.id, comunidad);
+      }
+    });
+  }
+  EditEvent(event: ElementId) {
+=======
+>>>>>>> Stashed changes
+    var grupo:ElementId = {...event}; 
+    grupo.url = `comunidades/${event.id}`;
+    console.log("grupo: "+JSON.stringify(grupo))
+    this.editItem.emit(grupo);
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
   }
   newEvent() {
     this.newItem.emit('comunidad');

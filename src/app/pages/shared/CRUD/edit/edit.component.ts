@@ -14,7 +14,7 @@ export class EditComponent implements OnInit, OnChanges {
   forma: FormGroup = this.fb.group({} as ElementId);
   @Input() isNewElement: boolean = false;
   @Input() item: ElementId = {} as ElementId;
-  @Input() newitem: string = {} as string;
+  @Input() newitem: string = "";
   @Output() addItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   formElement : any;
 
@@ -30,7 +30,7 @@ export class EditComponent implements OnInit, OnChanges {
     //this.crearFormulario();
   }
   crearFormulario() {
-    //console.log("newel: "+JSON.stringify(this.newitem)+"item: "+JSON.stringify(this.item))
+    console.log("newel: "+JSON.stringify(this.newitem)+"item: "+JSON.stringify(this.item))
     
     if(this.isNewElement)
     {
