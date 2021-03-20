@@ -4,7 +4,7 @@
   </div>
 </div-->
 <div class="row" *ngIf="!onlyIcon">
-  <div class="col-12 col-md-3">
+  <div *ngIf="child" class="col-12 col-md-3">
     <h3>Mis Eventos:</h3>
 
     <ng-container *ngFor="let taller of talleres">
@@ -52,7 +52,7 @@
       </div>
     </ng-container>
   </div>
-  <div class="col-12 col-md-9">
+  <div [ngClass]="{'col-12 col-md-9':child,'container jumbotron m-t-10':!child}">
     <h2>Eventos:</h2>
     <p class="text-danger">{{ errormsg }}</p>
     <div class="row">
@@ -166,6 +166,7 @@
                       type="button"
                       style="font-size: x-small"
                       class="btn btn-success"
+                      (click)="iraEventos()"
                     >
                       Más información
                     </button>
@@ -173,35 +174,11 @@
                 </div>
               </div>
             </div>
-            <!-- <div class="">
-              <div class="btn-group" style="text-align: center;">
-                <button class="btn btn-primary boton" type="button">Abandonar</button>
-                <button class="btn btn-success boton" type="button">Más información</button>
-              </div>
-            </div> -->
+          
           </div>
         </div>
       </div>
     </div>
-
-    <!-- <ng-container *ngFor="let taller of talleres">
-      <div
-        class="div-whit-image justify-content-center d-flex align-items-end"
-        [ngStyle]="{
-          'background-image':
-            'url(' + (taller.image || 'assets/img/comunidad.png') + ')'
-        }"
-      >
-        <h2 class="text-center">{{ taller.title }}</h2>
-      </div>
-      <div class="card" *ngIf="isMyEvent(taller)">
-        <img
-          [src]="taller.image || 'assets/img/comunidad.png'"
-          class="card-img-top"
-          alt="image"
-        />
-      </div>
-    </ng-container> -->
   </div>
   <ng-template #notFound>
     <pre class="ml-2">No estás apuntado a ningún evento</pre>

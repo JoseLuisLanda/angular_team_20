@@ -9,7 +9,7 @@ import { TermsprivacyComponent } from './pages/termsprivacy/termsprivacy.compone
 import { VerificationEmailComponent } from './pages/utils/verification-email/verification-email.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { CounterComponent } from './pages/section/counter/counter.component';
-import { SponsorsComponent } from './pages/section/sponsor/sponsors/sponsors.component';
+import { SponsorsComponent } from './shared/components/sponsor/sponsors.component';
 import { ProfiledetailsComponent } from './pages/profile/profiledetails/profiledetails.component';
 import { ProfilegruposComponent } from './pages/profile/profilegrupos/profilegrupos.component';
 import { ProfileinsigniasComponent } from './pages/profile/profileinsignias/profileinsignias.component';
@@ -41,6 +41,7 @@ const routes: Routes = [
   {path: 'profilegrupos', component: ProfilegruposComponent},
   {path: 'profileinsignias', component: ProfileinsigniasComponent},
   {path: 'profileventos', component: ProfileventosComponent},
+  {path: 'sponsors', component: SponsorsComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'copyright', component: CopyrightComponent},
