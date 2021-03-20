@@ -9,7 +9,10 @@
           <p class="card-text">{{ taller.description }}</p>
 
           <div class="col-12 m-t-10">
-            <button class="btn btn-danger text-white text-sm m-b-10" (click)="DeleteEvent(taller)">
+            <button
+              class="btn btn-danger text-white text-sm m-b-10"
+              (click)="DeleteEvent(taller)"
+            >
               X
             </button>
           </div>
@@ -21,20 +24,47 @@
     <h2>Eventos:</h2>
     <p class="text-danger">{{ errormsg }}</p>
     <div class="row">
-      <div class="col-sm-6 col-md-4" *ngFor="let taller of talleres">
-        <div class="card">
-          <img [src]="taller.image || 'assets/img/comunidad.png'" class="card-img-top" alt="image" />
+      <div class="col-sm-6 col-md-4 mb-3" *ngFor="let taller of talleres">
+        <div class="card h-100">
+          <img
+            [src]="taller.image || 'assets/img/comunidad.png'"
+            class="card-img-top"
+            alt="image"
+          />
           <div class="card-body">
             <h5 class="card-title">{{ taller.title }}</h5>
-            <p class="card-text">{{ taller.description }}</p>
+            <p
+              class="card-text"
+              *ngIf="taller.description.length > 60; else noLarge"
+            >
+              {{ taller.description | slice: 0:60 }} ....
+            </p>
+            <ng-template #noLarge>
+              <p class="card-text">
+                {{ taller.description }}
+              </p>
+            </ng-template>
             <small class="card-text">{{ taller.date.toDate() | date }}</small>
             <!-- <a href="#">Màs info</a> -->
             <div class="col-12 m-t-10">
-              <button (click)="AddEvent(taller)" *ngIf="!isMyEvent(taller)" [disabled]="!canIAsist(taller)"
-                class="btn btn-warning btn-block">
+              <button
+                (click)="AddEvent(taller)"
+                *ngIf="!isMyEvent(taller) && canIAsist(taller)"
+                class="btn btn-warning btn-block"
+              >
                 Asistir
               </button>
-              <button *ngIf="isMyEvent(taller)" class="btn btn-success btn-block">
+              <button
+                *ngIf="!isMyEvent(taller) && !canIAsist(taller)"
+                class="btn btn-danger btn-block"
+                disabled
+              >
+                Ya no puedes asister a este evento
+              </button>
+              <button
+                *ngIf="isMyEvent(taller)"
+                class="btn btn-success btn-block"
+              >
                 Asistiré
               </button>
               <!-- <button
@@ -46,18 +76,21 @@
             </div>
           </div>
           <ng-template #imgDefault>
-            <img src="assets/img/comunidad.png" class="card-img-top" alt="image" />
+            <img
+              src="assets/img/comunidad.png"
+              class="card-img-top"
+              alt="image"
+            />
           </ng-template>
         </div>
       </div>
     </div>
   </div>
 </div>
-<div  *ngIf="onlyIcon">
-  <div *ngIf="myTalleres > 0; else notFound"  class="talleres-personalizado">
-
-    <div *ngFor="let taller of talleres" >
-      <div class="form-group row">
+<div *ngIf="onlyIcon">
+  <div *ngIf="myTalleres > 0; else notFound" class="talleres-personalizado">
+    <div *ngFor="let taller of talleres">
+      <div class="form-group row" *ngIf="isMyEvent(taller)">
         <!-- <div class="col-sm-6 col-form-label" style="text-align: center;">
           <img [src]="'assets/img/comunidad.png' || taller.image" width="120vw" height="70vh" >
           <div class="btn-group" style="font-size: xx-small;">
@@ -69,23 +102,44 @@
         <div class="col-sm-12">
           <div class="card">
             <div class="card-header">
-              <img [src]="'assets/img/comunidad.png' || taller.image" width="50vw" height="50vh"
-                class="perfil-redondo">&nbsp;
+              <img
+                [src]="'assets/img/comunidad.png' || taller.image"
+                width="50vw"
+                height="50vh"
+                class="perfil-redondo"
+              />&nbsp;
               <b>{{ taller.title }}</b>
-              <div style="font-size: x-small;">
+              <div style="font-size: x-small">
                 <b>Descripción:</b>
-                <label>{{ taller.description }}</label>
+                <label *ngIf="taller.description.length > 60"
+                  >{{ taller.description | slice: 0:60 }}...</label
+                >
+                <label *ngIf="taller.description.length <= 60"
+                  >{{ taller.description }}...</label
+                >
               </div>
-              <hr>
-            <div id='toolbar'>
-              <div class='wrapper text-center'>
-                <div class="btn-group" style="font-size: xx-small;">
-                  <button type="button" style="font-size: x-small;"
-                    class="btn btn-danger">Abandonar</button>&nbsp;&nbsp;
-                  <button type="button" style="font-size: x-small;" class="btn btn-success">Más información</button>
+              <hr />
+              <div id="toolbar">
+                <div class="wrapper text-center">
+                  <div class="btn-group" style="font-size: xx-small">
+                    <button
+                      type="button"
+                      style="font-size: x-small"
+                      class="btn btn-danger mr-2"
+                      (click)="DeleteEvent(taller)"
+                    >
+                      Abandonar
+                    </button>
+                    <button
+                      type="button"
+                      style="font-size: x-small"
+                      class="btn btn-success"
+                    >
+                      Más información
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
             </div>
             <!-- <div class="">
               <div class="btn-group" style="text-align: center;">
@@ -93,17 +147,10 @@
                 <button class="btn btn-success boton" type="button">Más información</button>
               </div>
             </div> -->
-            
-
-            
           </div>
-
         </div>
-
       </div>
-
     </div>
-
 
     <!-- <ng-container *ngFor="let taller of talleres">
       <div
@@ -127,3 +174,4 @@
   <ng-template #notFound>
     <pre class="ml-2">No estás apuntado a ningún evento</pre>
   </ng-template>
+</div>

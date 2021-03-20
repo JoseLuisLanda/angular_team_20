@@ -6,6 +6,9 @@ import {
   AngularFirestoreCollection,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { UserModel } from '../../shared/models/user.model';
+import { AuthService } from './auth.service';
+import firebase from 'firebase/app';
 
 @Injectable({
     providedIn: 'root',
@@ -14,20 +17,26 @@ import { Observable } from 'rxjs';
   export class ProfileService {
     private itemsCollection!: AngularFirestoreCollection<any>;
     items!: Observable<any[]>;
+    user!: UserModel |null;
     //private url = 'https://publicastv-a67df.firebaseio.com/';
     //private CARPETA_FILES = 'file';
     private newElements: any[] = [];
     public elementsId: any[] = [];
     private elementsString = '';
   
-    constructor(private http: HttpClient, private db: AngularFirestore) {}
-  
-    public updateDoc(collection: string, uid: string, data: any) {
+    constructor(private http: HttpClient, private db: AngularFirestore, private auth:AuthService ) {
+      this.auth.afAuth.user.subscribe((v: any) => {
+        if (v) {
+          this.user = v;
+        }
+      });
+    }
+    public updateDoc(collection: string, uid: string, data: any): void {
       // with ref = (collection,ref => ref.where('uid', '==', uid))
       this.db
         .collection(collection)
         .doc(uid)
-        .set(data)
+        .update(data)
         .then(() => {
           console.log('Document successfully updated!');
         })
@@ -57,6 +66,15 @@ import { Observable } from 'rxjs';
     public guardarFile(file: any, ruta: string) {
       this.db.collection(`/${ruta}`).add(file);
       this.getCollection(file);
+    }
+    nuevaActvidad(description: string): void {
+      if(this.user) {
+        if(!this.user.actividadReciente) {
+          this.user.actividadReciente = [];
+        }
+        this.user.actividadReciente.push({ date: new Date().toISOString(), description });
+        this.updateDoc('users', this.user.uid,  { actividadReciente: this.user.actividadReciente });
+      }
     }
   }
   

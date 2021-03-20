@@ -35,7 +35,6 @@ export class TimeService {
 
   getInfoReloj(fechaLimite: Date): Observable<ActualReloj>{
     this.clock.subscribe(t => {
-      console.log( moment.duration( moment(fechaLimite).diff(new Date())  ).minutes() );
       this.ar = {
         dia: moment.duration( moment(fechaLimite).diff(new Date())  ).days(),
         hora: moment.duration( moment(fechaLimite).diff(new Date())  ).hours(),

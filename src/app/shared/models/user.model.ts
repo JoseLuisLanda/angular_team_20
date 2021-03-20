@@ -7,13 +7,18 @@ export interface UserModel {
   displayName?: string;
   organization?: string;
   uid: string;
-  lastLoginAt?:string;
+  lastLoginAt?: string;
   emailVerified: boolean;
   refreshToken?: string;
   photoURL?: string;
   role?: Roles;
   rememberme?: boolean;
-  url?:string;
-  type?:string;
+  url?: string;
+  type?: string;
+  actividadReciente?: Actividad[];
+}
+export interface Actividad {
+  date: string;
+  description: string;
 }
 export type Roles = 'SUSCRIPTOR' | 'EDITOR' | 'ADMIN';

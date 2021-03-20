@@ -2,8 +2,8 @@
 <div class="row">
   <ng-container *ngIf="onlyIcon ? countMyInsignias() > 0 : true; else notFound">
     <ng-container *ngIf="!onlyIcon">
-      <div class="col-6 col-md-4 col-lg-3" *ngFor="let insignia of insignias">
-        <div class="card">
+      <div class="col-6 col-md-4 col-lg-3 mb-3" *ngFor="let insignia of insignias">
+        <div class="card h-100">
           <img
             [src]="insignia.image || 'assets/img/insignia1.jpg'"
             class="card-img-top"
