@@ -114,7 +114,7 @@
             <div *ngIf="grupo.images && grupo.images[0]; else imgDefault">
               <!-- Carousel images-->
               <div
-                id="{{ grupo.id }}"
+                id="img{{ grupo.id }}"
                 class="carousel slide"
                 data-ride="carousel"
                 data-bs-ride="carousel"
@@ -143,7 +143,7 @@
                 <a
                   *ngIf="grupo.images.length > 1"
                   class="carousel-control-prev"
-                  href="#{{ grupo.id }}"
+                  href="#img{{ grupo.id }}"
                   role="button"
                   data-slide="prev"
                 >
@@ -156,7 +156,7 @@
                 <a
                   *ngIf="grupo.images.length > 1"
                   class="carousel-control-next"
-                  href="#{{ grupo.id }}"
+                  href="#img{{ grupo.id }}"
                   role="button"
                   data-slide="next"
                 >

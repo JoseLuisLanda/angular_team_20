@@ -233,7 +233,7 @@ export class ProfileventosComponent implements OnInit, OnChanges {
     this.uploadImage.emit(event);
   }
   deleteImage(event: ElementId, image: ElementId) {
-    //event.url = `comunidades/${event.id}`;
+    event.url = `talleres/${event.id}`;
     event.item = image;
     this.removeImage.emit(event);
   }
