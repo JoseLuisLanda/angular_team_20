@@ -28,29 +28,23 @@ export class ProfileventosComponent implements OnInit, OnChanges {
   @Input() user: any = {};
   @Input() item: ElementId = {} as ElementId;
   @Input() onlyIcon = false;
-  @Input() area = '';
+  @Input() child:boolean = false;
   @Output() addItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   @Output() editItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   @Output()
   uploadImage: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   @Output()
   removeImage: EventEmitter<ElementId> = new EventEmitter<ElementId>();
+  @Output() newItem: EventEmitter<string> = new EventEmitter<string>();
   constructor(private fsService: FirestoreService, private auth: AuthService) {
     this.fsService.getCollection('talleres', 10).subscribe((data) => {
       this.talleres = data as any[];
       this.countMyEvents();
     });
-    this.auth.afAuth.user.subscribe((v) => {
-      if (v) {
-        console.log('User', v);
-        this.user = v;
-        this.currentUser = this.user;
-        console.log(this.countMyEvents());
-      }
-    });
+
   }
   ngOnChanges(changes: SimpleChanges): void {
-    // this.currentUser = this.user;
+    this.currentUser = this.user;
     this.countMyEvents();
   }
   countMyEvents(): number {
@@ -108,7 +102,7 @@ export class ProfileventosComponent implements OnInit, OnChanges {
         if (!this.isMyEvent(event)) {
           event.asistentes.push({ id: this.currentUser.uid, status: true });
           console.log(event);
-          this.fsService.updateDoc('talleres', event.id, event);
+          this.fsService.updateDoc('talleres', event.id!, event);
           this.fsService
             .getDoc('insignias', 'TaOJdHwQdbFBtqYzg2xz')
             .subscribe((insignia: Insignia) => {
@@ -163,7 +157,7 @@ export class ProfileventosComponent implements OnInit, OnChanges {
     if (this.isMyEvent(event)) {
       return false;
     }
-    const f = event.asistentes.find((v) => v.id === this.currentUser.uid);
+    const f = event.asistentes!.find((v) => v.id === this.currentUser.uid);
     if (!f) {
       return true;
     }
@@ -190,31 +184,32 @@ export class ProfileventosComponent implements OnInit, OnChanges {
         // );
         // this.addItem.emit(this.currentUser);
         if (this.isMyEvent(event)) {
-          const index = event.asistentes.findIndex(
+          const index = event.asistentes!.findIndex(
             (d) => d.id === this.currentUser.uid
           );
           if (index !== -1) {
-            event.asistentes[index].status = false;
-            this.fsService.updateDoc('talleres', event.id, event);
+            event.asistentes![index].status = false;
+            this.fsService.updateDoc('talleres', event.id!, event);
           }
         }
       }
     });
   }
   isMyEvent(event: Taller): boolean {
-    const f = event.asistentes.find(
+    const f = event.asistentes!.find(
       (v) => v.id === this.currentUser.uid && v.status
     );
     return f ? true : false;
   }
-  EditEvent(event: ElementId) {
+  EditEvent(event: Taller) {
     //agrega un nuevo registro si no tiene un id que editar
-    event.url = `talleres/${event.id}`;
-    this.editItem.emit(event);
+    var elementId: ElementId = {...event};
+    elementId.url = `talleres/${event.id}`;
+    this.editItem.emit(elementId);
   }
-  // newEvent() {
-  //   this.newItem.emit("taller");
-  // }
+  newEvent() {
+     this.newItem.emit("taller");
+   }
   insertImage(event: ElementId) {
     event.url = `talleres/${event.id}`;
     this.uploadImage.emit(event);

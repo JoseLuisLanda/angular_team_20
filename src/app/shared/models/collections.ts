@@ -1,13 +1,13 @@
 export interface Comunidad {
-  id: string;
-  name: string;
+  id?: string;
+  name?: string;
   uid: string;
-  link: string;
-  image: string;
-  users: string[];
-  images: Image[];
-  lenguaje: string;
-  description: string;
+  link?: string;
+  image?: string;
+  users?: string[];
+  images?: Image[];
+  lenguaje?: string;
+  description?: string;
 }
 export interface Image {
   id: string;
@@ -17,16 +17,16 @@ export interface Image {
 }
 export interface Taller {
   uid: string;
-  id: string;
-  autor: string;
-  autorLink: string;
-  description: string;
+  id?: string;
+  autor?: string;
+  autorLink?: string;
+  description?: string;
   image?: string;
-  link: string;
-  title: string;
-  categoria: string;
-  date: firebase.default.firestore.Timestamp;
-  asistentes: Asistente[];
+  link?: string;
+  title?: string;
+  categoria?: string;
+  date?: firebase.default.firestore.Timestamp;
+  asistentes?: Asistente[];
 }
 export interface Asistente {
   id: string;

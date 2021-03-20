@@ -14,7 +14,7 @@ export class EditComponent implements OnInit, OnChanges {
   forma: FormGroup = this.fb.group({} as ElementId);
   @Input() isNewElement: boolean = false;
   @Input() item: ElementId = {} as ElementId;
-  @Input() newitem: string = {} as string;
+  @Input() newitem: string = "";
   @Output() addItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   formElement : any;
 
@@ -58,7 +58,7 @@ export class EditComponent implements OnInit, OnChanges {
       this.formElement = this.item;
     }
     
-    console.log("form datebirth: "+JSON.stringify(this.formElement.dateBirth))
+   
     this.forma = this.fb.group(this.formElement);
     //ading default fields to form name and description
     this.formElement.name !== undefined ? this.addTextInput('name', this.formElement.name != null ? this.formElement.name : "") : null;
@@ -79,6 +79,7 @@ export class EditComponent implements OnInit, OnChanges {
 
     this.formElement.displayName != undefined ? this.addTextInput('displayName',
       this.formElement.displayName != null ? this.formElement.displayName : '') : null;
+      
   }
   //ADDING FIELDS
   

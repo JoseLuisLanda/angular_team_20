@@ -1,3 +1,8 @@
+<div *ngIf="!child" class="row">
+  <div class="col-12">
+    <button *ngIf="currentUser.type === 'admin'" class="btn btn-primary col-2 col-md-3 float-right" (click)="newEvent()">Nuevo</button>
+  </div>
+</div>
 <div class="row" *ngIf="!onlyIcon">
   <div class="col-12 col-md-3">
     <h3>Mis Eventos:</h3>
@@ -27,7 +32,7 @@
           <div class="card-body">
             <h5 class="card-title">{{ taller.title }}</h5>
             <p class="card-text">{{ taller.description }}</p>
-            <small class="card-text">{{ taller.date.toDate() | date }}</small>
+            <small class="card-text">{{ taller.date!.toDate() | date }}</small>
             <!-- <a href="#">Màs info</a> -->
             <div class="col-12 m-t-10">
               <button (click)="AddEvent(taller)" *ngIf="!isMyEvent(taller)" [disabled]="!canIAsist(taller)"
@@ -37,12 +42,12 @@
               <button *ngIf="isMyEvent(taller)" class="btn btn-success btn-block">
                 Asistiré
               </button>
-              <!-- <button
+              <button
                   (click)="EditEvent(taller)"
                   class="btn btn-success btn-block"
                 >
                   Editar
-                </button> -->
+                </button>
             </div>
           </div>
           <ng-template #imgDefault>
@@ -53,7 +58,7 @@
     </div>
   </div>
 </div>
-<div  *ngIf="onlyIcon">
+<div class="row" *ngIf="onlyIcon">
   <div *ngIf="myTalleres > 0; else notFound"  class="talleres-personalizado">
 
     <div *ngFor="let taller of talleres" >
