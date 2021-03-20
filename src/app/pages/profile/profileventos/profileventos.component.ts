@@ -44,9 +44,16 @@ export class ProfileventosComponent implements OnInit, OnChanges {
       this.talleres = data as any[];
       this.countMyEvents();
     });
+    this.auth.afAuth.user.subscribe((v) => {
+      if (v) {
+        this.user = v;
+        this.currentUser = this.user;
+        console.log(this.countMyEvents());
+      }
+    });
   }
   ngOnChanges(changes: SimpleChanges): void {
-    this.currentUser = this.user;
+    // this.currentUser = this.user;
     this.countMyEvents();
   }
   countMyEvents(): number {
