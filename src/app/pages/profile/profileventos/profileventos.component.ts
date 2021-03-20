@@ -28,39 +28,32 @@ export class ProfileventosComponent implements OnInit, OnChanges {
   myTalleres = 0;
   @Input() user: any = {};
   @Input() item: ElementId = {} as ElementId;
+
+  
   @Input() onlyIcon = false;
-  @Input() area = '';
+  @Input() child:boolean = false;
   @Output() addItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   @Output() editItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   @Output()
   uploadImage: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   @Output()
   removeImage: EventEmitter<ElementId> = new EventEmitter<ElementId>();
-  constructor(
-    private fsService: FirestoreService,
-    private auth: AuthService,
-    private profileService: ProfileService
-  ) {
+  @Output() newItem: EventEmitter<string> = new EventEmitter<string>();
+  constructor(private fsService: FirestoreService, private auth: AuthService,private profileService: ProfileService) {
     this.fsService.getCollection('talleres', 10).subscribe((data) => {
       this.talleres = data as any[];
       this.countMyEvents();
     });
-    this.auth.afAuth.user.subscribe((v) => {
-      if (v) {
-        this.user = v;
-        this.currentUser = this.user;
-        console.log(this.countMyEvents());
-      }
-    });
   }
   ngOnChanges(changes: SimpleChanges): void {
-    // this.currentUser = this.user;
+    this.currentUser = this.user;
     this.countMyEvents();
   }
   countMyEvents(): number {
     const d = this.talleres.filter((v) => this.isMyEvent(v)).length;
     this.myTalleres = d;
     return d;
+
   }
   ngOnInit(): void {
     this.currentUser = this.user;
@@ -223,15 +216,19 @@ export class ProfileventosComponent implements OnInit, OnChanges {
     );
     return f ? true : false;
   }
-  EditEvent(event: ElementId) {
+  EditEvent(event: Taller) {
     //agrega un nuevo registro si no tiene un id que editar
-    event.url = `talleres/${event.id}`;
-    this.editItem.emit(event);
+    var elementId: ElementId = {...event};
+    elementId.url = `talleres/${event.id}`;
+    this.editItem.emit(elementId);
   }
-  // newEvent() {
-  //   this.newItem.emit("taller");
-  // }
+
+  newEvent() {
+     this.newItem.emit("taller");
+   }
+
   insertImage(event: ElementId) {
+
     event.url = `talleres/${event.id}`;
     this.uploadImage.emit(event);
   }

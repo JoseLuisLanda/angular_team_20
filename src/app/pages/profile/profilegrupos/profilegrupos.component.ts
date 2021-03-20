@@ -144,6 +144,7 @@ export class ProfilegruposComponent implements OnInit, OnChanges {
       });
     }
   }
+
   DeleteEvent(comunidad: Comunidad) {
     // this.currentUser.grupos?.splice(
     //   this.currentUser.grupos!.findIndex((ev) => ev.uid === event.id),
@@ -158,18 +159,20 @@ export class ProfilegruposComponent implements OnInit, OnChanges {
       showCancelButton: true,
     }).then((v) => {
       if (v.isConfirmed) {
-        comunidad.users?.splice(
-          comunidad.users.findIndex((d) => d === this.currentUser.uid),
+        comunidad.users!.splice(
+          comunidad.users!.findIndex((d) => d === this.currentUser.uid),
           1
         );
         this.fsService.updateDoc('comunidades', comunidad.id, comunidad);
-        this.profileService.nuevaActvidad(`Has abandonado el evento ${comunidad.name}`);
       }
     });
   }
-  EditEvent(event: ElementId) {
-    event.url = `comunidades/${event.id}`;
-    this.editItem.emit(event);
+  EditEvent(event: Comunidad) {
+    var grupo:ElementId = {...event}; 
+    grupo.url = `comunidades/${event.id}`;
+    //console.log("grupo: "+JSON.stringify(grupo))
+    //console.log("event: "+JSON.stringify(event))
+    this.editItem.emit(grupo);
   }
   newEvent() {
     this.newItem.emit('comunidad');
