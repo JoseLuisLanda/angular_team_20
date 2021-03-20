@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 import { Insignia } from '../../../shared/models/collections';
 import { AuthService } from '../../../core/services/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { ProfileService } from '../../../core/services/profile.service';
 
 @Component({
   selector: 'app-profileventos',
@@ -35,14 +36,17 @@ export class ProfileventosComponent implements OnInit, OnChanges {
   uploadImage: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   @Output()
   removeImage: EventEmitter<ElementId> = new EventEmitter<ElementId>();
-  constructor(private fsService: FirestoreService, private auth: AuthService) {
+  constructor(
+    private fsService: FirestoreService,
+    private auth: AuthService,
+    private profileService: ProfileService
+  ) {
     this.fsService.getCollection('talleres', 10).subscribe((data) => {
       this.talleres = data as any[];
       this.countMyEvents();
     });
     this.auth.afAuth.user.subscribe((v) => {
       if (v) {
-        console.log('User', v);
         this.user = v;
         this.currentUser = this.user;
         console.log(this.countMyEvents());
@@ -109,18 +113,27 @@ export class ProfileventosComponent implements OnInit, OnChanges {
           event.asistentes.push({ id: this.currentUser.uid, status: true });
           console.log(event);
           this.fsService.updateDoc('talleres', event.id, event);
+          this.profileService.nuevaActvidad(
+            `Te has unido al evento ${event.title}`
+          );
           this.fsService
             .getDoc('insignias', 'TaOJdHwQdbFBtqYzg2xz')
             .subscribe((insignia: Insignia) => {
-              const f = insignia.owners.find(
+              const f = insignia.owners?.find(
                 (id) => id === this.currentUser.uid
               );
               if (!f) {
+                if (!insignia.owners) {
+                  insignia.owners = [];
+                }
                 insignia.owners.push(this.currentUser.uid);
                 this.fsService.updateDoc(
                   'insignias',
                   'TaOJdHwQdbFBtqYzg2xz',
                   insignia
+                );
+                this.profileService.nuevaActvidad(
+                  `Has obtenido la insignia "Eventual"`
                 );
               }
             });
@@ -196,6 +209,9 @@ export class ProfileventosComponent implements OnInit, OnChanges {
           if (index !== -1) {
             event.asistentes[index].status = false;
             this.fsService.updateDoc('talleres', event.id, event);
+            this.profileService.nuevaActvidad(
+              `Has abandonado el evento ${event.title}`
+            );
           }
         }
       }

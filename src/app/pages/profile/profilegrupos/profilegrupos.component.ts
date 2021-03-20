@@ -12,6 +12,7 @@ import { ElementId } from 'src/app/shared/models/element';
 import Swal from 'sweetalert2';
 import { Comunidad } from '../../../shared/models/collections';
 import { UserModel } from '../../../shared/models/user.model';
+import { ProfileService } from '../../../core/services/profile.service';
 
 @Component({
   selector: 'app-profilegrupos',
@@ -37,7 +38,10 @@ export class ProfilegruposComponent implements OnInit, OnChanges {
   lenguajeActivo = '';
   comunidadActiva = '';
   users: UserModel[] = [];
-  constructor(private fsService: FirestoreService) {
+  constructor(
+    private fsService: FirestoreService,
+    private profileService: ProfileService
+  ) {
     this.fsService.getCollection('comunidades').subscribe((data: any) => {
       this.grupos = data;
       if (this.comunidadActiva === '') {
@@ -80,7 +84,10 @@ export class ProfilegruposComponent implements OnInit, OnChanges {
   }
   isMyComunidad(comunidad: Comunidad, id?: string): boolean {
     const u = id || this.currentUser.uid;
-    const isMine = comunidad.users.find((v) => v === u);
+    let isMine;
+    if (comunidad.users) {
+      isMine = comunidad.users.find((v) => v === u);
+    }
     return isMine ? true : false;
   }
   getMyGrupos(): Comunidad[] {
@@ -116,7 +123,7 @@ export class ProfilegruposComponent implements OnInit, OnChanges {
   //   }
   // }
   addEvent(comunidad: Comunidad): void {
-    const isMine = comunidad.users.find((v) => v === this.currentUser.uid);
+    const isMine = comunidad.users?.find((v) => v === this.currentUser.uid);
     if (!isMine) {
       Swal.fire({
         title: '¿Estás seguro?',
@@ -126,8 +133,12 @@ export class ProfilegruposComponent implements OnInit, OnChanges {
         showCancelButton: true,
       }).then((v) => {
         if (v.isConfirmed) {
+          if(!comunidad.users) {
+            comunidad.users = [];
+          }
           comunidad.users.push(this.currentUser.uid);
           this.fsService.updateDoc('comunidades', comunidad.id, comunidad);
+          this.profileService.nuevaActvidad(`Te has unido al evento ${comunidad.name}`);
           this.comunidadActiva = comunidad.id;
         }
       });
@@ -147,11 +158,12 @@ export class ProfilegruposComponent implements OnInit, OnChanges {
       showCancelButton: true,
     }).then((v) => {
       if (v.isConfirmed) {
-        comunidad.users.splice(
+        comunidad.users?.splice(
           comunidad.users.findIndex((d) => d === this.currentUser.uid),
           1
         );
         this.fsService.updateDoc('comunidades', comunidad.id, comunidad);
+        this.profileService.nuevaActvidad(`Has abandonado el evento ${comunidad.name}`);
       }
     });
   }
@@ -192,6 +204,4 @@ export class ProfilegruposComponent implements OnInit, OnChanges {
     }
     return false;
   }
-
-  
 }

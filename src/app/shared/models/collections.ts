@@ -4,7 +4,7 @@ export interface Comunidad {
   uid: string;
   link: string;
   image: string;
-  users: string[];
+  users?: string[];
   images: Image[];
   lenguaje: string;
   description: string;
@@ -37,7 +37,7 @@ export interface Insignia {
   description: string;
   image?: string;
   name: string;
-  owners: string[];
+  owners?: string[];
 }
 export interface Categoria {
   id: string;

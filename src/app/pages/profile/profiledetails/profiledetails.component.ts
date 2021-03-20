@@ -20,6 +20,7 @@ import {
 import { AfsService } from 'src/app/core/services/afs.service';
 import { ElementId } from 'src/app/shared/models/element';
 import { Taller } from 'src/app/shared/models/collections';
+import { UserModel } from '../../../shared/models/user.model';
 
 type DocPredicate<T> = string | AngularFirestoreDocument<T>;
 type CollectionPredicate<T> = string | AngularFirestoreCollection<T>;
@@ -30,9 +31,9 @@ type CollectionPredicate<T> = string | AngularFirestoreCollection<T>;
 })
 export class ProfiledetailsComponent implements OnInit, OnChanges {
   user: any;
-  userProfile: any;
+  userProfile!: UserModel;
   @Input() type: string = '';
-  @Input() item: ElementId = {} as ElementId;
+  @Input() item: any = {};
   @Input() child: boolean = false;
   @Output() addItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
 
