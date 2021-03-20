@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Taller, Categoria } from '../../models/collections';
 import { FirestoreService } from '../../../core/services/firebase.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-taller',
@@ -12,7 +13,7 @@ export class TallerComponent implements OnInit {
   categorias: Categoria[] = [];
   talleresTemp: Taller[] = [];
   currentDate = new Date().getMilliseconds();
-  constructor(private fsService: FirestoreService) {}
+  constructor(private fsService: FirestoreService,private router: Router) {}
 
   ngOnInit(): void {
     this.fsService.getCollection('categorias', 10).subscribe((v) => {
