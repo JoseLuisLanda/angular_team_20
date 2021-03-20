@@ -15,6 +15,7 @@ import { Insignia } from '../../../shared/models/collections';
 import { AuthService } from '../../../core/services/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ProfileService } from '../../../core/services/profile.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profileventos',
@@ -38,7 +39,8 @@ export class ProfileventosComponent implements OnInit, OnChanges {
   removeImage: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   @Output()
   newItem: EventEmitter<string> = new EventEmitter<string>();
-  constructor(private fsService: FirestoreService, private auth: AuthService,private profileService: ProfileService) {
+  constructor(private fsService: FirestoreService, private auth: AuthService,
+    private profileService: ProfileService, private router: Router) {
     this.fsService.getCollection('talleres', 10).subscribe((data) => {
       this.talleres = data as any[];
       this.countMyEvents();
@@ -65,7 +67,7 @@ export class ProfileventosComponent implements OnInit, OnChanges {
     this.currentUser = this.user;
   }
   iraEventos(){
-    (<HTMLInputElement> document.getElementById("evnBtn")).click();
+    (<HTMLInputElement> document.getElementById("evento")).click();
   }
   AddEvent(event: Taller) {
     Swal.fire({
@@ -111,6 +113,10 @@ export class ProfileventosComponent implements OnInit, OnChanges {
       }
     });
     
+  }
+  misEventos(){
+    this.profileService.setSelectedTab("evento");
+    this.router.navigate(['/profile']);
   }
   canIAsist(event: Taller): boolean {
     if (this.isMyEvent(event)) {

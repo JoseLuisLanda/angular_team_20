@@ -53,9 +53,15 @@
     </ng-container>
   </div>
   <div [ngClass]="{'col-12 col-md-9':child,'container jumbotron m-t-10':!child}">
+    
+    <div class="col-12">
+      
+      <button (click)="misEventos()" class="btn btn-outline-primary float-right" *ngIf="!child">Participar en un Evento</button>
+    </div>
     <h2>Eventos:</h2>
-    <p class="text-danger">{{ errormsg }}</p>
-    <div class="row">
+    
+    <div class="row col-12 m-t-10">
+      <p class="text-danger">{{ errormsg }}</p>
       <div class="col-sm-6 col-md-4 mb-3" *ngFor="let taller of talleres">
         <div class="card h-100">
           <img
@@ -78,7 +84,7 @@
             </ng-template>
             <small class="card-text">{{ taller.date.toDate() | date }}</small>
             <!-- <a href="#">Màs info</a> -->
-            <div class="col-12 m-t-10">
+            <div *ngIf="child" class="col-12 m-t-10">
               <button
                 (click)="AddEvent(taller)"
                 *ngIf="!isMyEvent(taller) && canIAsist(taller)"
@@ -123,14 +129,6 @@
   <div *ngIf="myTalleres > 0; else notFound" class="talleres-personalizado">
     <div *ngFor="let taller of talleres">
       <div class="form-group row" *ngIf="isMyEvent(taller)">
-        <!-- <div class="col-sm-6 col-form-label" style="text-align: center;">
-          <img [src]="'assets/img/comunidad.png' || taller.image" width="120vw" height="70vh" >
-          <div class="btn-group" style="font-size: xx-small;">
-            <button  class="btn btn-sm btn-warning">Abandonar</button><br>
-          <button  class="btn btn-sm btn-primary">Más información</button>
-          </div>
-
-        </div> -->
         <div class="col-sm-12">
           <div class="card">
             <div class="card-header">
