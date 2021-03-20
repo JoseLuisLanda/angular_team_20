@@ -28,17 +28,16 @@ export class ProfileventosComponent implements OnInit, OnChanges {
   myTalleres = 0;
   @Input() user: any = {};
   @Input() item: ElementId = {} as ElementId;
-
-  
   @Input() onlyIcon = false;
-  @Input() child:boolean = false;
+  @Input() area = '';
   @Output() addItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   @Output() editItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   @Output()
   uploadImage: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   @Output()
   removeImage: EventEmitter<ElementId> = new EventEmitter<ElementId>();
-  @Output() newItem: EventEmitter<string> = new EventEmitter<string>();
+  @Output()
+  newItem: EventEmitter<string> = new EventEmitter<string>();
   constructor(private fsService: FirestoreService, private auth: AuthService,private profileService: ProfileService) {
     this.fsService.getCollection('talleres', 10).subscribe((data) => {
       this.talleres = data as any[];
