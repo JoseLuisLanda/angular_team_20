@@ -180,9 +180,9 @@ export class ProfilegruposComponent implements OnInit, OnChanges {
     //event.url = `comunidades/${event.id}`;
     //console.log("antes de eliminar:"+JSON.stringify(image))
     event.item = image;
-    /*console.log("antes de eliminar:"+JSON.stringify(event))
+    console.log("antes de eliminar:"+JSON.stringify(event))
     event.images?.splice(event.images?.indexOf(event.item!),1)
-    console.log("despues de eliminar:"+JSON.stringify(event))*/
+    console.log("despues de eliminar:"+JSON.stringify(event))
     this.removeImage.emit(event);
   }
   filterByName(name: string) {

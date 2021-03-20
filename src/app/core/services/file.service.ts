@@ -120,9 +120,9 @@ export class FileService {
     
     deleteFile(element: ElementId) {
       var name = element.item!.id +"/"+ element.item!.name?.split(".")[0];
-     //console.log("deleting file: "+name)
-     element.images?.splice(element.images?.indexOf(element.item!),1)
-       this.updateUserData({images:element.images}, element.url!) 
+     console.log("deleting file: "+name)
+     //element.images?.splice(element.images?.indexOf(element.item!),1)
+       this.updateUserData({images:element.images}, element.item!.id! ) 
       
       /* this.storageRef.child('/file/comunidad.png').delete().then(() => {
        console.log('File Successfully deleted');
