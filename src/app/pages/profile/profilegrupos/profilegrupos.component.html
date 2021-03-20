@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-12 col-md-3">
+  <div *ngIf="child" class="col-12 col-md-3">
     <h3>Mis Grupos:</h3>
     <div>
       <select
@@ -66,7 +66,7 @@
       </ng-container>
     </div>
   </div>
-  <div class="col-12 col-md-9">
+  <div [ngClass]="{'col-12 col-md-9':child,'container jumbotron m-t-10':!child}">
     <h2>Grupos:</h2>
     <div class="row">
       <select

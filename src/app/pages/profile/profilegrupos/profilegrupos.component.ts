@@ -26,7 +26,7 @@ export class ProfilegruposComponent implements OnInit, OnChanges {
   lenguajes: string[] = [];
   @Input() user: ElementId = {} as ElementId;
   @Input() item: ElementId = {} as ElementId;
-  @Input() area: string = '';
+  @Input() child: boolean = false;
   @Output() addItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   @Output() editItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   @Output()
