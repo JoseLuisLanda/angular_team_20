@@ -190,7 +190,7 @@ export class ProfilegruposComponent implements OnInit, OnChanges {
     this.uploadImage.emit(event);
   }
   deleteImage(event: ElementId, image: ElementId) {
-    //event.url = `comunidades/${event.id}`;
+    event.url = `comunidades/${event.id}`;
     //console.log("antes de eliminar:"+JSON.stringify(image))
     event.item = image;
     /*console.log("antes de eliminar:"+JSON.stringify(event))

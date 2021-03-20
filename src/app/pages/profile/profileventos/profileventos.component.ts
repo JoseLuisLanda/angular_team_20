@@ -28,25 +28,31 @@ export class ProfileventosComponent implements OnInit, OnChanges {
   myTalleres = 0;
   @Input() user: any = {};
   @Input() item: ElementId = {} as ElementId;
-
-  
   @Input() onlyIcon = false;
-  @Input() child:boolean = false;
+  @Input() area = '';
   @Output() addItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   @Output() editItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   @Output()
   uploadImage: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   @Output()
   removeImage: EventEmitter<ElementId> = new EventEmitter<ElementId>();
-  @Output() newItem: EventEmitter<string> = new EventEmitter<string>();
+  @Output()
+  newItem: EventEmitter<string> = new EventEmitter<string>();
   constructor(private fsService: FirestoreService, private auth: AuthService,private profileService: ProfileService) {
     this.fsService.getCollection('talleres', 10).subscribe((data) => {
       this.talleres = data as any[];
       this.countMyEvents();
     });
+    this.auth.afAuth.user.subscribe((v) => {
+      if (v) {
+        this.user = v;
+        this.currentUser = this.user;
+        console.log(this.countMyEvents());
+      }
+    });
   }
   ngOnChanges(changes: SimpleChanges): void {
-    this.currentUser = this.user;
+    // this.currentUser = this.user;
     this.countMyEvents();
   }
   countMyEvents(): number {
@@ -233,7 +239,7 @@ export class ProfileventosComponent implements OnInit, OnChanges {
     this.uploadImage.emit(event);
   }
   deleteImage(event: ElementId, image: ElementId) {
-    //event.url = `comunidades/${event.id}`;
+    event.url = `talleres/${event.id}`;
     event.item = image;
     this.removeImage.emit(event);
   }

@@ -55,7 +55,7 @@ export class FirestoreService {
       });
   }
 
-  public getCollection(nameCollection: string, count: number = 5,collection:string = "",value:string = "") {
+  public getCollection(nameCollection: string, count: number = 10,collection:string = "",value:string = "") {
     if(collection === "" && value === "")
     {
       this.itemsCollection = this.db.collection<any>(nameCollection, (ref) =>
