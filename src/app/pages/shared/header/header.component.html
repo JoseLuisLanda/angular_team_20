@@ -37,14 +37,6 @@
     </ul>
     <form class="form-inline my-2 my-lg-0" *ngIf="user$ | async as user">
       <ul class="navbar-nav mx-auto"  *ngIf="user">
-        <!-- <li class="nav-item">
-          <a class="btn btn-profile" (click)="checkUserIsVerified()">
-            <img style="max-width: 35px;" [src]="imagePath"/>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link" (click)="onLogout()">Salir</a>
-        </li> -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" data-target=".navbar-collapse.show" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-user-circle fa-1x"></i> &nbsp;{{ user?.email }}
