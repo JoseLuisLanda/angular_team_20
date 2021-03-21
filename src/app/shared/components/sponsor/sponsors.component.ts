@@ -14,7 +14,6 @@ export class SponsorsComponent implements OnInit {
   constructor(private fsService: FirestoreService) {
     this.fsService.getCollection('leaders', 15).subscribe( (data) => {
       this.leaders = data;
-      console.log('leaders : ' , data);
     });
     this.fsService.getCollection('sponsors', 15).subscribe((data) => {
       this.images = data;

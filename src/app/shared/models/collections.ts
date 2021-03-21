@@ -8,6 +8,7 @@ export interface Comunidad {
   images: Image[];
   lenguaje: string;
   description: string;
+  url: string;
 }
 export interface Leaders {
   id: string;
@@ -30,6 +31,7 @@ export interface Taller {
   description: string;
   image?: string;
   link: string;
+  url: string;
   title: string;
   categoria: string;
   date: firebase.default.firestore.Timestamp;
