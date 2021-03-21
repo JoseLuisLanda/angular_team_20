@@ -1,5 +1,5 @@
 <div *ngIf="editProfile">
-  <app-edit [profile] = "userModel" [editingProfile] = "true" (itemSaved) = "itemSaved($event)"></app-edit>
+  <app-edit [profile] = "userModel" [editingProfile] = "true" (itemSaved) = "itemSaved($event)" (backProfile)="backtoProfile($event)"></app-edit>
 </div>
 <div *ngIf="user && !editProfile; else login">
   <div class="main">

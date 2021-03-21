@@ -25,6 +25,7 @@ export class EditComponent implements OnInit, OnChanges {
   @Input() newitem: string = "";
   @Output() addItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   @Output() itemSaved: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() backProfile: EventEmitter<boolean> = new EventEmitter<boolean>();
   formElement : any;
   user: any;
 
@@ -235,5 +236,8 @@ export class EditComponent implements OnInit, OnChanges {
       
 
     
+  }
+  regresarPerfil(){
+    this.backProfile.emit(true);
   }
 }
