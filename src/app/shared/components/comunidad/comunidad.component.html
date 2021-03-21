@@ -1,27 +1,40 @@
-<div style="background: rgb(236, 236, 236);">
-<div class="form-group row" style="margin-right: 0.3vh; margin-left: 0.3vh;">
-  <label class="col-sm-7 col-form-label">
-    <h5 class="">Comunidades</h5>
-  </label>
-
-</div>
-
-<div class="form-group row" *ngFor="let comunidad of comunidades" style="margin-right: 0.3vh; margin-left: 0.3vh;">
-  <div class="col-sm-2 col-form-label">
-    <img [src]="comunidad.image || defaultImage" width="40vw" height="40vh" class="perfil-redondo">
-  </div>
-  <label class="col-sm-9 col-form-label m-l-5" style="text-align: justify; font-size: small;">
-    <b >{{comunidad.name}}</b>
-    
-  </label>
-  <div class="col-12" style="text-align: left;">
-    <label class="col-12 col-form-label"> <button (click)="irGrupos()" class="col-12 btn btn-sm btn-primary">Unirme</button>
+<div style="background: rgb(236, 236, 236)">
+  <div class="form-group row" style="margin-right: 0.3vh; margin-left: 0.3vh">
+    <label class="col-sm-7 col-form-label">
+      <h5 class="">Comunidades</h5>
     </label>
-    
   </div>
- 
-  <div class="col-sm-12">
-    <hr>  
+  <div class="comunidades-div">
+    <div
+      class="form-group row"
+      *ngFor="let comunidad of comunidades"
+      style="margin-right: 0.3vh; margin-left: 0.3vh"
+    >
+      <div class="col-sm-2 col-form-label">
+        <img
+          [src]="comunidad.image || defaultImage"
+          width="40vw"
+          height="40vh"
+          class="perfil-redondo"
+        />
+      </div>
+      <label
+        class="col-sm-9 col-form-label m-l-5"
+        style="text-align: justify; font-size: small"
+      >
+        <b>{{ comunidad.name }}</b>
+      </label>
+      <div class="col-12" style="text-align: left">
+        <label class="col-12 col-form-label">
+          <button (click)="irGrupos()" class="col-12 btn btn-sm btn-primary">
+            Unirme
+          </button>
+        </label>
+      </div>
+
+      <div class="col-sm-12">
+        <hr />
+      </div>
+    </div>
   </div>
-</div>
 </div>

@@ -13,18 +13,22 @@ export class TallerComponent implements OnInit {
   categorias: Categoria[] = [];
   talleresTemp: Taller[] = [];
   currentDate = new Date().getMilliseconds();
-  constructor(private fsService: FirestoreService,private router: Router) {}
+  constructor(private fsService: FirestoreService, private router: Router) {}
 
   ngOnInit(): void {
     this.fsService.getCollection('categorias', 10).subscribe((v) => {
       this.categorias = v;
     });
     this.fsService.getCollection('talleres').subscribe((v: any) => {
-      //console.log(v);
-
       this.talleres = v;
       this.talleresTemp = this.talleres;
     });
+  }
+  isPastEvent(taller: Taller): boolean {
+    if (!(new Date().getTime() > taller?.date?.toDate().getTime())) {
+      return false;
+    }
+    return true;
   }
   onFilter(categoria: string): void {
     if (categoria === '') {

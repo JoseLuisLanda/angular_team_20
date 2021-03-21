@@ -1,40 +1,59 @@
-<div style="background: rgb(236, 236, 236);">
-<div class="form-group row" style="margin-right: 0.3vh; margin-left: 0.3vh;">
-  <label class="col-sm-7 col-form-label">
-    <h5 class="">Talleres</h5>
-  </label>
-  
-  <div class="col-sm-12 col-form-label">
-    <select #select class="form-control" placeholder="Talleres por areas de conocimiento"
-      (change)="onFilter(select.value)">
-      <option value="">Talleres por areas de conocimiento</option>
-      <option [value]="categoria.id" *ngFor="let categoria of categorias">
-        {{ categoria.name | titlecase }}
-      </option>
-    </select>
-  </div>
-  <div class="col-sm-12 col-form-label">
-    <p style="text-align: justify; background: #726f6c; color: white;">&nbsp;&nbsp;&nbsp;Hoy</p>
- </div>
-</div>
-
-<div  *ngFor="let taller of talleresTemp" >
-  <div class="form-group row talleres-personalizado" style="margin-right: 0.3vh; margin-left: 0.3vh;">
-    <div class="col-sm-3 col-form-label">
-      <img src="{{ 'assets/img/logo/logo.png' }}" width="40vw" height="40vh" class="perfil-redondo">
-    </div>
-    <label class="col-sm-9 col-form-label">
-      <h6 class="">{{taller.title}}</h6>
-      <!-- <label style="font-size: small;">12:00pm</label> -->
-      <small *ngIf="taller.date">{{ taller.date.toDate() | date }}</small>
-      <!-- <p><b>By</b><a href="/" style="color: cornflowerblue;">&nbsp;Juan Pablo de la Torre</a></p> -->
-      <p>
-        By
-        <a [href]="taller.autorLink">{{ taller.autor }}</a>
-      </p>
-      <hr>
+<div style="background: rgb(236, 236, 236)">
+  <div class="form-group row" style="margin-right: 0.3vh; margin-left: 0.3vh">
+    <label class="col-sm-7 col-form-label">
+      <h5 class="">Talleres</h5>
     </label>
-  </div>
 
-</div>
+    <div class="col-sm-12 col-form-label">
+      <select
+        #select
+        class="form-control"
+        placeholder="Talleres por areas de conocimiento"
+        (change)="onFilter(select.value)"
+      >
+        <option value="">Talleres por areas de conocimiento</option>
+        <option [value]="categoria.id" *ngFor="let categoria of categorias">
+          {{ categoria.name | titlecase }}
+        </option>
+      </select>
+    </div>
+    <div class="col-sm-12 col-form-label">
+      <p style="text-align: justify; background: #726f6c; color: white">
+        &nbsp;&nbsp;&nbsp;Hoy
+      </p>
+    </div>
+  </div>
+  <div class="talleres-div">
+    <div *ngFor="let taller of talleresTemp">
+      <div
+        class="form-group row talleres-personalizado"
+        style="margin-right: 0.3vh; margin-left: 0.3vh"
+      >
+        <div class="col-sm-3 col-form-label">
+          <!-- <img
+            src="{{ 'assets/img/logo/logo.png' }}"
+            width="40vw"
+            height="40vh"
+            class="perfil-redondo"
+          /> -->
+          <div
+            class="perfil-redondo"
+            style="background-color: aliceblue"
+          >
+            <i class="fas fa-check" *ngIf="isPastEvent(taller)"></i>
+            <i *ngIf="!isPastEvent(taller)" class="fas fa-ellipsis-h" ></i>
+          </div>
+        </div>
+        <label class="col-sm-9 col-form-label">
+          <h6 class="">{{ taller.title }}</h6>
+          <small *ngIf="taller.date">{{ taller.date.toDate() | date }}</small>
+          <p>
+            By
+            <a [href]="taller.autorLink">{{ taller.autor }}</a>
+          </p>
+          <hr />
+        </label>
+      </div>
+    </div>
+  </div>
 </div>
