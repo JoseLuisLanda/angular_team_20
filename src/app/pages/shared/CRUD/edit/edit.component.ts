@@ -3,8 +3,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { GroupedObservable, of } from 'rxjs';
 import { AfsService } from 'src/app/core/services/afs.service';
+import { FirestoreService } from 'src/app/core/services/firebase.service';
 import { Comunidad, ElementId, Elemento, Item , Taller} from 'src/app/shared/models/element';
 import { UserModel } from 'src/app/shared/models/user.model';
+import { Insignia } from '../../../../shared/models/collections';
+import { ProfileService } from '../../../../core/services/profile.service';
+import { AuthService } from '../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-edit',
@@ -22,8 +26,9 @@ export class EditComponent implements OnInit, OnChanges {
   @Output() addItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   @Output() itemSaved: EventEmitter<boolean> = new EventEmitter<boolean>();
   formElement : any;
+  user: any;
 
-  constructor(private fb: FormBuilder, private afsService : AfsService,private router: Router) { 
+  constructor(private fb: FormBuilder, private afsService : AfsService,private router: Router, private fsService: FirestoreService, private profileService: ProfileService,private auth: AuthService) { 
    
   }
   ngOnChanges(changes: SimpleChanges): void {
@@ -31,7 +36,9 @@ export class EditComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    
+   this.auth.afAuth.user.subscribe(v => {
+    this.user = v;
+   }); 
     //this.crearFormulario();
   }
   crearFormulario() {
@@ -191,6 +198,29 @@ export class EditComponent implements OnInit, OnChanges {
         console.log("EDITADO: ",JSON.stringify(res))
         if(this.editingProfile){
           //this.router.navigate(['/profile']);
+          if(this.editingProfile) {
+            this.fsService
+            .getDoc('insignias', 'w2uZwEISE7qmOEs0THrH')
+            .subscribe((insignia: Insignia) => {
+              const f = insignia.owners?.find(
+                (id) => id === this.user?.uid
+              );
+              if (!f) {
+                if (!insignia.owners) {
+                  insignia.owners = [];
+                }
+                insignia.owners.push(this.user?.uid);
+                this.fsService.updateDoc(
+                  'insignias',
+                  'w2uZwEISE7qmOEs0THrH',
+                  insignia
+                );
+                this.profileService.nuevaActvidad(
+                  `Has obtenido la insignia "Sociable"`
+                );
+              }
+            });
+          }
           this.itemSaved.emit(true);
         }
         

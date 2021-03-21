@@ -12,7 +12,7 @@ Login con Google/Gmail:
 
 
 # Versión QuickApp (App ID: 104025909)
-Existe una versión de Huawei quickapp para la misma sin embargo aquí solo funcionara una cuenta que registres con correo electrónico, ni google auth ni facebook funcionan en la version 1.0 de esta app:
+Existe una versión de Huawei quickapp para la misma sin embargo aquí solo funcionara una cuenta que registres con correo electrónico, ni google auth ni facebook funcionan en la version 1.0 de esta app debido a problemas de compatibilidad de firebase con quickapps:
 
 <img src="./images/quick.png" data-canonical-src="quick.png" /><br/>
 

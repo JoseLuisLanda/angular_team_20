@@ -49,7 +49,7 @@ const routes: Routes = [
   {path: 'terms', component: TermsprivacyComponent},
   {path: 'counter', component: CounterComponent},
   {path: 'home', component: HomeComponent},
-  {path: '**', redirectTo: 'home'},
+  {path: '**', redirectTo: 'login'},
   {path: '', component: HomeComponent}
 ];
 
