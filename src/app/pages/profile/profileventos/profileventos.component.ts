@@ -49,7 +49,6 @@ export class ProfileventosComponent implements OnInit, OnChanges {
       if (v) {
         this.user = v;
         this.currentUser = this.user;
-        console.log(this.countMyEvents());
       }
     });
   }

@@ -11,7 +11,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  user: UserModel = {} as UserModel;
+  user: UserModel = { rememberme: true } as UserModel;
   recordarme = false;
   errMsg = '';
 

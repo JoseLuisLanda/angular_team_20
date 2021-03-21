@@ -40,16 +40,16 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     
     setTimeout( () => {
-      console.log("tabselected: "+this.selectedTab);
       if(this.selectedTab !== "default"){
         (<HTMLInputElement> document.getElementById(this.selectedTab)).click();
         Swal.close();
       }
       this.profileService.setSelectedTab("default");
-  }, 500);
+  }, 400);
    
    
   }
+
 
   ngOnInit(): void {
     this.selectedTab = this.profileService.getSelectedTab();
