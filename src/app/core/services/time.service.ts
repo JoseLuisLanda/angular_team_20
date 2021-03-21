@@ -30,7 +30,6 @@ export class TimeService {
         map (t => new Date()),
         shareReplay(1)
       );
-    moment().zone("-04:00");
   }
 
   getInfoReloj(fechaLimite: Date): Observable<ActualReloj>{

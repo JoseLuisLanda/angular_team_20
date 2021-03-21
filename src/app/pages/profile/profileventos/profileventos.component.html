@@ -11,7 +11,7 @@
       <div class="card" *ngIf="isMyEvent(taller)">
         <div class="card-header">
           <img
-            [src]="'assets/img/comunidad.png' || taller.image"
+            [src]="taller.url"
             width="50vw"
             height="50vh"
             class="perfil-redondo"
@@ -65,7 +65,7 @@
       <div class="col-sm-6 col-md-4 mb-3" *ngFor="let taller of talleres">
         <div class="card h-100">
           <img
-            [src]="taller.image || 'assets/img/comunidad.png'"
+            [src]="taller.url || 'assets/img/comunidad.png'"
             class="card-img-top"
             alt="image"
           />
