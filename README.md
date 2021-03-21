@@ -5,6 +5,28 @@ URL Producción:
 
 https://comfecoapp.firebaseapp.com
 
+# Instrucciones para testear el sitio
+
+La solución esta habilitada para realizar operaciones de inserción de imagenes para las comunidades y agregar nuevas comunidades, también permite editar los datos de un evento si se inicia sesión con una cuenta de ADMINISTRADOR.
+
+# Iniciar sesión simulando ser un administrador
+Debes registrarte con un correo que no sea terminación @gmail mediante el formulario o bien iniciar sesión con algún proveedor como facebook o gmail pero con una cuenta de correo con terminación diferente de @gmail.
+
+# Iniciar sesión simulando ser un usuario convencional, sin permisos de edición e inserción
+Para testear la aplicación simulando un usuario común, sin permisos de edición se requiere iniciar sesión con una cuenta de gmail, ya sea dada de alta por el formulario o iniciando sesión con el proveedoir de gmail.
+
+# Confirmar cuenta de correo
+Para acceder a la sección de editar profile con una cuenta de correo electrónica dada de alta debes confirmar tu correo electrónico mediante un enlace que debe llegar a tu bandeja de entrada, favor de revisar en bandeja de otros o de correo no deseado por favor, es posible que debas loguearte nuevamente para que el cambio se refleje.
+
+# Subir imagenes
+La función de subir imagenes permite cambiar tu foto de perfil dando click sobre la misma en "detalles de perfil" o bien subir imagenes de algún grupo dando click en agregar, en caso de subir más de una imágen se habilita un corousel en las card para que puedas desplazarte y verlas todas.
+
+# Insignias
+Ganas una insignia con el simple hecho de editar y llenar tu información de perfil, ganas otra al unirte a un grupo, puedes ver la lista de insignias en la sección insignias de tu pèrfil, se marcarán las que ya tengas asignadas.
+
+# Unirse a talleres
+Si te unes a un taller o evento y despues te sales ya no tienes opción de volverte a unir.
+
 Esta solución se basa en un proyecto de Angular +11 como Front-End y Firebase services como backend. Cuenta con los servicios de Firebase hosting en un ambiente de producción https://comfecoapp.firebaseapp.com/, la información se encuentra almacenada en firestore de firebase y se utilizan 3 servicios de autenticación:
 
 Login con Firebase:
