@@ -22,6 +22,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   @Input() item: ElementId = {} as ElementId;
   @Input() area: string = "";
   @Output() addItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
+  
   title = 'ComfecoApp';
   templateElement = {} as ElementId;
   caller = 'defaultArea';
@@ -127,5 +128,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
    var doc = this.afsService.doc$(`users/${ userId }`).subscribe(res=>{
    this.userProfile = res as ElementId;
   },err=>{console.log("error: "+err);})
+  }
+  backtoProfile(event: boolean){
+    this.editProfile = false;
   }
 }

@@ -8,8 +8,8 @@
             <h5 class=""></h5>
           </label>
           <div class="col-sm-9" style="text-align: right;">
-            <label class="col-sm-12 col-form-label"> <a (click)="editarPerfil()" style="color: cornflowerblue; font-size: small;">Editar
-                Perfil</a> </label>
+            <label class="col-sm-12 col-form-label"> <button (click)="editarPerfil()" class="btn btn-primary">Editar
+                Perfil</button> </label>
           </div>
           <div class="div-img">
             <!-- *ngIf="userProfile?.images && userProfile?.images[0]" -->
@@ -75,14 +75,11 @@
       </div>
       <div class="col-lg-3">
         <div class="form-group row">
-          <label class="col-sm-7 col-form-label" style="font-size: small;">
+          <label class="col-12 col-form-label" style="font-size: small;">
 
             <label>Eventos de tu interés</label>
           </label>
-          <div class="col-sm-5">
-            <label class="col-sm-12 col-form-label"></label>
-            <a data-toggle="list" href="#eventos" role="tab" aria-controls="messages" style="color: cornflowerblue; font-size: small;">Ver más...</a>
-          </div>
+          
           <div class="col-sm-12">
             <app-profileventos [onlyIcon]="true"></app-profileventos>
           </div>
@@ -93,22 +90,3 @@
     </div>
   </div>
 </section>
-
-<!-- <div class="jumbotron">
-  <div class="card" style="width: 18rem; ">
-<div class="main row">
-<div class="col-12 col-md-2">
-  <div class="card" style="width: 12rem; ">
-    <button (click)="insertImage(userProfile)" class="btn btn-warning btn-block">Cambiar</button>
-    <img *ngIf="userProfile?.images && userProfile?.images[0]" style="max-height: 150px;" alt="image" [src]="userProfile?.images[0].url" class=" card-img-top rounded mx-auto d-block"/>
-    <div class="card-body">
-      <a class="nav-link">Nick: {{ userProfile?.displayName }}</a>
-      <a class="nav-link">Email: {{ userProfile?.email }}</a>
-      <div class="col-12 m-t-10">
-          <button (click)="EditProfile(userProfile)" class="btn btn-success btn-block">Editar</button>
-        </div>
-      
-      
-    </div>
-  </div>
-</div> -->
