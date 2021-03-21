@@ -22,31 +22,43 @@ import { ElementId } from 'src/app/shared/models/element';
 import { UserModel } from 'src/app/shared/models/user.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-
 @Component({
   selector: 'app-profileedit',
   templateUrl: './profileedit.component.html',
   styleUrls: ['./profileedit.component.css'],
 })
 export class ProfileeditComponent implements OnInit {
- 
   @Input() user: UserModel = {} as UserModel;
   @Output() addItem: EventEmitter<ElementId> = new EventEmitter<ElementId>();
 
-  @Output() editProfile: EventEmitter<UserModel> = new EventEmitter<UserModel>();
+  @Output()
+  editProfile: EventEmitter<UserModel> = new EventEmitter<UserModel>();
   @Output()
   uploadImage: EventEmitter<ElementId> = new EventEmitter<ElementId>();
-  forma: FormGroup = this.fb.group({} as ElementId);
-  constructor(private fb: FormBuilder, 
+  f: FormGroup = this.fb.group({} as ElementId);
+  constructor(
+    private fb: FormBuilder,
     private auth: AuthService,
     private dbservice: FirestoreService,
     private fsService: AngularFirestore,
     private afsService: AfsService
   ) {}
 
- 
   ngOnInit(): void {
-    this.forma = this.fb.group(this.user);
+    this.f = this.fb.group({
+      displayName: ['', Validators.required],
+      email: [{ value: '', disabled: true }],
+      genero: [{ value: '', disabled: true }],
+      fechaNacimiento: [],
+      pais: [],
+      facebook: [],
+      github: [],
+      linkedin: [],
+      password: [],
+      password1: [],
+      biografia: [, Validators.maxLength(140)],
+      categoria: [],
+    });
   }
 
   insertImage(profile: ElementId) {

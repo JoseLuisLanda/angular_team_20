@@ -20,7 +20,7 @@ export class AuthService extends RoleValidator {
   //private apiKey: string = 'apiKey';
   private url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty';
   private apiKey = 'AIzaSyDHxlKfchpJrycT_fAOX3JjBCWp_uFlcjI';
-
+  credentialEmail : any;
   public userToken: string = '';
   constructor(
     private http: HttpClient,
@@ -68,14 +68,16 @@ export class AuthService extends RoleValidator {
   }
   async login(userData: UserModel): Promise<any> {
     try {
-      const { user } = await this.afAuth.signInWithEmailAndPassword(
+      const d = await this.afAuth.signInWithEmailAndPassword(
         userData.email,
         userData.password!
       );
+      this.credentialEmail = d.credential;
+
       if (userData.rememberme)
         this.afAuth.setPersistence(firebase.auth.Auth.Persistence.SESSION);
       else this.afAuth.setPersistence(firebase.auth.Auth.Persistence.NONE);
-      return user;
+      return d.user;
     } catch (error) {
       console.log(error);
       return error;

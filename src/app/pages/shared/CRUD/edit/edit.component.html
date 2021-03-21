@@ -1,197 +1,310 @@
-<button *ngIf="formElement.id == null" type="button" (click)="formReset()" class="active btn btn-block btn-outline-danger col-6" id="resetBtn">Limpiar</button>
-<form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar()">
-  
-  <p id="errLbl" style="color: black;"></p>
+<div class="container mt-3">
+  <button
+    *ngIf="formElement.id == null && !editingProfile"
+    type="button"
+    (click)="formReset()"
+    class="active btn btn-block btn-outline-danger col-6 my-2"
+    id="resetBtn"
+  >
+    Limpiar
+  </button>
+  <form
+    autocomplete="off"
+    [formGroup]="forma"
+    (ngSubmit)="guardar()"
+    class="mx-2"
+    [ngClass]="{'row': editingProfile}"
+  >
+    <p id="errLbl" style="color: black"></p>
 
+    <div *ngIf="forma.value.name | json" class="form-group row">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Nombre</span>
+        </div>
 
-<div *ngIf="forma.value.name | json" class="form-group row">
-  
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text">Nombre</span>
-    </div>
-    
-    <input  class="form-control" type="text" placeholder="Asigna un Nombre" formControlName="name"
-      [class.is-invalid]="nombreNoValido">
-
-  </div>
-  <div class="col">
-
-
-    <small *ngIf="nombreNoValido" class="text-danger">
-      Ingrese al menos 5 letras
-    </small>
-  </div>
-</div>
-
-<div *ngIf="forma.value.displayName | json" class="form-group row">
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text">*Usuario</span>
-    </div>
-    <input class="form-control" type="text" placeholder="Usuario" formControlName="displayName"
-      [class.is-invalid]="displayNameNoValido">
-
-  </div>
-  <div class="col">
-    <small *ngIf="displayNameNoValido" class="text-danger">
-      Ingrese al menos 5 letras
-    </small>
-  </div>
-</div>
-  <div *ngIf="forma.value.autor | json" class="form-group row">
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Autor</span>
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Asigna un Nombre"
+          formControlName="name"
+          [class.is-invalid]="nombreNoValido"
+        />
       </div>
-      <input class="form-control" type="text" placeholder="Autor" formControlName="autor"
-        [class.is-invalid]="autorNoValido">
-  
+      <div class="col">
+        <small *ngIf="nombreNoValido" class="text-danger">
+          Ingrese al menos 5 letras
+        </small>
+      </div>
     </div>
-  <div class="col">
-    <small *ngIf="autorNoValido" class="text-danger">
-      Ingrese al menos 5 letras
-    </small>
-  </div>
-</div>
-<div *ngIf="forma.value.link | json" class="form-group row">
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text">Link</span>
+
+    <div
+      *ngIf="forma.value.displayName | json"
+      [ngClass]="{
+        'row form-group': !editingProfile,
+        'col-sm-6': editingProfile
+      }"
+    >
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">*Usuario</span>
+        </div>
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Usuario"
+          formControlName="displayName"
+          [class.is-invalid]="displayNameNoValido"
+        />
+      </div>
+      <div class="col">
+        <small *ngIf="displayNameNoValido" class="text-danger">
+          Ingrese al menos 5 letras
+        </small>
+      </div>
     </div>
-    <input class="form-control" type="text" placeholder="http://..." formControlName="link"
-      [class.is-invalid]="linkNoValido">
-
-  </div>
-<div class="col">
-  <small *ngIf="autorNoValido" class="text-danger">
-    Ingrese al menos 5 letras
-  </small>
-</div>
-</div>
-
-<div *ngIf="forma.value.owner | json" class="form-group row">
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text">Owner</span>
+    <div *ngIf="forma.value.autor | json" class="form-group row">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Autor</span>
+        </div>
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Autor"
+          formControlName="autor"
+          [class.is-invalid]="autorNoValido"
+        />
+      </div>
+      <div class="col">
+        <small *ngIf="autorNoValido" class="text-danger">
+          Ingrese al menos 5 letras
+        </small>
+      </div>
     </div>
-    <input class="form-control" type="text" placeholder="Owner" formControlName="owner"
-      [class.is-invalid]="ownerNoValido">
-
-  </div>
-<div class="col">
-  <small *ngIf="ownerNoValido" class="text-danger">
-    Ingrese al menos 5 letras
-  </small>
-</div>
-</div>
-
-<div *ngIf="forma.value.email | json" class="form-group row">
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text">*Email</span>
+    <div *ngIf="forma.value.link | json" class="form-group row">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Link</span>
+        </div>
+        <input
+          class="form-control"
+          type="text"
+          placeholder="http://..."
+          formControlName="link"
+          [class.is-invalid]="linkNoValido"
+        />
+      </div>
+      <div class="col">
+        <small *ngIf="autorNoValido" class="text-danger">
+          Ingrese al menos 5 letras
+        </small>
+      </div>
     </div>
-    <input class="form-control" type="text" placeholder="Email" formControlName="email"
-      [class.is-invalid]="correoNoValido">
 
-  </div>
-  <div class="col">
-    <small *ngIf="correoNoValido" class="text-danger">
-      Ingrese el email
-    </small>
-  </div>
-</div>
-
-<div *ngIf="forma.value.title | json" class="form-group row">
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text">Título</span>
+    <div *ngIf="forma.value.owner | json" class="form-group row">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Owner</span>
+        </div>
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Owner"
+          formControlName="owner"
+          [class.is-invalid]="ownerNoValido"
+        />
+      </div>
+      <div class="col">
+        <small *ngIf="ownerNoValido" class="text-danger">
+          Ingrese al menos 5 letras
+        </small>
+      </div>
     </div>
-    <input class="form-control" type="text" placeholder="Titulo" formControlName="title"
-    [class.is-invalid]="titleNoValido">
-  </div>
-  <div class="col">
-    <small *ngIf="titleNoValido" class="text-danger">
-      Ingrese al menos 5 letras
-    </small>
-  </div>
-</div>
+
+    <div
+      *ngIf="(forma.value.email | json) && !editingProfile"
+      class="form-group row"
+    >
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">*Email</span>
+        </div>
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Email"
+          formControlName="email"
+          [class.is-invalid]="correoNoValido"
+        />
+      </div>
+      <div class="col">
+        <small *ngIf="correoNoValido" class="text-danger">
+          Ingrese el email
+        </small>
+      </div>
+    </div>
+
+    <div *ngIf="forma.value.title | json" class="form-group row">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Título</span>
+        </div>
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Titulo"
+          formControlName="title"
+          [class.is-invalid]="titleNoValido"
+        />
+      </div>
+      <div class="col">
+        <small *ngIf="titleNoValido" class="text-danger">
+          Ingrese al menos 5 letras
+        </small>
+      </div>
+    </div>
 
     <div *ngIf="forma.value.description | json" class="form-group row">
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Descripción</span>
-          </div>
-          <input class="form-control" type="text" placeholder="Descripción breve" formControlName="description"
-            [class.is-invalid]="descriptionNoValido">
-    
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Descripción</span>
         </div>
-        <div class="col">
-          <small *ngIf="descriptionNoValido" class="text-danger">
-            Ingrese la descripción
-          </small>
-        </div>
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Descripción breve"
+          formControlName="description"
+          [class.is-invalid]="descriptionNoValido"
+        />
       </div>
+      <div class="col">
+        <small *ngIf="descriptionNoValido" class="text-danger">
+          Ingrese la descripción
+        </small>
+      </div>
+    </div>
 
-      <div *ngIf="forma.value.genero | json" class="form-group row">
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Género</span>
-          </div>
-          <input class="form-control" type="text" placeholder="Género" formControlName="genero">
+    <div
+      *ngIf="forma.value.genero | json"
+      [ngClass]="{
+        'row form-group': !editingProfile,
+        'col-sm-6': editingProfile
+      }"
+    >
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Género</span>
         </div>
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Género"
+          formControlName="genero"
+        />
       </div>
+    </div>
 
-      <div *ngIf="forma.value.dateBirth | json" class="form-group row">
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Cumpleaños</span>
-          </div>
-          <input class="form-control" type="text" placeholder="Fecha Nacimiento" formControlName="dateBirth">
+    <div
+      *ngIf="forma.value.dateBirth | json"
+      [ngClass]="{
+        'row form-group': !editingProfile,
+        'col-sm-6': editingProfile
+      }"
+    >
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Cumpleaños</span>
         </div>
+        <input
+          class="form-control"
+          type="date"
+          placeholder="Fecha Nacimiento"
+          formControlName="dateBirth"
+        />
       </div>
-      <div *ngIf="forma.value.facebook | json" class="form-group row">
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Facebook</span>
-          </div>
-          <input class="form-control" type="text" placeholder="Facebook" formControlName="facebook">
+    </div>
+    <div
+      *ngIf="forma.value.facebook | json"
+      [ngClass]="{
+        'row form-group': !editingProfile,
+        'col-sm-6': editingProfile
+      }"
+    >
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Facebook</span>
         </div>
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Facebook"
+          formControlName="facebook"
+        />
       </div>
-      <div *ngIf="forma.value.twitter | json" class="form-group row">
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Twitter</span>
-          </div>
-          <input class="form-control" type="text" placeholder="Twitter" formControlName="twitter">
+    </div>
+    <div
+      *ngIf="forma.value.twitter | json"
+      [ngClass]="{
+        'row form-group': !editingProfile,
+        'col-sm-6': editingProfile
+      }"
+    >
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Twitter</span>
         </div>
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Twitter"
+          formControlName="twitter"
+        />
       </div>
-      <div *ngIf="forma.value.linkedin | json" class="form-group row">
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Linkedin</span>
-          </div>
-          <input class="form-control" type="text" placeholder="Linkedin" formControlName="linkedin">
+    </div>
+    <div
+      *ngIf="forma.value.linkedin | json"
+      [ngClass]="{
+        'row form-group': !editingProfile,
+        'col-sm-6': editingProfile
+      }"
+    >
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Linkedin</span>
         </div>
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Linkedin"
+          formControlName="linkedin"
+        />
       </div>
-      <div *ngIf="forma.value.github | json" class="form-group row">
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">GitHub</span>
-          </div>
-          <input class="form-control" type="text" placeholder="GitHub" formControlName="github">
+    </div>
+    <div
+      *ngIf="forma.value.github | json"
+      [ngClass]="{
+        'row form-group': !editingProfile,
+        'col-sm-6': editingProfile
+      }"
+    >
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">GitHub</span>
         </div>
+        <input
+          class="form-control"
+          type="text"
+          placeholder="GitHub"
+          formControlName="github"
+        />
       </div>
+    </div>
 
- 
-  
+  </form>
   <div class="form-group row">
-    
     <div class="input-group col">
-      <button type="submit" class="btn btn-primary btn-block">
-        Guardar
-      </button>
+      <button type="submit" (click)="guardar()" class="btn btn-primary btn-block">Guardar</button>
     </div>
   </div>
-
-</form>
+</div>
